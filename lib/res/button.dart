@@ -13,7 +13,9 @@ class PrimaryButton extends StatelessWidget {
       this.height,
       this.color,
       this.ripple,
-      required this.onTap});
+      required this.onTap,
+      this.allCaps,
+      this.margin});
 
   final String text;
   final TextStyle? textStyle;
@@ -23,12 +25,16 @@ class PrimaryButton extends StatelessWidget {
   final Color? color;
   final Color? ripple;
   final VoidCallback? onTap;
+  final bool? allCaps;
+  final EdgeInsetsGeometry? margin;
 
   @override
   Widget build(BuildContext context) {
+    double widthh = MediaQuery.of(context).size.width;
     return Container(
-      margin: const EdgeInsets.only(left: 33, right: 33),
-      height: 50,
+      margin: margin ?? const EdgeInsets.only(left: 33, right: 33),
+      width: width ?? widthh,
+      height: height ?? 50,
       decoration: BoxDecoration(
           color: color ?? AppColors.primary,
           borderRadius:
@@ -44,7 +50,7 @@ class PrimaryButton extends StatelessWidget {
           child: Container(
             alignment: Alignment.center,
             child: Text(
-              text,
+              allCaps == false ? text : text.toUpperCase(),
               style: textStyle ??
                   context.textStyle.titleSmall!
                       .copyWith(color: AppColors.white),
