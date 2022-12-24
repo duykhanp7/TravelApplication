@@ -1,3 +1,18 @@
 {
-    "@@locale": "en"
+    "@@locale": "en",
+    "app_name": "Fellow 4U",
+    "sign_up": "Sign Up",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "country": "Country",
+    "email": "Email",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "traveler": "Traveler",
+    "tour_guide": "Tour Guide",
+    "password_has_more_than_6_letters": "Password has more than 6 letters",
+    "by_singing_up_you_agree_to_our": "By singing up, you agree to our ",
+    "tern_conditions": "Tern & Conditions",
+    "already_have_an_account": "Already have an account? ",
+    "sign_in": "Sign in"
 }

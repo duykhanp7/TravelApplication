@@ -49,6 +49,156 @@ class SLocalization {
   static SLocalization? maybeOf(BuildContext context) {
     return Localizations.of<SLocalization>(context, SLocalization);
   }
+
+  /// `Fellow 4U`
+  String get app_name {
+    return Intl.message(
+      'Fellow 4U',
+      name: 'app_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Up`
+  String get sign_up {
+    return Intl.message(
+      'Sign Up',
+      name: 'sign_up',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `First Name`
+  String get first_name {
+    return Intl.message(
+      'First Name',
+      name: 'first_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Name`
+  String get last_name {
+    return Intl.message(
+      'Last Name',
+      name: 'last_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Country`
+  String get country {
+    return Intl.message(
+      'Country',
+      name: 'country',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Password`
+  String get confirm_password {
+    return Intl.message(
+      'Confirm Password',
+      name: 'confirm_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Traveler`
+  String get traveler {
+    return Intl.message(
+      'Traveler',
+      name: 'traveler',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tour Guide`
+  String get tour_guide {
+    return Intl.message(
+      'Tour Guide',
+      name: 'tour_guide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password has more than 6 letters`
+  String get password_has_more_than_6_letters {
+    return Intl.message(
+      'Password has more than 6 letters',
+      name: 'password_has_more_than_6_letters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By singing up, you agree to our `
+  String get by_singing_up_you_agree_to_our {
+    return Intl.message(
+      'By singing up, you agree to our ',
+      name: 'by_singing_up_you_agree_to_our',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tern & Conditions`
+  String get tern_conditions {
+    return Intl.message(
+      'Tern & Conditions',
+      name: 'tern_conditions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already have an account? `
+  String get already_have_an_account {
+    return Intl.message(
+      'Already have an account? ',
+      name: 'already_have_an_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in`
+  String get sign_in {
+    return Intl.message(
+      'Sign in',
+      name: 'sign_in',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<SLocalization> {
