@@ -250,13 +250,23 @@ class SLocalization {
     );
   }
 
-  /// `Check your email we will send you an instruction to reset your password.`
+  /// `Input your email, we will send you an instruction to reset your password.`
   String
       get input_your_email_we_will_send_you_an_instruction_to_reset_your_password {
     return Intl.message(
-      'Check your email we will send you an instruction to reset your password.',
+      'Input your email, we will send you an instruction to reset your password.',
       name:
           'input_your_email_we_will_send_you_an_instruction_to_reset_your_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please check your email for the instructions on how to reset your password.`
+  String get please_check_u_email {
+    return Intl.message(
+      'Please check your email for the instructions on how to reset your password.',
+      name: 'please_check_u_email',
       desc: '',
       args: [],
     );
@@ -267,6 +277,16 @@ class SLocalization {
     return Intl.message(
       'Send',
       name: 'send',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check Email`
+  String get check_email {
+    return Intl.message(
+      'Check Email',
+      name: 'check_email',
       desc: '',
       args: [],
     );
