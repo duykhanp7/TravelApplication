@@ -30,9 +30,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_password":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
+        "dont_have_an_account":
+            MessageLookupByLibrary.simpleMessage("Don\'t have an account? "),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "first_name": MessageLookupByLibrary.simpleMessage("First Name"),
+        "forgot_password":
+            MessageLookupByLibrary.simpleMessage("Forgot password"),
         "last_name": MessageLookupByLibrary.simpleMessage("Last Name"),
+        "or_sign_in_with":
+            MessageLookupByLibrary.simpleMessage("or sign in with"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "password_has_more_than_6_letters":
             MessageLookupByLibrary.simpleMessage(
@@ -42,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tern_conditions":
             MessageLookupByLibrary.simpleMessage("Tern & Conditions"),
         "tour_guide": MessageLookupByLibrary.simpleMessage("Tour Guide"),
-        "traveler": MessageLookupByLibrary.simpleMessage("Traveler")
+        "traveler": MessageLookupByLibrary.simpleMessage("Traveler"),
+        "welcom_back": MessageLookupByLibrary.simpleMessage("Welcome back,")
       };
 }
