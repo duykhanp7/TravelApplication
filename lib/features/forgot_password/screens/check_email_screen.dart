@@ -1,22 +1,23 @@
-import 'package:flutter/gestures.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 import 'package:travel_booking_tour/l10n/generated/l10n.dart';
 import 'package:travel_booking_tour/res/background.dart';
-import 'package:travel_booking_tour/res/button.dart';
 import 'package:travel_booking_tour/res/colors.dart';
-import 'package:travel_booking_tour/res/input_field.dart';
+import 'package:travel_booking_tour/res/icons.dart';
+import 'package:travel_booking_tour/res/images.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
-  const ForgotPasswordScreen({super.key});
+class CheckEmailScreen extends StatefulWidget {
+  const CheckEmailScreen({super.key});
 
   @override
   State<StatefulWidget> createState() {
-    return _ForgotPasswordScreen();
+    return _CheckEmailScreen();
   }
 }
 
-class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
+class _CheckEmailScreen extends State<CheckEmailScreen> {
   late SLocalization localization;
 
   @override
@@ -29,41 +30,20 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
         child: Container(
           alignment: Alignment.center,
           child: AppBackground(
-              header: localization.forgot_password,
+              header: localization.check_email,
               children: Container(
                 alignment: Alignment.center,
+                padding: const EdgeInsets.only(top: 28, left: 32, right: 32),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      alignment: Alignment.center,
-                      padding:
-                          const EdgeInsets.only(left: 32, right: 32, top: 28),
-                      child: Column(
-                        children: [
-                          _buildTitle(),
-                          const SizedBox(
-                            height: 23,
-                          ),
-                          AppTextField(
-                            hintText: localization.email,
-                            obsecureText: false,
-                            labelText: localization.email,
-                            textInputType: TextInputType.emailAddress,
-                          )
-                        ],
-                      ),
-                    ),
+                    _buildTitle(),
                     const SizedBox(
-                      height: 52,
+                      height: 40,
                     ),
-                    PrimaryButton(
-                      text: localization.send,
-                      onTap: () {},
-                      allCaps: true,
-                    ),
+                    _buildBody(),
                     const SizedBox(
-                      height: 128,
+                      height: 125,
                     ),
                     Container(
                       alignment: Alignment.center,
@@ -77,11 +57,7 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
                                 text: localization.sign_in,
                                 style: context.textStyle.titleSmall!.copyWith(
                                     fontWeight: FontWeight.w400,
-                                    color: AppColors.primary),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    //Todo
-                                  })
+                                    color: AppColors.primary))
                           ])),
                     )
                   ],
@@ -96,11 +72,18 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
     return Container(
       alignment: Alignment.centerLeft,
       child: Text(
-        localization
-            .input_your_email_we_will_send_you_an_instruction_to_reset_your_password,
+        localization.please_check_u_email,
         style: context.textStyle.titleMedium!.copyWith(
-            fontWeight: FontWeight.w400, color: AppColors.textOnboardingBrown),
+            fontWeight: FontWeight.w400,
+            color: AppColors.inActiveRadioBorderColor),
       ),
+    );
+  }
+
+  Widget _buildBody() {
+    return Container(
+      alignment: Alignment.center,
+      child: Image.asset(AppImages.email),
     );
   }
 }
