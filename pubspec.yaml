@@ -68,6 +68,7 @@ flutter:
     - assets/icons/
     - assets/icons/splash/
     - assets/icons/onboarding/
+    - assets/icons/signin/
     - assets/images/
     - assets/images/onboarding/
 

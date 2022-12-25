@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
+import 'package:travel_booking_tour/res/icons.dart';
 
 import 'colors.dart';
 
@@ -55,6 +57,50 @@ class PrimaryButton extends StatelessWidget {
                   context.textStyle.titleSmall!
                       .copyWith(color: AppColors.white),
             ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SocialButton extends StatelessWidget {
+  const SocialButton(
+      {super.key,
+      required this.icon,
+      required this.background,
+      required this.splash,
+      required this.voidCallback,
+      this.width,
+      this.height,
+      this.radius});
+
+  final String icon;
+  final Color background;
+  final Color splash;
+  final VoidCallback voidCallback;
+  final double? width;
+  final double? height;
+  final double? radius;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      width: width ?? 40,
+      height: height ?? 40,
+      decoration: BoxDecoration(
+          color: background, borderRadius: BorderRadius.circular(radius ?? 7)),
+      child: Material(
+        borderRadius: BorderRadius.circular(radius ?? 7),
+        color: AppColors.transparent,
+        child: InkWell(
+          splashColor: splash,
+          borderRadius: BorderRadius.circular(radius ?? 7),
+          onTap: voidCallback,
+          child: Container(
+            alignment: Alignment.center,
+            child: SvgPicture.asset(icon),
           ),
         ),
       ),
