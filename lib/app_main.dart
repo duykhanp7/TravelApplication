@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:travel_booking_tour/features/signin/signin_screen.dart';
 import 'package:travel_booking_tour/features/signup/sign_up_screen.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 
@@ -13,7 +14,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: "Fellow 4U",
       theme: ThemeData(backgroundColor: AppColors.white, fontFamily: 'Roboto'),
-      home: const SignUpScreen(),
+      home: const SignInScreen(),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const <LocalizationsDelegate<Object>>[
         SLocalization.delegate,
