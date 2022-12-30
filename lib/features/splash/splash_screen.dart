@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:travel_booking_tour/features/splash/bloc/bloc_splash_screen.dart';
+import 'package:travel_booking_tour/features/splash/bloc/bloc_splash_state.dart';
 import 'package:travel_booking_tour/res/icons.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
@@ -10,27 +13,29 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: SafeArea(
-          child: Container(
-        width: width,
-        color: AppColors.primary,
-        child: Column(
-          children: [
-            Flexible(
-              flex: 4,
-              child: _buildTopHeader(),
-            ),
-            Flexible(
-              flex: 3,
-              child: _buildWidgetFellow(),
-            ),
-            Flexible(
-              flex: 3,
-              child: _buildBottomHeader(context),
-            ),
-          ],
-        ),
-      )),
+      body: BlocBuilder<BlocSplashScreen, SplashState>(
+        builder: (context, state) => SafeArea(
+            child: Container(
+          width: width,
+          color: AppColors.primary,
+          child: Column(
+            children: [
+              Flexible(
+                flex: 4,
+                child: _buildTopHeader(),
+              ),
+              Flexible(
+                flex: 3,
+                child: _buildWidgetFellow(),
+              ),
+              Flexible(
+                flex: 3,
+                child: _buildBottomHeader(context),
+              ),
+            ],
+          ),
+        )),
+      ),
     );
   }
 
