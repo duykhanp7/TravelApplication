@@ -6,9 +6,9 @@ import 'package:travel_booking_tour/router/path.dart';
 
 import '../../../router/routes.dart';
 
-class BlocSplashScreen extends Bloc<SplashEvent, SplashState> {
-  BlocSplashScreen() : super(SplashStateInitial()) {
-    on<SplashEventInitial>((event, emit) => {
+class BlocSplashScreen extends Bloc<BlocSplashEvent, BlocSplashState> {
+  BlocSplashScreen() : super(BlocSplashStateInitial()) {
+    on<BlocSplashEventInitial>((event, emit) => {
           debugPrint('Splash Event Initial'),
           Future.delayed(
             const Duration(seconds: 3),

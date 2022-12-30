@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:travel_booking_tour/features/onboarding/bloc/bloc_onboarding_screen.dart';
 import 'package:travel_booking_tour/features/onboarding/onboarding_screen.dart';
+import 'package:travel_booking_tour/features/signin/signin_screen.dart';
+import 'package:travel_booking_tour/features/signup/sign_up_screen.dart';
 import 'package:travel_booking_tour/features/splash/bloc/bloc_splash_event.dart';
 import 'package:travel_booking_tour/features/splash/bloc/bloc_splash_screen.dart';
 import 'package:travel_booking_tour/features/splash/splash_screen.dart';
@@ -19,7 +22,11 @@ class MainApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider<BlocSplashScreen>(
-            create: (context) => BlocSplashScreen()..add(SplashEventInitial()),
+            create: (context) =>
+                BlocSplashScreen()..add(BlocSplashEventInitial()),
+          ),
+          BlocProvider<BlocOnboardingScreen>(
+            create: (context) => BlocOnboardingScreen(),
           ),
         ],
         child: MaterialApp(
@@ -31,6 +38,8 @@ class MainApp extends StatelessWidget {
           routes: {
             AppPath.splashScreen: (context) => const SplashScreen(),
             AppPath.onBoardingSCreen: (context) => const OnboardingScreen(),
+            AppPath.signUpScreen: (context) => const SignUpScreen(),
+            AppPath.signInScreen: (context) => const SignInScreen(),
           },
           navigatorKey: Routes.navigator,
           debugShowCheckedModeBanner: false,
