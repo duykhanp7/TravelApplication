@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 
-abstract class SplashState extends Equatable {}
+abstract class BlocSplashState extends Equatable {}
 
-class SplashStateInitial extends SplashState {
+class BlocSplashStateInitial extends BlocSplashState {
   @override
   List<Object?> get props => [];
 }
