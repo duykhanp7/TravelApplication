@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:travel_booking_tour/bloc_provider/app_bloc_provider.dart';
+import 'package:travel_booking_tour/features/onboarding/bloc/bloc_onboarding_screen.dart';
 import 'package:travel_booking_tour/features/onboarding/onboarding_screen.dart';
 import 'package:travel_booking_tour/features/signin/signin_screen.dart';
 import 'package:travel_booking_tour/features/signup/sign_up_screen.dart';
+import 'package:travel_booking_tour/features/splash/bloc/bloc_splash_event.dart';
+import 'package:travel_booking_tour/features/splash/bloc/bloc_splash_screen.dart';
 import 'package:travel_booking_tour/features/splash/splash_screen.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/router/path.dart';
@@ -18,7 +20,15 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: AppBlocProvider.providers,
+        providers: [
+          BlocProvider<BlocSplashScreen>(
+            create: (context) =>
+                BlocSplashScreen()..add(BlocSplashEventInitial()),
+          ),
+          BlocProvider<BlocOnboardingScreen>(
+            create: (context) => BlocOnboardingScreen(),
+          ),
+        ],
         child: MaterialApp(
           title: "Fellow 4U",
           theme:
