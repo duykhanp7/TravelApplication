@@ -1,12 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 import 'package:travel_booking_tour/data/models/onboarding_model.dart';
-import 'package:travel_booking_tour/features/onboarding/bloc/bloc_onboarding_event.dart';
-import 'package:travel_booking_tour/features/onboarding/bloc/bloc_onboarding_screen.dart';
-import 'package:travel_booking_tour/features/onboarding/bloc/bloc_onboarding_state.dart';
 import 'package:travel_booking_tour/features/onboarding/onboarding_Page.dart';
 import 'package:travel_booking_tour/features/onboarding/widgets/onboarding_header.dart';
 import 'package:travel_booking_tour/res/res.dart';
@@ -33,63 +28,57 @@ class _OnboardingScreen extends State<OnboardingScreen> {
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.dark));
     return Scaffold(
-      body: BlocBuilder<BlocOnboardingScreen, BlocOnboardingState>(
-        builder: (context, state) => SafeArea(
-            child: Stack(
-          alignment: Alignment.center,
-          children: [
-            PageView.builder(
-              itemBuilder: (context, index) => OnboardingPage(
-                  widget: widgets[index], onboardingModel: models[index]),
-              itemCount: 3,
-              controller: pageController,
-              onPageChanged: (value) {
-                setState(() {
-                  currentIndex = value;
-                });
-              },
-            ),
-            Visibility(
-                visible: currentIndex <= 1,
-                child: Positioned(
-                    bottom: 150, child: _buildIndicator(currentIndex))),
-            Visibility(
-              visible: currentIndex >= 2,
-              child: Positioned(
-                  bottom: 96,
-                  left: 0,
-                  right: 0,
-                  child: _buildButtonGetStarted()),
-            ),
-            Visibility(
+      body: SafeArea(
+          child: Stack(
+        alignment: Alignment.center,
+        children: [
+          PageView.builder(
+            itemBuilder: (context, index) => OnboardingPage(
+                widget: widgets[index], onboardingModel: models[index]),
+            itemCount: 3,
+            controller: pageController,
+            onPageChanged: (value) {
+              setState(() {
+                currentIndex = value;
+              });
+            },
+          ),
+          Visibility(
               visible: currentIndex <= 1,
               child: Positioned(
-                  bottom: 70,
-                  right: 31,
-                  child: Material(
-                    color: AppColors.white,
-                    child: InkWell(
-                      splashColor: AppColors.white,
-                      child: Container(
-                        alignment: Alignment.center,
-                        height: 20,
-                        width: 50,
-                        child: Text(
-                          'SKIP',
-                          style: context.textStyle.titleSmall!
-                              .copyWith(color: AppColors.textSkipColor),
-                        ),
+                  bottom: 150, child: _buildIndicator(currentIndex))),
+          Visibility(
+            visible: currentIndex >= 2,
+            child: Positioned(
+                bottom: 96, left: 0, right: 0, child: _buildButtonGetStarted()),
+          ),
+          Visibility(
+            visible: currentIndex <= 1,
+            child: Positioned(
+                bottom: 70,
+                right: 31,
+                child: Material(
+                  color: AppColors.white,
+                  child: InkWell(
+                    splashColor: AppColors.white,
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 20,
+                      width: 50,
+                      child: Text(
+                        'SKIP',
+                        style: context.textStyle.titleSmall!
+                            .copyWith(color: AppColors.textSkipColor),
                       ),
-                      onTap: () {
-                        BlocProvider.of<BlocOnboardingScreen>(context)
-                            .add(BlocOnboardingEventOnButtonSkipClick());
-                      },
                     ),
-                  )),
-            ),
-          ],
-        )),
-      ),
+                    onTap: () {
+                      debugPrint('Skip');
+                    },
+                  ),
+                )),
+          ),
+        ],
+      )),
     );
   }
 
@@ -116,10 +105,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
   Widget _buildButtonGetStarted() {
     return PrimaryButton(
       text: 'GET STARTED',
-      onTap: () {
-        BlocProvider.of<BlocOnboardingScreen>(context)
-            .add(BlocOnboardingEventOnButtonGetStartedClick());
-      },
+      onTap: () {},
     );
   }
 

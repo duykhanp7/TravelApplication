@@ -13,7 +13,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: BlocBuilder<BlocSplashScreen, BlocSplashState>(
+      body: BlocBuilder<BlocSplashScreen, SplashState>(
         builder: (context, state) => SafeArea(
             child: Container(
           width: width,
