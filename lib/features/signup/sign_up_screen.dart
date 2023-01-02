@@ -24,6 +24,7 @@ class _SignUpScreen extends State<SignUpScreen> {
 
   late SLocalization localization;
   String password = '';
+  final GlobalKey<FormState> signUpGlobalKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +62,7 @@ class _SignUpScreen extends State<SignUpScreen> {
       alignment: Alignment.center,
       width: MediaQuery.of(context).size.width,
       child: Form(
-        key: AppValidator.globalKeyFomrState,
+        key: signUpGlobalKey,
         child: Column(
           children: [
             Container(
@@ -187,8 +188,9 @@ class _SignUpScreen extends State<SignUpScreen> {
               child: PrimaryButton(
                 text: localization.sign_up,
                 onTap: () {
-                  BlocProvider.of<BlocSignupScreen>(context)
-                      .add(BlocSignUpEventValidate());
+                  BlocProvider.of<BlocSignupScreen>(context).add(
+                      BlocSignUpEventValidate(
+                          signUpGlobalKey: signUpGlobalKey));
                 },
                 allCaps: true,
                 margin: const EdgeInsets.only(left: 33, right: 33),
@@ -201,20 +203,21 @@ class _SignUpScreen extends State<SignUpScreen> {
               alignment: Alignment.center,
               child: Text.rich(TextSpan(
                   text: localization.already_have_an_account,
-                  style: context.textStyle.labelMedium!.copyWith(
+                  style: context.textStyle.titleSmall!.copyWith(
                       fontWeight: FontWeight.w400,
                       fontStyle: FontStyle.normal,
                       color: AppColors.textByAgreeColor),
                   children: <TextSpan>[
                     TextSpan(
                         text: localization.sign_in,
-                        style: context.textStyle.labelMedium!.copyWith(
+                        style: context.textStyle.titleSmall!.copyWith(
                             fontWeight: FontWeight.w400,
                             fontStyle: FontStyle.normal,
                             color: AppColors.primary),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            //Todo
+                            BlocProvider.of<BlocSignupScreen>(context)
+                                .add(BlocSignUpEventSignInClick());
                           })
                   ])),
             )

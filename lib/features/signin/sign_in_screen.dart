@@ -1,11 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
+import 'package:travel_booking_tour/features/signin/bloc/bloc_sign_in_event.dart';
+import 'package:travel_booking_tour/features/signin/bloc/bloc_sign_in_screen.dart';
 import 'package:travel_booking_tour/res/background.dart';
-import 'package:travel_booking_tour/res/button.dart';
-import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/icons.dart';
-import 'package:travel_booking_tour/res/input_field.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
 import '../../l10n/generated/l10n.dart';
@@ -21,6 +21,7 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreen extends State<SignInScreen> {
   late SLocalization localization;
+  final GlobalKey<FormState> signInGlobalKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +59,10 @@ class _SignInScreen extends State<SignInScreen> {
           ),
           PrimaryButton(
             text: localization.sign_in,
-            onTap: () {},
+            onTap: () {
+              BlocProvider.of<BlocSignInScreen>(context).add(
+                  BlocSignInEventSignInClick(signInGlobalKey: signInGlobalKey));
+            },
             allCaps: true,
           ),
           const SizedBox(
@@ -93,7 +97,11 @@ class _SignInScreen extends State<SignInScreen> {
                   text: localization.sign_up,
                   style: context.textStyle.titleSmall!.copyWith(
                       fontWeight: FontWeight.w400, color: AppColors.primary),
-                  recognizer: TapGestureRecognizer()..onTap = () {})
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      BlocProvider.of<BlocSignInScreen>(context)
+                          .add(BlocSignInEventSignUpClick());
+                    })
             ])),
           )
         ],
@@ -150,40 +158,52 @@ class _SignInScreen extends State<SignInScreen> {
   }
 
   Widget _buildInputFields() {
-    return Container(
-      alignment: Alignment.center,
-      padding: const EdgeInsets.only(top: 50),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AppTextField(
-            hintText: localization.email,
-            obsecureText: false,
-            labelText: localization.email,
-            textInputType: TextInputType.emailAddress,
-            validator: AppValidator.validateTextFieldEmail,
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          AppTextField(
-            hintText: localization.password,
-            obsecureText: true,
-            labelText: localization.password,
-            validator: AppValidator.validateTextFieldPasword,
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Container(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                localization.forgot_password,
-                style: context.textStyle.titleSmall!.copyWith(
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.textByAgreeColor),
-              )),
-        ],
+    return Form(
+      key: signInGlobalKey,
+      child: Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.only(top: 50),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AppTextField(
+              hintText: localization.email,
+              obsecureText: false,
+              labelText: localization.email,
+              textInputType: TextInputType.emailAddress,
+              validator: AppValidator.validateTextFieldEmail,
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            AppTextField(
+              hintText: localization.password,
+              obsecureText: true,
+              labelText: localization.password,
+              validator: AppValidator.validateTextFieldPaswordLogIn,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+                alignment: Alignment.centerLeft,
+                child: Material(
+                  color: AppColors.transparent,
+                  child: InkWell(
+                    child: Text(
+                      localization.forgot_password,
+                      style: context.textStyle.titleSmall!.copyWith(
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.textByAgreeColor),
+                    ),
+                    onTap: () {
+                      BlocProvider.of<BlocSignInScreen>(context)
+                          .add(BlocSignInEventForgotPassword());
+                    },
+                  ),
+                )),
+          ],
+        ),
       ),
     );
   }
