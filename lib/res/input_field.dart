@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/res/colors.dart';
+import 'package:travel_booking_tour/res/res.dart';
 
 class AppTextField extends StatefulWidget {
   const AppTextField(
@@ -14,7 +14,10 @@ class AppTextField extends StatefulWidget {
       this.width,
       this.height,
       required this.labelText,
-      this.labelTextStyle});
+      this.labelTextStyle,
+      required this.validator,
+      this.autovalidateMode,
+      this.onChange});
 
   final String? initialText;
   final String hintText;
@@ -26,6 +29,9 @@ class AppTextField extends StatefulWidget {
   final bool obsecureText;
   final double? width;
   final double? height;
+  final dynamic validator;
+  final Function(String)? onChange;
+  final AutovalidateMode? autovalidateMode;
 
   @override
   State<StatefulWidget> createState() {
@@ -79,6 +85,9 @@ class _AppTextField extends State<AppTextField> {
                     borderSide: BorderSide(
                         width: 2, color: AppColors.underLineTextFieldColor))),
             obscureText: widget.obsecureText,
+            onChanged: widget.onChange ?? (value) {},
+            validator: widget.validator,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             textInputAction: TextInputAction.done,
             cursorColor: AppColors.textHintColor,
             style: widget.textStyle ??
