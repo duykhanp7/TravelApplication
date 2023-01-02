@@ -25,7 +25,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "already_have_an_account":
             MessageLookupByLibrary.simpleMessage("Already have an account? "),
         "app_name": MessageLookupByLibrary.simpleMessage("Fellow 4U"),
-        "back_to": MessageLookupByLibrary.simpleMessage("Back to "),
         "by_singing_up_you_agree_to_our": MessageLookupByLibrary.simpleMessage(
             "By singing up, you agree to our "),
         "confirm_password":
@@ -37,9 +36,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "first_name": MessageLookupByLibrary.simpleMessage("First Name"),
         "forgot_password":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
-        "input_your_email_we_will_send_you_an_instruction_to_reset_your_password":
-            MessageLookupByLibrary.simpleMessage(
-                "Check your email we will send you an instruction to reset your password."),
         "last_name": MessageLookupByLibrary.simpleMessage("Last Name"),
         "or_sign_in_with":
             MessageLookupByLibrary.simpleMessage("or sign in with"),
@@ -47,7 +43,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "password_has_more_than_6_letters":
             MessageLookupByLibrary.simpleMessage(
                 "Password has more than 6 letters"),
-        "send": MessageLookupByLibrary.simpleMessage("Send"),
         "sign_in": MessageLookupByLibrary.simpleMessage("Sign in"),
         "sign_up": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "tern_conditions":

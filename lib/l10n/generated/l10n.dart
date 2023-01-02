@@ -239,38 +239,6 @@ class SLocalization {
       args: [],
     );
   }
-
-  /// `Back to `
-  String get back_to {
-    return Intl.message(
-      'Back to ',
-      name: 'back_to',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Check your email we will send you an instruction to reset your password.`
-  String
-      get input_your_email_we_will_send_you_an_instruction_to_reset_your_password {
-    return Intl.message(
-      'Check your email we will send you an instruction to reset your password.',
-      name:
-          'input_your_email_we_will_send_you_an_instruction_to_reset_your_password',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Send`
-  String get send {
-    return Intl.message(
-      'Send',
-      name: 'send',
-      desc: '',
-      args: [],
-    );
-  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<SLocalization> {
