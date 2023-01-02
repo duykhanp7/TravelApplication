@@ -4,7 +4,7 @@ import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 import 'package:travel_booking_tour/data/models/onboarding_model.dart';
 import 'package:travel_booking_tour/features/onboarding/onboarding_Page.dart';
 import 'package:travel_booking_tour/features/onboarding/widgets/onboarding_header.dart';
-import 'package:travel_booking_tour/res/res.dart';
+import 'package:travel_booking_tour/res/colors.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -103,9 +103,29 @@ class _OnboardingScreen extends State<OnboardingScreen> {
   }
 
   Widget _buildButtonGetStarted() {
-    return PrimaryButton(
-      text: 'GET STARTED',
-      onTap: () {},
+    return Container(
+      margin: const EdgeInsets.only(left: 33, right: 33),
+      height: 50,
+      decoration: const BoxDecoration(
+          color: AppColors.primary,
+          borderRadius: BorderRadius.all(Radius.circular(6))),
+      child: Material(
+        borderRadius: const BorderRadius.all(Radius.circular(6)),
+        color: AppColors.transparent,
+        child: InkWell(
+          splashColor: AppColors.buttonRipple,
+          borderRadius: BorderRadius.circular(6),
+          onTap: () {},
+          child: Container(
+            alignment: Alignment.center,
+            child: Text(
+              "GET STARTED",
+              style: context.textStyle.titleSmall!
+                  .copyWith(color: AppColors.white),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
