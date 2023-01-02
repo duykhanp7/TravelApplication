@@ -6,6 +6,7 @@ import 'package:travel_booking_tour/res/button.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/icons.dart';
 import 'package:travel_booking_tour/res/input_field.dart';
+import 'package:travel_booking_tour/res/res.dart';
 
 import '../../l10n/generated/l10n.dart';
 
@@ -160,6 +161,7 @@ class _SignInScreen extends State<SignInScreen> {
             obsecureText: false,
             labelText: localization.email,
             textInputType: TextInputType.emailAddress,
+            validator: AppValidator.validateTextFieldEmail,
           ),
           const SizedBox(
             height: 24,
@@ -168,6 +170,7 @@ class _SignInScreen extends State<SignInScreen> {
             hintText: localization.password,
             obsecureText: true,
             labelText: localization.password,
+            validator: AppValidator.validateTextFieldPasword,
           ),
           const SizedBox(
             height: 15,
