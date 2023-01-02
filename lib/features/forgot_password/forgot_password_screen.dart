@@ -6,6 +6,7 @@ import 'package:travel_booking_tour/res/background.dart';
 import 'package:travel_booking_tour/res/button.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/input_field.dart';
+import 'package:travel_booking_tour/res/res.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -50,6 +51,7 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
                             obsecureText: false,
                             labelText: localization.email,
                             textInputType: TextInputType.emailAddress,
+                            validator: AppValidator.validateTextFieldEmail,
                           )
                         ],
                       ),
