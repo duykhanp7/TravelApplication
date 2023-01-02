@@ -1,11 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
+import 'package:travel_booking_tour/features/forgot_password/bloc/bloc_forgot_password_event.dart';
+import 'package:travel_booking_tour/features/forgot_password/bloc/bloc_forgot_password_screen.dart';
 import 'package:travel_booking_tour/l10n/generated/l10n.dart';
 import 'package:travel_booking_tour/res/background.dart';
-import 'package:travel_booking_tour/res/button.dart';
-import 'package:travel_booking_tour/res/colors.dart';
-import 'package:travel_booking_tour/res/input_field.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -19,7 +19,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
   late SLocalization localization;
-
+  final GlobalKey<FormState> forgotPasswordGlobalKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     localization = SLocalization.of(context);
@@ -31,62 +31,73 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
           alignment: Alignment.center,
           child: AppBackground(
               header: localization.forgot_password,
-              children: Container(
-                alignment: Alignment.center,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      padding:
-                          const EdgeInsets.only(left: 32, right: 32, top: 28),
-                      child: Column(
-                        children: [
-                          _buildTitle(),
-                          const SizedBox(
-                            height: 23,
-                          ),
-                          AppTextField(
-                            hintText: localization.email,
-                            obsecureText: false,
-                            labelText: localization.email,
-                            textInputType: TextInputType.emailAddress,
-                            validator: AppValidator.validateTextFieldEmail,
-                          )
-                        ],
+              children: Form(
+                key: forgotPasswordGlobalKey,
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        padding:
+                            const EdgeInsets.only(left: 32, right: 32, top: 28),
+                        child: Column(
+                          children: [
+                            _buildTitle(),
+                            const SizedBox(
+                              height: 23,
+                            ),
+                            AppTextField(
+                              hintText: localization.email,
+                              obsecureText: false,
+                              labelText: localization.email,
+                              textInputType: TextInputType.emailAddress,
+                              validator: AppValidator.validateTextFieldEmail,
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 52,
-                    ),
-                    PrimaryButton(
-                      text: localization.send,
-                      onTap: () {},
-                      allCaps: true,
-                    ),
-                    const SizedBox(
-                      height: 128,
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text.rich(TextSpan(
-                          text: localization.back_to,
-                          style: context.textStyle.titleSmall!.copyWith(
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.textByAgreeColor),
-                          children: <TextSpan>[
-                            TextSpan(
-                                text: localization.sign_in,
-                                style: context.textStyle.titleSmall!.copyWith(
-                                    fontWeight: FontWeight.w400,
-                                    color: AppColors.primary),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    //Todo
-                                  })
-                          ])),
-                    )
-                  ],
+                      const SizedBox(
+                        height: 52,
+                      ),
+                      PrimaryButton(
+                        text: localization.send,
+                        onTap: () {
+                          BlocProvider.of<BlocForgotPasswordScreen>(context)
+                              .add(BlocForgotPasswordEventSendEmailClick(
+                                  forgotPasswordGlobalKey:
+                                      forgotPasswordGlobalKey));
+                        },
+                        allCaps: true,
+                      ),
+                      const SizedBox(
+                        height: 128,
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        child: Text.rich(TextSpan(
+                            text: localization.back_to,
+                            style: context.textStyle.titleSmall!.copyWith(
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.textByAgreeColor),
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: localization.sign_in,
+                                  style: context.textStyle.titleSmall!.copyWith(
+                                      fontWeight: FontWeight.w400,
+                                      color: AppColors.primary),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      BlocProvider.of<BlocForgotPasswordScreen>(
+                                              context)
+                                          .add(
+                                              BlocForgotPasswordEventSignInClick());
+                                    })
+                            ])),
+                      )
+                    ],
+                  ),
                 ),
               )),
         ),

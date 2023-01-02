@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_booking_tour/features/forgot_password/forgot_password_screen.dart';
+import 'package:travel_booking_tour/features/forgot_password/screens/check_email_screen.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
 import '../features/onboarding/onboarding_screen.dart';
@@ -18,6 +19,7 @@ class Routes {
     AppPath.signUpScreen: (context) => const SignUpScreen(),
     AppPath.signInScreen: (context) => const SignInScreen(),
     AppPath.forgotPassword: (context) => const ForgotPasswordScreen(),
+    AppPath.checkEmail: (context) => const CheckEmailScreen(),
   };
 
   static void navigateToAndRemoveUntil(

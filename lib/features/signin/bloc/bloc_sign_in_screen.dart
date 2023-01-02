@@ -16,7 +16,7 @@ class BlocSignInScreen extends Bloc<BlocSignInEvent, BlocSignInState> {
       }
     });
     on<BlocSignInEventSignUpClick>((event, emit) {
-      Routes.backTo();
+      Routes.navigateTo(AppPath.signUpScreen, {});
     });
     on<BlocSignInEventForgotPassword>((event, emit) {
       Routes.navigateTo(AppPath.forgotPassword, {});
