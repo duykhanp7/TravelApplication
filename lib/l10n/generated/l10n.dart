@@ -199,46 +199,6 @@ class SLocalization {
       args: [],
     );
   }
-
-  /// `Welcome back,`
-  String get welcom_back {
-    return Intl.message(
-      'Welcome back,',
-      name: 'welcom_back',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Forgot password`
-  String get forgot_password {
-    return Intl.message(
-      'Forgot password',
-      name: 'forgot_password',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `or sign in with`
-  String get or_sign_in_with {
-    return Intl.message(
-      'or sign in with',
-      name: 'or_sign_in_with',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Don't have an account? `
-  String get dont_have_an_account {
-    return Intl.message(
-      'Don\'t have an account? ',
-      name: 'dont_have_an_account',
-      desc: '',
-      args: [],
-    );
-  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<SLocalization> {

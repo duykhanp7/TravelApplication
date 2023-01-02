@@ -17,7 +17,4 @@ class AppColors {
   static const Color inActiveRadioBorderColor = Color(0xFF555555);
   static const Color underLineTextFieldColor = Color(0xFFAFAFAF);
   static const Color textByAgreeColor = Color(0xFF777777);
-  static const Color facebookBgColor = Color(0xFF3574D1);
-  static const Color talkBgColor = Color(0xFFFFE812);
-  static const Color lineBgColor = Color(0xFF3ACE01);
 }

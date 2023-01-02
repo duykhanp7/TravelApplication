@@ -47,9 +47,7 @@ class _AppTextField extends State<AppTextField> {
               widget.labelText,
               style: widget.labelTextStyle ??
                   context.textStyle.titleMedium!.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.black,
-                      fontStyle: FontStyle.normal),
+                      color: AppColors.black, fontStyle: FontStyle.normal),
             ),
           ),
           const SizedBox(

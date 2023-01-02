@@ -5,7 +5,6 @@ class AppIcons {
   static const String parentPathIcons = 'assets/icons';
   static const String childPathSplash = '/splash';
   static const String childPathOnboarding = '/onboarding';
-  static const String childPathSignIn = '/signin';
 
   static const String appLogo = '$parentPathIcons/app_icon.svg';
 
@@ -53,10 +52,4 @@ class AppIcons {
       '$parentPathIcons$childPathOnboarding/wave_vertical.svg';
   static const String cloudyLight2 =
       '$parentPathIcons$childPathOnboarding/cloudy_light_2.svg';
-
-  //Sign in
-  static const String facebook =
-      '$parentPathIcons$childPathSignIn/facebook.svg';
-  static const String talk = '$parentPathIcons$childPathSignIn/talk.svg';
-  static const String line = '$parentPathIcons$childPathSignIn/line.svg';
 }
