@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
 class AppValidator {
-  static final GlobalKey<FormState> globalKeyFomrState = GlobalKey<FormState>();
-
   static String? validateTextFieldFirstName(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your first name';
@@ -61,6 +59,20 @@ class AppValidator {
           .hasMatch(value);
       if (!paswordValid) {
         return 'Password should have at least 8 characters\nMust have : number, upper, lower characters, special characters';
+      }
+    }
+    return null;
+  }
+
+  static String? validateTextFieldPaswordLogIn(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your password';
+    } else {
+      final bool paswordValid = RegExp(
+              r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+          .hasMatch(value);
+      if (!paswordValid) {
+        return 'Incorrect password format';
       }
     }
     return null;

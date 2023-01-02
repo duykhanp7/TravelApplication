@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travel_booking_tour/features/signin/bloc/bloc_sign_in_screen.dart';
 import 'package:travel_booking_tour/features/signup/bloc/bloc_sign_up_screen.dart';
 
 import '../features/onboarding/bloc/bloc_onboarding_screen.dart';
@@ -15,6 +16,9 @@ class AppBlocProvider {
     ),
     BlocProvider<BlocSignupScreen>(
       create: (context) => BlocSignupScreen(),
+    ),
+    BlocProvider<BlocSignInScreen>(
+      create: (context) => BlocSignInScreen(),
     ),
   ];
 }

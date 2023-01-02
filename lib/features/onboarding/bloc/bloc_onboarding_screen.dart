@@ -11,11 +11,11 @@ class BlocOnboardingScreen
   BlocOnboardingScreen() : super(BlocOnboardingStateInitial()) {
     on<BlocOnboardingEventOnButtonSkipClick>((event, emit) => {
           debugPrint('BlocOnboardingEventOnButtonSkipClick'),
-          Routes.navigateToAndRemoveUntil(AppPath.signUpScreen, '')
+          Routes.navigateToAndRemoveUntil(AppPath.signUpScreen, {})
         });
     on<BlocOnboardingEventOnButtonGetStartedClick>((event, emit) => {
           debugPrint('BlocOnboardingEventOnButtonGetStartedClick'),
-          Routes.navigateToAndRemoveUntil(AppPath.signUpScreen, '')
+          Routes.navigateToAndRemoveUntil(AppPath.signUpScreen, {})
         });
   }
 }
