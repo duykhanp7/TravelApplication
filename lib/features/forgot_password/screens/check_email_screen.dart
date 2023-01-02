@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 import 'package:travel_booking_tour/l10n/generated/l10n.dart';
 import 'package:travel_booking_tour/res/background.dart';
 import 'package:travel_booking_tour/res/colors.dart';
+import 'package:travel_booking_tour/res/icons.dart';
 import 'package:travel_booking_tour/res/images.dart';
 
 class CheckEmailScreen extends StatefulWidget {
