@@ -69,9 +69,6 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
                       alignment: Alignment.center,
                       child: Text.rich(TextSpan(
                           text: localization.back_to,
-                          style: context.textStyle.titleSmall!.copyWith(
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.textByAgreeColor),
                           children: <TextSpan>[
                             TextSpan(
                                 text: localization.sign_in,
