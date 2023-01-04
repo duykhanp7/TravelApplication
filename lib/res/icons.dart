@@ -7,6 +7,7 @@ class AppIcons {
   static const String childPathOnboarding = '/onboarding';
   static const String childPathSignIn = '/signin';
   static const String childPathForgotPassword = '/forgot_password';
+  static const String childPathExplore = '/explore';
 
   static const String appLogo = '$parentPathIcons/app_icon.svg';
 
@@ -64,4 +65,11 @@ class AppIcons {
   //Forgot password
   static const String email =
       '$parentPathIcons$childPathForgotPassword/email.svg';
+
+  //Explore
+  static const String search = '$parentPathIcons$childPathExplore/search.svg';
+  static const String cloudyWhite =
+      '$parentPathIcons$childPathExplore/cloud_white.svg';
+  static const String locationWhite =
+      '$parentPathIcons$childPathExplore/location_white.svg';
 }

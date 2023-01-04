@@ -35,9 +35,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "dont_have_an_account":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account? "),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "explore": MessageLookupByLibrary.simpleMessage("Explore"),
         "first_name": MessageLookupByLibrary.simpleMessage("First Name"),
         "forgot_password":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
+        "hi_where_do_u_want_to_explore": MessageLookupByLibrary.simpleMessage(
+            "Hi, where do you want to explore?"),
         "input_your_email_we_will_send_you_an_instruction_to_reset_your_password":
             MessageLookupByLibrary.simpleMessage(
                 "Input your email, we will send you an instruction to reset your password."),

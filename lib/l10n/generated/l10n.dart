@@ -291,6 +291,26 @@ class SLocalization {
       args: [],
     );
   }
+
+  /// `Hi, where do you want to explore?`
+  String get hi_where_do_u_want_to_explore {
+    return Intl.message(
+      'Hi, where do you want to explore?',
+      name: 'hi_where_do_u_want_to_explore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Explore`
+  String get explore {
+    return Intl.message(
+      'Explore',
+      name: 'explore',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<SLocalization> {
