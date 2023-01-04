@@ -23,5 +23,7 @@
     "input_your_email_we_will_send_you_an_instruction_to_reset_your_password": "Input your email, we will send you an instruction to reset your password.",
     "please_check_u_email": "Please check your email for the instructions on how to reset your password.",
     "send": "Send",
-    "check_email": "Check Email"
+    "check_email": "Check Email",
+    "hi_where_do_u_want_to_explore": "Hi, where do you want to explore?",
+    "explore": "Explore"
 }

@@ -43,6 +43,7 @@ dependencies:
   equatable: ^2.0.5
   flutter_bloc: ^8.1.1
   bloc: ^8.1.0
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
@@ -72,9 +73,11 @@ flutter:
     - assets/icons/splash/
     - assets/icons/onboarding/
     - assets/icons/signin/
+    - assets/icons/explore/
     - assets/images/
     - assets/images/onboarding/
     - assets/images/forgot_password/
+    - assets/images/explore/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
