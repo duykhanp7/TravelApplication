@@ -73,6 +73,9 @@ class AppIcons {
   static const String locationWhite =
       '$parentPathIcons$childPathExplore/location_white.svg';
 
+  static const String locationGreen =
+      '$parentPathIcons$childPathExplore/location_green.svg';
+
   //Journey
 
   static const String calendarWhite =
