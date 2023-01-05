@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 
-import 'colors.dart';
+import '../colors.dart';
 
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton(

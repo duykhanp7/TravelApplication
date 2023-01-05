@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +9,8 @@ import 'package:travel_booking_tour/features/onboarding/bloc/bloc_onboarding_sta
 import 'package:travel_booking_tour/features/onboarding/onboarding_Page.dart';
 import 'package:travel_booking_tour/features/onboarding/widgets/onboarding_header.dart';
 import 'package:travel_booking_tour/res/res.dart';
+
+import '../../res/button/button.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

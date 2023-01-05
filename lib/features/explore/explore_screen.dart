@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
+import 'package:travel_booking_tour/features/explore/widgets/journey_item.dart';
 import 'package:travel_booking_tour/l10n/generated/l10n.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/icons.dart';
@@ -27,7 +28,7 @@ class _ExploreScreen extends State<ExploreScreen> {
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Container(
-        alignment: Alignment.center,
+        alignment: Alignment.topCenter,
         child: Stack(
           children: [_buildbody(), _buildHeader(width)],
         ),
@@ -167,6 +168,56 @@ class _ExploreScreen extends State<ExploreScreen> {
   }
 
   Widget _buildbody() {
-    return Container();
+    return Container(
+      color: AppColors.white,
+      padding: const EdgeInsets.only(left: 16, right: 16),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 200,
+            ),
+            _buildTopJourneyWidget()
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTopJourneyWidget() {
+    return Container(
+      alignment: Alignment.topLeft,
+      child: Column(
+        children: [
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Top Journeys',
+              style: context.textStyle.titleLarge?.copyWith(
+                  fontSize: 24,
+                  color: AppColors.black,
+                  fontWeight: FontWeight.w100,
+                  fontStyle: FontStyle.italic),
+            ),
+          ),
+          const SizedBox(
+            height: 17,
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            height: 260,
+            child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) => const JourneyItem(
+                      rating: 5,
+                    ),
+                separatorBuilder: (context, index) => const SizedBox(
+                      width: 15,
+                    ),
+                itemCount: 10),
+          )
+        ],
+      ),
+    );
   }
 }

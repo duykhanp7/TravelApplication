@@ -15,7 +15,10 @@ class AppImages {
       '$parentPathImages$childPathImagesForgotPassword/email.png';
 
   //Explore
-
   static const String bgHeaderXplore =
       '$parentPathImages$childPathExplore/bg_explore_header.png';
+
+  //Journey
+  static const String daNangBanaHoiAn =
+      '$parentPathImages$childPathExplore/da_nang_ba_na_hoi_an.png';
 }

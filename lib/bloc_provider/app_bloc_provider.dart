@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_booking_tour/features/forgot_password/bloc/bloc_forgot_password_screen.dart';
-import 'package:travel_booking_tour/features/forgot_password/screens/check_email_screen.dart';
 import 'package:travel_booking_tour/features/signin/bloc/bloc_sign_in_screen.dart';
 import 'package:travel_booking_tour/features/signup/bloc/bloc_sign_up_screen.dart';
 

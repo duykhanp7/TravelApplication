@@ -6,9 +6,12 @@ import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 import 'package:travel_booking_tour/features/signup/bloc/bloc_sign_up_event.dart';
 import 'package:travel_booking_tour/features/signup/bloc/bloc_sign_up_screen.dart';
 import 'package:travel_booking_tour/l10n/generated/l10n.dart';
-import 'package:travel_booking_tour/res/background.dart';
+import 'package:travel_booking_tour/res/background/background.dart';
 import 'package:travel_booking_tour/res/res.dart';
-import 'package:travel_booking_tour/res/system.dart';
+
+import '../../res/button/button.dart';
+import '../../res/input/input_field.dart';
+import '../../res/radio/radio.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

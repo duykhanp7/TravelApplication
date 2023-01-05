@@ -4,11 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 import 'package:travel_booking_tour/features/signin/bloc/bloc_sign_in_event.dart';
 import 'package:travel_booking_tour/features/signin/bloc/bloc_sign_in_screen.dart';
-import 'package:travel_booking_tour/res/background.dart';
-import 'package:travel_booking_tour/res/icons.dart';
+import 'package:travel_booking_tour/res/background/background.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
 import '../../l10n/generated/l10n.dart';
+import '../../res/button/button.dart';
+import '../../res/input/input_field.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
