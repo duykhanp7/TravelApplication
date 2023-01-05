@@ -21,6 +21,7 @@ class AppImages {
   //Journey
   static const String daNangBanaHoiAn =
       '$parentPathImages$childPathExplore/da_nang_ba_na_hoi_an.png';
+  static const String hoiAn = '$parentPathImages$childPathExplore/hoian.png';
 
   //Tour guide
   static const String emmy = '$parentPathImages$childPathExplore/emmy.png';

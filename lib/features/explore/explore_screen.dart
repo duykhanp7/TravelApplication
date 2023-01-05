@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 import 'package:travel_booking_tour/features/explore/widgets/journey_item.dart';
+import 'package:travel_booking_tour/features/explore/widgets/top_experience_item.dart';
 import 'package:travel_booking_tour/features/explore/widgets/tour_guide_item.dart';
 import 'package:travel_booking_tour/l10n/generated/l10n.dart';
 import 'package:travel_booking_tour/res/colors.dart';
@@ -182,7 +183,8 @@ class _ExploreScreen extends State<ExploreScreen> {
             const SizedBox(
               height: 30,
             ),
-            _buildBestGuide()
+            _buildBestGuide(),
+            _buildTopExperiences()
           ],
         ),
       ),
@@ -293,6 +295,44 @@ class _ExploreScreen extends State<ExploreScreen> {
               ),
               TourGuideItem(callback: () {}),
             ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTopExperiences() {
+    return Container(
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 30,
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Top Experiences',
+              style: context.textStyle.titleLarge?.copyWith(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w100,
+                  fontStyle: FontStyle.italic),
+            ),
+          ),
+          const SizedBox(
+            height: 17,
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            height: 350,
+            child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) => TopExperienceItem(
+                      callback: () {},
+                    ),
+                separatorBuilder: (context, index) => const SizedBox(
+                      width: 15,
+                    ),
+                itemCount: 10),
           )
         ],
       ),
