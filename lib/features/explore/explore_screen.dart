@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 import 'package:travel_booking_tour/features/explore/widgets/journey_item.dart';
+import 'package:travel_booking_tour/features/explore/widgets/tour_guide_item.dart';
 import 'package:travel_booking_tour/l10n/generated/l10n.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/icons.dart';
@@ -177,7 +178,11 @@ class _ExploreScreen extends State<ExploreScreen> {
             const SizedBox(
               height: 200,
             ),
-            _buildTopJourneyWidget()
+            _buildTopJourneyWidget(),
+            const SizedBox(
+              height: 30,
+            ),
+            _buildBestGuide()
           ],
         ),
       ),
@@ -208,13 +213,86 @@ class _ExploreScreen extends State<ExploreScreen> {
             height: 260,
             child: ListView.separated(
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => const JourneyItem(
+                itemBuilder: (context, index) => JourneyItem(
                       rating: 5,
+                      callback: () {},
                     ),
                 separatorBuilder: (context, index) => const SizedBox(
                       width: 15,
                     ),
                 itemCount: 10),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBestGuide() {
+    return Container(
+      alignment: Alignment.center,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Best Guides',
+                  style: context.textStyle.titleLarge?.copyWith(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w100,
+                      color: AppColors.textOnboardingBlack,
+                      fontStyle: FontStyle.italic),
+                ),
+              ),
+              const Spacer(),
+              Container(
+                height: 20,
+                alignment: Alignment.center,
+                child: Material(
+                  color: AppColors.transparent,
+                  child: InkWell(
+                    splashColor: AppColors.primary.withOpacity(0.1),
+                    child: Text(
+                      'SEE MORE',
+                      style: context.textStyle.titleSmall
+                          ?.copyWith(color: AppColors.primary),
+                    ),
+                    onTap: () {},
+                  ),
+                ),
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 17,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TourGuideItem(
+                callback: () {},
+              ),
+              const SizedBox(
+                width: 15,
+              ),
+              TourGuideItem(
+                callback: () {},
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TourGuideItem(callback: () {}),
+              const SizedBox(
+                width: 15,
+              ),
+              TourGuideItem(callback: () {}),
+            ],
           )
         ],
       ),
