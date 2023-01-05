@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/res/colors.dart';
-import 'package:travel_booking_tour/res/icons.dart';
-import 'package:travel_booking_tour/res/images.dart';
-import 'package:travel_booking_tour/res/star/vertical_star_widget.dart';
 
-class TourGuideItem extends StatefulWidget {
-  const TourGuideItem({super.key, required this.callback});
+import '../../../res/colors.dart';
+import '../../../res/icons.dart';
+import '../../../res/images.dart';
 
+class TopExperienceItem extends StatefulWidget {
+  const TopExperienceItem({super.key, required this.callback});
   final VoidCallback callback;
 
   @override
   State<StatefulWidget> createState() {
-    return _TourGuideItem();
+    return _TopExperienceItem();
   }
 }
 
-class _TourGuideItem extends State<TourGuideItem> {
+class _TopExperienceItem extends State<TopExperienceItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: 170,
-        height: 220,
+        width: 206,
+        height: 350,
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(12))),
         child: Stack(
@@ -37,32 +36,57 @@ class _TourGuideItem extends State<TourGuideItem> {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(12)),
                           child: Image.asset(
-                            AppImages.emmy,
-                            width: 220,
+                            AppImages.hoiAn,
+                            width: 206,
+                            height: 259,
                             filterQuality: FilterQuality.high,
                             fit: BoxFit.cover,
                           ),
                         ),
                         Positioned(
-                            bottom: 7,
-                            left: 10,
+                            bottom: 15,
+                            left: 16,
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                const VerticalStarWidget(rating: 5),
+                                Container(
+                                  width: 70,
+                                  height: 70,
+                                  padding: const EdgeInsets.all(3),
+                                  alignment: Alignment.center,
+                                  decoration: const BoxDecoration(
+                                    color: AppColors.primary,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(35)),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(35)),
+                                    child: Image.asset(AppImages.emmy),
+                                  ),
+                                ),
                                 const SizedBox(
-                                  height: 4,
+                                  height: 2,
                                 ),
                                 Container(
-                                  alignment: Alignment.centerLeft,
+                                  alignment: Alignment.center,
+                                  width: 88,
+                                  height: 23,
+                                  padding:
+                                      const EdgeInsets.only(left: 5, right: 5),
+                                  decoration: BoxDecoration(
+                                      color: AppColors.primary,
+                                      borderRadius: BorderRadius.circular(10)),
                                   child: Text(
-                                    '127 reviews',
-                                    textAlign: TextAlign.start,
+                                    'Emmy',
+                                    overflow: TextOverflow.ellipsis,
+                                    softWrap: true,
+                                    textAlign: TextAlign.center,
                                     style: context.textStyle.titleSmall
                                         ?.copyWith(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w400,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
                                             color: AppColors.white),
                                   ),
                                 )
@@ -85,8 +109,9 @@ class _TourGuideItem extends State<TourGuideItem> {
                             height: 8,
                           ),
                           Text(
+                            '2 Hour Bicycle Tour exploring Hoian',
                             overflow: TextOverflow.ellipsis,
-                            'Emmy',
+                            maxLines: 2,
                             style: context.textStyle.titleMedium
                                 ?.copyWith(fontWeight: FontWeight.w500),
                           ),
@@ -94,7 +119,7 @@ class _TourGuideItem extends State<TourGuideItem> {
                             height: 7,
                           ),
                           Container(
-                            padding: const EdgeInsets.only(left: 3),
+                            padding: const EdgeInsets.only(left: 3, right: 3),
                             child: Row(
                               children: [
                                 SvgPicture.asset(AppIcons.locationGreen),
@@ -102,7 +127,8 @@ class _TourGuideItem extends State<TourGuideItem> {
                                   width: 6,
                                 ),
                                 Text(
-                                  'Da Nang, Viet Nam',
+                                  'Hoi An, Viet Nam',
+                                  maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: context.textStyle.titleSmall?.copyWith(
                                       fontWeight: FontWeight.w400,
@@ -117,8 +143,8 @@ class _TourGuideItem extends State<TourGuideItem> {
               ],
             ),
             Container(
-              width: 170,
-              height: 220,
+              width: 206,
+              height: 350,
               decoration: const BoxDecoration(
                   color: AppColors.transparent,
                   borderRadius: BorderRadius.all(Radius.circular(12))),

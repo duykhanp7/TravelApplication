@@ -111,6 +111,7 @@ class _JourneyItem extends State<JourneyItem> {
                             alignment: Alignment.centerLeft,
                             child: Text(
                               'Da Nang - Ba Na - Hoi An',
+                              overflow: TextOverflow.ellipsis,
                               style: context.textStyle.titleMedium,
                             ),
                           ),
