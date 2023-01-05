@@ -21,6 +21,8 @@ class AppImages {
   //Journey
   static const String daNangBanaHoiAn =
       '$parentPathImages$childPathExplore/da_nang_ba_na_hoi_an.png';
+  static const String daNangBanaHoiAn1 =
+      '$parentPathImages$childPathExplore/da_nang_ba_na_hoi_an_1.png';
   static const String hoiAn = '$parentPathImages$childPathExplore/hoian.png';
 
   //Tour guide

@@ -82,6 +82,10 @@ class AppIcons {
       '$parentPathIcons$childPathExplore/calendar.svg';
   static const String clock = '$parentPathIcons$childPathExplore/clock.svg';
   static const String star = '$parentPathIcons$childPathExplore/star.svg';
+  static const String bookMarkNone =
+      '$parentPathIcons$childPathExplore/book_mark_none.svg';
+  static const String bookMarkFill =
+      '$parentPathIcons$childPathExplore/book_mark_fill.svg';
   static const String favoriteNone =
       '$parentPathIcons$childPathExplore/favorite_none.svg';
   static const String favoriteFill =
