@@ -1,33 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/res/colors.dart';
-import 'package:travel_booking_tour/res/icons.dart';
-import 'package:travel_booking_tour/res/images.dart';
-import 'package:travel_booking_tour/res/star/vertical_star_widget.dart';
 
-class JourneyItem extends StatefulWidget {
-  const JourneyItem({super.key, required this.rating, required this.callback});
-  final int rating;
+import '../../../res/colors.dart';
+import '../../../res/icons.dart';
+import '../../../res/images.dart';
+import '../../../res/star/vertical_star_widget.dart';
+
+class FeaturedTourItem extends StatefulWidget {
+  const FeaturedTourItem(
+      {super.key, required this.callback, required this.rating});
   final VoidCallback callback;
+  final int rating;
   @override
   State<StatefulWidget> createState() {
-    return _JourneyItem();
+    return _FeaturedTourItem();
   }
 }
 
-class _JourneyItem extends State<JourneyItem> {
+class _FeaturedTourItem extends State<FeaturedTourItem> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 3,
+      margin: const EdgeInsets.only(bottom: 16),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
       borderOnForeground: true,
       semanticContainer: true,
       child: Container(
-        width: 235,
         height: 260,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15), color: AppColors.white),
@@ -40,8 +41,8 @@ class _JourneyItem extends State<JourneyItem> {
                     child: Stack(
                       children: [
                         Container(
+                          width: MediaQuery.of(context).size.width,
                           decoration: const BoxDecoration(
-                              color: AppColors.white,
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(15),
                                   topRight: Radius.circular(15))),
@@ -50,9 +51,8 @@ class _JourneyItem extends State<JourneyItem> {
                                 topLeft: Radius.circular(15),
                                 topRight: Radius.circular(15)),
                             child: Image.asset(
-                              AppImages.daNangBanaHoiAn,
+                              AppImages.daNangBanaHoiAn1,
                               filterQuality: FilterQuality.high,
-                              width: 235,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -81,7 +81,6 @@ class _JourneyItem extends State<JourneyItem> {
                 Flexible(
                     flex: 1,
                     child: Container(
-                      width: 235,
                       padding:
                           const EdgeInsets.only(top: 10, left: 12, right: 12),
                       decoration: const BoxDecoration(
@@ -91,14 +90,19 @@ class _JourneyItem extends State<JourneyItem> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Da Nang - Ba Na - Hoi An',
-                              overflow: TextOverflow.ellipsis,
-                              style: context.textStyle.titleMedium
-                                  ?.copyWith(fontWeight: FontWeight.w500),
-                            ),
+                          Row(
+                            children: [
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Da Nang - Ba Na - Hoi An',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: context.textStyle.titleMedium
+                                      ?.copyWith(fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                              const Spacer(),
+                            ],
                           ),
                           const SizedBox(
                             height: 8,
@@ -141,28 +145,31 @@ class _JourneyItem extends State<JourneyItem> {
                                 style: context.textStyle.titleSmall?.copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: AppColors.textOnboardingBrown),
+                              ),
+                              const Spacer(),
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  '\$400.00',
+                                  style: context.textStyle.titleMedium
+                                      ?.copyWith(
+                                          fontWeight: FontWeight.w100,
+                                          color: AppColors.primary,
+                                          fontStyle: FontStyle.italic),
+                                ),
                               )
                             ],
                           ),
                           const SizedBox(
                             height: 8,
                           ),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              '\$400.00',
-                              style: context.textStyle.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.w100,
-                                  color: AppColors.primary,
-                                  fontStyle: FontStyle.italic),
-                            ),
-                          )
                         ],
                       ),
                     )),
               ],
             ),
             Container(
+              width: MediaQuery.of(context).size.width,
               height: 260,
               decoration: const BoxDecoration(
                   color: AppColors.transparent,
@@ -192,9 +199,22 @@ class _JourneyItem extends State<JourneyItem> {
                     child: InkWell(
                       child: SvgPicture.asset(AppIcons.bookMarkNone),
                       onTap: () {
-                        debugPrint('On Book Mark Click');
+                        debugPrint('On Featured Tour Click');
                       },
                     ),
+                  ),
+                )),
+            Positioned(
+                right: 12,
+                top: 40,
+                bottom: 0,
+                child: Container(
+                  alignment: Alignment.center,
+                  child: InkWell(
+                    child: SvgPicture.asset(AppIcons.favoriteNone),
+                    onTap: () {
+                      debugPrint('On Favorite Click');
+                    },
                   ),
                 )),
           ],

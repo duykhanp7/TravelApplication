@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
+import 'package:travel_booking_tour/features/explore/widgets/featured_tour_item.dart';
 import 'package:travel_booking_tour/features/explore/widgets/journey_item.dart';
 import 'package:travel_booking_tour/features/explore/widgets/top_experience_item.dart';
 import 'package:travel_booking_tour/features/explore/widgets/tour_guide_item.dart';
@@ -184,7 +185,8 @@ class _ExploreScreen extends State<ExploreScreen> {
               height: 30,
             ),
             _buildBestGuide(),
-            _buildTopExperiences()
+            _buildTopExperiences(),
+            _buildFeaturedTours()
           ],
         ),
       ),
@@ -303,6 +305,7 @@ class _ExploreScreen extends State<ExploreScreen> {
 
   Widget _buildTopExperiences() {
     return Container(
+      alignment: Alignment.center,
       child: Column(
         children: [
           const SizedBox(
@@ -333,6 +336,57 @@ class _ExploreScreen extends State<ExploreScreen> {
                       width: 15,
                     ),
                 itemCount: 10),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFeaturedTours() {
+    return Container(
+      padding: const EdgeInsets.only(top: 30),
+      alignment: Alignment.center,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Featured Tours',
+                  style: context.textStyle.titleLarge?.copyWith(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w100,
+                      color: AppColors.textOnboardingBlack,
+                      fontStyle: FontStyle.italic),
+                ),
+              ),
+              const Spacer(),
+              Container(
+                height: 20,
+                alignment: Alignment.center,
+                child: Material(
+                  color: AppColors.transparent,
+                  child: InkWell(
+                    splashColor: AppColors.primary.withOpacity(0.1),
+                    child: Text(
+                      'SEE MORE',
+                      style: context.textStyle.titleSmall
+                          ?.copyWith(color: AppColors.primary),
+                    ),
+                    onTap: () {},
+                  ),
+                ),
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 17,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+                10, (index) => FeaturedTourItem(callback: () {}, rating: 5)),
           )
         ],
       ),
