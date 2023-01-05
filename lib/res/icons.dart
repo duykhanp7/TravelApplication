@@ -72,4 +72,15 @@ class AppIcons {
       '$parentPathIcons$childPathExplore/cloud_white.svg';
   static const String locationWhite =
       '$parentPathIcons$childPathExplore/location_white.svg';
+
+  //Journey
+
+  static const String calendarWhite =
+      '$parentPathIcons$childPathExplore/calendar.svg';
+  static const String clock = '$parentPathIcons$childPathExplore/clock.svg';
+  static const String star = '$parentPathIcons$childPathExplore/star.svg';
+  static const String favoriteNone =
+      '$parentPathIcons$childPathExplore/favorite_none.svg';
+  static const String favoriteFill =
+      '$parentPathIcons$childPathExplore/favorite_fill.svg';
 }

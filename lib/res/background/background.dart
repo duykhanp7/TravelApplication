@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 
-import 'clip_path.dart';
-import 'colors.dart';
-import 'icons.dart';
+import '../clip_path.dart';
+import '../colors.dart';
+import '../icons.dart';
 
 class AppBackground extends StatelessWidget {
   const AppBackground(
