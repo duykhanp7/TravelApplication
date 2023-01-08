@@ -5,6 +5,7 @@ class AppImages {
   static const String childPathImagesOnboarding = '/onboarding';
   static const String childPathImagesForgotPassword = '/forgot_password';
   static const String childPathExplore = '/explore';
+  static const String childPathProfile = '/profile';
 
   static const String card1 =
       '$parentPathImages$childPathImagesOnboarding/card1.png';
@@ -29,4 +30,10 @@ class AppImages {
 
   //Tour guide
   static const String emmy = '$parentPathImages$childPathExplore/emmy.png';
+
+  //Profile
+  static const String defaultBg =
+      '$parentPathImages$childPathProfile/default_bg_profile.png';
+  static const String imageProfile =
+      '$parentPathImages$childPathProfile/image_profile.png';
 }
