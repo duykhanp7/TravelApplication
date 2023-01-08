@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
+import 'package:travel_booking_tour/features/explore/widgets/bottom_nav_item.dart';
 import 'package:travel_booking_tour/features/explore/widgets/featured_tour_item.dart';
 import 'package:travel_booking_tour/features/explore/widgets/journey_item.dart';
 import 'package:travel_booking_tour/features/explore/widgets/top_experience_item.dart';
@@ -24,6 +25,10 @@ class ExploreScreen extends StatefulWidget {
 
 class _ExploreScreen extends State<ExploreScreen> {
   late SLocalization localization;
+  late List<String> icons;
+  late List<String> titles;
+  ScrollController scrollController = ScrollController();
+  int indexClick = 0;
   @override
   Widget build(BuildContext context) {
     localization = SLocalization.of(context);
@@ -37,7 +42,26 @@ class _ExploreScreen extends State<ExploreScreen> {
           children: [_buildbody(), _buildHeader(width)],
         ),
       ),
+      bottomNavigationBar: _buildBottomNavigationBar(context),
     );
+  }
+
+  @override
+  void initState() {
+    icons = <String>[];
+    icons.add(AppIcons.compassNone);
+    icons.add(AppIcons.locationNone);
+    icons.add(AppIcons.messageNone);
+    icons.add(AppIcons.notificationNone);
+    icons.add(AppIcons.personalNone);
+
+    titles = <String>[];
+    titles.add('Explore');
+    titles.add('Location');
+    titles.add('Message');
+    titles.add('Notification');
+    titles.add('Profile');
+    super.initState();
   }
 
   Widget _buildHeader(double width) {
@@ -176,6 +200,8 @@ class _ExploreScreen extends State<ExploreScreen> {
       color: AppColors.white,
       padding: const EdgeInsets.only(left: 16, right: 16),
       child: SingleChildScrollView(
+        controller: scrollController,
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             const SizedBox(
@@ -218,6 +244,7 @@ class _ExploreScreen extends State<ExploreScreen> {
             alignment: Alignment.centerLeft,
             height: 260,
             child: ListView.separated(
+                physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) => JourneyItem(
                       rating: 5,
@@ -330,6 +357,7 @@ class _ExploreScreen extends State<ExploreScreen> {
             alignment: Alignment.centerLeft,
             height: 350,
             child: ListView.separated(
+                physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) => TopExperienceItem(
                       callback: () {},
@@ -444,5 +472,78 @@ class _ExploreScreen extends State<ExploreScreen> {
         ],
       ),
     );
+  }
+
+  Widget _buildBottomNavigationBar(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+            alignment: Alignment.center,
+            height: 60,
+            color: AppColors.white,
+            child: CustomPaint(
+              size: Size(MediaQuery.of(context).size.width, 60),
+              painter: RPSCustomPainter(),
+            )),
+        Container(
+          alignment: Alignment.center,
+          height: 60,
+          color: AppColors.white,
+          child: Row(
+            children: List.generate(
+                icons.length,
+                (index) => BottomNavItem(
+                      index: index,
+                      icon: icons[index],
+                      title: titles[index],
+                      clicked: index == indexClick,
+                      onClick: (index) {
+                        setState(() {
+                          indexClick = index;
+                          if (indexClick == 0) {
+                            scrollController.animateTo(0,
+                                duration: const Duration(seconds: 2),
+                                curve: Curves.fastLinearToSlowEaseIn);
+                          }
+                        });
+                      },
+                    )),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class RPSCustomPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint0 = Paint()
+      ..color = const Color.fromARGB(255, 255, 255, 255)
+      ..style = PaintingStyle.fill
+      ..strokeWidth = 1;
+
+    Paint shadowPaint = Paint()
+      ..color = AppColors.underLineTextFieldColor.withOpacity(0.5)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 3
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 5);
+
+    Path path0 = Path();
+    path0.moveTo(0, 0);
+    path0.lineTo(0, size.height);
+    path0.lineTo(size.width, size.height);
+    path0.lineTo(size.width, 0);
+    path0.quadraticBezierTo(
+        size.width * 0.4967083, size.height * -0.2311857, 0, 0);
+    path0.close();
+
+    canvas.drawPath(path0.shift(const Offset(0, 0)), shadowPaint);
+    canvas.drawPath(path0, paint0);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
   }
 }
