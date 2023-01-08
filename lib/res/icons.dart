@@ -90,4 +90,16 @@ class AppIcons {
       '$parentPathIcons$childPathExplore/favorite_none.svg';
   static const String favoriteFill =
       '$parentPathIcons$childPathExplore/favorite_fill.svg';
+
+  //Bottom navigation
+  static const String compassNone =
+      '$parentPathIcons$childPathExplore/compass_none.svg';
+  static const String locationNone =
+      '$parentPathIcons$childPathExplore/location_none.svg';
+  static const String messageNone =
+      '$parentPathIcons$childPathExplore/message_none.svg';
+  static const String notificationNone =
+      '$parentPathIcons$childPathExplore/notification_none.svg';
+  static const String personalNone =
+      '$parentPathIcons$childPathExplore/personal_none.svg';
 }
