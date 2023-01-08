@@ -8,6 +8,7 @@ class AppIcons {
   static const String childPathSignIn = '/signin';
   static const String childPathForgotPassword = '/forgot_password';
   static const String childPathExplore = '/explore';
+  static const String childPathProfile = '/profile';
 
   static const String appLogo = '$parentPathIcons/app_icon.svg';
 
@@ -102,4 +103,10 @@ class AppIcons {
       '$parentPathIcons$childPathExplore/notification_none.svg';
   static const String personalNone =
       '$parentPathIcons$childPathExplore/personal_none.svg';
+
+  //Profile
+  static const String setting = '$parentPathIcons$childPathProfile/setting.svg';
+  static const String camera = '$parentPathIcons$childPathProfile/camera.svg';
+  static const String cameraFill =
+      '$parentPathIcons$childPathProfile/camera_fill.svg';
 }

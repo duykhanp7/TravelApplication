@@ -6,6 +6,7 @@ class AppColors {
   static const Color primary = Color(0xFF00CEA6);
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color.fromARGB(255, 0, 0, 0);
+  static const Color blackDefault = Color(0xFF000000);
   static const Color textOnboardingBrown = Color(0xFF555555);
   static const Color textOnboardingBlack = Color(0xFF121212);
   static const Color textSkipColor = Color(0xFF777777);

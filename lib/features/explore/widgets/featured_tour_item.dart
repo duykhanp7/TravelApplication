@@ -189,33 +189,74 @@ class _FeaturedTourItem extends State<FeaturedTourItem> {
             Positioned(
                 right: 12,
                 top: 12,
-                child: Container(
+                child: Stack(
                   alignment: Alignment.center,
-                  width: 13,
-                  height: 20,
-                  color: AppColors.transparent,
-                  child: Material(
-                    color: AppColors.transparent,
-                    child: InkWell(
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      width: 13,
+                      height: 20,
+                      color: AppColors.transparent,
                       child: SvgPicture.asset(AppIcons.bookMarkNone),
-                      onTap: () {
-                        debugPrint('On Featured Tour Click');
-                      },
                     ),
-                  ),
+                    Container(
+                      alignment: Alignment.center,
+                      color: AppColors.transparent,
+                      child: Material(
+                        borderRadius: BorderRadius.circular(15),
+                        color: AppColors.transparent,
+                        child: InkWell(
+                          splashColor: AppColors.white.withOpacity(0.2),
+                          highlightColor: AppColors.white.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(15),
+                          child: Container(
+                            width: 30,
+                            height: 30,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15)),
+                          ),
+                          onTap: () {
+                            debugPrint('On Featured Tour Click');
+                          },
+                        ),
+                      ),
+                    )
+                  ],
                 )),
             Positioned(
                 right: 12,
                 top: 40,
                 bottom: 0,
-                child: Container(
+                child: Stack(
                   alignment: Alignment.center,
-                  child: InkWell(
-                    child: SvgPicture.asset(AppIcons.favoriteNone),
-                    onTap: () {
-                      debugPrint('On Favorite Click');
-                    },
-                  ),
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      child: SvgPicture.asset(AppIcons.favoriteNone),
+                    ),
+                    Container(
+                      width: 40,
+                      height: 40,
+                      alignment: Alignment.center,
+                      child: Material(
+                          color: AppColors.transparent,
+                          borderRadius: BorderRadius.circular(20),
+                          child: InkWell(
+                            splashColor:
+                                AppColors.textSkipColor.withOpacity(0.1),
+                            highlightColor:
+                                AppColors.textSkipColor.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(20),
+                            child: Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20)),
+                            ),
+                            onTap: () {},
+                          )),
+                    )
+                  ],
                 )),
           ],
         ),

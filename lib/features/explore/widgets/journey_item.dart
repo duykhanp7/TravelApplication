@@ -182,20 +182,39 @@ class _JourneyItem extends State<JourneyItem> {
             Positioned(
                 right: 12,
                 top: 12,
-                child: Container(
+                child: Stack(
                   alignment: Alignment.center,
-                  width: 13,
-                  height: 20,
-                  color: AppColors.transparent,
-                  child: Material(
-                    color: AppColors.transparent,
-                    child: InkWell(
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      width: 13,
+                      height: 20,
+                      color: AppColors.transparent,
                       child: SvgPicture.asset(AppIcons.bookMarkNone),
-                      onTap: () {
-                        debugPrint('On Book Mark Click');
-                      },
                     ),
-                  ),
+                    Container(
+                      alignment: Alignment.center,
+                      width: 40,
+                      height: 40,
+                      color: AppColors.transparent,
+                      child: Material(
+                        borderRadius: BorderRadius.circular(20),
+                        color: AppColors.transparent,
+                        child: InkWell(
+                          splashColor: AppColors.white.withOpacity(0.1),
+                          highlightColor: AppColors.white.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20)),
+                          ),
+                          onTap: () {
+                            debugPrint('On Book Mark Click');
+                          },
+                        ),
+                      ),
+                    )
+                  ],
                 )),
           ],
         ),

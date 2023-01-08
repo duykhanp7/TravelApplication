@@ -12,7 +12,7 @@ class BlocSplashScreen extends Bloc<BlocSplashEvent, BlocSplashState> {
           debugPrint('Splash Event Initial'),
           Future.delayed(
             const Duration(seconds: 3),
-            () => Routes.navigateTo(AppPath.exploreScreen, {}),
+            () => Routes.navigateTo(AppPath.mainScreen, {}),
           )
         });
   }
