@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
+import 'package:travel_booking_tour/features/explore/model/feature_tour.dart';
 
 import '../../../res/colors.dart';
 import '../../../res/icons.dart';
@@ -8,10 +9,13 @@ import '../../../res/images.dart';
 import '../../../res/star/vertical_star_widget.dart';
 
 class FeaturedTourItem extends StatefulWidget {
-  const FeaturedTourItem(
-      {super.key, required this.callback, required this.rating});
+  const FeaturedTourItem({
+    super.key,
+    required this.callback,
+    required this.featureTourJson,
+  });
   final VoidCallback callback;
-  final int rating;
+  final FeatureTourJson featureTourJson;
   @override
   State<StatefulWidget> createState() {
     return _FeaturedTourItem();
@@ -63,12 +67,14 @@ class _FeaturedTourItem extends State<FeaturedTourItem> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                VerticalStarWidget(rating: widget.rating),
+                                VerticalStarWidget(
+                                    rating:
+                                        widget.featureTourJson.ratings ?? 0),
                                 const SizedBox(
                                   width: 13,
                                 ),
                                 Text(
-                                  '1247 likes',
+                                  '${widget.featureTourJson.likes} likes',
                                   style: context.textStyle.titleSmall?.copyWith(
                                       fontSize: 12,
                                       color: AppColors.white,
@@ -95,7 +101,7 @@ class _FeaturedTourItem extends State<FeaturedTourItem> {
                               Container(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  'Da Nang - Ba Na - Hoi An',
+                                  widget.featureTourJson.address ?? '',
                                   overflow: TextOverflow.ellipsis,
                                   style: context.textStyle.titleMedium
                                       ?.copyWith(fontWeight: FontWeight.w500),
@@ -119,7 +125,8 @@ class _FeaturedTourItem extends State<FeaturedTourItem> {
                                 width: 9,
                               ),
                               Text(
-                                'Jan 30, 2023',
+                                widget.featureTourJson.dateStart ??
+                                    '00-00-0000',
                                 style: context.textStyle.titleSmall?.copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: AppColors.textOnboardingBrown),
@@ -141,7 +148,7 @@ class _FeaturedTourItem extends State<FeaturedTourItem> {
                                 width: 9,
                               ),
                               Text(
-                                '3 days',
+                                '${widget.featureTourJson.quantities} days',
                                 style: context.textStyle.titleSmall?.copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: AppColors.textOnboardingBrown),
@@ -150,7 +157,7 @@ class _FeaturedTourItem extends State<FeaturedTourItem> {
                               Container(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  '\$400.00',
+                                  '\$${widget.featureTourJson.prices ?? 0}',
                                   style: context.textStyle.titleMedium
                                       ?.copyWith(
                                           fontWeight: FontWeight.w100,

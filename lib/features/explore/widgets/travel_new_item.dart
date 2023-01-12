@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
+import 'package:travel_booking_tour/features/explore/model/travel_news.dart';
 
 import '../../../res/colors.dart';
-import '../../../res/images.dart';
 
 class TravelNewItem extends StatefulWidget {
-  const TravelNewItem({super.key, required this.callback});
+  const TravelNewItem(
+      {super.key, required this.callback, required this.travelNewJson});
 
   final VoidCallback callback;
+  final TravelNewJson travelNewJson;
 
   @override
   State<StatefulWidget> createState() {
@@ -30,7 +32,7 @@ class _TravelNewItem extends State<TravelNewItem> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'New Destination in Da Nang City',
+                  widget.travelNewJson.destinationTitle ?? '',
                   overflow: TextOverflow.ellipsis,
                   style: context.textStyle.titleMedium
                       ?.copyWith(fontWeight: FontWeight.w500),
@@ -39,7 +41,7 @@ class _TravelNewItem extends State<TravelNewItem> {
                   height: 4,
                 ),
                 Text(
-                  'Frb 5, 2023',
+                  widget.travelNewJson.dateStart ?? '',
                   style: context.textStyle.titleSmall?.copyWith(
                       fontWeight: FontWeight.w400,
                       color: AppColors.textSkipColor),
@@ -51,7 +53,7 @@ class _TravelNewItem extends State<TravelNewItem> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.asset(
-                    AppImages.cungVanHoaThieuNhi,
+                    widget.travelNewJson.destinationImageUrl ?? '',
                     filterQuality: FilterQuality.high,
                     width: MediaQuery.of(context).size.width,
                     fit: BoxFit.cover,

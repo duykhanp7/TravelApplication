@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
+import 'package:travel_booking_tour/features/explore/model/top_experiences.dart';
 
 import '../../../res/colors.dart';
 import '../../../res/icons.dart';
-import '../../../res/images.dart';
 
 class TopExperienceItem extends StatefulWidget {
-  const TopExperienceItem({super.key, required this.callback});
+  const TopExperienceItem(
+      {super.key, required this.callback, required this.topExperienceJson});
   final VoidCallback callback;
-
+  final TopExperienceJson topExperienceJson;
   @override
   State<StatefulWidget> createState() {
     return _TopExperienceItem();
@@ -36,7 +37,7 @@ class _TopExperienceItem extends State<TopExperienceItem> {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(12)),
                           child: Image.asset(
-                            AppImages.hoiAn,
+                            widget.topExperienceJson.destinationImageUrl ?? '',
                             width: 206,
                             height: 259,
                             filterQuality: FilterQuality.high,
@@ -63,7 +64,10 @@ class _TopExperienceItem extends State<TopExperienceItem> {
                                   child: ClipRRect(
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(35)),
-                                    child: Image.asset(AppImages.emmy),
+                                    child: Image.asset(
+                                      widget.topExperienceJson.guideImageUrl ??
+                                          '',
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(
@@ -79,7 +83,7 @@ class _TopExperienceItem extends State<TopExperienceItem> {
                                       color: AppColors.primary,
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Text(
-                                    'Emmy',
+                                    widget.topExperienceJson.name ?? '',
                                     overflow: TextOverflow.ellipsis,
                                     softWrap: true,
                                     textAlign: TextAlign.center,
@@ -109,7 +113,7 @@ class _TopExperienceItem extends State<TopExperienceItem> {
                             height: 8,
                           ),
                           Text(
-                            '2 Hour Bicycle Tour exploring Hoian',
+                            widget.topExperienceJson.description ?? '',
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                             style: context.textStyle.titleMedium
@@ -127,7 +131,7 @@ class _TopExperienceItem extends State<TopExperienceItem> {
                                   width: 6,
                                 ),
                                 Text(
-                                  'Hoi An, Viet Nam',
+                                  widget.topExperienceJson.address ?? '',
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: context.textStyle.titleSmall?.copyWith(
