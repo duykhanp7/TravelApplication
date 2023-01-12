@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
+import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_event.dart';
+import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_screen.dart';
+import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_state.dart';
+import 'package:travel_booking_tour/features/explore/model/best_guide.dart';
+import 'package:travel_booking_tour/features/explore/model/feature_tour.dart';
+import 'package:travel_booking_tour/features/explore/model/top_experiences.dart';
+import 'package:travel_booking_tour/features/explore/model/top_journey.dart';
+import 'package:travel_booking_tour/features/explore/model/travel_news.dart';
 import 'package:travel_booking_tour/features/explore/widgets/featured_tour_item.dart';
 import 'package:travel_booking_tour/features/explore/widgets/journey_item.dart';
 import 'package:travel_booking_tour/features/explore/widgets/top_experience_item.dart';
@@ -33,7 +42,7 @@ class _ExploreScreen extends State<ExploreScreen> {
       onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
       child: Container(
         alignment: Alignment.topCenter,
-        child: _buildbody(),
+        child: _buildbody(context),
       ),
     );
   }
@@ -43,33 +52,54 @@ class _ExploreScreen extends State<ExploreScreen> {
     super.initState();
   }
 
-  Widget _buildbody() {
-    return Container(
-      color: AppColors.white,
-      padding: const EdgeInsets.only(left: 16, right: 16),
-      child: SingleChildScrollView(
-        controller: widget.scrollController,
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 200,
+  Widget _buildbody(BuildContext context) {
+    BlocProvider.of<BlocExploreScreen>(context)
+        .add(BlocExploreEventInitial(objects: [
+      BestGuideJson(),
+      FeatureTourJson(),
+      TopExperienceJson(),
+      TopJourneyJson(),
+      TravelNewJson()
+    ]));
+    return BlocBuilder<BlocExploreScreen, BlocExploreState>(
+      builder: (context, exploreState) {
+        if (exploreState is BlocExploreStateLoadDataSuccess) {
+          return Container(
+            color: AppColors.white,
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: SingleChildScrollView(
+              controller: widget.scrollController,
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 200,
+                  ),
+                  _buildTopJourneyWidget(exploreState.topJourneyJsons),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  _buildBestGuide(exploreState.bestGuideJsons),
+                  _buildTopExperiences(exploreState.topExperienceJsons),
+                  _buildFeaturedTours(exploreState.featuresTourJsons),
+                  _buildTravelNews(exploreState.travelNewJsons),
+                ],
+              ),
             ),
-            _buildTopJourneyWidget(),
-            const SizedBox(
-              height: 30,
-            ),
-            _buildBestGuide(),
-            _buildTopExperiences(),
-            _buildFeaturedTours(),
-            _buildTravelNews()
-          ],
-        ),
-      ),
+          );
+        }
+        return Container(
+          alignment: Alignment.center,
+          color: AppColors.white,
+          child: const CircularProgressIndicator(
+            color: AppColors.primary,
+          ),
+        );
+      },
     );
   }
 
-  Widget _buildTopJourneyWidget() {
+  Widget _buildTopJourneyWidget(List<TopJourneyJson> items) {
     return Container(
       alignment: Alignment.topLeft,
       child: Column(
@@ -95,20 +125,20 @@ class _ExploreScreen extends State<ExploreScreen> {
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) => JourneyItem(
-                      rating: 5,
+                      journeyJson: items[index],
                       callback: () {},
                     ),
                 separatorBuilder: (context, index) => const SizedBox(
                       width: 15,
                     ),
-                itemCount: 10),
+                itemCount: items.length),
           )
         ],
       ),
     );
   }
 
-  Widget _buildBestGuide() {
+  Widget _buildBestGuide(List<BestGuideJson> items) {
     return Container(
       alignment: Alignment.center,
       child: Column(
@@ -180,7 +210,7 @@ class _ExploreScreen extends State<ExploreScreen> {
     );
   }
 
-  Widget _buildTopExperiences() {
+  Widget _buildTopExperiences(List<TopExperienceJson> items) {
     return Container(
       alignment: Alignment.center,
       child: Column(
@@ -209,18 +239,19 @@ class _ExploreScreen extends State<ExploreScreen> {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) => TopExperienceItem(
                       callback: () {},
+                      topExperienceJson: items[index],
                     ),
                 separatorBuilder: (context, index) => const SizedBox(
                       width: 15,
                     ),
-                itemCount: 10),
+                itemCount: items.length),
           )
         ],
       ),
     );
   }
 
-  Widget _buildFeaturedTours() {
+  Widget _buildFeaturedTours(List<FeatureTourJson> items) {
     return Container(
       padding: const EdgeInsets.only(top: 30),
       alignment: Alignment.center,
@@ -261,17 +292,23 @@ class _ExploreScreen extends State<ExploreScreen> {
           const SizedBox(
             height: 17,
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-                5, (index) => FeaturedTourItem(callback: () {}, rating: 5)),
-          )
+          items.isNotEmpty
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                      items.length,
+                      (index) => FeaturedTourItem(
+                            callback: () {},
+                            featureTourJson: items[index],
+                          )),
+                )
+              : Container()
         ],
       ),
     );
   }
 
-  Widget _buildTravelNews() {
+  Widget _buildTravelNews(List<TravelNewJson> items) {
     return Container(
       padding: const EdgeInsets.only(top: 30),
       alignment: Alignment.center,
@@ -314,8 +351,10 @@ class _ExploreScreen extends State<ExploreScreen> {
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children:
-                List.generate(5, (index) => TravelNewItem(callback: () {})),
+            children: List.generate(
+                items.length,
+                (index) => TravelNewItem(
+                    travelNewJson: items[index], callback: () {})),
           )
         ],
       ),
