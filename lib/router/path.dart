@@ -7,4 +7,6 @@ class AppPath {
   static const String forgotPassword = '/forgotPassword';
   static const String checkEmail = '/checkEmail';
   static const String exploreScreen = '/exploreScreen';
+  static const String empty = '/empty';
+  static const String guide = '/guide';
 }

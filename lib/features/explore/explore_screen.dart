@@ -32,11 +32,14 @@ class ExploreScreen extends StatefulWidget {
 
 class _ExploreScreen extends State<ExploreScreen> {
   late SLocalization localization;
+  late BlocExploreScreen _blocExploreScreen;
 
   int indexClick = 0;
   @override
   Widget build(BuildContext context) {
     localization = SLocalization.of(context);
+    _blocExploreScreen = BlocProvider.of<BlocExploreScreen>(context);
+
     SystemChrome.setSystemUIOverlayStyle(AppSystem.systemTransparentStatusBar);
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
@@ -53,8 +56,7 @@ class _ExploreScreen extends State<ExploreScreen> {
   }
 
   Widget _buildbody(BuildContext context) {
-    BlocProvider.of<BlocExploreScreen>(context)
-        .add(BlocExploreEventInitial(objects: [
+    _blocExploreScreen.add(BlocExploreEventInitial(objects: [
       BestGuideJson(),
       FeatureTourJson(),
       TopExperienceJson(),
@@ -126,7 +128,10 @@ class _ExploreScreen extends State<ExploreScreen> {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) => JourneyItem(
                       journeyJson: items[index],
-                      callback: () {},
+                      callback: () {
+                        _blocExploreScreen
+                            .add(BlocExploreEventOnTopJourneyClick());
+                      },
                     ),
                 separatorBuilder: (context, index) => const SizedBox(
                       width: 15,

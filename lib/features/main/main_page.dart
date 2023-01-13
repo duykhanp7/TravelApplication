@@ -44,6 +44,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     icons = <String>[];
+
     icons.add(AppIcons.compassNone);
     icons.add(AppIcons.locationNone);
     icons.add(AppIcons.messageNone);
