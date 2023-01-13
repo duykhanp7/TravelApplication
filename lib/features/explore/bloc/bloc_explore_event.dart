@@ -15,3 +15,8 @@ class BlocExploreEventReloadData extends BlocExploreEvent {
   @override
   List<Object?> get props => [];
 }
+
+class BlocExploreEventOnTopJourneyClick extends BlocExploreEvent {
+  @override
+  List<Object?> get props => [];
+}

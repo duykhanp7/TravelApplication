@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travel_booking_tour/bloc_provider/app_bloc_provider.dart';
+import 'package:travel_booking_tour/features/empty/empty.dart';
 import 'package:travel_booking_tour/features/splash/splash_screen.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/router/path.dart';
@@ -31,6 +32,9 @@ class MainApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
+          onUnknownRoute: (settings) => MaterialPageRoute(
+            builder: (context) => const EmptyPage(),
+          ),
           supportedLocales: const <Locale>[Locale('vi'), Locale('en')],
           locale: const Locale('vi'),
         ));

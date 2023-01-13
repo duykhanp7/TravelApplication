@@ -5,3 +5,4 @@ export 'icons.dart';
 export 'styles.dart';
 export 'system.dart';
 export 'validator.dart';
+export 'chip.dart';

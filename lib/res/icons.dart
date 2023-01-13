@@ -109,4 +109,6 @@ class AppIcons {
   static const String camera = '$parentPathIcons$childPathProfile/camera.svg';
   static const String cameraFill =
       '$parentPathIcons$childPathProfile/camera_fill.svg';
+
+  static const String icBack = '$parentPathIcons/ic_back.svg';
 }
