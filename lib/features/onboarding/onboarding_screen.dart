@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/data/models/onboarding_model.dart';
 import 'package:travel_booking_tour/features/onboarding/bloc/bloc_onboarding_event.dart';
 import 'package:travel_booking_tour/features/onboarding/bloc/bloc_onboarding_screen.dart';
 import 'package:travel_booking_tour/features/onboarding/bloc/bloc_onboarding_state.dart';
@@ -10,7 +9,8 @@ import 'package:travel_booking_tour/features/onboarding/onboarding_Page.dart';
 import 'package:travel_booking_tour/features/onboarding/widgets/onboarding_header.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
-import '../../res/button/button.dart';
+import '../../res/button.dart';
+import 'models/onboarding_json.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -23,7 +23,7 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreen extends State<OnboardingScreen> {
   List<Widget> widgets = <Widget>[];
-  List<OnboardingModel> models = <OnboardingModel>[];
+  List<OnboardingJson> models = <OnboardingJson>[];
   int currentIndex = 0;
   final PageController pageController = PageController(initialPage: 0);
 
@@ -132,15 +132,15 @@ class _OnboardingScreen extends State<OnboardingScreen> {
     widgets.add(const OnboardingHeader2());
     widgets.add(const OnboardingHeader3());
 
-    models.add(OnboardingModel(
+    models.add(const OnboardingJson(
         description: 'Find a local guide easily',
         content:
             'With Fellow4U, you can find a local guide for you trip easily and explore as the way you want.'));
-    models.add(OnboardingModel(
+    models.add(const OnboardingJson(
         description: 'Many tours around the world',
         content:
             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'));
-    models.add(OnboardingModel(
+    models.add(const OnboardingJson(
         description: 'Create a trip and get offers',
         content:
             'Fellow4U helps you save time and get offers from hundred local guides that suit your trip.'));

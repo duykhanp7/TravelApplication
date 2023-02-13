@@ -38,5 +38,8 @@ class AppImages {
       '$parentPathImages$childPathProfile/image_profile.png';
 
   static const String winterPicture = '$parentPathImages/winter_picture.png';
+  static const String myex1 = '$parentPathImages/myex1.png';
+  static const String myex2 = '$parentPathImages/myex2.png';
+  static const String myex3 = '$parentPathImages/myex3.png';
   static const String tuanTran = '$parentPathImages/tuan_tran.png';
 }

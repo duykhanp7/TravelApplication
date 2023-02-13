@@ -2,12 +2,12 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_event.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_state.dart';
-import 'package:travel_booking_tour/features/explore/model/best_guide.dart';
-import 'package:travel_booking_tour/features/explore/model/feature_tour.dart';
-import 'package:travel_booking_tour/features/explore/model/top_experiences.dart';
-import 'package:travel_booking_tour/features/explore/model/top_journey.dart';
-import 'package:travel_booking_tour/features/explore/model/travel_news.dart';
-import 'package:travel_booking_tour/features/explore/repository/explore_repository.dart';
+import 'package:travel_booking_tour/features/explore/models/best_guide_preview_json.dart';
+import 'package:travel_booking_tour/features/explore/models/feature_tour_preview_json.dart';
+import 'package:travel_booking_tour/features/explore/models/top_experiences_preview_json.dart';
+import 'package:travel_booking_tour/features/explore/models/top_journey_preview_json.dart';
+import 'package:travel_booking_tour/features/explore/models/travel_news_preview_json.dart';
+import 'package:travel_booking_tour/features/explore/repositories/explore_repository.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
 import '../../../router/routes.dart';
@@ -46,8 +46,9 @@ class BlocExploreScreen extends Bloc<BlocExploreEvent, BlocExploreState> {
           travelNewJsons: travelNewJsons));
     });
     on<BlocExploreEventReloadData>((event, emit) {});
-    on<BlocExploreEventOnTopJourneyClick>((event, emit) {
-      Routes.navigateTo(AppPath.guide, {});
+    on<BlocExploreEventOnTopJourneyClick>((event, emit) {});
+    on<BlocExploreEventOnBestGuideClick>((event, emit) {
+      Routes.navigateTo(AppPath.guide, {'video': event.videoUrl});
     });
   }
 }

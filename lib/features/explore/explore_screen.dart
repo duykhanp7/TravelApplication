@@ -5,11 +5,11 @@ import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_event.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_screen.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_state.dart';
-import 'package:travel_booking_tour/features/explore/model/best_guide.dart';
-import 'package:travel_booking_tour/features/explore/model/feature_tour.dart';
-import 'package:travel_booking_tour/features/explore/model/top_experiences.dart';
-import 'package:travel_booking_tour/features/explore/model/top_journey.dart';
-import 'package:travel_booking_tour/features/explore/model/travel_news.dart';
+import 'package:travel_booking_tour/features/explore/models/best_guide_preview_json.dart';
+import 'package:travel_booking_tour/features/explore/models/feature_tour_preview_json.dart';
+import 'package:travel_booking_tour/features/explore/models/top_experiences_preview_json.dart';
+import 'package:travel_booking_tour/features/explore/models/top_journey_preview_json.dart';
+import 'package:travel_booking_tour/features/explore/models/travel_news_preview_json.dart';
 import 'package:travel_booking_tour/features/explore/widgets/featured_tour_item.dart';
 import 'package:travel_booking_tour/features/explore/widgets/journey_item.dart';
 import 'package:travel_booking_tour/features/explore/widgets/top_experience_item.dart';
@@ -40,23 +40,25 @@ class _ExploreScreen extends State<ExploreScreen> {
     localization = SLocalization.of(context);
     _blocExploreScreen = BlocProvider.of<BlocExploreScreen>(context);
 
-    SystemChrome.setSystemUIOverlayStyle(AppSystem.systemTransparentStatusBar);
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-      child: Container(
-        alignment: Alignment.topCenter,
-        child: _buildbody(context),
+    return Scaffold(
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+        child: Container(
+          alignment: Alignment.topCenter,
+          child: _buildbody(context),
+        ),
       ),
     );
   }
 
   @override
   void initState() {
+    SystemChrome.setSystemUIOverlayStyle(AppSystem.systemTransparentStatusBar);
     super.initState();
   }
 
   Widget _buildbody(BuildContext context) {
-    _blocExploreScreen.add(BlocExploreEventInitial(objects: [
+    _blocExploreScreen.add(BlocExploreEventInitial(objects: const [
       BestGuideJson(),
       FeatureTourJson(),
       TopExperienceJson(),
@@ -128,10 +130,7 @@ class _ExploreScreen extends State<ExploreScreen> {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) => JourneyItem(
                       journeyJson: items[index],
-                      callback: () {
-                        _blocExploreScreen
-                            .add(BlocExploreEventOnTopJourneyClick());
-                      },
+                      callback: () {},
                     ),
                 separatorBuilder: (context, index) => const SizedBox(
                       width: 15,
@@ -187,13 +186,21 @@ class _ExploreScreen extends State<ExploreScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TourGuideItem(
-                callback: () {},
+                callback: () {
+                  _blocExploreScreen.add(BlocExploreEventOnBestGuideClick(
+                      videoUrl:
+                          'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'));
+                },
               ),
               const SizedBox(
                 width: 15,
               ),
               TourGuideItem(
-                callback: () {},
+                callback: () {
+                  _blocExploreScreen.add(BlocExploreEventOnBestGuideClick(
+                      videoUrl:
+                          'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'));
+                },
               ),
             ],
           ),
@@ -203,11 +210,19 @@ class _ExploreScreen extends State<ExploreScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TourGuideItem(callback: () {}),
+              TourGuideItem(callback: () {
+                _blocExploreScreen.add(BlocExploreEventOnBestGuideClick(
+                    videoUrl:
+                        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'));
+              }),
               const SizedBox(
                 width: 15,
               ),
-              TourGuideItem(callback: () {}),
+              TourGuideItem(callback: () {
+                _blocExploreScreen.add(BlocExploreEventOnBestGuideClick(
+                    videoUrl:
+                        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'));
+              }),
             ],
           )
         ],

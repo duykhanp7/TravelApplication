@@ -111,4 +111,16 @@ class AppIcons {
       '$parentPathIcons$childPathProfile/camera_fill.svg';
 
   static const String icBack = '$parentPathIcons/ic_back.svg';
+  static const String icPause = '$parentPathIcons/ic_pause.svg';
+  static const String icClose = '$parentPathIcons/ic_close.svg';
+
+  static const String icAddBlue = '$parentPathIcons/ic_add_blue.svg';
+  static const String icCalendar = '$parentPathIcons/ic_calendar.svg';
+  static const String icCheck = '$parentPathIcons/ic_check.svg';
+  static const String icUncheck = '$parentPathIcons/ic_uncheck.svg';
+  static const String icClock = '$parentPathIcons/ic_clock.svg';
+  static const String icDown = '$parentPathIcons/ic_down.svg';
+  static const String icUp = '$parentPathIcons/ic_up.svg';
+  static const String icLocationBorderBlack =
+      '$parentPathIcons/ic_location_border_black.svg';
 }

@@ -20,3 +20,10 @@ class BlocExploreEventOnTopJourneyClick extends BlocExploreEvent {
   @override
   List<Object?> get props => [];
 }
+
+class BlocExploreEventOnBestGuideClick extends BlocExploreEvent {
+  BlocExploreEventOnBestGuideClick({required this.videoUrl});
+  final String videoUrl;
+  @override
+  List<Object?> get props => [];
+}

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/data/models/onboarding_model.dart';
 import 'package:travel_booking_tour/res/colors.dart';
+
+import 'models/onboarding_json.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({
@@ -11,7 +12,7 @@ class OnboardingPage extends StatelessWidget {
   });
 
   final Widget widget;
-  final OnboardingModel onboardingModel;
+  final OnboardingJson onboardingModel;
 
   @override
   Widget build(BuildContext context) {

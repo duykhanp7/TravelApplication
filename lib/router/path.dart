@@ -9,4 +9,6 @@ class AppPath {
   static const String exploreScreen = '/exploreScreen';
   static const String empty = '/empty';
   static const String guide = '/guide';
+  static const String chooseGuideTripInformation =
+      '/chooseGuideTripInformation';
 }
