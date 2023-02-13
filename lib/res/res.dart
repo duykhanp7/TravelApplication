@@ -6,3 +6,4 @@ export 'styles.dart';
 export 'system.dart';
 export 'validator.dart';
 export 'chip.dart';
+export 'appbar_app_widget.dart';

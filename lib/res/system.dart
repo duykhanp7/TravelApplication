@@ -12,4 +12,9 @@ class AppSystem {
       statusBarBrightness: Brightness.light,
       statusBarColor: AppColors.transparent,
       statusBarIconBrightness: Brightness.light);
+
+  static const systemLightStatusBar = SystemUiOverlayStyle(
+      statusBarBrightness: Brightness.light,
+      statusBarColor: AppColors.transparent,
+      statusBarIconBrightness: Brightness.dark);
 }

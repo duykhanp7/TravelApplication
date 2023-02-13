@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/features/explore/model/feature_tour.dart';
+import 'package:travel_booking_tour/features/explore/models/feature_tour_preview_json.dart';
 
 import '../../../res/colors.dart';
 import '../../../res/icons.dart';
 import '../../../res/images.dart';
-import '../../../res/star/vertical_star_widget.dart';
+import '../../../res/vertical_star_widget.dart';
 
 class FeaturedTourItem extends StatefulWidget {
   const FeaturedTourItem({
@@ -67,7 +67,7 @@ class _FeaturedTourItem extends State<FeaturedTourItem> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                VerticalStarWidget(
+                                HorizontalStarWidget(
                                     rating:
                                         widget.featureTourJson.ratings ?? 0),
                                 const SizedBox(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/features/explore/model/travel_news.dart';
+import 'package:travel_booking_tour/features/explore/models/travel_news_preview_json.dart';
 
 import '../../../res/colors.dart';
 

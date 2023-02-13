@@ -22,4 +22,5 @@ class AppColors {
   static const Color talkBgColor = Color(0xFFFFE812);
   static const Color lineBgColor = Color(0xFF3ACE01);
   static const Color chipBg = Color(0xFFF5F5F5);
+  static const Color tableBorder = Color(0xFFDBDBDB);
 }

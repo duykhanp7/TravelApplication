@@ -4,7 +4,7 @@ import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/icons.dart';
 import 'package:travel_booking_tour/res/images.dart';
-import 'package:travel_booking_tour/res/star/vertical_star_widget.dart';
+import 'package:travel_booking_tour/res/vertical_star_widget.dart';
 
 class TourGuideItem extends StatefulWidget {
   const TourGuideItem({super.key, required this.callback});
@@ -50,7 +50,7 @@ class _TourGuideItem extends State<TourGuideItem> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const VerticalStarWidget(rating: 5),
+                                const HorizontalStarWidget(rating: 5),
                                 const SizedBox(
                                   height: 4,
                                 ),
