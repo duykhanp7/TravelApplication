@@ -47,26 +47,32 @@ class _AppbarAppWidget extends State<AppbarAppWidget> {
               borderRadius: BorderRadius.circular(30),
               child: InkWell(
                 borderRadius: BorderRadius.circular(30),
-                child: const Icon(
-                  Icons.close,
-                  color: AppColors.black,
-                  size: 25,
-                ),
-                onTap: () {
-                  Routes.backTo();
-                },
+                child: widget.prefixWidget ??
+                    const Icon(
+                      Icons.close,
+                      color: AppColors.black,
+                      size: 25,
+                    ),
+                onTap: () => widget.prefixAction ?? Routes.backTo(),
               ),
             ),
           ),
       titleTextStyle: widget.titleStyle ??
           context.textStyle.titleMedium?.copyWith(
-              fontSize: 17,
+              fontSize: 22,
               fontWeight: FontWeight.w100,
               fontStyle: FontStyle.italic,
               color: AppColors.textOnboardingBlack),
       actions: [
         Container(
-          child: widget.suffixWidget ?? Container(),
+          alignment: Alignment.center,
+          child: Material(
+            color: AppColors.transparent,
+            child: InkWell(
+              child: widget.suffixWidget ?? Container(),
+              onTap: () => widget.suffixAction ?? Routes.backTo(),
+            ),
+          ),
         )
       ],
     );

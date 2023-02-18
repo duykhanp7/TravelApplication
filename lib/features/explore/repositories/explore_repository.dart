@@ -9,7 +9,7 @@ import 'package:travel_booking_tour/res/images.dart';
 class ExploreRepository implements BaseRepository {
   Future<List<TopJourneyJson>> getListTopJourney() async {
     return <TopJourneyJson>[
-      TopJourneyJson(
+      const TopJourneyJson(
           destinationTitle: 'Da Nang - Ba Na - Hoi An',
           dateStart: 'Jan 30, 2022',
           imageUrl: AppImages.daNangBanaHoiAn,
@@ -17,7 +17,7 @@ class ExploreRepository implements BaseRepository {
           price: 400.00,
           quantities: 3,
           ratings: 1),
-      TopJourneyJson(
+      const TopJourneyJson(
           destinationTitle: 'Da Nang - Ba Na - Hoi An',
           dateStart: 'Jan 30, 2022',
           imageUrl: AppImages.daNangBanaHoiAn,
@@ -25,7 +25,7 @@ class ExploreRepository implements BaseRepository {
           price: 4030.00,
           quantities: 3,
           ratings: 2),
-      TopJourneyJson(
+      const TopJourneyJson(
           destinationTitle: 'Da Nang - Ba Na - Hoi An',
           dateStart: 'Jan 30, 2022',
           imageUrl: AppImages.daNangBanaHoiAn,
@@ -33,7 +33,7 @@ class ExploreRepository implements BaseRepository {
           price: 4010.00,
           quantities: 3,
           ratings: 3),
-      TopJourneyJson(
+      const TopJourneyJson(
           destinationTitle: 'Da Nang - Ba Na - Hoi An',
           dateStart: 'Jan 30, 2022',
           imageUrl: AppImages.daNangBanaHoiAn,
@@ -41,7 +41,7 @@ class ExploreRepository implements BaseRepository {
           price: 4030.00,
           quantities: 3,
           ratings: 4),
-      TopJourneyJson(
+      const TopJourneyJson(
           destinationTitle: 'Da Nang - Ba Na - Hoi An',
           dateStart: 'Jan 30, 2022',
           imageUrl: AppImages.daNangBanaHoiAn,
@@ -49,7 +49,7 @@ class ExploreRepository implements BaseRepository {
           price: 4001.00,
           quantities: 3,
           ratings: 5),
-      TopJourneyJson(
+      const TopJourneyJson(
           destinationTitle: 'Da Nang - Ba Na - Hoi An',
           dateStart: 'Jan 30, 2022',
           imageUrl: AppImages.daNangBanaHoiAn,
@@ -62,25 +62,25 @@ class ExploreRepository implements BaseRepository {
 
   Future<List<BestGuideJson>> getListBestGuide() async {
     return <BestGuideJson>[
-      BestGuideJson(
+      const BestGuideJson(
           address: 'Da Nang - Viet Nam',
           imageUrl: AppImages.emmy,
           reviews: 127,
           name: 'Emmy',
           ratings: 1),
-      BestGuideJson(
+      const BestGuideJson(
           address: 'Ho Chi Minh - Viet Nam',
           imageUrl: AppImages.emmy,
           reviews: 122,
           name: 'Eric Pham',
           ratings: 2),
-      BestGuideJson(
+      const BestGuideJson(
           address: 'Ha Noi - Viet Nam',
           imageUrl: AppImages.emmy,
           reviews: 100,
           name: 'Khan Pham',
           ratings: 3),
-      BestGuideJson(
+      const BestGuideJson(
           address: 'Phu Yen - Viet Nam',
           imageUrl: AppImages.emmy,
           reviews: 111,
@@ -91,30 +91,31 @@ class ExploreRepository implements BaseRepository {
 
   Future<List<TopExperienceJson>> getListTopExperiences() async {
     return <TopExperienceJson>[
-      TopExperienceJson(
+      const TopExperienceJson(
           address: 'Hoi An, Viet Nam',
           description: '2 Hour Bicycle Tour exploring Hoi An',
           destinationImageUrl: AppImages.hoiAn,
           guideImageUrl: AppImages.emmy,
           name: 'Emmy'),
-      TopExperienceJson(
+      const TopExperienceJson(
           address: 'TPHCM, Viet Nam',
           description: '2 Hour Bicycle Tour exploring Hoi An',
           destinationImageUrl: AppImages.hoiAn,
           guideImageUrl: AppImages.emmy,
           name: 'Duy Khan'),
-      TopExperienceJson(
+      const TopExperienceJson(
           address: 'Ha Noi, Viet Nam',
           description: '2 Hour Bicycle Tour exploring Hoi An',
           destinationImageUrl: AppImages.hoiAn,
           guideImageUrl: AppImages.emmy,
           name: 'Tuong Vi'),
-      TopExperienceJson(
+      const TopExperienceJson(
           address: 'Hoi An, Viet Nam',
           description: '2 Hour Bicycle Tour exploring Hoi An',
           destinationImageUrl: AppImages.hoiAn,
           guideImageUrl: AppImages.emmy,
           name: 'Emmy'),
+      // ignore: prefer_const_constructors
       TopExperienceJson(
           address: 'Hoi An, Viet Nam',
           description: '2 Hour Bicycle Tour exploring Hoi An',
@@ -126,7 +127,7 @@ class ExploreRepository implements BaseRepository {
 
   Future<List<FeatureTourJson>> getListFeatureTour() async {
     return <FeatureTourJson>[
-      FeatureTourJson(
+      const FeatureTourJson(
           address: 'Da Nang - Ba Na - Hoi An',
           dateStart: 'Jan 30, 2020',
           destinationImageUrl: AppImages.daNangBanaHoiAn1,
@@ -134,6 +135,7 @@ class ExploreRepository implements BaseRepository {
           quantities: 3,
           prices: 100.00,
           ratings: 2),
+      // ignore: prefer_const_constructors
       FeatureTourJson(
           address: 'Da Nang - Ba Na - Hoi An',
           dateStart: 'Jan 30, 2020',
@@ -142,7 +144,7 @@ class ExploreRepository implements BaseRepository {
           prices: 200.00,
           quantities: 3,
           ratings: 3),
-      FeatureTourJson(
+      const FeatureTourJson(
           address: 'Da Nang - Ba Na - Hoi An',
           dateStart: 'Jan 30, 2020',
           destinationImageUrl: AppImages.daNangBanaHoiAn1,
@@ -150,7 +152,7 @@ class ExploreRepository implements BaseRepository {
           likes: 1250,
           quantities: 3,
           ratings: 4),
-      FeatureTourJson(
+      const FeatureTourJson(
           address: 'Da Nang - Ba Na - Hoi An',
           dateStart: 'Jan 30, 2020',
           destinationImageUrl: AppImages.daNangBanaHoiAn1,
@@ -158,7 +160,7 @@ class ExploreRepository implements BaseRepository {
           likes: 1250,
           quantities: 3,
           ratings: 1),
-      FeatureTourJson(
+      const FeatureTourJson(
           address: 'Da Nang - Ba Na - Hoi An',
           dateStart: 'Jan 30, 2020',
           destinationImageUrl: AppImages.daNangBanaHoiAn1,
@@ -171,27 +173,27 @@ class ExploreRepository implements BaseRepository {
 
   Future<List<TravelNewJson>> getListTravelNews() async {
     return <TravelNewJson>[
-      TravelNewJson(
+      const TravelNewJson(
           dateStart: 'Feb 6, 2022',
           destinationImageUrl: AppImages.cungVanHoaThieuNhi,
           destinationTitle: ' Da Nang City'),
-      TravelNewJson(
+      const TravelNewJson(
           dateStart: 'Feb 6, 2022',
           destinationImageUrl: AppImages.cungVanHoaThieuNhi,
           destinationTitle: 'New Destination in Da Nang City'),
-      TravelNewJson(
+      const TravelNewJson(
           dateStart: 'Feb 6, 2022',
           destinationImageUrl: AppImages.cungVanHoaThieuNhi,
           destinationTitle: 'New Destination '),
-      TravelNewJson(
+      const TravelNewJson(
           dateStart: 'Feb 6, 2022',
           destinationImageUrl: AppImages.cungVanHoaThieuNhi,
           destinationTitle: 'New Destination in Da Nang City'),
-      TravelNewJson(
+      const TravelNewJson(
           dateStart: 'Feb 6, 2022',
           destinationImageUrl: AppImages.cungVanHoaThieuNhi,
           destinationTitle: 'New Da Nang City'),
-      TravelNewJson(
+      const TravelNewJson(
           dateStart: 'Feb 6, 2022',
           destinationImageUrl: AppImages.cungVanHoaThieuNhi,
           destinationTitle: 'New Destination in Da Nang City')

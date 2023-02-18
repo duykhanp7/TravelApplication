@@ -6,32 +6,34 @@ class AppTextField extends StatefulWidget {
   const AppTextField(
       {super.key,
       this.initialText,
-      required this.hintText,
+      this.hintText,
       this.hintTextStyle,
       this.textStyle,
       this.textInputType,
-      required this.obsecureText,
+      this.obsecureText,
       this.width,
       this.height,
-      required this.labelText,
+      this.labelText,
       this.labelTextStyle,
-      required this.validator,
+      this.validator,
       this.autovalidateMode,
       this.onChange,
       this.icon,
       this.prefixIcon,
       this.suffixIcon,
       this.isDense,
-      this.contentPadding});
+      this.contentPadding,
+      this.textAlign,
+      this.textEditingController});
 
   final String? initialText;
-  final String hintText;
-  final String labelText;
+  final String? hintText;
+  final String? labelText;
   final TextStyle? hintTextStyle;
   final TextStyle? textStyle;
   final TextStyle? labelTextStyle;
   final TextInputType? textInputType;
-  final bool obsecureText;
+  final bool? obsecureText;
   final double? width;
   final double? height;
   final dynamic validator;
@@ -42,6 +44,8 @@ class AppTextField extends StatefulWidget {
   final Widget? suffixIcon;
   final bool? isDense;
   final EdgeInsetsGeometry? contentPadding;
+  final TextAlign? textAlign;
+  final TextEditingController? textEditingController;
 
   @override
   State<StatefulWidget> createState() {
@@ -57,23 +61,29 @@ class _AppTextField extends State<AppTextField> {
       alignment: Alignment.centerLeft,
       child: Column(
         children: [
-          Container(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              widget.labelText,
-              style: widget.labelTextStyle ??
-                  context.textStyle.titleMedium!.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.black,
-                      fontStyle: FontStyle.normal),
-            ),
-          ),
-          const SizedBox(
-            height: 12,
-          ),
+          widget.labelText == null
+              ? Container()
+              : Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    widget.labelText ?? '',
+                    style: widget.labelTextStyle ??
+                        context.textStyle.titleMedium!.copyWith(
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.black,
+                            fontStyle: FontStyle.normal),
+                  ),
+                ),
+          widget.labelText == null
+              ? Container()
+              : const SizedBox(
+                  height: 12,
+                ),
           TextFormField(
-            initialValue: widget.initialText ?? '',
             keyboardType: widget.textInputType ?? TextInputType.text,
+            textAlignVertical: TextAlignVertical.center,
+            textAlign: widget.textAlign ?? TextAlign.start,
+            controller: widget.textEditingController,
             decoration: InputDecoration(
                 icon: widget.icon,
                 prefixIconConstraints:
@@ -86,6 +96,7 @@ class _AppTextField extends State<AppTextField> {
                         fontWeight: FontWeight.w400,
                         color: AppColors.textHintColor,
                         fontStyle: FontStyle.normal),
+                isCollapsed: true,
                 isDense: widget.isDense ?? true,
                 contentPadding: widget.contentPadding ??
                     const EdgeInsets.only(
@@ -100,7 +111,7 @@ class _AppTextField extends State<AppTextField> {
                 focusedBorder: const UnderlineInputBorder(
                     borderSide: BorderSide(
                         width: 2, color: AppColors.underLineTextFieldColor))),
-            obscureText: widget.obsecureText,
+            obscureText: widget.obsecureText ?? false,
             onChanged: widget.onChange ?? (value) {},
             validator: widget.validator,
             autovalidateMode: AutovalidateMode.onUserInteraction,

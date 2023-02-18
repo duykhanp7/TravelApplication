@@ -47,6 +47,7 @@ dependencies:
   video_viewer: ^1.2.7
   freezed_annotation: ^2.2.0
   json_annotation: ^4.8.0
+  dio: ^5.0.0
 
 dev_dependencies:
   flutter_test:

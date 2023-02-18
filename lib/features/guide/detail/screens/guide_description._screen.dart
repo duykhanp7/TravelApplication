@@ -12,7 +12,7 @@ import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/res/vertical_star_widget.dart';
 import 'package:video_viewer/video_viewer.dart';
 
-import 'bloc/bloc_detail_guide_state.dart';
+import '../bloc/bloc_detail_guide_state.dart';
 
 class GuideDescriptionScreen extends StatefulWidget {
   const GuideDescriptionScreen({super.key});
@@ -39,7 +39,6 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
     _blocDetailGuideScreen
         .add(BlocDetailGuideEventLoadVideo(videoUrl: videoURL['video']));
-    debugPrint('Map<String, dynamic> ${videoURL['video']}');
     return Scaffold(
       body: WillPopScope(
         child: Container(
