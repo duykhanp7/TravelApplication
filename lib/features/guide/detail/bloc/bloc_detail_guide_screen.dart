@@ -8,19 +8,25 @@ import 'package:video_viewer/domain/entities/video_source.dart';
 class BlocDetailGuideScreen
     extends Bloc<BlocDetailGuideEvent, BlocDetailGuideState> {
   BlocDetailGuideScreen() : super(BlocDetailGuideStateInitial()) {
-    on<BlocDetailGuideEventBack>((event, emit) {
+    on<BlocDetailGuideEvent>((event, emit) => mapStateToEvent(event, emit));
+  }
+
+  void mapStateToEvent(
+      BlocDetailGuideEvent event, Emitter<BlocDetailGuideState> emit) async {
+    if (event is BlocDetailGuideEventInitial) {
       Routes.backTo();
-    });
-    on<BlocDetailGuideEventLoadVideo>((event, emit) async {
+    }
+    if (event is BlocDetailGuideEventLoadVideo) {
       final source =
           VideoSource.fromNetworkVideoSources({'video': event.videoUrl});
       emit(BlocDetailGuideStateLoadVideoSuccess(
           current: DateTime.now().millisecond, source: Map.from(source)));
-    });
-    on<BlocDetailGuideEventClose>(
-        (event, emit) => emit(BlocDetailGuideStateClose()));
-    on<BlocDetailGuideEventChooseThisGuide>((event, emit) {
+    }
+    if (event is BlocDetailGuideEventClose) {
+      emit(BlocDetailGuideStateClose());
+    }
+    if (event is BlocDetailGuideEventChooseThisGuide) {
       Routes.navigateTo(AppPath.chooseGuideTripInformation, {});
-    });
+    }
   }
 }
