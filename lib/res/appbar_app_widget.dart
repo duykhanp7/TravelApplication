@@ -65,10 +65,14 @@ class _AppbarAppWidget extends State<AppbarAppWidget> {
               color: AppColors.textOnboardingBlack),
       actions: [
         Container(
+          margin: const EdgeInsets.only(right: 10),
           alignment: Alignment.center,
+          color: AppColors.transparent,
           child: Material(
             color: AppColors.transparent,
             child: InkWell(
+              splashColor: AppColors.black.withOpacity(0.1),
+              highlightColor: AppColors.black.withOpacity(0.1),
               child: widget.suffixWidget ?? Container(),
               onTap: () => widget.suffixAction ?? Routes.backTo(),
             ),

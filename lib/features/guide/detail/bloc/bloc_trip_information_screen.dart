@@ -2,6 +2,9 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:travel_booking_tour/features/guide/detail/bloc/bloc_trip_information_event.dart';
 import 'package:travel_booking_tour/features/guide/detail/bloc/bloc_trip_information_state.dart';
+import 'package:travel_booking_tour/router/path.dart';
+
+import '../../../../router/routes.dart';
 
 class BlocTripInformationScreen
     extends Bloc<BlocTripInformationEvent, BlocTripInformationState> {
@@ -72,6 +75,9 @@ class BlocTripInformationScreen
     }
     if (event is BlocTripInformationEventUnCheckAttractions) {
       emit(BlocTripInformationStateCheck(current: DateTime.now().microsecond));
+    }
+    if (event is BlocTripInformationEventChangeAddNewAttractions) {
+      Routes.navigateTo(AppPath.addNewPlaces, {});
     }
     if (event is BlocTripInformationEventDone) {
       debugPrint(

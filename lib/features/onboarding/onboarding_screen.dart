@@ -34,7 +34,8 @@ class _OnboardingScreen extends State<OnboardingScreen> {
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.dark));
     return Scaffold(
-      body: BlocBuilder<BlocOnboardingScreen, BlocOnboardingState>(
+      body: SafeArea(
+          child: BlocBuilder<BlocOnboardingScreen, BlocOnboardingState>(
         builder: (context, state) => SafeArea(
             child: Stack(
           alignment: Alignment.center,
@@ -90,7 +91,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
             ),
           ],
         )),
-      ),
+      )),
     );
   }
 
