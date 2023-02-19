@@ -10,17 +10,17 @@ import 'package:travel_booking_tour/res/button.dart';
 import 'package:travel_booking_tour/res/input_field.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
-class ChooseGuideTripInformationPage extends StatefulWidget {
-  const ChooseGuideTripInformationPage({super.key});
+class ChooseGuideTripInformationScreen extends StatefulWidget {
+  const ChooseGuideTripInformationScreen({super.key});
 
   @override
   State<StatefulWidget> createState() {
-    return _ChooseGuideTripInformationPage();
+    return _ChooseGuideTripInformationScreen();
   }
 }
 
-class _ChooseGuideTripInformationPage
-    extends State<ChooseGuideTripInformationPage> {
+class _ChooseGuideTripInformationScreen
+    extends State<ChooseGuideTripInformationScreen> {
   late BlocTripInformationScreen _blocTripInformationScreen;
 
   @override
@@ -39,12 +39,13 @@ class _ChooseGuideTripInformationPage
       appBar: const AppbarAppWidget(
         title: 'Trip information',
       ),
-      body: GestureDetector(
+      body: SafeArea(
+          child: GestureDetector(
         child: SingleChildScrollView(
           child: _buildBody(),
         ),
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-      ),
+      )),
     );
   }
 
@@ -323,7 +324,10 @@ class _ChooseGuideTripInformationPage
               highlightColor: AppColors.white.withOpacity(0.5),
               splashColor: AppColors.white.withOpacity(0.5),
               borderRadius: BorderRadius.circular(10),
-              onTap: () {},
+              onTap: () {
+                _blocTripInformationScreen
+                    .add(BlocTripInformationEventChangeAddNewAttractions());
+              },
             ),
           ),
         )

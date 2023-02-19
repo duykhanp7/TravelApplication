@@ -108,7 +108,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                         ),
                         onTap: () {
                           _blocDetailGuideScreen
-                              .add(BlocDetailGuideEventBack());
+                              .add(BlocDetailGuideEventClose());
                         },
                       )),
                 )

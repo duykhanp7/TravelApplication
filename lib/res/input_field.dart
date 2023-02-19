@@ -24,7 +24,10 @@ class AppTextField extends StatefulWidget {
       this.isDense,
       this.contentPadding,
       this.textAlign,
-      this.textEditingController});
+      this.textEditingController,
+      this.inputDecoration,
+      this.onFieldSubmitted,
+      this.focusNode});
 
   final String? initialText;
   final String? hintText;
@@ -46,6 +49,9 @@ class AppTextField extends StatefulWidget {
   final EdgeInsetsGeometry? contentPadding;
   final TextAlign? textAlign;
   final TextEditingController? textEditingController;
+  final InputDecoration? inputDecoration;
+  final Function(String)? onFieldSubmitted;
+  final FocusNode? focusNode;
 
   @override
   State<StatefulWidget> createState() {
@@ -84,39 +90,45 @@ class _AppTextField extends State<AppTextField> {
             textAlignVertical: TextAlignVertical.center,
             textAlign: widget.textAlign ?? TextAlign.start,
             controller: widget.textEditingController,
-            decoration: InputDecoration(
-                icon: widget.icon,
-                prefixIconConstraints:
-                    const BoxConstraints(minHeight: 25, minWidth: 25),
-                prefixIcon: widget.prefixIcon,
-                suffixIcon: widget.suffixIcon,
-                hintText: widget.hintText,
-                hintStyle: widget.hintTextStyle ??
-                    context.textStyle.titleMedium!.copyWith(
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.textHintColor,
-                        fontStyle: FontStyle.normal),
-                isCollapsed: true,
-                isDense: widget.isDense ?? true,
-                contentPadding: widget.contentPadding ??
-                    const EdgeInsets.only(
-                      bottom: 10,
-                    ),
-                border: const UnderlineInputBorder(
-                    borderSide: BorderSide(
-                        width: 2, color: AppColors.underLineTextFieldColor)),
-                enabledBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(
-                        width: 2, color: AppColors.underLineTextFieldColor)),
-                focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(
-                        width: 2, color: AppColors.underLineTextFieldColor))),
+            onFieldSubmitted: widget.onFieldSubmitted,
+            focusNode: widget.focusNode,
+            decoration: widget.inputDecoration ??
+                InputDecoration(
+                    icon: widget.icon,
+                    prefixIconConstraints:
+                        const BoxConstraints(minHeight: 25, minWidth: 25),
+                    prefixIcon: widget.prefixIcon,
+                    suffixIcon: widget.suffixIcon,
+                    hintText: widget.hintText,
+                    hintStyle: widget.hintTextStyle ??
+                        context.textStyle.titleMedium!.copyWith(
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.textHintColor,
+                            fontStyle: FontStyle.normal),
+                    isCollapsed: true,
+                    isDense: widget.isDense ?? true,
+                    contentPadding: widget.contentPadding ??
+                        const EdgeInsets.only(
+                          bottom: 10,
+                        ),
+                    border: const UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            width: 2,
+                            color: AppColors.underLineTextFieldColor)),
+                    enabledBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            width: 2,
+                            color: AppColors.underLineTextFieldColor)),
+                    focusedBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            width: 2,
+                            color: AppColors.underLineTextFieldColor))),
             obscureText: widget.obsecureText ?? false,
             onChanged: widget.onChange ?? (value) {},
             validator: widget.validator,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             textInputAction: TextInputAction.done,
-            cursorColor: AppColors.textHintColor,
+            cursorColor: AppColors.primary,
             style: widget.textStyle ??
                 context.textStyle.titleSmall!.copyWith(
                     fontWeight: FontWeight.w400,

@@ -23,7 +23,7 @@ class BlocDetailGuideScreen
           current: DateTime.now().millisecond, source: Map.from(source)));
     }
     if (event is BlocDetailGuideEventClose) {
-      emit(BlocDetailGuideStateClose());
+      Routes.backTo();
     }
     if (event is BlocDetailGuideEventChooseThisGuide) {
       Routes.navigateTo(AppPath.chooseGuideTripInformation, {});
