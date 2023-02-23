@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class AppValidator {
   static String? validateTextFieldFirstName(String? value) {
     if (value == null || value.isEmpty) {
@@ -72,7 +70,7 @@ class AppValidator {
               r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
           .hasMatch(value);
       if (!paswordValid) {
-        return 'Incorrect password format';
+        return 'Password should have at least 8 characters\nMust have : number, upper, lower characters, special characters';
       }
     }
     return null;
@@ -80,7 +78,6 @@ class AppValidator {
 
   static String? validateTextFieldConfirmPasword(
       String? value, String password) {
-    debugPrint('Value password confirm : $value $password');
     if (value == null || value.isEmpty) {
       return 'Please enter your password';
     } else if (value.trim() != password.trim()) {

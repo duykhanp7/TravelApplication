@@ -3,16 +3,17 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/features/guide/detail/bloc/bloc_detail_guide_event.dart';
-import 'package:travel_booking_tour/features/guide/detail/bloc/bloc_detail_guide_screen.dart';
+import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_detail_guide_event.dart';
+import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_detail_guide_screen.dart';
 import 'package:travel_booking_tour/features/guide/detail/widgets/my_experience_item.dart';
 import 'package:travel_booking_tour/features/guide/detail/widgets/review_guide_item.dart';
+import 'package:travel_booking_tour/res/app_dialog.dart';
 import 'package:travel_booking_tour/res/button.dart';
 import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/res/vertical_star_widget.dart';
 import 'package:video_viewer/video_viewer.dart';
 
-import '../bloc/bloc_detail_guide_state.dart';
+import '../blocs/bloc_detail_guide_state.dart';
 
 class GuideDescriptionScreen extends StatefulWidget {
   const GuideDescriptionScreen({super.key});
@@ -204,8 +205,9 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                     child: PrimaryButton(
                       text: 'Choose This Guide',
                       onTap: () {
-                        _blocDetailGuideScreen
-                            .add(BlocDetailGuideEventChooseThisGuide());
+                        _blocDetailGuideScreen.add(
+                            BlocDetailGuideEventChooseThisGuide(
+                                current: DateTime.now().millisecond));
                       },
                       allCaps: true,
                       height: 50,
@@ -254,15 +256,14 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                 height: 1.5),
           ),
           BlocBuilder<BlocDetailGuideScreen, BlocDetailGuideState>(
+            buildWhen: (previous, current) =>
+                current is BlocDetailGuideStateInitial ||
+                current is BlocDetailGuideStateLoadVideoSuccess ||
+                current is BlocDetailGuideStateLoadVideoFailure,
             builder: (context, state) {
-              if (state is BlocDetailGuideEventInitial) {
-                debugPrint('BlocDetailGuideStateLoadVideoInitial ');
-              } else if (state is BlocDetailGuideStateLoadVideoSuccess) {
-                debugPrint(
-                    'BlocDetailGuideStateLoadVideoSuccess ${state.source['video'].toString()}');
+              if (state is BlocDetailGuideStateLoadVideoSuccess) {
                 return _buildVideo(state.source);
               } else if (state is BlocDetailGuideStateLoadVideoFailure) {
-                debugPrint('BlocDetailGuideStateLoadVideoFailure');
                 Container(
                   alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width,

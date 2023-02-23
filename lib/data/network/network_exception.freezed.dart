@@ -35,6 +35,8 @@ mixin _$NetworkException {
     required TResult Function() unableToProcess,
     required TResult Function(String error) defaultError,
     required TResult Function() unexpectedError,
+    required TResult Function(int? statusCode, String? statetusText)
+        apiException,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +58,7 @@ mixin _$NetworkException {
     TResult? Function()? unableToProcess,
     TResult? Function(String error)? defaultError,
     TResult? Function()? unexpectedError,
+    TResult? Function(int? statusCode, String? statetusText)? apiException,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -77,6 +80,7 @@ mixin _$NetworkException {
     TResult Function()? unableToProcess,
     TResult Function(String error)? defaultError,
     TResult Function()? unexpectedError,
+    TResult Function(int? statusCode, String? statetusText)? apiException,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -99,6 +103,7 @@ mixin _$NetworkException {
     required TResult Function(UnableToProcess value) unableToProcess,
     required TResult Function(DefaultError value) defaultError,
     required TResult Function(UnexpectedError value) unexpectedError,
+    required TResult Function(ApiException value) apiException,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -120,6 +125,7 @@ mixin _$NetworkException {
     TResult? Function(UnableToProcess value)? unableToProcess,
     TResult? Function(DefaultError value)? defaultError,
     TResult? Function(UnexpectedError value)? unexpectedError,
+    TResult? Function(ApiException value)? apiException,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -141,6 +147,7 @@ mixin _$NetworkException {
     TResult Function(UnableToProcess value)? unableToProcess,
     TResult Function(DefaultError value)? defaultError,
     TResult Function(UnexpectedError value)? unexpectedError,
+    TResult Function(ApiException value)? apiException,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -182,12 +189,21 @@ class __$$RequestCancelledCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RequestCancelled implements RequestCancelled {
+class _$RequestCancelled
+    with DiagnosticableTreeMixin
+    implements RequestCancelled {
   const _$RequestCancelled();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'NetworkException.requestCancelled()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'NetworkException.requestCancelled'));
   }
 
   @override
@@ -219,6 +235,8 @@ class _$RequestCancelled implements RequestCancelled {
     required TResult Function() unableToProcess,
     required TResult Function(String error) defaultError,
     required TResult Function() unexpectedError,
+    required TResult Function(int? statusCode, String? statetusText)
+        apiException,
   }) {
     return requestCancelled();
   }
@@ -243,6 +261,7 @@ class _$RequestCancelled implements RequestCancelled {
     TResult? Function()? unableToProcess,
     TResult? Function(String error)? defaultError,
     TResult? Function()? unexpectedError,
+    TResult? Function(int? statusCode, String? statetusText)? apiException,
   }) {
     return requestCancelled?.call();
   }
@@ -267,6 +286,7 @@ class _$RequestCancelled implements RequestCancelled {
     TResult Function()? unableToProcess,
     TResult Function(String error)? defaultError,
     TResult Function()? unexpectedError,
+    TResult Function(int? statusCode, String? statetusText)? apiException,
     required TResult orElse(),
   }) {
     if (requestCancelled != null) {
@@ -295,6 +315,7 @@ class _$RequestCancelled implements RequestCancelled {
     required TResult Function(UnableToProcess value) unableToProcess,
     required TResult Function(DefaultError value) defaultError,
     required TResult Function(UnexpectedError value) unexpectedError,
+    required TResult Function(ApiException value) apiException,
   }) {
     return requestCancelled(this);
   }
@@ -319,6 +340,7 @@ class _$RequestCancelled implements RequestCancelled {
     TResult? Function(UnableToProcess value)? unableToProcess,
     TResult? Function(DefaultError value)? defaultError,
     TResult? Function(UnexpectedError value)? unexpectedError,
+    TResult? Function(ApiException value)? apiException,
   }) {
     return requestCancelled?.call(this);
   }
@@ -343,6 +365,7 @@ class _$RequestCancelled implements RequestCancelled {
     TResult Function(UnableToProcess value)? unableToProcess,
     TResult Function(DefaultError value)? defaultError,
     TResult Function(UnexpectedError value)? unexpectedError,
+    TResult Function(ApiException value)? apiException,
     required TResult orElse(),
   }) {
     if (requestCancelled != null) {
@@ -374,12 +397,21 @@ class __$$UnauthorisedRequestCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UnauthorisedRequest implements UnauthorisedRequest {
+class _$UnauthorisedRequest
+    with DiagnosticableTreeMixin
+    implements UnauthorisedRequest {
   const _$UnauthorisedRequest();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'NetworkException.unauthorisedRequest()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty('type', 'NetworkException.unauthorisedRequest'));
   }
 
   @override
@@ -411,6 +443,8 @@ class _$UnauthorisedRequest implements UnauthorisedRequest {
     required TResult Function() unableToProcess,
     required TResult Function(String error) defaultError,
     required TResult Function() unexpectedError,
+    required TResult Function(int? statusCode, String? statetusText)
+        apiException,
   }) {
     return unauthorisedRequest();
   }
@@ -435,6 +469,7 @@ class _$UnauthorisedRequest implements UnauthorisedRequest {
     TResult? Function()? unableToProcess,
     TResult? Function(String error)? defaultError,
     TResult? Function()? unexpectedError,
+    TResult? Function(int? statusCode, String? statetusText)? apiException,
   }) {
     return unauthorisedRequest?.call();
   }
@@ -459,6 +494,7 @@ class _$UnauthorisedRequest implements UnauthorisedRequest {
     TResult Function()? unableToProcess,
     TResult Function(String error)? defaultError,
     TResult Function()? unexpectedError,
+    TResult Function(int? statusCode, String? statetusText)? apiException,
     required TResult orElse(),
   }) {
     if (unauthorisedRequest != null) {
@@ -487,6 +523,7 @@ class _$UnauthorisedRequest implements UnauthorisedRequest {
     required TResult Function(UnableToProcess value) unableToProcess,
     required TResult Function(DefaultError value) defaultError,
     required TResult Function(UnexpectedError value) unexpectedError,
+    required TResult Function(ApiException value) apiException,
   }) {
     return unauthorisedRequest(this);
   }
@@ -511,6 +548,7 @@ class _$UnauthorisedRequest implements UnauthorisedRequest {
     TResult? Function(UnableToProcess value)? unableToProcess,
     TResult? Function(DefaultError value)? defaultError,
     TResult? Function(UnexpectedError value)? unexpectedError,
+    TResult? Function(ApiException value)? apiException,
   }) {
     return unauthorisedRequest?.call(this);
   }
@@ -535,6 +573,7 @@ class _$UnauthorisedRequest implements UnauthorisedRequest {
     TResult Function(UnableToProcess value)? unableToProcess,
     TResult Function(DefaultError value)? defaultError,
     TResult Function(UnexpectedError value)? unexpectedError,
+    TResult Function(ApiException value)? apiException,
     required TResult orElse(),
   }) {
     if (unauthorisedRequest != null) {
@@ -566,12 +605,18 @@ class __$$BadRequestCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BadRequest implements BadRequest {
+class _$BadRequest with DiagnosticableTreeMixin implements BadRequest {
   const _$BadRequest();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'NetworkException.badRequest()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'NetworkException.badRequest'));
   }
 
   @override
@@ -603,6 +648,8 @@ class _$BadRequest implements BadRequest {
     required TResult Function() unableToProcess,
     required TResult Function(String error) defaultError,
     required TResult Function() unexpectedError,
+    required TResult Function(int? statusCode, String? statetusText)
+        apiException,
   }) {
     return badRequest();
   }
@@ -627,6 +674,7 @@ class _$BadRequest implements BadRequest {
     TResult? Function()? unableToProcess,
     TResult? Function(String error)? defaultError,
     TResult? Function()? unexpectedError,
+    TResult? Function(int? statusCode, String? statetusText)? apiException,
   }) {
     return badRequest?.call();
   }
@@ -651,6 +699,7 @@ class _$BadRequest implements BadRequest {
     TResult Function()? unableToProcess,
     TResult Function(String error)? defaultError,
     TResult Function()? unexpectedError,
+    TResult Function(int? statusCode, String? statetusText)? apiException,
     required TResult orElse(),
   }) {
     if (badRequest != null) {
@@ -679,6 +728,7 @@ class _$BadRequest implements BadRequest {
     required TResult Function(UnableToProcess value) unableToProcess,
     required TResult Function(DefaultError value) defaultError,
     required TResult Function(UnexpectedError value) unexpectedError,
+    required TResult Function(ApiException value) apiException,
   }) {
     return badRequest(this);
   }
@@ -703,6 +753,7 @@ class _$BadRequest implements BadRequest {
     TResult? Function(UnableToProcess value)? unableToProcess,
     TResult? Function(DefaultError value)? defaultError,
     TResult? Function(UnexpectedError value)? unexpectedError,
+    TResult? Function(ApiException value)? apiException,
   }) {
     return badRequest?.call(this);
   }
@@ -727,6 +778,7 @@ class _$BadRequest implements BadRequest {
     TResult Function(UnableToProcess value)? unableToProcess,
     TResult Function(DefaultError value)? defaultError,
     TResult Function(UnexpectedError value)? unexpectedError,
+    TResult Function(ApiException value)? apiException,
     required TResult orElse(),
   }) {
     if (badRequest != null) {
@@ -772,15 +824,23 @@ class __$$NotFoundCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$NotFound implements NotFound {
+class _$NotFound with DiagnosticableTreeMixin implements NotFound {
   const _$NotFound(this.reason);
 
   @override
   final String reason;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'NetworkException.notFound(reason: $reason)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'NetworkException.notFound'))
+      ..add(DiagnosticsProperty('reason', reason));
   }
 
   @override
@@ -820,6 +880,8 @@ class _$NotFound implements NotFound {
     required TResult Function() unableToProcess,
     required TResult Function(String error) defaultError,
     required TResult Function() unexpectedError,
+    required TResult Function(int? statusCode, String? statetusText)
+        apiException,
   }) {
     return notFound(reason);
   }
@@ -844,6 +906,7 @@ class _$NotFound implements NotFound {
     TResult? Function()? unableToProcess,
     TResult? Function(String error)? defaultError,
     TResult? Function()? unexpectedError,
+    TResult? Function(int? statusCode, String? statetusText)? apiException,
   }) {
     return notFound?.call(reason);
   }
@@ -868,6 +931,7 @@ class _$NotFound implements NotFound {
     TResult Function()? unableToProcess,
     TResult Function(String error)? defaultError,
     TResult Function()? unexpectedError,
+    TResult Function(int? statusCode, String? statetusText)? apiException,
     required TResult orElse(),
   }) {
     if (notFound != null) {
@@ -896,6 +960,7 @@ class _$NotFound implements NotFound {
     required TResult Function(UnableToProcess value) unableToProcess,
     required TResult Function(DefaultError value) defaultError,
     required TResult Function(UnexpectedError value) unexpectedError,
+    required TResult Function(ApiException value) apiException,
   }) {
     return notFound(this);
   }
@@ -920,6 +985,7 @@ class _$NotFound implements NotFound {
     TResult? Function(UnableToProcess value)? unableToProcess,
     TResult? Function(DefaultError value)? defaultError,
     TResult? Function(UnexpectedError value)? unexpectedError,
+    TResult? Function(ApiException value)? apiException,
   }) {
     return notFound?.call(this);
   }
@@ -944,6 +1010,7 @@ class _$NotFound implements NotFound {
     TResult Function(UnableToProcess value)? unableToProcess,
     TResult Function(DefaultError value)? defaultError,
     TResult Function(UnexpectedError value)? unexpectedError,
+    TResult Function(ApiException value)? apiException,
     required TResult orElse(),
   }) {
     if (notFound != null) {
@@ -980,12 +1047,21 @@ class __$$MethodNotAllowedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$MethodNotAllowed implements MethodNotAllowed {
+class _$MethodNotAllowed
+    with DiagnosticableTreeMixin
+    implements MethodNotAllowed {
   const _$MethodNotAllowed();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'NetworkException.methodNotAllowed()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'NetworkException.methodNotAllowed'));
   }
 
   @override
@@ -1017,6 +1093,8 @@ class _$MethodNotAllowed implements MethodNotAllowed {
     required TResult Function() unableToProcess,
     required TResult Function(String error) defaultError,
     required TResult Function() unexpectedError,
+    required TResult Function(int? statusCode, String? statetusText)
+        apiException,
   }) {
     return methodNotAllowed();
   }
@@ -1041,6 +1119,7 @@ class _$MethodNotAllowed implements MethodNotAllowed {
     TResult? Function()? unableToProcess,
     TResult? Function(String error)? defaultError,
     TResult? Function()? unexpectedError,
+    TResult? Function(int? statusCode, String? statetusText)? apiException,
   }) {
     return methodNotAllowed?.call();
   }
@@ -1065,6 +1144,7 @@ class _$MethodNotAllowed implements MethodNotAllowed {
     TResult Function()? unableToProcess,
     TResult Function(String error)? defaultError,
     TResult Function()? unexpectedError,
+    TResult Function(int? statusCode, String? statetusText)? apiException,
     required TResult orElse(),
   }) {
     if (methodNotAllowed != null) {
@@ -1093,6 +1173,7 @@ class _$MethodNotAllowed implements MethodNotAllowed {
     required TResult Function(UnableToProcess value) unableToProcess,
     required TResult Function(DefaultError value) defaultError,
     required TResult Function(UnexpectedError value) unexpectedError,
+    required TResult Function(ApiException value) apiException,
   }) {
     return methodNotAllowed(this);
   }
@@ -1117,6 +1198,7 @@ class _$MethodNotAllowed implements MethodNotAllowed {
     TResult? Function(UnableToProcess value)? unableToProcess,
     TResult? Function(DefaultError value)? defaultError,
     TResult? Function(UnexpectedError value)? unexpectedError,
+    TResult? Function(ApiException value)? apiException,
   }) {
     return methodNotAllowed?.call(this);
   }
@@ -1141,6 +1223,7 @@ class _$MethodNotAllowed implements MethodNotAllowed {
     TResult Function(UnableToProcess value)? unableToProcess,
     TResult Function(DefaultError value)? defaultError,
     TResult Function(UnexpectedError value)? unexpectedError,
+    TResult Function(ApiException value)? apiException,
     required TResult orElse(),
   }) {
     if (methodNotAllowed != null) {
@@ -1172,12 +1255,19 @@ class __$$NotAcceptableCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$NotAcceptable implements NotAcceptable {
+class _$NotAcceptable with DiagnosticableTreeMixin implements NotAcceptable {
   const _$NotAcceptable();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'NetworkException.notAcceptable()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'NetworkException.notAcceptable'));
   }
 
   @override
@@ -1209,6 +1299,8 @@ class _$NotAcceptable implements NotAcceptable {
     required TResult Function() unableToProcess,
     required TResult Function(String error) defaultError,
     required TResult Function() unexpectedError,
+    required TResult Function(int? statusCode, String? statetusText)
+        apiException,
   }) {
     return notAcceptable();
   }
@@ -1233,6 +1325,7 @@ class _$NotAcceptable implements NotAcceptable {
     TResult? Function()? unableToProcess,
     TResult? Function(String error)? defaultError,
     TResult? Function()? unexpectedError,
+    TResult? Function(int? statusCode, String? statetusText)? apiException,
   }) {
     return notAcceptable?.call();
   }
@@ -1257,6 +1350,7 @@ class _$NotAcceptable implements NotAcceptable {
     TResult Function()? unableToProcess,
     TResult Function(String error)? defaultError,
     TResult Function()? unexpectedError,
+    TResult Function(int? statusCode, String? statetusText)? apiException,
     required TResult orElse(),
   }) {
     if (notAcceptable != null) {
@@ -1285,6 +1379,7 @@ class _$NotAcceptable implements NotAcceptable {
     required TResult Function(UnableToProcess value) unableToProcess,
     required TResult Function(DefaultError value) defaultError,
     required TResult Function(UnexpectedError value) unexpectedError,
+    required TResult Function(ApiException value) apiException,
   }) {
     return notAcceptable(this);
   }
@@ -1309,6 +1404,7 @@ class _$NotAcceptable implements NotAcceptable {
     TResult? Function(UnableToProcess value)? unableToProcess,
     TResult? Function(DefaultError value)? defaultError,
     TResult? Function(UnexpectedError value)? unexpectedError,
+    TResult? Function(ApiException value)? apiException,
   }) {
     return notAcceptable?.call(this);
   }
@@ -1333,6 +1429,7 @@ class _$NotAcceptable implements NotAcceptable {
     TResult Function(UnableToProcess value)? unableToProcess,
     TResult Function(DefaultError value)? defaultError,
     TResult Function(UnexpectedError value)? unexpectedError,
+    TResult Function(ApiException value)? apiException,
     required TResult orElse(),
   }) {
     if (notAcceptable != null) {
@@ -1364,12 +1461,19 @@ class __$$RequestTimeoutCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RequestTimeout implements RequestTimeout {
+class _$RequestTimeout with DiagnosticableTreeMixin implements RequestTimeout {
   const _$RequestTimeout();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'NetworkException.requestTimeout()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'NetworkException.requestTimeout'));
   }
 
   @override
@@ -1401,6 +1505,8 @@ class _$RequestTimeout implements RequestTimeout {
     required TResult Function() unableToProcess,
     required TResult Function(String error) defaultError,
     required TResult Function() unexpectedError,
+    required TResult Function(int? statusCode, String? statetusText)
+        apiException,
   }) {
     return requestTimeout();
   }
@@ -1425,6 +1531,7 @@ class _$RequestTimeout implements RequestTimeout {
     TResult? Function()? unableToProcess,
     TResult? Function(String error)? defaultError,
     TResult? Function()? unexpectedError,
+    TResult? Function(int? statusCode, String? statetusText)? apiException,
   }) {
     return requestTimeout?.call();
   }
@@ -1449,6 +1556,7 @@ class _$RequestTimeout implements RequestTimeout {
     TResult Function()? unableToProcess,
     TResult Function(String error)? defaultError,
     TResult Function()? unexpectedError,
+    TResult Function(int? statusCode, String? statetusText)? apiException,
     required TResult orElse(),
   }) {
     if (requestTimeout != null) {
@@ -1477,6 +1585,7 @@ class _$RequestTimeout implements RequestTimeout {
     required TResult Function(UnableToProcess value) unableToProcess,
     required TResult Function(DefaultError value) defaultError,
     required TResult Function(UnexpectedError value) unexpectedError,
+    required TResult Function(ApiException value) apiException,
   }) {
     return requestTimeout(this);
   }
@@ -1501,6 +1610,7 @@ class _$RequestTimeout implements RequestTimeout {
     TResult? Function(UnableToProcess value)? unableToProcess,
     TResult? Function(DefaultError value)? defaultError,
     TResult? Function(UnexpectedError value)? unexpectedError,
+    TResult? Function(ApiException value)? apiException,
   }) {
     return requestTimeout?.call(this);
   }
@@ -1525,6 +1635,7 @@ class _$RequestTimeout implements RequestTimeout {
     TResult Function(UnableToProcess value)? unableToProcess,
     TResult Function(DefaultError value)? defaultError,
     TResult Function(UnexpectedError value)? unexpectedError,
+    TResult Function(ApiException value)? apiException,
     required TResult orElse(),
   }) {
     if (requestTimeout != null) {
@@ -1556,12 +1667,18 @@ class __$$SendTimeoutCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SendTimeout implements SendTimeout {
+class _$SendTimeout with DiagnosticableTreeMixin implements SendTimeout {
   const _$SendTimeout();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'NetworkException.sendTimeout()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'NetworkException.sendTimeout'));
   }
 
   @override
@@ -1593,6 +1710,8 @@ class _$SendTimeout implements SendTimeout {
     required TResult Function() unableToProcess,
     required TResult Function(String error) defaultError,
     required TResult Function() unexpectedError,
+    required TResult Function(int? statusCode, String? statetusText)
+        apiException,
   }) {
     return sendTimeout();
   }
@@ -1617,6 +1736,7 @@ class _$SendTimeout implements SendTimeout {
     TResult? Function()? unableToProcess,
     TResult? Function(String error)? defaultError,
     TResult? Function()? unexpectedError,
+    TResult? Function(int? statusCode, String? statetusText)? apiException,
   }) {
     return sendTimeout?.call();
   }
@@ -1641,6 +1761,7 @@ class _$SendTimeout implements SendTimeout {
     TResult Function()? unableToProcess,
     TResult Function(String error)? defaultError,
     TResult Function()? unexpectedError,
+    TResult Function(int? statusCode, String? statetusText)? apiException,
     required TResult orElse(),
   }) {
     if (sendTimeout != null) {
@@ -1669,6 +1790,7 @@ class _$SendTimeout implements SendTimeout {
     required TResult Function(UnableToProcess value) unableToProcess,
     required TResult Function(DefaultError value) defaultError,
     required TResult Function(UnexpectedError value) unexpectedError,
+    required TResult Function(ApiException value) apiException,
   }) {
     return sendTimeout(this);
   }
@@ -1693,6 +1815,7 @@ class _$SendTimeout implements SendTimeout {
     TResult? Function(UnableToProcess value)? unableToProcess,
     TResult? Function(DefaultError value)? defaultError,
     TResult? Function(UnexpectedError value)? unexpectedError,
+    TResult? Function(ApiException value)? apiException,
   }) {
     return sendTimeout?.call(this);
   }
@@ -1717,6 +1840,7 @@ class _$SendTimeout implements SendTimeout {
     TResult Function(UnableToProcess value)? unableToProcess,
     TResult Function(DefaultError value)? defaultError,
     TResult Function(UnexpectedError value)? unexpectedError,
+    TResult Function(ApiException value)? apiException,
     required TResult orElse(),
   }) {
     if (sendTimeout != null) {
@@ -1747,12 +1871,18 @@ class __$$ConflictCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Conflict implements Conflict {
+class _$Conflict with DiagnosticableTreeMixin implements Conflict {
   const _$Conflict();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'NetworkException.conflict()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'NetworkException.conflict'));
   }
 
   @override
@@ -1784,6 +1914,8 @@ class _$Conflict implements Conflict {
     required TResult Function() unableToProcess,
     required TResult Function(String error) defaultError,
     required TResult Function() unexpectedError,
+    required TResult Function(int? statusCode, String? statetusText)
+        apiException,
   }) {
     return conflict();
   }
@@ -1808,6 +1940,7 @@ class _$Conflict implements Conflict {
     TResult? Function()? unableToProcess,
     TResult? Function(String error)? defaultError,
     TResult? Function()? unexpectedError,
+    TResult? Function(int? statusCode, String? statetusText)? apiException,
   }) {
     return conflict?.call();
   }
@@ -1832,6 +1965,7 @@ class _$Conflict implements Conflict {
     TResult Function()? unableToProcess,
     TResult Function(String error)? defaultError,
     TResult Function()? unexpectedError,
+    TResult Function(int? statusCode, String? statetusText)? apiException,
     required TResult orElse(),
   }) {
     if (conflict != null) {
@@ -1860,6 +1994,7 @@ class _$Conflict implements Conflict {
     required TResult Function(UnableToProcess value) unableToProcess,
     required TResult Function(DefaultError value) defaultError,
     required TResult Function(UnexpectedError value) unexpectedError,
+    required TResult Function(ApiException value) apiException,
   }) {
     return conflict(this);
   }
@@ -1884,6 +2019,7 @@ class _$Conflict implements Conflict {
     TResult? Function(UnableToProcess value)? unableToProcess,
     TResult? Function(DefaultError value)? defaultError,
     TResult? Function(UnexpectedError value)? unexpectedError,
+    TResult? Function(ApiException value)? apiException,
   }) {
     return conflict?.call(this);
   }
@@ -1908,6 +2044,7 @@ class _$Conflict implements Conflict {
     TResult Function(UnableToProcess value)? unableToProcess,
     TResult Function(DefaultError value)? defaultError,
     TResult Function(UnexpectedError value)? unexpectedError,
+    TResult Function(ApiException value)? apiException,
     required TResult orElse(),
   }) {
     if (conflict != null) {
@@ -1939,12 +2076,21 @@ class __$$InternalServerErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InternalServerError implements InternalServerError {
+class _$InternalServerError
+    with DiagnosticableTreeMixin
+    implements InternalServerError {
   const _$InternalServerError();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'NetworkException.internalServerError()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty('type', 'NetworkException.internalServerError'));
   }
 
   @override
@@ -1976,6 +2122,8 @@ class _$InternalServerError implements InternalServerError {
     required TResult Function() unableToProcess,
     required TResult Function(String error) defaultError,
     required TResult Function() unexpectedError,
+    required TResult Function(int? statusCode, String? statetusText)
+        apiException,
   }) {
     return internalServerError();
   }
@@ -2000,6 +2148,7 @@ class _$InternalServerError implements InternalServerError {
     TResult? Function()? unableToProcess,
     TResult? Function(String error)? defaultError,
     TResult? Function()? unexpectedError,
+    TResult? Function(int? statusCode, String? statetusText)? apiException,
   }) {
     return internalServerError?.call();
   }
@@ -2024,6 +2173,7 @@ class _$InternalServerError implements InternalServerError {
     TResult Function()? unableToProcess,
     TResult Function(String error)? defaultError,
     TResult Function()? unexpectedError,
+    TResult Function(int? statusCode, String? statetusText)? apiException,
     required TResult orElse(),
   }) {
     if (internalServerError != null) {
@@ -2052,6 +2202,7 @@ class _$InternalServerError implements InternalServerError {
     required TResult Function(UnableToProcess value) unableToProcess,
     required TResult Function(DefaultError value) defaultError,
     required TResult Function(UnexpectedError value) unexpectedError,
+    required TResult Function(ApiException value) apiException,
   }) {
     return internalServerError(this);
   }
@@ -2076,6 +2227,7 @@ class _$InternalServerError implements InternalServerError {
     TResult? Function(UnableToProcess value)? unableToProcess,
     TResult? Function(DefaultError value)? defaultError,
     TResult? Function(UnexpectedError value)? unexpectedError,
+    TResult? Function(ApiException value)? apiException,
   }) {
     return internalServerError?.call(this);
   }
@@ -2100,6 +2252,7 @@ class _$InternalServerError implements InternalServerError {
     TResult Function(UnableToProcess value)? unableToProcess,
     TResult Function(DefaultError value)? defaultError,
     TResult Function(UnexpectedError value)? unexpectedError,
+    TResult Function(ApiException value)? apiException,
     required TResult orElse(),
   }) {
     if (internalServerError != null) {
@@ -2131,12 +2284,19 @@ class __$$NotImplementedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$NotImplemented implements NotImplemented {
+class _$NotImplemented with DiagnosticableTreeMixin implements NotImplemented {
   const _$NotImplemented();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'NetworkException.notImplemented()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'NetworkException.notImplemented'));
   }
 
   @override
@@ -2168,6 +2328,8 @@ class _$NotImplemented implements NotImplemented {
     required TResult Function() unableToProcess,
     required TResult Function(String error) defaultError,
     required TResult Function() unexpectedError,
+    required TResult Function(int? statusCode, String? statetusText)
+        apiException,
   }) {
     return notImplemented();
   }
@@ -2192,6 +2354,7 @@ class _$NotImplemented implements NotImplemented {
     TResult? Function()? unableToProcess,
     TResult? Function(String error)? defaultError,
     TResult? Function()? unexpectedError,
+    TResult? Function(int? statusCode, String? statetusText)? apiException,
   }) {
     return notImplemented?.call();
   }
@@ -2216,6 +2379,7 @@ class _$NotImplemented implements NotImplemented {
     TResult Function()? unableToProcess,
     TResult Function(String error)? defaultError,
     TResult Function()? unexpectedError,
+    TResult Function(int? statusCode, String? statetusText)? apiException,
     required TResult orElse(),
   }) {
     if (notImplemented != null) {
@@ -2244,6 +2408,7 @@ class _$NotImplemented implements NotImplemented {
     required TResult Function(UnableToProcess value) unableToProcess,
     required TResult Function(DefaultError value) defaultError,
     required TResult Function(UnexpectedError value) unexpectedError,
+    required TResult Function(ApiException value) apiException,
   }) {
     return notImplemented(this);
   }
@@ -2268,6 +2433,7 @@ class _$NotImplemented implements NotImplemented {
     TResult? Function(UnableToProcess value)? unableToProcess,
     TResult? Function(DefaultError value)? defaultError,
     TResult? Function(UnexpectedError value)? unexpectedError,
+    TResult? Function(ApiException value)? apiException,
   }) {
     return notImplemented?.call(this);
   }
@@ -2292,6 +2458,7 @@ class _$NotImplemented implements NotImplemented {
     TResult Function(UnableToProcess value)? unableToProcess,
     TResult Function(DefaultError value)? defaultError,
     TResult Function(UnexpectedError value)? unexpectedError,
+    TResult Function(ApiException value)? apiException,
     required TResult orElse(),
   }) {
     if (notImplemented != null) {
@@ -2323,12 +2490,21 @@ class __$$ServiceUnavailableCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ServiceUnavailable implements ServiceUnavailable {
+class _$ServiceUnavailable
+    with DiagnosticableTreeMixin
+    implements ServiceUnavailable {
   const _$ServiceUnavailable();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'NetworkException.serviceUnavailable()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty('type', 'NetworkException.serviceUnavailable'));
   }
 
   @override
@@ -2360,6 +2536,8 @@ class _$ServiceUnavailable implements ServiceUnavailable {
     required TResult Function() unableToProcess,
     required TResult Function(String error) defaultError,
     required TResult Function() unexpectedError,
+    required TResult Function(int? statusCode, String? statetusText)
+        apiException,
   }) {
     return serviceUnavailable();
   }
@@ -2384,6 +2562,7 @@ class _$ServiceUnavailable implements ServiceUnavailable {
     TResult? Function()? unableToProcess,
     TResult? Function(String error)? defaultError,
     TResult? Function()? unexpectedError,
+    TResult? Function(int? statusCode, String? statetusText)? apiException,
   }) {
     return serviceUnavailable?.call();
   }
@@ -2408,6 +2587,7 @@ class _$ServiceUnavailable implements ServiceUnavailable {
     TResult Function()? unableToProcess,
     TResult Function(String error)? defaultError,
     TResult Function()? unexpectedError,
+    TResult Function(int? statusCode, String? statetusText)? apiException,
     required TResult orElse(),
   }) {
     if (serviceUnavailable != null) {
@@ -2436,6 +2616,7 @@ class _$ServiceUnavailable implements ServiceUnavailable {
     required TResult Function(UnableToProcess value) unableToProcess,
     required TResult Function(DefaultError value) defaultError,
     required TResult Function(UnexpectedError value) unexpectedError,
+    required TResult Function(ApiException value) apiException,
   }) {
     return serviceUnavailable(this);
   }
@@ -2460,6 +2641,7 @@ class _$ServiceUnavailable implements ServiceUnavailable {
     TResult? Function(UnableToProcess value)? unableToProcess,
     TResult? Function(DefaultError value)? defaultError,
     TResult? Function(UnexpectedError value)? unexpectedError,
+    TResult? Function(ApiException value)? apiException,
   }) {
     return serviceUnavailable?.call(this);
   }
@@ -2484,6 +2666,7 @@ class _$ServiceUnavailable implements ServiceUnavailable {
     TResult Function(UnableToProcess value)? unableToProcess,
     TResult Function(DefaultError value)? defaultError,
     TResult Function(UnexpectedError value)? unexpectedError,
+    TResult Function(ApiException value)? apiException,
     required TResult orElse(),
   }) {
     if (serviceUnavailable != null) {
@@ -2515,12 +2698,21 @@ class __$$NoInternetConnectionCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$NoInternetConnection implements NoInternetConnection {
+class _$NoInternetConnection
+    with DiagnosticableTreeMixin
+    implements NoInternetConnection {
   const _$NoInternetConnection();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'NetworkException.noInternetConnection()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty('type', 'NetworkException.noInternetConnection'));
   }
 
   @override
@@ -2552,6 +2744,8 @@ class _$NoInternetConnection implements NoInternetConnection {
     required TResult Function() unableToProcess,
     required TResult Function(String error) defaultError,
     required TResult Function() unexpectedError,
+    required TResult Function(int? statusCode, String? statetusText)
+        apiException,
   }) {
     return noInternetConnection();
   }
@@ -2576,6 +2770,7 @@ class _$NoInternetConnection implements NoInternetConnection {
     TResult? Function()? unableToProcess,
     TResult? Function(String error)? defaultError,
     TResult? Function()? unexpectedError,
+    TResult? Function(int? statusCode, String? statetusText)? apiException,
   }) {
     return noInternetConnection?.call();
   }
@@ -2600,6 +2795,7 @@ class _$NoInternetConnection implements NoInternetConnection {
     TResult Function()? unableToProcess,
     TResult Function(String error)? defaultError,
     TResult Function()? unexpectedError,
+    TResult Function(int? statusCode, String? statetusText)? apiException,
     required TResult orElse(),
   }) {
     if (noInternetConnection != null) {
@@ -2628,6 +2824,7 @@ class _$NoInternetConnection implements NoInternetConnection {
     required TResult Function(UnableToProcess value) unableToProcess,
     required TResult Function(DefaultError value) defaultError,
     required TResult Function(UnexpectedError value) unexpectedError,
+    required TResult Function(ApiException value) apiException,
   }) {
     return noInternetConnection(this);
   }
@@ -2652,6 +2849,7 @@ class _$NoInternetConnection implements NoInternetConnection {
     TResult? Function(UnableToProcess value)? unableToProcess,
     TResult? Function(DefaultError value)? defaultError,
     TResult? Function(UnexpectedError value)? unexpectedError,
+    TResult? Function(ApiException value)? apiException,
   }) {
     return noInternetConnection?.call(this);
   }
@@ -2676,6 +2874,7 @@ class _$NoInternetConnection implements NoInternetConnection {
     TResult Function(UnableToProcess value)? unableToProcess,
     TResult Function(DefaultError value)? defaultError,
     TResult Function(UnexpectedError value)? unexpectedError,
+    TResult Function(ApiException value)? apiException,
     required TResult orElse(),
   }) {
     if (noInternetConnection != null) {
@@ -2707,12 +2906,21 @@ class __$$FormatExceptionCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FormatException implements FormatException {
+class _$FormatException
+    with DiagnosticableTreeMixin
+    implements FormatException {
   const _$FormatException();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'NetworkException.formatException()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'NetworkException.formatException'));
   }
 
   @override
@@ -2744,6 +2952,8 @@ class _$FormatException implements FormatException {
     required TResult Function() unableToProcess,
     required TResult Function(String error) defaultError,
     required TResult Function() unexpectedError,
+    required TResult Function(int? statusCode, String? statetusText)
+        apiException,
   }) {
     return formatException();
   }
@@ -2768,6 +2978,7 @@ class _$FormatException implements FormatException {
     TResult? Function()? unableToProcess,
     TResult? Function(String error)? defaultError,
     TResult? Function()? unexpectedError,
+    TResult? Function(int? statusCode, String? statetusText)? apiException,
   }) {
     return formatException?.call();
   }
@@ -2792,6 +3003,7 @@ class _$FormatException implements FormatException {
     TResult Function()? unableToProcess,
     TResult Function(String error)? defaultError,
     TResult Function()? unexpectedError,
+    TResult Function(int? statusCode, String? statetusText)? apiException,
     required TResult orElse(),
   }) {
     if (formatException != null) {
@@ -2820,6 +3032,7 @@ class _$FormatException implements FormatException {
     required TResult Function(UnableToProcess value) unableToProcess,
     required TResult Function(DefaultError value) defaultError,
     required TResult Function(UnexpectedError value) unexpectedError,
+    required TResult Function(ApiException value) apiException,
   }) {
     return formatException(this);
   }
@@ -2844,6 +3057,7 @@ class _$FormatException implements FormatException {
     TResult? Function(UnableToProcess value)? unableToProcess,
     TResult? Function(DefaultError value)? defaultError,
     TResult? Function(UnexpectedError value)? unexpectedError,
+    TResult? Function(ApiException value)? apiException,
   }) {
     return formatException?.call(this);
   }
@@ -2868,6 +3082,7 @@ class _$FormatException implements FormatException {
     TResult Function(UnableToProcess value)? unableToProcess,
     TResult Function(DefaultError value)? defaultError,
     TResult Function(UnexpectedError value)? unexpectedError,
+    TResult Function(ApiException value)? apiException,
     required TResult orElse(),
   }) {
     if (formatException != null) {
@@ -2899,12 +3114,21 @@ class __$$UnableToProcessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UnableToProcess implements UnableToProcess {
+class _$UnableToProcess
+    with DiagnosticableTreeMixin
+    implements UnableToProcess {
   const _$UnableToProcess();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'NetworkException.unableToProcess()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'NetworkException.unableToProcess'));
   }
 
   @override
@@ -2936,6 +3160,8 @@ class _$UnableToProcess implements UnableToProcess {
     required TResult Function() unableToProcess,
     required TResult Function(String error) defaultError,
     required TResult Function() unexpectedError,
+    required TResult Function(int? statusCode, String? statetusText)
+        apiException,
   }) {
     return unableToProcess();
   }
@@ -2960,6 +3186,7 @@ class _$UnableToProcess implements UnableToProcess {
     TResult? Function()? unableToProcess,
     TResult? Function(String error)? defaultError,
     TResult? Function()? unexpectedError,
+    TResult? Function(int? statusCode, String? statetusText)? apiException,
   }) {
     return unableToProcess?.call();
   }
@@ -2984,6 +3211,7 @@ class _$UnableToProcess implements UnableToProcess {
     TResult Function()? unableToProcess,
     TResult Function(String error)? defaultError,
     TResult Function()? unexpectedError,
+    TResult Function(int? statusCode, String? statetusText)? apiException,
     required TResult orElse(),
   }) {
     if (unableToProcess != null) {
@@ -3012,6 +3240,7 @@ class _$UnableToProcess implements UnableToProcess {
     required TResult Function(UnableToProcess value) unableToProcess,
     required TResult Function(DefaultError value) defaultError,
     required TResult Function(UnexpectedError value) unexpectedError,
+    required TResult Function(ApiException value) apiException,
   }) {
     return unableToProcess(this);
   }
@@ -3036,6 +3265,7 @@ class _$UnableToProcess implements UnableToProcess {
     TResult? Function(UnableToProcess value)? unableToProcess,
     TResult? Function(DefaultError value)? defaultError,
     TResult? Function(UnexpectedError value)? unexpectedError,
+    TResult? Function(ApiException value)? apiException,
   }) {
     return unableToProcess?.call(this);
   }
@@ -3060,6 +3290,7 @@ class _$UnableToProcess implements UnableToProcess {
     TResult Function(UnableToProcess value)? unableToProcess,
     TResult Function(DefaultError value)? defaultError,
     TResult Function(UnexpectedError value)? unexpectedError,
+    TResult Function(ApiException value)? apiException,
     required TResult orElse(),
   }) {
     if (unableToProcess != null) {
@@ -3106,15 +3337,23 @@ class __$$DefaultErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DefaultError implements DefaultError {
+class _$DefaultError with DiagnosticableTreeMixin implements DefaultError {
   const _$DefaultError(this.error);
 
   @override
   final String error;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'NetworkException.defaultError(error: $error)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'NetworkException.defaultError'))
+      ..add(DiagnosticsProperty('error', error));
   }
 
   @override
@@ -3154,6 +3393,8 @@ class _$DefaultError implements DefaultError {
     required TResult Function() unableToProcess,
     required TResult Function(String error) defaultError,
     required TResult Function() unexpectedError,
+    required TResult Function(int? statusCode, String? statetusText)
+        apiException,
   }) {
     return defaultError(error);
   }
@@ -3178,6 +3419,7 @@ class _$DefaultError implements DefaultError {
     TResult? Function()? unableToProcess,
     TResult? Function(String error)? defaultError,
     TResult? Function()? unexpectedError,
+    TResult? Function(int? statusCode, String? statetusText)? apiException,
   }) {
     return defaultError?.call(error);
   }
@@ -3202,6 +3444,7 @@ class _$DefaultError implements DefaultError {
     TResult Function()? unableToProcess,
     TResult Function(String error)? defaultError,
     TResult Function()? unexpectedError,
+    TResult Function(int? statusCode, String? statetusText)? apiException,
     required TResult orElse(),
   }) {
     if (defaultError != null) {
@@ -3230,6 +3473,7 @@ class _$DefaultError implements DefaultError {
     required TResult Function(UnableToProcess value) unableToProcess,
     required TResult Function(DefaultError value) defaultError,
     required TResult Function(UnexpectedError value) unexpectedError,
+    required TResult Function(ApiException value) apiException,
   }) {
     return defaultError(this);
   }
@@ -3254,6 +3498,7 @@ class _$DefaultError implements DefaultError {
     TResult? Function(UnableToProcess value)? unableToProcess,
     TResult? Function(DefaultError value)? defaultError,
     TResult? Function(UnexpectedError value)? unexpectedError,
+    TResult? Function(ApiException value)? apiException,
   }) {
     return defaultError?.call(this);
   }
@@ -3278,6 +3523,7 @@ class _$DefaultError implements DefaultError {
     TResult Function(UnableToProcess value)? unableToProcess,
     TResult Function(DefaultError value)? defaultError,
     TResult Function(UnexpectedError value)? unexpectedError,
+    TResult Function(ApiException value)? apiException,
     required TResult orElse(),
   }) {
     if (defaultError != null) {
@@ -3314,12 +3560,21 @@ class __$$UnexpectedErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UnexpectedError implements UnexpectedError {
+class _$UnexpectedError
+    with DiagnosticableTreeMixin
+    implements UnexpectedError {
   const _$UnexpectedError();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'NetworkException.unexpectedError()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'NetworkException.unexpectedError'));
   }
 
   @override
@@ -3351,6 +3606,8 @@ class _$UnexpectedError implements UnexpectedError {
     required TResult Function() unableToProcess,
     required TResult Function(String error) defaultError,
     required TResult Function() unexpectedError,
+    required TResult Function(int? statusCode, String? statetusText)
+        apiException,
   }) {
     return unexpectedError();
   }
@@ -3375,6 +3632,7 @@ class _$UnexpectedError implements UnexpectedError {
     TResult? Function()? unableToProcess,
     TResult? Function(String error)? defaultError,
     TResult? Function()? unexpectedError,
+    TResult? Function(int? statusCode, String? statetusText)? apiException,
   }) {
     return unexpectedError?.call();
   }
@@ -3399,6 +3657,7 @@ class _$UnexpectedError implements UnexpectedError {
     TResult Function()? unableToProcess,
     TResult Function(String error)? defaultError,
     TResult Function()? unexpectedError,
+    TResult Function(int? statusCode, String? statetusText)? apiException,
     required TResult orElse(),
   }) {
     if (unexpectedError != null) {
@@ -3427,6 +3686,7 @@ class _$UnexpectedError implements UnexpectedError {
     required TResult Function(UnableToProcess value) unableToProcess,
     required TResult Function(DefaultError value) defaultError,
     required TResult Function(UnexpectedError value) unexpectedError,
+    required TResult Function(ApiException value) apiException,
   }) {
     return unexpectedError(this);
   }
@@ -3451,6 +3711,7 @@ class _$UnexpectedError implements UnexpectedError {
     TResult? Function(UnableToProcess value)? unableToProcess,
     TResult? Function(DefaultError value)? defaultError,
     TResult? Function(UnexpectedError value)? unexpectedError,
+    TResult? Function(ApiException value)? apiException,
   }) {
     return unexpectedError?.call(this);
   }
@@ -3475,6 +3736,7 @@ class _$UnexpectedError implements UnexpectedError {
     TResult Function(UnableToProcess value)? unableToProcess,
     TResult Function(DefaultError value)? defaultError,
     TResult Function(UnexpectedError value)? unexpectedError,
+    TResult Function(ApiException value)? apiException,
     required TResult orElse(),
   }) {
     if (unexpectedError != null) {
@@ -3486,4 +3748,256 @@ class _$UnexpectedError implements UnexpectedError {
 
 abstract class UnexpectedError implements NetworkException {
   const factory UnexpectedError() = _$UnexpectedError;
+}
+
+/// @nodoc
+abstract class _$$ApiExceptionCopyWith<$Res> {
+  factory _$$ApiExceptionCopyWith(
+          _$ApiException value, $Res Function(_$ApiException) then) =
+      __$$ApiExceptionCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int? statusCode, String? statetusText});
+}
+
+/// @nodoc
+class __$$ApiExceptionCopyWithImpl<$Res>
+    extends _$NetworkExceptionCopyWithImpl<$Res, _$ApiException>
+    implements _$$ApiExceptionCopyWith<$Res> {
+  __$$ApiExceptionCopyWithImpl(
+      _$ApiException _value, $Res Function(_$ApiException) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? statusCode = freezed,
+    Object? statetusText = freezed,
+  }) {
+    return _then(_$ApiException(
+      statusCode: freezed == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      statetusText: freezed == statetusText
+          ? _value.statetusText
+          : statetusText // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ApiException with DiagnosticableTreeMixin implements ApiException {
+  const _$ApiException({required this.statusCode, required this.statetusText});
+
+  @override
+  final int? statusCode;
+  @override
+  final String? statetusText;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'NetworkException.apiException(statusCode: $statusCode, statetusText: $statetusText)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'NetworkException.apiException'))
+      ..add(DiagnosticsProperty('statusCode', statusCode))
+      ..add(DiagnosticsProperty('statetusText', statetusText));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ApiException &&
+            (identical(other.statusCode, statusCode) ||
+                other.statusCode == statusCode) &&
+            (identical(other.statetusText, statetusText) ||
+                other.statetusText == statetusText));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, statusCode, statetusText);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ApiExceptionCopyWith<_$ApiException> get copyWith =>
+      __$$ApiExceptionCopyWithImpl<_$ApiException>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() requestCancelled,
+    required TResult Function() unauthorisedRequest,
+    required TResult Function() badRequest,
+    required TResult Function(String reason) notFound,
+    required TResult Function() methodNotAllowed,
+    required TResult Function() notAcceptable,
+    required TResult Function() requestTimeout,
+    required TResult Function() sendTimeout,
+    required TResult Function() conflict,
+    required TResult Function() internalServerError,
+    required TResult Function() notImplemented,
+    required TResult Function() serviceUnavailable,
+    required TResult Function() noInternetConnection,
+    required TResult Function() formatException,
+    required TResult Function() unableToProcess,
+    required TResult Function(String error) defaultError,
+    required TResult Function() unexpectedError,
+    required TResult Function(int? statusCode, String? statetusText)
+        apiException,
+  }) {
+    return apiException(statusCode, statetusText);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? requestCancelled,
+    TResult? Function()? unauthorisedRequest,
+    TResult? Function()? badRequest,
+    TResult? Function(String reason)? notFound,
+    TResult? Function()? methodNotAllowed,
+    TResult? Function()? notAcceptable,
+    TResult? Function()? requestTimeout,
+    TResult? Function()? sendTimeout,
+    TResult? Function()? conflict,
+    TResult? Function()? internalServerError,
+    TResult? Function()? notImplemented,
+    TResult? Function()? serviceUnavailable,
+    TResult? Function()? noInternetConnection,
+    TResult? Function()? formatException,
+    TResult? Function()? unableToProcess,
+    TResult? Function(String error)? defaultError,
+    TResult? Function()? unexpectedError,
+    TResult? Function(int? statusCode, String? statetusText)? apiException,
+  }) {
+    return apiException?.call(statusCode, statetusText);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? requestCancelled,
+    TResult Function()? unauthorisedRequest,
+    TResult Function()? badRequest,
+    TResult Function(String reason)? notFound,
+    TResult Function()? methodNotAllowed,
+    TResult Function()? notAcceptable,
+    TResult Function()? requestTimeout,
+    TResult Function()? sendTimeout,
+    TResult Function()? conflict,
+    TResult Function()? internalServerError,
+    TResult Function()? notImplemented,
+    TResult Function()? serviceUnavailable,
+    TResult Function()? noInternetConnection,
+    TResult Function()? formatException,
+    TResult Function()? unableToProcess,
+    TResult Function(String error)? defaultError,
+    TResult Function()? unexpectedError,
+    TResult Function(int? statusCode, String? statetusText)? apiException,
+    required TResult orElse(),
+  }) {
+    if (apiException != null) {
+      return apiException(statusCode, statetusText);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(RequestCancelled value) requestCancelled,
+    required TResult Function(UnauthorisedRequest value) unauthorisedRequest,
+    required TResult Function(BadRequest value) badRequest,
+    required TResult Function(NotFound value) notFound,
+    required TResult Function(MethodNotAllowed value) methodNotAllowed,
+    required TResult Function(NotAcceptable value) notAcceptable,
+    required TResult Function(RequestTimeout value) requestTimeout,
+    required TResult Function(SendTimeout value) sendTimeout,
+    required TResult Function(Conflict value) conflict,
+    required TResult Function(InternalServerError value) internalServerError,
+    required TResult Function(NotImplemented value) notImplemented,
+    required TResult Function(ServiceUnavailable value) serviceUnavailable,
+    required TResult Function(NoInternetConnection value) noInternetConnection,
+    required TResult Function(FormatException value) formatException,
+    required TResult Function(UnableToProcess value) unableToProcess,
+    required TResult Function(DefaultError value) defaultError,
+    required TResult Function(UnexpectedError value) unexpectedError,
+    required TResult Function(ApiException value) apiException,
+  }) {
+    return apiException(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(RequestCancelled value)? requestCancelled,
+    TResult? Function(UnauthorisedRequest value)? unauthorisedRequest,
+    TResult? Function(BadRequest value)? badRequest,
+    TResult? Function(NotFound value)? notFound,
+    TResult? Function(MethodNotAllowed value)? methodNotAllowed,
+    TResult? Function(NotAcceptable value)? notAcceptable,
+    TResult? Function(RequestTimeout value)? requestTimeout,
+    TResult? Function(SendTimeout value)? sendTimeout,
+    TResult? Function(Conflict value)? conflict,
+    TResult? Function(InternalServerError value)? internalServerError,
+    TResult? Function(NotImplemented value)? notImplemented,
+    TResult? Function(ServiceUnavailable value)? serviceUnavailable,
+    TResult? Function(NoInternetConnection value)? noInternetConnection,
+    TResult? Function(FormatException value)? formatException,
+    TResult? Function(UnableToProcess value)? unableToProcess,
+    TResult? Function(DefaultError value)? defaultError,
+    TResult? Function(UnexpectedError value)? unexpectedError,
+    TResult? Function(ApiException value)? apiException,
+  }) {
+    return apiException?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(RequestCancelled value)? requestCancelled,
+    TResult Function(UnauthorisedRequest value)? unauthorisedRequest,
+    TResult Function(BadRequest value)? badRequest,
+    TResult Function(NotFound value)? notFound,
+    TResult Function(MethodNotAllowed value)? methodNotAllowed,
+    TResult Function(NotAcceptable value)? notAcceptable,
+    TResult Function(RequestTimeout value)? requestTimeout,
+    TResult Function(SendTimeout value)? sendTimeout,
+    TResult Function(Conflict value)? conflict,
+    TResult Function(InternalServerError value)? internalServerError,
+    TResult Function(NotImplemented value)? notImplemented,
+    TResult Function(ServiceUnavailable value)? serviceUnavailable,
+    TResult Function(NoInternetConnection value)? noInternetConnection,
+    TResult Function(FormatException value)? formatException,
+    TResult Function(UnableToProcess value)? unableToProcess,
+    TResult Function(DefaultError value)? defaultError,
+    TResult Function(UnexpectedError value)? unexpectedError,
+    TResult Function(ApiException value)? apiException,
+    required TResult orElse(),
+  }) {
+    if (apiException != null) {
+      return apiException(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ApiException implements NetworkException {
+  const factory ApiException(
+      {required final int? statusCode,
+      required final String? statetusText}) = _$ApiException;
+
+  int? get statusCode;
+  String? get statetusText;
+  @JsonKey(ignore: true)
+  _$$ApiExceptionCopyWith<_$ApiException> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:travel_booking_tour/features/guide/detail/bloc/bloc_trip_information_event.dart';
-import 'package:travel_booking_tour/features/guide/detail/bloc/bloc_trip_information_screen.dart';
-import 'package:travel_booking_tour/features/guide/detail/bloc/bloc_trip_information_state.dart';
+import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_trip_information_event.dart';
+import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_trip_information_screen.dart';
+import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_trip_information_state.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/icons.dart';
 import 'package:travel_booking_tour/res/images.dart';

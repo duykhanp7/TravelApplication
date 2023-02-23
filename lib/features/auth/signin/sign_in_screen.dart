@@ -2,14 +2,16 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/features/signin/bloc/bloc_sign_in_event.dart';
-import 'package:travel_booking_tour/features/signin/bloc/bloc_sign_in_screen.dart';
+import 'package:travel_booking_tour/features/auth/signin/blocs/bloc_sign_in_event.dart';
+import 'package:travel_booking_tour/features/auth/signin/blocs/bloc_sign_in_screen.dart';
+import 'package:travel_booking_tour/features/auth/signin/blocs/bloc_sign_in_state.dart';
 import 'package:travel_booking_tour/res/background.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
-import '../../l10n/generated/l10n.dart';
-import '../../res/button.dart';
-import '../../res/input_field.dart';
+import '../../../l10n/generated/l10n.dart';
+import '../../../res/app_dialog.dart';
+import '../../../res/button.dart';
+import '../../../res/input_field.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -23,25 +25,64 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreen extends State<SignInScreen> {
   late SLocalization localization;
   final GlobalKey<FormState> signInGlobalKey = GlobalKey<FormState>();
+  late BlocSignInScreen _blocSignInScreen;
+
+  @override
+  void initState() {
+    _blocSignInScreen = BlocProvider.of<BlocSignInScreen>(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('On Build Sign In');
     localization = SLocalization.of(context);
     return Scaffold(
+      backgroundColor: AppColors.white,
       body: SafeArea(
-          child: SingleChildScrollView(
-        child: Container(
-          color: AppColors.primary,
-          alignment: Alignment.center,
-          child: AppBackground(
-              header: localization.sign_in, children: _buildBody()),
+          child: GestureDetector(
+        child: SingleChildScrollView(
+          child: BlocListener<BlocSignInScreen, BlocSignInState>(
+            listenWhen: (previous, current) =>
+                current is BlocSignInStateValidateSuccess ||
+                current is BlocSignInStateServerError,
+            listener: (context, state) {
+              if (state is BlocSignInStateValidateSuccess) {
+                showDialog(
+                  context: context,
+                  builder: (context) => AppDialog(
+                    typeDialog: TypeDialog.success,
+                    content: 'Congratulation!\nSign up successfully.',
+                    positiveAction: () => Navigator.of(context).pop(),
+                  ),
+                );
+              } else if (state is BlocSignInStateServerError) {
+                showDialog(
+                  context: context,
+                  builder: (context) => AppDialog(
+                    typeDialog: TypeDialog.error,
+                    content: 'Opp Sorry!\nSomething went wrong, try later!',
+                    positiveAction: () => Navigator.of(context).pop(),
+                  ),
+                );
+              }
+            },
+            child: Container(
+              color: AppColors.primary,
+              alignment: Alignment.center,
+              child: AppBackground(
+                  header: localization.sign_in, children: _buildBody()),
+            ),
+          ),
         ),
+        onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
       )),
     );
   }
 
   Widget _buildBody() {
     return Container(
+      color: AppColors.white,
       alignment: Alignment.center,
       padding: const EdgeInsets.only(top: 30),
       child: Column(
@@ -58,13 +99,21 @@ class _SignInScreen extends State<SignInScreen> {
           const SizedBox(
             height: 25,
           ),
-          PrimaryButton(
-            text: localization.sign_in,
-            onTap: () {
-              BlocProvider.of<BlocSignInScreen>(context).add(
-                  BlocSignInEventSignInClick(signInGlobalKey: signInGlobalKey));
-            },
-            allCaps: true,
+          BlocBuilder<BlocSignInScreen, BlocSignInState>(
+            buildWhen: (previous, current) =>
+                current is BlocSignInStateValidateLoading ||
+                current is BlocSignInStateValidateSuccess ||
+                current is BlocSignInStateValidateFail ||
+                current is BlocSignInStateServerError,
+            builder: (context, state) => PrimaryButton(
+              text: localization.sign_in,
+              isLoading: state is BlocSignInStateValidateLoading,
+              onTap: () {
+                _blocSignInScreen.add(BlocSignInEventSignInClick(
+                    signInGlobalKey: signInGlobalKey));
+              },
+              allCaps: true,
+            ),
           ),
           const SizedBox(
             height: 34,
@@ -100,8 +149,7 @@ class _SignInScreen extends State<SignInScreen> {
                       fontWeight: FontWeight.w400, color: AppColors.primary),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      BlocProvider.of<BlocSignInScreen>(context)
-                          .add(BlocSignInEventSignUpClick());
+                      _blocSignInScreen.add(BlocSignInEventSignUpClick());
                     })
             ])),
           )
@@ -172,7 +220,9 @@ class _SignInScreen extends State<SignInScreen> {
               obsecureText: false,
               labelText: localization.email,
               textInputType: TextInputType.emailAddress,
-              validator: AppValidator.validateTextFieldEmail,
+              validator: _blocSignInScreen.validateTextFieldEmail,
+              onChange: (value) => _blocSignInScreen
+                  .add(BlocSignInEventChangeEmail(email: value)),
             ),
             const SizedBox(
               height: 24,
@@ -182,6 +232,8 @@ class _SignInScreen extends State<SignInScreen> {
               obsecureText: true,
               labelText: localization.password,
               validator: AppValidator.validateTextFieldPaswordLogIn,
+              onChange: (value) => _blocSignInScreen
+                  .add(BlocSignInEventChangePassword(password: value)),
             ),
             const SizedBox(
               height: 15,
@@ -198,8 +250,7 @@ class _SignInScreen extends State<SignInScreen> {
                           color: AppColors.textByAgreeColor),
                     ),
                     onTap: () {
-                      BlocProvider.of<BlocSignInScreen>(context)
-                          .add(BlocSignInEventForgotPassword());
+                      _blocSignInScreen.add(BlocSignInEventForgotPassword());
                     },
                   ),
                 )),

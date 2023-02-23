@@ -10,19 +10,21 @@ import 'package:travel_booking_tour/features/main/main_page.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
 import '../features/onboarding/onboarding_screen.dart';
-import '../features/signin/sign_in_screen.dart';
-import '../features/signup/sign_up_screen.dart';
+import '../features/auth/signin/sign_in_screen.dart';
+import '../features/auth/signup/sign_up_screen.dart';
 import '../features/splash/splash_screen.dart';
 
 class Routes {
   static final GlobalKey<NavigatorState> navigator =
       GlobalKey<NavigatorState>();
 
+  static SplashScreen splashScreen = const SplashScreen();
+
   static final routes = {
     AppPath.splashScreen: (context) => const SplashScreen(),
     AppPath.onBoardingSCreen: (context) => const OnboardingScreen(),
     AppPath.mainScreen: (context) => const MainPage(),
-    AppPath.signUpScreen: (context) => const SignUpScreen(),
+    AppPath.signUpScreen: (context) => SignUpScreen(),
     AppPath.signInScreen: (context) => const SignInScreen(),
     AppPath.forgotPassword: (context) => const ForgotPasswordScreen(),
     AppPath.checkEmail: (context) => const CheckEmailScreen(),
@@ -44,6 +46,12 @@ class Routes {
       namePage,
       arguments: arguments,
     );
+  }
+
+  static void navigatoReplacement(
+      String namePage, Map<String, dynamic> arguments) {
+    navigator.currentState
+        ?.pushReplacementNamed(namePage, arguments: arguments);
   }
 
   static void backTo({String? namePage, Map<String, dynamic>? arguments}) {

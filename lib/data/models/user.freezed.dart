@@ -28,6 +28,8 @@ mixin _$UserJson {
   bool? get blocked => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
+  String? get firstName => throw _privateConstructorUsedError;
+  String? get lastName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,7 +50,9 @@ abstract class $UserJsonCopyWith<$Res> {
       bool? confirmed,
       bool? blocked,
       String? createdAt,
-      String? updatedAt});
+      String? updatedAt,
+      String? firstName,
+      String? lastName});
 }
 
 /// @nodoc
@@ -72,6 +76,8 @@ class _$UserJsonCopyWithImpl<$Res, $Val extends UserJson>
     Object? blocked = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -106,6 +112,14 @@ class _$UserJsonCopyWithImpl<$Res, $Val extends UserJson>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String?,
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -125,7 +139,9 @@ abstract class _$$_UserJsonCopyWith<$Res> implements $UserJsonCopyWith<$Res> {
       bool? confirmed,
       bool? blocked,
       String? createdAt,
-      String? updatedAt});
+      String? updatedAt,
+      String? firstName,
+      String? lastName});
 }
 
 /// @nodoc
@@ -147,6 +163,8 @@ class __$$_UserJsonCopyWithImpl<$Res>
     Object? blocked = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
   }) {
     return _then(_$_UserJson(
       id: freezed == id
@@ -181,6 +199,14 @@ class __$$_UserJsonCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String?,
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -196,7 +222,9 @@ class _$_UserJson with DiagnosticableTreeMixin implements _UserJson {
       this.confirmed,
       this.blocked,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.firstName,
+      this.lastName});
 
   factory _$_UserJson.fromJson(Map<String, dynamic> json) =>
       _$$_UserJsonFromJson(json);
@@ -217,10 +245,14 @@ class _$_UserJson with DiagnosticableTreeMixin implements _UserJson {
   final String? createdAt;
   @override
   final String? updatedAt;
+  @override
+  final String? firstName;
+  @override
+  final String? lastName;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserJson(id: $id, username: $username, email: $email, provider: $provider, confirmed: $confirmed, blocked: $blocked, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserJson(id: $id, username: $username, email: $email, provider: $provider, confirmed: $confirmed, blocked: $blocked, createdAt: $createdAt, updatedAt: $updatedAt, firstName: $firstName, lastName: $lastName)';
   }
 
   @override
@@ -235,7 +267,9 @@ class _$_UserJson with DiagnosticableTreeMixin implements _UserJson {
       ..add(DiagnosticsProperty('confirmed', confirmed))
       ..add(DiagnosticsProperty('blocked', blocked))
       ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('updatedAt', updatedAt));
+      ..add(DiagnosticsProperty('updatedAt', updatedAt))
+      ..add(DiagnosticsProperty('firstName', firstName))
+      ..add(DiagnosticsProperty('lastName', lastName));
   }
 
   @override
@@ -255,13 +289,17 @@ class _$_UserJson with DiagnosticableTreeMixin implements _UserJson {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, username, email, provider,
-      confirmed, blocked, createdAt, updatedAt);
+      confirmed, blocked, createdAt, updatedAt, firstName, lastName);
 
   @JsonKey(ignore: true)
   @override
@@ -286,7 +324,9 @@ abstract class _UserJson implements UserJson {
       final bool? confirmed,
       final bool? blocked,
       final String? createdAt,
-      final String? updatedAt}) = _$_UserJson;
+      final String? updatedAt,
+      final String? firstName,
+      final String? lastName}) = _$_UserJson;
 
   factory _UserJson.fromJson(Map<String, dynamic> json) = _$_UserJson.fromJson;
 
@@ -306,6 +346,10 @@ abstract class _UserJson implements UserJson {
   String? get createdAt;
   @override
   String? get updatedAt;
+  @override
+  String? get firstName;
+  @override
+  String? get lastName;
   @override
   @JsonKey(ignore: true)
   _$$_UserJsonCopyWith<_$_UserJson> get copyWith =>

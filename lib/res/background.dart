@@ -98,7 +98,6 @@ class AppBackground extends StatelessWidget {
           children: [
             Container(
               alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width,
               height: 140,
               child: ClipPath(
                 clipper: CustomClipPath(),
@@ -108,12 +107,8 @@ class AppBackground extends StatelessWidget {
               ),
             ),
             Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
               color: AppColors.white,
-              padding: const EdgeInsets.only(
-                top: 10,
-              ),
+              padding: const EdgeInsets.only(top: 10, bottom: 50),
               child: Column(
                 children: [
                   Container(

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:travel_booking_tour/features/guide/detail/bloc/bloc_trip_information_event.dart';
-import 'package:travel_booking_tour/features/guide/detail/bloc/bloc_trip_information_state.dart';
+import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_trip_information_event.dart';
+import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_trip_information_state.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
 import '../../../../router/routes.dart';

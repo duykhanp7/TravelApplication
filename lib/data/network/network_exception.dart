@@ -1,7 +1,10 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'dart:developer' as dev;
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:travel_booking_tour/data/dio/api_interface.dart';
 
 part 'network_exception.freezed.dart';
 
@@ -41,7 +44,33 @@ abstract class NetworkException with _$NetworkException implements Exception {
 
   const factory NetworkException.unexpectedError() = UnexpectedError;
 
+  const factory NetworkException.apiException(
+      {required int? statusCode, required String? statetusText}) = ApiException;
+
+  static T convertResponse<T>(Response response, Converter<T>? converter) {
+    if (converter != null) {
+      if ((response.data as Map)['user'] != null) {
+        return converter((response.data as Map)['user']);
+      }
+      return (response.data as Map)['user'] as T;
+    }
+    return {} as T;
+  }
+
   static NetworkException getDioException(error) {
+    if (kDebugMode) {
+      StackTrace? stackTrace;
+      if (error is Error) {
+        stackTrace = error.stackTrace;
+      }
+      dev.log(
+        'Error type: ${error.runtimeType}',
+        name: 'NetworkException',
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
     if (error is Exception) {
       try {
         NetworkException? networkException;
@@ -62,16 +91,19 @@ abstract class NetworkException with _$NetworkException implements Exception {
             case DioErrorType.badResponse:
               switch (error.response?.statusCode) {
                 case 400:
-                  networkException =
-                      const NetworkException.unauthorisedRequest();
+                  networkException = NetworkException.apiException(
+                      statusCode: error.response?.statusCode,
+                      statetusText: error.response?.data['error']?['message']);
                   break;
                 case 401:
-                  networkException =
-                      const NetworkException.unauthorisedRequest();
+                  networkException = NetworkException.apiException(
+                      statusCode: error.response?.statusCode,
+                      statetusText: error.response?.data['error']?['message']);
                   break;
                 case 403:
-                  networkException =
-                      const NetworkException.unauthorisedRequest();
+                  networkException = NetworkException.apiException(
+                      statusCode: error.response?.statusCode,
+                      statetusText: error.response?.data['error']?['message']);
                   break;
                 case 404:
                   networkException =
@@ -81,15 +113,19 @@ abstract class NetworkException with _$NetworkException implements Exception {
                   networkException = const NetworkException.conflict();
                   break;
                 case 408:
-                  networkException = const NetworkException.requestTimeout();
+                  networkException = NetworkException.apiException(
+                      statusCode: error.response?.statusCode,
+                      statetusText: error.response?.data['error']?['message']);
                   break;
                 case 500:
-                  networkException =
-                      const NetworkException.internalServerError();
+                  networkException = NetworkException.apiException(
+                      statusCode: error.response?.statusCode,
+                      statetusText: error.response?.data['error']?['message']);
                   break;
                 case 503:
-                  networkException =
-                      const NetworkException.serviceUnavailable();
+                  networkException = NetworkException.apiException(
+                      statusCode: error.response?.statusCode,
+                      statetusText: error.response?.data['error']?['message']);
                   break;
                 default:
                   var responseCode = error.response?.statusCode;
@@ -128,22 +164,29 @@ abstract class NetworkException with _$NetworkException implements Exception {
 
 extension NetworkExceptionEx on NetworkException {
   String get getTextError => when(
-        requestCancelled: () => '',
-        unauthorisedRequest: () => '',
+        apiException: (statusCode, statetusText) =>
+            'StatusCode $statusCode - StatusTetx $statetusText',
+        requestCancelled: () => 'requestCancelled',
+        unauthorisedRequest: () => 'unauthorisedRequest',
         badRequest: () => '',
         notFound: (reason) => reason,
-        methodNotAllowed: () => '',
-        notAcceptable: () => '',
-        requestTimeout: () => '',
-        sendTimeout: () => '',
-        conflict: () => '',
-        internalServerError: () => '',
-        notImplemented: () => '',
-        serviceUnavailable: () => '',
-        noInternetConnection: () => '',
-        formatException: () => '',
-        unableToProcess: () => '',
+        methodNotAllowed: () => 'methodNotAllowed',
+        notAcceptable: () => 'notAcceptable',
+        requestTimeout: () => 'requestTimeout',
+        sendTimeout: () => 'sendTimeout',
+        conflict: () => 'conflict',
+        internalServerError: () => 'internalServerError',
+        notImplemented: () => 'notImplemented',
+        serviceUnavailable: () => 'serviceUnavailable',
+        noInternetConnection: () => 'noInternetConnection',
+        formatException: () => 'formatException',
+        unableToProcess: () => 'unableToProcess',
         defaultError: (error) => error,
-        unexpectedError: () => '',
+        unexpectedError: () => 'unexpectedError',
+      );
+
+  int get statusCode => maybeWhen(
+        apiException: (statusCode, statetusText) => statusCode ?? 500,
+        orElse: () => 0,
       );
 }
