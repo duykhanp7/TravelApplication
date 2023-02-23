@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:travel_booking_tour/features/main/bloc/bloc_main_event.dart';
-import 'package:travel_booking_tour/features/main/bloc/bloc_main_state.dart';
+import 'package:travel_booking_tour/features/main/blocs/bloc_main_event.dart';
+import 'package:travel_booking_tour/features/main/blocs/bloc_main_state.dart';
 
 class BlocMainScreen extends Bloc<BlocmainEvent, BlocMainState> {
   BlocMainScreen() : super(BlocMainStateInitial()) {

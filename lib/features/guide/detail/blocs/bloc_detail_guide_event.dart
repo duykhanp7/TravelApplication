@@ -25,6 +25,13 @@ class BlocDetailGuideEventClose extends BlocDetailGuideEvent {
 }
 
 class BlocDetailGuideEventChooseThisGuide extends BlocDetailGuideEvent {
+  BlocDetailGuideEventChooseThisGuide({required this.current});
+  final int current;
+  @override
+  List<Object?> get props => [current];
+}
+
+class BlocDetailGuideEventRegisterFail extends BlocDetailGuideEvent {
   @override
   List<Object?> get props => [];
 }

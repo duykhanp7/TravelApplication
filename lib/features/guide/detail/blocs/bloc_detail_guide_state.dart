@@ -9,12 +9,10 @@ class BlocDetailGuideStateInitial extends BlocDetailGuideState {
 }
 
 class BlocDetailGuideStateLoadVideoSuccess extends BlocDetailGuideState {
-  BlocDetailGuideStateLoadVideoSuccess(
-      {required this.source, required this.current});
-  final int current;
+  BlocDetailGuideStateLoadVideoSuccess({required this.source});
   final Map<String, VideoSource> source;
   @override
-  List<Object?> get props => [current, source.values];
+  List<Object?> get props => [source.values];
 }
 
 class BlocDetailGuideStateLoadVideoFailure extends BlocDetailGuideState {
@@ -23,6 +21,13 @@ class BlocDetailGuideStateLoadVideoFailure extends BlocDetailGuideState {
 }
 
 class BlocDetailGuideStateClose extends BlocDetailGuideState {
+  @override
+  List<Object?> get props => [];
+}
+
+class BlocDetailGuideStateRegisterFail extends BlocDetailGuideState {
+  BlocDetailGuideStateRegisterFail({required this.textError});
+  final String textError;
   @override
   List<Object?> get props => [];
 }

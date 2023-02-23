@@ -127,7 +127,7 @@ class _AppTextField extends State<AppTextField> {
             onChanged: widget.onChange ?? (value) {},
             validator: widget.validator,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            textInputAction: TextInputAction.done,
+            textInputAction: TextInputAction.next,
             cursorColor: AppColors.primary,
             style: widget.textStyle ??
                 context.textStyle.titleSmall!.copyWith(

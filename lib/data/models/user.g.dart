@@ -15,6 +15,8 @@ _$_UserJson _$$_UserJsonFromJson(Map<String, dynamic> json) => _$_UserJson(
       blocked: json['blocked'] as bool?,
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
+      firstName: json['firstName'] as String?,
+      lastName: json['lastName'] as String?,
     );
 
 Map<String, dynamic> _$$_UserJsonToJson(_$_UserJson instance) =>
@@ -27,4 +29,6 @@ Map<String, dynamic> _$$_UserJsonToJson(_$_UserJson instance) =>
       'blocked': instance.blocked,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
     };

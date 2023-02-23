@@ -10,13 +10,10 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: SafeArea(
-          child: BlocBuilder<BlocSplashScreen, BlocSplashState>(
+      body: BlocBuilder<BlocSplashScreen, BlocSplashState>(
         builder: (context, state) => SafeArea(
             child: Container(
-          width: width,
           color: AppColors.primary,
           child: Column(
             children: [
@@ -35,7 +32,7 @@ class SplashScreen extends StatelessWidget {
             ],
           ),
         )),
-      )),
+      ),
     );
   }
 
@@ -163,7 +160,6 @@ class SplashScreen extends StatelessWidget {
   }
 
   Widget _buildBottomHeader(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     return Container(
       alignment: Alignment.bottomCenter,
       child: Stack(
@@ -179,7 +175,6 @@ class SplashScreen extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: SvgPicture.asset(
               AppIcons.bottomWave,
-              width: width,
               fit: BoxFit.fitWidth,
             ),
           ),

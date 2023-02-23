@@ -23,4 +23,9 @@ class AppColors {
   static const Color lineBgColor = Color(0xFF3ACE01);
   static const Color chipBg = Color(0xFFF5F5F5);
   static const Color tableBorder = Color(0xFFDBDBDB);
+  static const Color error = Color(0xFFE53935);
+  static const Color success = Color(0xFF7CB342);
+  static const Color warning = Color(0xFFEF6C00);
+  static const Color info = Color(0xFF2196F3);
+  static const Color link = Color(0xFF00CEA6);
 }
