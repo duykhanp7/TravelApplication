@@ -7,6 +7,7 @@ import 'package:travel_booking_tour/features/guide/detail/screens/add_new_places
 import 'package:travel_booking_tour/features/guide/detail/screens/guide_description._screen.dart';
 import 'package:travel_booking_tour/features/guide/detail/screens/choose_guide_trip_information_page.dart';
 import 'package:travel_booking_tour/features/main/main_page.dart';
+import 'package:travel_booking_tour/features/terms_and_conditions/terms_and_conditions_screen.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
 import '../features/onboarding/onboarding_screen.dart';
@@ -33,6 +34,7 @@ class Routes {
     AppPath.chooseGuideTripInformation: (context) =>
         const ChooseGuideTripInformationScreen(),
     AppPath.addNewPlaces: (context) => const AddNewPlacesScreen(),
+    AppPath.termAndCondition: (context) => const TermAndConditionScreen(),
   };
 
   static void navigateToAndRemoveUntil(

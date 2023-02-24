@@ -11,7 +11,8 @@ class AppbarAppWidget extends StatefulWidget implements PreferredSizeWidget {
       this.suffixWidget,
       this.prefixAction,
       this.suffixAction,
-      this.titleStyle});
+      this.titleStyle,
+      this.background});
 
   final String? title;
   final TextStyle? titleStyle;
@@ -19,6 +20,7 @@ class AppbarAppWidget extends StatefulWidget implements PreferredSizeWidget {
   final Widget? suffixWidget;
   final VoidCallback? prefixAction;
   final VoidCallback? suffixAction;
+  final Color? background;
 
   @override
   State<StatefulWidget> createState() {
@@ -33,7 +35,7 @@ class _AppbarAppWidget extends State<AppbarAppWidget> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.white,
+      backgroundColor: widget.background ?? AppColors.white,
       centerTitle: true,
       title: Text(widget.title ?? ''),
       elevation: 0,

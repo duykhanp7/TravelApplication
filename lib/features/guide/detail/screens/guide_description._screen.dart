@@ -7,7 +7,7 @@ import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_detail_guid
 import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_detail_guide_screen.dart';
 import 'package:travel_booking_tour/features/guide/detail/widgets/my_experience_item.dart';
 import 'package:travel_booking_tour/features/guide/detail/widgets/review_guide_item.dart';
-import 'package:travel_booking_tour/res/app_dialog.dart';
+
 import 'package:travel_booking_tour/res/button.dart';
 import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/res/vertical_star_widget.dart';

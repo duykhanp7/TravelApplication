@@ -1,0 +1,36 @@
+class TermsAndConditionsRepository {
+  Future<List<String>> getTermsAndConditions() async {
+    return [
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+      'A platform’s (iOS and Android) terms and conditions take precedence over the mobile app’s terms of use. This includes refund requests, which are not provided by the app developer and are under the platform’s policies',
+    ];
+  }
+}

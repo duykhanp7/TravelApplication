@@ -216,7 +216,8 @@ class _SignUpScreen extends State<SignUpScreen> {
                               ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  //Todo
+                                  _blocSignInScreen.add(
+                                      BlocSignUpEventTermAndConditionsClick());
                                 })
                         ])),
                   )

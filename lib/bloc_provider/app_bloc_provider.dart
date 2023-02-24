@@ -6,6 +6,7 @@ import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_trip_inform
 import 'package:travel_booking_tour/features/main/blocs/bloc_main_screen.dart';
 import 'package:travel_booking_tour/features/auth/signin/blocs/bloc_sign_in_screen.dart';
 import 'package:travel_booking_tour/features/auth/signup/blocs/bloc_sign_up_screen.dart';
+import 'package:travel_booking_tour/features/terms_and_conditions/blocs/bloc_terms_and_conditions_screen.dart';
 
 import '../features/onboarding/blocs/bloc_onboarding_screen.dart';
 import '../features/splash/bloc/bloc_splash_event.dart';
@@ -38,5 +39,7 @@ class AppBlocProvider {
         create: (context) => BlocDetailGuideScreen()),
     BlocProvider<BlocTripInformationScreen>(
         create: (context) => BlocTripInformationScreen()),
+    BlocProvider<BlocTermsAndConditionsScreen>(
+        create: (context) => BlocTermsAndConditionsScreen()),
   ];
 }

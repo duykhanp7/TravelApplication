@@ -5,6 +5,7 @@ import 'package:travel_booking_tour/data/network/network_exception.dart';
 import 'package:travel_booking_tour/features/auth/signup/blocs/bloc_sign_up_event.dart';
 import 'package:travel_booking_tour/features/auth/signup/blocs/bloc_sign_up_state.dart';
 import 'package:travel_booking_tour/features/auth/auth_repository.dart';
+import 'package:travel_booking_tour/router/path.dart';
 import 'package:travel_booking_tour/router/routes.dart';
 
 class BlocSignupScreen extends Bloc<BlocSignUpEvent, BlocSignUpState> {
@@ -73,6 +74,8 @@ class BlocSignupScreen extends Bloc<BlocSignUpEvent, BlocSignUpState> {
     } else if (event is BlocSignUpEventChangeConfirmPassword) {
       debugPrint('Password $password $confirmPassword');
       confirmPassword = event.confirmPassword;
+    } else if (event is BlocSignUpEventTermAndConditionsClick) {
+      Routes.navigateTo(AppPath.termAndCondition, {});
     } else if (event is BlocSignUpEventSignInClick) {
       Routes.backTo();
     }

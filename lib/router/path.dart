@@ -12,4 +12,5 @@ class AppPath {
   static const String chooseGuideTripInformation =
       '/chooseGuideTripInformation';
   static const String addNewPlaces = '/addNewPlaces';
+  static const String termAndCondition = '/termAndCondition';
 }
