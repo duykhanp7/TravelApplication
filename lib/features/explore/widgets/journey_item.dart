@@ -210,9 +210,7 @@ class _JourneyItem extends State<JourneyItem> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20)),
                           ),
-                          onTap: () {
-                            debugPrint('On Book Mark Click');
-                          },
+                          onTap: () {},
                         ),
                       ),
                     )

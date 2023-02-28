@@ -79,9 +79,6 @@ class BlocTripInformationScreen
     if (event is BlocTripInformationEventChangeAddNewAttractions) {
       Routes.navigateTo(AppPath.addNewPlaces, {});
     }
-    if (event is BlocTripInformationEventDone) {
-      debugPrint(
-          'All information : $date $timeFrom $timeTo $city $numberOfTravelers');
-    }
+    if (event is BlocTripInformationEventDone) {}
   }
 }

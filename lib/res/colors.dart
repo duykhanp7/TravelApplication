@@ -28,4 +28,6 @@ class AppColors {
   static const Color warning = Color(0xFFEF6C00);
   static const Color info = Color(0xFF2196F3);
   static const Color link = Color(0xFF00CEA6);
+  static const Color timeLineIndicator = Color(0xFF00BC97);
+  static const Color colorOptional = Color(0xFF2196F3);
 }

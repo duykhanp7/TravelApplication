@@ -11,9 +11,9 @@ import 'package:travel_booking_tour/res/app_dialog.dart';
 import 'package:travel_booking_tour/res/background.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
-import '../../../res/button.dart';
-import '../../../res/input_field.dart';
-import '../../../res/radio.dart';
+import '../../../../res/button.dart';
+import '../../../../res/input_field.dart';
+import '../../../../res/radio.dart';
 
 class SignUpScreen extends StatefulWidget {
   SignUpScreen({super.key});
@@ -39,7 +39,6 @@ class _SignUpScreen extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('On Build Sign Up');
     localization = SLocalization.of(context);
     SystemChrome.setSystemUIOverlayStyle(AppSystem.systemStyle);
     return Scaffold(

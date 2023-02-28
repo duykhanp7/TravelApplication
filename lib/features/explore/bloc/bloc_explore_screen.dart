@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_event.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_state.dart';
 import 'package:travel_booking_tour/features/explore/models/best_guide_preview_json.dart';
@@ -33,9 +32,7 @@ class BlocExploreScreen extends Bloc<BlocExploreEvent, BlocExploreState> {
           topJourneyJsons = await _exploreRepository.getListTopJourney();
         } else if (element is TravelNewJson) {
           travelNewJsons = await _exploreRepository.getListTravelNews();
-        } else {
-          debugPrint('Not Valid type');
-        }
+        } else {}
       });
 
       emit(BlocExploreStateLoadDataSuccess(
