@@ -8,9 +8,17 @@ import 'icons.dart';
 
 class AppBackground extends StatelessWidget {
   const AppBackground(
-      {super.key, required this.children, required this.header});
+      {super.key,
+      required this.children,
+      required this.header,
+      this.headerStyle,
+      this.top,
+      this.headerPadding});
   final Widget children;
   final String header;
+  final TextStyle? headerStyle;
+  final Widget? top;
+  final EdgeInsets? headerPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -25,47 +33,6 @@ class AppBackground extends StatelessWidget {
       padding: const EdgeInsets.only(top: 10, left: 20),
       child: Stack(
         children: [
-          Row(
-            children: [
-              Container(
-                width: 56,
-                height: 56,
-                decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(15)),
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    SvgPicture.asset(AppIcons.appLogo,
-                        width: 32, height: 38, color: AppColors.primary),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          AppIcons.point,
-                          width: 4,
-                          height: 4,
-                          color: AppColors.primary,
-                        ),
-                        const SizedBox(
-                          width: 4,
-                        ),
-                        SvgPicture.asset(AppIcons.point,
-                            width: 4, height: 4, color: AppColors.primary)
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              const Spacer(),
-              Container(
-                margin: const EdgeInsets.only(right: 20),
-                child: SvgPicture.asset(
-                  AppIcons.plane,
-                ),
-              )
-            ],
-          ),
           Positioned(
             bottom: 0,
             left: 100,
@@ -84,9 +51,55 @@ class AppBackground extends StatelessWidget {
               width: 57,
               height: 25,
             ),
-          )
+          ),
+          Row(
+            children: [
+              top ??
+                  Container(
+                    width: 56,
+                    height: 56,
+                    decoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.circular(15)),
+                    child: _buildTopWidget(),
+                  ),
+              const Spacer(),
+              Container(
+                margin: const EdgeInsets.only(right: 20),
+                child: SvgPicture.asset(
+                  AppIcons.plane,
+                ),
+              )
+            ],
+          ),
         ],
       ),
+    );
+  }
+
+  Widget _buildTopWidget() {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        SvgPicture.asset(AppIcons.appLogo,
+            width: 32, height: 38, color: AppColors.primary),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              AppIcons.point,
+              width: 4,
+              height: 4,
+              color: AppColors.primary,
+            ),
+            const SizedBox(
+              width: 4,
+            ),
+            SvgPicture.asset(AppIcons.point,
+                width: 4, height: 4, color: AppColors.primary)
+          ],
+        )
+      ],
     );
   }
 
@@ -108,7 +121,8 @@ class AppBackground extends StatelessWidget {
             ),
             Container(
               color: AppColors.white,
-              padding: const EdgeInsets.only(top: 10, bottom: 50),
+              padding:
+                  headerPadding ?? const EdgeInsets.only(top: 10, bottom: 50),
               child: Column(
                 children: [
                   Container(
@@ -116,10 +130,11 @@ class AppBackground extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 32),
                     child: Text(
                       header,
-                      style: context.textStyle.titleLarge!.copyWith(
-                          fontSize: 34,
-                          fontWeight: FontWeight.w100,
-                          fontStyle: FontStyle.italic),
+                      style: headerStyle ??
+                          context.textStyle.titleLarge!.copyWith(
+                              fontSize: 34,
+                              fontWeight: FontWeight.w100,
+                              fontStyle: FontStyle.italic),
                     ),
                   ),
                   children

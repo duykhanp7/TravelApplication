@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:travel_booking_tour/data/models/user.dart';
 import 'package:travel_booking_tour/data/network/network_exception.dart';
-import 'package:travel_booking_tour/features/auth/auth_repository.dart';
+import 'package:travel_booking_tour/features/auth/signup/repositories/auth_repository.dart';
 import 'package:travel_booking_tour/features/auth/signin/blocs/bloc_sign_in_event.dart';
 import 'package:travel_booking_tour/features/auth/signin/blocs/bloc_sign_in_state.dart';
 import 'package:travel_booking_tour/router/path.dart';
@@ -25,7 +25,6 @@ class BlocSignInScreen extends Bloc<BlocSignInEvent, BlocSignInState> {
       emit(BlocSignInStateValidateLoading());
       if (event.signInGlobalKey.currentState?.validate() ?? false) {
         try {
-          debugPrint('Data $email $password');
           Map<String, dynamic> data = {
             "identifier": email,
             "password": password

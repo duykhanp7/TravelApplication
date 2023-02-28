@@ -222,9 +222,7 @@ class _FeaturedTourItem extends State<FeaturedTourItem> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15)),
                           ),
-                          onTap: () {
-                            debugPrint('On Featured Tour Click');
-                          },
+                          onTap: () {},
                         ),
                       ),
                     )

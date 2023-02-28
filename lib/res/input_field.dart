@@ -27,7 +27,9 @@ class AppTextField extends StatefulWidget {
       this.textEditingController,
       this.inputDecoration,
       this.onFieldSubmitted,
-      this.focusNode});
+      this.focusNode,
+      this.maxLines,
+      this.onEditingCompleted});
 
   final String? initialText;
   final String? hintText;
@@ -51,7 +53,9 @@ class AppTextField extends StatefulWidget {
   final TextEditingController? textEditingController;
   final InputDecoration? inputDecoration;
   final Function(String)? onFieldSubmitted;
+  final Function()? onEditingCompleted;
   final FocusNode? focusNode;
+  final int? maxLines;
 
   @override
   State<StatefulWidget> createState() {
@@ -91,7 +95,9 @@ class _AppTextField extends State<AppTextField> {
             textAlign: widget.textAlign ?? TextAlign.start,
             controller: widget.textEditingController,
             onFieldSubmitted: widget.onFieldSubmitted,
+            maxLines: widget.maxLines ?? 1,
             focusNode: widget.focusNode,
+            onEditingComplete: widget.onEditingCompleted,
             decoration: widget.inputDecoration ??
                 InputDecoration(
                     icon: widget.icon,
@@ -127,7 +133,7 @@ class _AppTextField extends State<AppTextField> {
             onChanged: widget.onChange ?? (value) {},
             validator: widget.validator,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            textInputAction: TextInputAction.next,
+            textInputAction: TextInputAction.done,
             cursorColor: AppColors.primary,
             style: widget.textStyle ??
                 context.textStyle.titleSmall!.copyWith(

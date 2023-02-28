@@ -1,10 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:travel_booking_tour/data/models/user.dart';
-import 'package:travel_booking_tour/data/network/network_exception.dart';
 import 'package:travel_booking_tour/features/auth/signup/blocs/bloc_sign_up_event.dart';
 import 'package:travel_booking_tour/features/auth/signup/blocs/bloc_sign_up_state.dart';
-import 'package:travel_booking_tour/features/auth/auth_repository.dart';
 import 'package:travel_booking_tour/router/path.dart';
 import 'package:travel_booking_tour/router/routes.dart';
 
@@ -18,7 +14,7 @@ class BlocSignupScreen extends Bloc<BlocSignUpEvent, BlocSignUpState> {
   String? confirmPassword;
   bool isValidEmail = true;
 
-  final AuthRepository _authRepository = AuthRepository();
+  //final AuthRepository _authRepository = AuthRepository();
 
   BlocSignupScreen() : super(BlocSignUpStateInitial()) {
     on<BlocSignUpEvent>((event, emit) => mapEventToState(event, emit));
@@ -28,35 +24,40 @@ class BlocSignupScreen extends Bloc<BlocSignUpEvent, BlocSignUpState> {
       BlocSignUpEvent event, Emitter<BlocSignUpState> emit) async {
     if (event is BlocSignUpEventValidate) {
       emit(BlocSignUpStateValidateLoading());
-      if (event.signUpGlobalKey.currentState?.validate() ?? false) {
-        try {
-          Map<String, dynamic> data = {
-            "email": email,
-            "username": email,
-            "password": password,
-            "fisrtName": firstName,
-            "lastName": lastName
-          };
-          final UserJson? user = await _authRepository.signUp(data);
-          if (user != null) {
-            emit(BlocSignUpStateValidateSuccess());
-          }
-        } on NetworkException catch (ex) {
-          debugPrint('Expcetion Sign Up ${ex.toString()}');
-          if (ex.statusCode == 0 ||
-              ex.statusCode == 500 ||
-              ex.statusCode == 503 ||
-              ex.statusCode == 401) {
-            emit(BlocSignUpStateServerError());
-          } else {
-            isValidEmail = false;
-            event.signUpGlobalKey.currentState?.validate();
-            emit(BlocSignUpStateValidateFail());
-          }
-        }
-      } else {
-        emit(BlocSignUpStateValidateFail());
+      if (typeAccount == 0) {
+        emit(BlocSignUpStateValidateSuccess());
+      } else if (typeAccount == 1) {
+        Routes.navigateTo(AppPath.tourGuideAddProfile, {});
       }
+      // if (event.signUpGlobalKey.currentState?.validate() ?? false) {
+      //   try {
+      //     Map<String, dynamic> data = {
+      //       "email": email,
+      //       "username": email,
+      //       "password": password,
+      //       "fisrtName": firstName,
+      //       "lastName": lastName
+      //     };
+      //     final UserJson? user = await _authRepository.signUp(data);
+      //     if (user != null) {
+      //       emit(BlocSignUpStateValidateSuccess());
+      //     }
+      //   } on NetworkException catch (ex) {
+      //     debugPrint('Expcetion Sign Up ${ex.toString()}');
+      //     if (ex.statusCode == 0 ||
+      //         ex.statusCode == 500 ||
+      //         ex.statusCode == 503 ||
+      //         ex.statusCode == 401) {
+      //       emit(BlocSignUpStateServerError());
+      //     } else {
+      //       isValidEmail = false;
+      //       event.signUpGlobalKey.currentState?.validate();
+      //       emit(BlocSignUpStateValidateFail());
+      //     }
+      //   }
+      // } else {
+      //   emit(BlocSignUpStateValidateFail());
+      // }
     } else if (event is BlocSignUpEventChangeTypeAccount) {
       typeAccount = event.typeAccount;
       emit(BlocSignUpStateChangeTypeAccount(typeAccount: typeAccount));
@@ -72,7 +73,6 @@ class BlocSignupScreen extends Bloc<BlocSignUpEvent, BlocSignUpState> {
     } else if (event is BlocSignUpEventChangePassword) {
       password = event.password;
     } else if (event is BlocSignUpEventChangeConfirmPassword) {
-      debugPrint('Password $password $confirmPassword');
       confirmPassword = event.confirmPassword;
     } else if (event is BlocSignUpEventTermAndConditionsClick) {
       Routes.navigateTo(AppPath.termAndCondition, {});

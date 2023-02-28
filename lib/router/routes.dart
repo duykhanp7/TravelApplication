@@ -10,9 +10,10 @@ import 'package:travel_booking_tour/features/main/main_page.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/terms_and_conditions_screen.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
+import '../features/auth/signup/screens/sign_up_screen.dart';
+import '../features/auth/signup/screens/sign_up_tour_guide_information_screen.dart';
 import '../features/onboarding/onboarding_screen.dart';
 import '../features/auth/signin/sign_in_screen.dart';
-import '../features/auth/signup/sign_up_screen.dart';
 import '../features/splash/splash_screen.dart';
 
 class Routes {
@@ -35,6 +36,8 @@ class Routes {
         const ChooseGuideTripInformationScreen(),
     AppPath.addNewPlaces: (context) => const AddNewPlacesScreen(),
     AppPath.termAndCondition: (context) => const TermAndConditionScreen(),
+    AppPath.tourGuideAddProfile: (context) =>
+        const SignUpTourGuideInformationScreen(),
   };
 
   static void navigateToAndRemoveUntil(

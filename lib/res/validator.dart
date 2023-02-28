@@ -20,6 +20,34 @@ class AppValidator {
     return null;
   }
 
+  static String? validateTextFieldAddress(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your address';
+    }
+    return null;
+  }
+
+  static String? validateTextFieldCity(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your city';
+    }
+    return null;
+  }
+
+  static String? validateTextFieldLanguage(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your city';
+    }
+    return null;
+  }
+
+  static String? validateTextFieldIntroduction(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your city';
+    }
+    return null;
+  }
+
   static String? validateTextFieldEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your email';

@@ -35,7 +35,6 @@ class _SignInScreen extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('On Build Sign In');
     localization = SLocalization.of(context);
     return Scaffold(
       backgroundColor: AppColors.white,
