@@ -125,4 +125,6 @@ class AppIcons {
       '$parentPathIcons/ic_location_border_black.svg';
   static const String icPersonal = '$parentPathIcons/ic_personal_null.svg';
   static const String icDropDown = '$parentPathIcons/ic_drop_down.svg';
+  static const String icSwitchCamera = '$parentPathIcons/ic_switch_camera.svg';
+  static const String icGallery = '$parentPathIcons/ic_gallery.svg';
 }

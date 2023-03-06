@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:travel_booking_tour/common/enums/enums.dart';
 
 abstract class BlocSignUpTourGuideInformationEvent extends Equatable {}
 
@@ -67,4 +68,87 @@ class BlocSignUpTourGuideInformationEventChangeIntroduction
   final String introduction;
   @override
   List<Object?> get props => [introduction];
+}
+
+class BlocSignUpTourGuideInformationEventChangeTimeFrom
+    extends BlocSignUpTourGuideInformationEvent {
+  BlocSignUpTourGuideInformationEventChangeTimeFrom({required this.timeFrom});
+  final String timeFrom;
+  @override
+  List<Object?> get props => [timeFrom];
+}
+
+class BlocSignUpTourGuideInformationEventChangeTimeTo
+    extends BlocSignUpTourGuideInformationEvent {
+  BlocSignUpTourGuideInformationEventChangeTimeTo({required this.timeTo});
+  final String timeTo;
+  @override
+  List<Object?> get props => [timeTo];
+}
+
+class BlocSignUpTourGuideInformationEventChangeFee
+    extends BlocSignUpTourGuideInformationEvent {
+  BlocSignUpTourGuideInformationEventChangeFee(
+      {required this.fee,
+      required this.quantityTraveler,
+      required this.current});
+  final String fee;
+  final QuantityTraveler quantityTraveler;
+  final int current;
+  @override
+  List<Object?> get props => [fee, quantityTraveler, current];
+}
+
+class BlocSignUpTourGuideInformationEventPickProfileImage
+    extends BlocSignUpTourGuideInformationEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class BlocSignUpTourGuideInformationEventRemoveProfileImage
+    extends BlocSignUpTourGuideInformationEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class BlocSignUpTourGuideInformationEventPickGuideLicenseImage
+    extends BlocSignUpTourGuideInformationEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class BlocSignUpTourGuideInformationEventRemoveGuideLicenseImage
+    extends BlocSignUpTourGuideInformationEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class BlocSignUpTourGuideInformationEventPickIdentityCardImage
+    extends BlocSignUpTourGuideInformationEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class BlocSignUpTourGuideInformationEventRemoveIdentityCardImage
+    extends BlocSignUpTourGuideInformationEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class BlocSignUpTourGuideInformationEventPickVideoIntroduction
+    extends BlocSignUpTourGuideInformationEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class BlocSignUpTourGuideInformationEventRemoveVideoIntroduction
+    extends BlocSignUpTourGuideInformationEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class BlocSignUpTourGuideInformationEventClose
+    extends BlocSignUpTourGuideInformationEvent {
+  @override
+  List<Object?> get props => [];
 }

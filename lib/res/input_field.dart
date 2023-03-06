@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
@@ -29,7 +30,8 @@ class AppTextField extends StatefulWidget {
       this.onFieldSubmitted,
       this.focusNode,
       this.maxLines,
-      this.onEditingCompleted});
+      this.onEditingCompleted,
+      this.maxLength});
 
   final String? initialText;
   final String? hintText;
@@ -56,6 +58,7 @@ class AppTextField extends StatefulWidget {
   final Function()? onEditingCompleted;
   final FocusNode? focusNode;
   final int? maxLines;
+  final int? maxLength;
 
   @override
   State<StatefulWidget> createState() {
@@ -96,8 +99,12 @@ class _AppTextField extends State<AppTextField> {
             controller: widget.textEditingController,
             onFieldSubmitted: widget.onFieldSubmitted,
             maxLines: widget.maxLines ?? 1,
+            enableIMEPersonalizedLearning: false,
             focusNode: widget.focusNode,
             onEditingComplete: widget.onEditingCompleted,
+            inputFormatters: [
+              LengthLimitingTextInputFormatter(widget.maxLength),
+            ],
             decoration: widget.inputDecoration ??
                 InputDecoration(
                     icon: widget.icon,

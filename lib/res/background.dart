@@ -28,6 +28,7 @@ class AppBackground extends StatelessWidget {
   }
 
   Widget _buildBackground() {
+    debugPrint('Rebuild App background');
     return Container(
       height: 150,
       padding: const EdgeInsets.only(top: 10, left: 20),

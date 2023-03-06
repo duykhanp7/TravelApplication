@@ -12,9 +12,13 @@ class AppDialog extends StatefulWidget {
       required this.content,
       required this.positiveAction,
       this.negativeAction,
-      this.typeDialog});
+      this.typeDialog,
+      this.negativeTitle,
+      this.positiveTitle});
 
   final String content;
+  final String? negativeTitle;
+  final String? positiveTitle;
   final VoidCallback positiveAction;
   final VoidCallback? negativeAction;
   final TypeDialog? typeDialog;
@@ -88,7 +92,7 @@ class _AppDialog extends State<AppDialog> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: AppColors.black.withOpacity(0.3)),
-                            child: Text('Cancel',
+                            child: Text(widget.negativeTitle ?? 'Cancel',
                                 style: context.textStyle.titleMedium?.copyWith(
                                     color: AppColors.white,
                                     fontWeight: FontWeight.w400,
@@ -126,7 +130,7 @@ class _AppDialog extends State<AppDialog> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: AppColors.primary.withOpacity(0.8)),
                             child: Text(
-                              'OK',
+                              widget.positiveTitle ?? 'OK',
                               style: context.textStyle.titleMedium?.copyWith(
                                   color: AppColors.white,
                                   fontWeight: FontWeight.w400,

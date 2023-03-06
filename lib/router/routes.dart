@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:travel_booking_tour/common/enums/enums.dart';
 import 'package:travel_booking_tour/features/empty/empty.dart';
 import 'package:travel_booking_tour/features/forgot_password/forgot_password_screen.dart';
 import 'package:travel_booking_tour/features/forgot_password/screens/check_email_screen.dart';
@@ -8,6 +9,7 @@ import 'package:travel_booking_tour/features/guide/detail/screens/guide_descript
 import 'package:travel_booking_tour/features/guide/detail/screens/choose_guide_trip_information_page.dart';
 import 'package:travel_booking_tour/features/main/main_page.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/terms_and_conditions_screen.dart';
+import 'package:travel_booking_tour/res/app_camera.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
 import '../features/auth/signup/screens/sign_up_screen.dart';
@@ -20,7 +22,8 @@ class Routes {
   static final GlobalKey<NavigatorState> navigator =
       GlobalKey<NavigatorState>();
 
-  static SplashScreen splashScreen = const SplashScreen();
+  static late List<CameraDescription> cameras;
+  static CameraOrRecorder cameraType = CameraOrRecorder.camera;
 
   static final routes = {
     AppPath.splashScreen: (context) => const SplashScreen(),
@@ -40,6 +43,10 @@ class Routes {
         const SignUpTourGuideInformationScreen(),
   };
 
+  static Future<void> initializedCamera() async {
+    cameras = await availableCameras();
+  }
+
   static void navigateToAndRemoveUntil(
       String namePage, Map<String, dynamic> arguments) {
     navigator.currentState?.pushNamedAndRemoveUntil(namePage, (route) => false,
@@ -47,16 +54,25 @@ class Routes {
   }
 
   static void navigateTo(String namePage, Map<String, dynamic> arguments) {
+    debugPrint('Breakpoint 1');
     navigator.currentState?.pushNamed(
       namePage,
       arguments: arguments,
     );
+    debugPrint('Breakpoint 2');
   }
 
   static void navigatoReplacement(
       String namePage, Map<String, dynamic> arguments) {
     navigator.currentState
         ?.pushReplacementNamed(namePage, arguments: arguments);
+  }
+
+  static Future<XFile?> navigateToCamera() async {
+    await initializedCamera();
+    return await navigator.currentState?.push(MaterialPageRoute(
+        builder: (context) =>
+            AppCamera(cameras: cameras, cameraOrRecorder: cameraType)));
   }
 
   static void backTo({String? namePage, Map<String, dynamic>? arguments}) {
