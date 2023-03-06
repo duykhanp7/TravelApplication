@@ -14,4 +14,5 @@ class AppPath {
   static const String addNewPlaces = '/addNewPlaces';
   static const String termAndCondition = '/termAndCondition';
   static const String tourGuideAddProfile = '/tourGuideAddProfile';
+  static const String camera = '/camera';
 }

@@ -7,11 +7,11 @@ import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_detail_guid
 import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_detail_guide_screen.dart';
 import 'package:travel_booking_tour/features/guide/detail/widgets/my_experience_item.dart';
 import 'package:travel_booking_tour/features/guide/detail/widgets/review_guide_item.dart';
+import 'package:travel_booking_tour/res/app_video.dart';
 
 import 'package:travel_booking_tour/res/button.dart';
 import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/res/vertical_star_widget.dart';
-import 'package:video_viewer/video_viewer.dart';
 
 import '../blocs/bloc_detail_guide_state.dart';
 
@@ -262,7 +262,11 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                 current is BlocDetailGuideStateLoadVideoFailure,
             builder: (context, state) {
               if (state is BlocDetailGuideStateLoadVideoSuccess) {
-                return _buildVideo(state.source);
+                return AppVideo(
+                  source: state.source,
+                  videoViewerController:
+                      _blocDetailGuideScreen.videoViewerController,
+                );
               } else if (state is BlocDetailGuideStateLoadVideoFailure) {
                 Container(
                   alignment: Alignment.center,
@@ -291,72 +295,6 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
           _buildWidgetReviews()
         ],
       ),
-    );
-  }
-
-  Widget _buildVideo(Map<String, VideoSource> source) {
-    if (source.isNotEmpty) {
-      return Container(
-        alignment: Alignment.center,
-        margin: const EdgeInsets.only(top: 10),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: VideoViewer(
-              style: VideoViewerStyle(
-                loading: Container(
-                  alignment: Alignment.center,
-                  width: 50,
-                  height: 50,
-                  child: SvgPicture.asset(AppIcons.icPause),
-                ),
-                thumbnail: Container(
-                  alignment: Alignment.center,
-                  color: AppColors.transparent,
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        color: AppColors.white.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(30)),
-                    child: SvgPicture.asset(
-                      AppIcons.icPause,
-                      width: 30,
-                      height: 30,
-                    ),
-                  ),
-                ),
-                progressBarStyle: ProgressBarStyle(
-                    bar: BarStyle.forward(
-                        background: AppColors.white,
-                        color: AppColors.primary,
-                        identifier: AppColors.white)),
-                playAndPauseStyle: PlayAndPauseWidgetStyle(
-                    background: AppColors.transparent,
-                    circleRadius: 50,
-                    play: const Icon(
-                      Icons.play_arrow,
-                      color: AppColors.primary,
-                      size: 30,
-                    ),
-                    pause: const Icon(
-                      Icons.pause,
-                      color: AppColors.primary,
-                      size: 30,
-                    )),
-              ),
-              rewindAmount: 5,
-              forwardAmount: 5,
-              language: VideoViewerLanguage.en,
-              enableShowReplayIconAtVideoEnd: true,
-              source: source),
-        ),
-      );
-    }
-    return Container(
-      width: 350,
-      height: 200,
-      color: AppColors.primary,
     );
   }
 

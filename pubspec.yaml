@@ -48,6 +48,9 @@ dependencies:
   freezed_annotation: ^2.2.0
   json_annotation: ^4.8.0
   dio: ^5.0.0
+  image_picker: ^0.8.6+4
+  image_cropper: ^3.0.1
+  camera: ^0.10.3+2
 
 dev_dependencies:
   flutter_test:

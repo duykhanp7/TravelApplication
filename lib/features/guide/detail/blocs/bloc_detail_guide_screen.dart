@@ -3,13 +3,15 @@ import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_detail_guid
 import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_detail_guide_state.dart';
 import 'package:travel_booking_tour/router/path.dart';
 import 'package:travel_booking_tour/router/routes.dart';
-import 'package:video_viewer/domain/entities/video_source.dart';
+import 'package:video_viewer/video_viewer.dart';
 
 class BlocDetailGuideScreen
     extends Bloc<BlocDetailGuideEvent, BlocDetailGuideState> {
   BlocDetailGuideScreen() : super(BlocDetailGuideStateInitial()) {
     on<BlocDetailGuideEvent>((event, emit) => mapStateToEvent(event, emit));
   }
+
+  final VideoViewerController videoViewerController = VideoViewerController();
 
   void mapStateToEvent(
       BlocDetailGuideEvent event, Emitter<BlocDetailGuideState> emit) async {
