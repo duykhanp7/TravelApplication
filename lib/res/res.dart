@@ -9,3 +9,4 @@ export 'chip.dart';
 export 'appbar_app_widget.dart';
 export 'app_camera.dart';
 export 'app_video.dart';
+export 'app_table.dart';

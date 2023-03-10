@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/features/explore/models/travel_news_preview_json.dart';
+import 'package:travel_booking_tour/data/models/tour_detail_json.dart';
 
 import '../../../res/colors.dart';
 
 class TravelNewItem extends StatefulWidget {
   const TravelNewItem(
-      {super.key, required this.callback, required this.travelNewJson});
+      {super.key, required this.callback, required this.tourDetailJson});
 
   final VoidCallback callback;
-  final TravelNewJson travelNewJson;
+  final TourDetailJson tourDetailJson;
 
   @override
   State<StatefulWidget> createState() {
@@ -32,7 +32,7 @@ class _TravelNewItem extends State<TravelNewItem> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.travelNewJson.destinationTitle ?? '',
+                  widget.tourDetailJson.destination ?? '',
                   overflow: TextOverflow.ellipsis,
                   style: context.textStyle.titleMedium
                       ?.copyWith(fontWeight: FontWeight.w500),
@@ -41,7 +41,7 @@ class _TravelNewItem extends State<TravelNewItem> {
                   height: 4,
                 ),
                 Text(
-                  widget.travelNewJson.dateStart ?? '',
+                  widget.tourDetailJson.departureDate ?? '',
                   style: context.textStyle.titleSmall?.copyWith(
                       fontWeight: FontWeight.w400,
                       color: AppColors.textSkipColor),
@@ -53,10 +53,11 @@ class _TravelNewItem extends State<TravelNewItem> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.asset(
-                    widget.travelNewJson.destinationImageUrl ?? '',
+                    widget.tourDetailJson.images?[0] ?? '',
                     filterQuality: FilterQuality.high,
                     width: MediaQuery.of(context).size.width,
                     fit: BoxFit.cover,
+                    height: 150,
                   ),
                 )
               ],
@@ -73,12 +74,12 @@ class _TravelNewItem extends State<TravelNewItem> {
                   borderRadius: BorderRadius.circular(10),
                   highlightColor: AppColors.white.withOpacity(0.1),
                   splashColor: AppColors.white.withOpacity(0.1),
+                  onTap: widget.callback,
                   child: Container(
                     alignment: Alignment.center,
                     height: 190,
                     width: MediaQuery.of(context).size.width,
                   ),
-                  onTap: () {},
                 ),
               ),
             )

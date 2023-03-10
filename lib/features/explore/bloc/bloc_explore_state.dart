@@ -1,9 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:travel_booking_tour/features/explore/models/best_guide_preview_json.dart';
-import 'package:travel_booking_tour/features/explore/models/feature_tour_preview_json.dart';
-import 'package:travel_booking_tour/features/explore/models/top_experiences_preview_json.dart';
-import 'package:travel_booking_tour/features/explore/models/top_journey_preview_json.dart';
-import 'package:travel_booking_tour/features/explore/models/travel_news_preview_json.dart';
+import 'package:travel_booking_tour/data/models/tour_detail_json.dart';
+import 'package:travel_booking_tour/data/models/tour_guide_detail_json.dart';
 
 abstract class BlocExploreState extends Equatable {}
 
@@ -23,11 +20,11 @@ class BlocExploreStateReload extends BlocExploreState {
 }
 
 class BlocExploreStateLoadDataSuccess extends BlocExploreState {
-  final List<TopJourneyJson> topJourneyJsons;
-  final List<BestGuideJson> bestGuideJsons;
-  final List<TopExperienceJson> topExperienceJsons;
-  final List<FeatureTourJson> featuresTourJsons;
-  final List<TravelNewJson> travelNewJsons;
+  final List<TourDetailJson> topJourneyJsons;
+  final List<TourGuideDetailJson> bestGuideJsons;
+  final List<TourDetailJson> topExperienceJsons;
+  final List<TourDetailJson> featuresTourJsons;
+  final List<TourDetailJson> travelNewJsons;
 
   BlocExploreStateLoadDataSuccess(
       {required this.topJourneyJsons,

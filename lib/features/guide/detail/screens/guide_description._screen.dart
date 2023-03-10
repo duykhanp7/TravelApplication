@@ -3,11 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
+import 'package:travel_booking_tour/data/models/tour_guide_detail_json.dart';
 import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_detail_guide_event.dart';
 import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_detail_guide_screen.dart';
 import 'package:travel_booking_tour/features/guide/detail/widgets/my_experience_item.dart';
 import 'package:travel_booking_tour/features/guide/detail/widgets/review_guide_item.dart';
-import 'package:travel_booking_tour/res/app_video.dart';
 
 import 'package:travel_booking_tour/res/button.dart';
 import 'package:travel_booking_tour/res/res.dart';
@@ -26,20 +26,26 @@ class GuideDescriptionScreen extends StatefulWidget {
 
 class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
   late BlocDetailGuideScreen _blocDetailGuideScreen;
+  late TourGuideDetailJson tourGuideDetailJson;
 
   @override
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(AppSystem.systemTransparentStatusBar);
     _blocDetailGuideScreen = BlocProvider.of<BlocDetailGuideScreen>(context);
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> videoURL =
+    Map<String, dynamic> datas =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
-    _blocDetailGuideScreen
-        .add(BlocDetailGuideEventLoadVideo(videoUrl: videoURL['video']));
+
+    tourGuideDetailJson = datas['data'] as TourGuideDetailJson;
+
+    _blocDetailGuideScreen.add(BlocDetailGuideEventLoadVideo(
+        videoUrl: tourGuideDetailJson.videoIntroductionUrl ?? ''));
+
     return Scaffold(
       body: WillPopScope(
         child: Container(
@@ -70,9 +76,10 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
         Container(
           alignment: Alignment.topCenter,
           child: Image.asset(
-            AppImages.winterPicture,
+            tourGuideDetailJson.coverImageUrl ?? AppImages.winterPicture,
             fit: BoxFit.cover,
             width: width,
+            height: 170,
           ),
         ),
         Positioned(
@@ -128,7 +135,8 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                     alignment: Alignment.center,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(40),
-                      child: Image.asset(AppImages.tuanTran),
+                      child: Image.asset(
+                          tourGuideDetailJson.profileImageUrl ?? ''),
                     ),
                   )
                 ],
@@ -140,6 +148,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
 
   Widget _buildBody(BuildContext context) {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Container(
         padding: const EdgeInsets.only(top: 200),
         alignment: Alignment.topCenter,
@@ -169,7 +178,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                         Container(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Tuan Tran',
+                            tourGuideDetailJson.name ?? '',
                             style: context.textStyle.titleLarge?.copyWith(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w100,
@@ -188,7 +197,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                               width: 8,
                             ),
                             Text(
-                              '127 reviews',
+                              '${tourGuideDetailJson.reviews?.length ?? 0} reviews',
                               style: context.textStyle.titleSmall?.copyWith(
                                   fontWeight: FontWeight.w400,
                                   color: AppColors.inActiveRadioBorderColor),
@@ -220,8 +229,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
           const SizedBox(
             height: 5,
           ),
-          const AppListChipWidget(
-              chips: <String>['Vietnamese', 'English', 'Korean']),
+          AppListChipWidget(chips: tourGuideDetailJson.languages ?? []),
           const SizedBox(
             height: 8,
           ),
@@ -238,7 +246,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                   width: 6,
                 ),
                 Text(
-                  'Da Nang, Viet Nam',
+                  tourGuideDetailJson.address ?? '',
                   style: context.textStyle.titleSmall?.copyWith(
                       fontWeight: FontWeight.w400, color: AppColors.primary),
                 )
@@ -249,12 +257,13 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
             height: 14,
           ),
           Text(
-            'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book',
+            tourGuideDetailJson.description ?? '',
             style: context.textStyle.titleMedium?.copyWith(
                 fontWeight: FontWeight.w400,
                 color: AppColors.textRadioItalicColor,
                 height: 1.5),
           ),
+          const SizedBox(height: 30),
           BlocBuilder<BlocDetailGuideScreen, BlocDetailGuideState>(
             buildWhen: (previous, current) =>
                 current is BlocDetailGuideStateInitial ||
@@ -273,108 +282,31 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                   width: MediaQuery.of(context).size.width,
                   height: 200,
                   child: const CircularProgressIndicator(
-                    color: AppColors.primary,
-                  ),
+                      color: AppColors.primary,
+                      strokeWidth: 2,
+                      backgroundColor: AppColors.white),
                 );
               }
               return Container(
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width,
                 height: 200,
+                decoration: BoxDecoration(
+                    color: AppColors.black.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(10)),
                 child: const CircularProgressIndicator(
-                  color: AppColors.primary,
-                ),
+                    color: AppColors.primary,
+                    strokeWidth: 2,
+                    backgroundColor: AppColors.white),
               );
             },
           ),
           const SizedBox(
-            height: 20,
+            height: 35,
           ),
-          _buildTablePrices(),
+          AppTable(datas: tourGuideDetailJson.prices ?? {}),
           _buildWidgetTourExperiences(),
           _buildWidgetReviews()
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTablePrices() {
-    return Container(
-      alignment: Alignment.center,
-      child: Table(
-        border: TableBorder(
-            borderRadius: BorderRadius.circular(10),
-            top: const BorderSide(width: 1, color: AppColors.tableBorder),
-            right: const BorderSide(width: 1, color: AppColors.tableBorder),
-            bottom: const BorderSide(width: 1, color: AppColors.tableBorder),
-            left: const BorderSide(width: 1, color: AppColors.tableBorder),
-            horizontalInside: const BorderSide(
-              width: 1,
-              color: AppColors.tableBorder,
-            ),
-            verticalInside:
-                const BorderSide(width: 1, color: AppColors.tableBorder)),
-        children: [
-          TableRow(children: [
-            Container(
-              alignment: Alignment.center,
-              height: 40,
-              child: Text('1-3 Travelers',
-                  textAlign: TextAlign.center,
-                  style: context.textStyle.titleMedium?.copyWith(
-                      color: AppColors.inActiveRadioBorderColor,
-                      fontWeight: FontWeight.w500)),
-            ),
-            Container(
-              alignment: Alignment.center,
-              height: 40,
-              child: Text('\$10/hour',
-                  textAlign: TextAlign.center,
-                  style: context.textStyle.titleMedium?.copyWith(
-                      color: AppColors.blackDefault,
-                      fontWeight: FontWeight.w500)),
-            )
-          ]),
-          TableRow(children: [
-            Container(
-              alignment: Alignment.center,
-              height: 40,
-              child: Text('4-6 Travelers',
-                  textAlign: TextAlign.center,
-                  style: context.textStyle.titleMedium?.copyWith(
-                      color: AppColors.inActiveRadioBorderColor,
-                      fontWeight: FontWeight.w500)),
-            ),
-            Container(
-              alignment: Alignment.center,
-              height: 40,
-              child: Text('\$14/hour',
-                  textAlign: TextAlign.center,
-                  style: context.textStyle.titleMedium?.copyWith(
-                      color: AppColors.blackDefault,
-                      fontWeight: FontWeight.w500)),
-            )
-          ]),
-          TableRow(children: [
-            Container(
-              alignment: Alignment.center,
-              height: 40,
-              child: Text('7-9 Travelers',
-                  textAlign: TextAlign.center,
-                  style: context.textStyle.titleMedium?.copyWith(
-                      color: AppColors.inActiveRadioBorderColor,
-                      fontWeight: FontWeight.w500)),
-            ),
-            Container(
-              alignment: Alignment.center,
-              height: 40,
-              child: Text('\$17/hour',
-                  textAlign: TextAlign.center,
-                  style: context.textStyle.titleMedium?.copyWith(
-                      color: AppColors.blackDefault,
-                      fontWeight: FontWeight.w500)),
-            )
-          ]),
         ],
       ),
     );
@@ -387,23 +319,26 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'My Experiences',
-            textAlign: TextAlign.left,
-            style: context.textStyle.titleLarge?.copyWith(
-                fontSize: 24,
-                fontWeight: FontWeight.w100,
-                color: AppColors.textOnboardingBlack,
-                fontStyle: FontStyle.italic),
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          const MyExperienceItem(),
-          const SizedBox(
-            height: 20,
-          ),
-          const MyExperienceItem()
+          ListView(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              Text(
+                'My Experiences',
+                textAlign: TextAlign.left,
+                style: context.textStyle.titleLarge?.copyWith(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w100,
+                    color: AppColors.textOnboardingBlack,
+                    fontStyle: FontStyle.italic),
+              ),
+              const SizedBox(height: 16),
+              ...List.generate(
+                  tourGuideDetailJson.experiences?.length ?? 0,
+                  (index) => MyExperienceItem(
+                      tourDetailJson: tourGuideDetailJson.experiences?[index]))
+            ],
+          )
         ],
       ),
     );
@@ -450,9 +385,11 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
           const SizedBox(
             height: 17,
           ),
-          const ReviewGuideItem(),
-          const ReviewGuideItem(),
-          const ReviewGuideItem(),
+          ...List.generate(
+            tourGuideDetailJson.reviews?.length ?? 0,
+            (index) => ReviewGuideItem(
+                reviewJson: tourGuideDetailJson.reviews?[index]),
+          )
         ],
       ),
     );

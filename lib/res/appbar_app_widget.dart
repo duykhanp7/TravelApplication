@@ -4,23 +4,26 @@ import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/router/routes.dart';
 
 class AppbarAppWidget extends StatefulWidget implements PreferredSizeWidget {
-  const AppbarAppWidget(
-      {super.key,
-      this.title,
-      this.prefixWidget,
-      this.suffixWidget,
-      this.prefixAction,
-      this.suffixAction,
-      this.titleStyle,
-      this.background});
+  const AppbarAppWidget({
+    super.key,
+    this.title,
+    this.prefixWidget,
+    this.suffixWidget,
+    this.titleStyle,
+    this.background,
+    this.flexibleSpace,
+    this.bottom,
+    this.height,
+  });
 
   final String? title;
   final TextStyle? titleStyle;
   final Widget? prefixWidget;
+  final Widget? flexibleSpace;
   final Widget? suffixWidget;
-  final VoidCallback? prefixAction;
-  final VoidCallback? suffixAction;
+  final PreferredSizeWidget? bottom;
   final Color? background;
+  final double? height;
 
   @override
   State<StatefulWidget> createState() {
@@ -28,7 +31,7 @@ class AppbarAppWidget extends StatefulWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(height ?? kToolbarHeight);
 }
 
 class _AppbarAppWidget extends State<AppbarAppWidget> {
@@ -39,6 +42,8 @@ class _AppbarAppWidget extends State<AppbarAppWidget> {
       centerTitle: true,
       title: Text(widget.title ?? ''),
       elevation: 0,
+      flexibleSpace: widget.flexibleSpace,
+      bottom: widget.bottom,
       leading: widget.prefixWidget ??
           Container(
             width: 25,
@@ -55,7 +60,7 @@ class _AppbarAppWidget extends State<AppbarAppWidget> {
                       color: AppColors.black,
                       size: 25,
                     ),
-                onTap: () => widget.prefixAction ?? Routes.backTo(),
+                onTap: () => Routes.backTo(),
               ),
             ),
           ),
@@ -65,22 +70,7 @@ class _AppbarAppWidget extends State<AppbarAppWidget> {
               fontWeight: FontWeight.w100,
               fontStyle: FontStyle.italic,
               color: AppColors.textOnboardingBlack),
-      actions: [
-        Container(
-          margin: const EdgeInsets.only(right: 10),
-          alignment: Alignment.center,
-          color: AppColors.transparent,
-          child: Material(
-            color: AppColors.transparent,
-            child: InkWell(
-              splashColor: AppColors.black.withOpacity(0.1),
-              highlightColor: AppColors.black.withOpacity(0.1),
-              child: widget.suffixWidget ?? Container(),
-              onTap: () => widget.suffixAction ?? Routes.backTo(),
-            ),
-          ),
-        )
-      ],
+      actions: [widget.suffixWidget ?? Container()],
     );
   }
 }

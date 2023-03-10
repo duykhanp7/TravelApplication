@@ -36,7 +36,7 @@ class MainApp extends StatelessWidget {
             builder: (context) => const EmptyPage(),
           ),
           supportedLocales: const <Locale>[Locale('vi'), Locale('en')],
-          locale: const Locale('vi'),
+          locale: const Locale('en'),
         ));
   }
 }

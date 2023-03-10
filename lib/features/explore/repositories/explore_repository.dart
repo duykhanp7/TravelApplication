@@ -1,204 +1,689 @@
-import 'package:travel_booking_tour/features/explore/models/best_guide_preview_json.dart';
-import 'package:travel_booking_tour/features/explore/models/feature_tour_preview_json.dart';
-import 'package:travel_booking_tour/features/explore/models/top_experiences_preview_json.dart';
-import 'package:travel_booking_tour/features/explore/models/top_journey_preview_json.dart';
-import 'package:travel_booking_tour/features/explore/models/travel_news_preview_json.dart';
 import 'package:travel_booking_tour/base/base_repository.dart';
+import 'package:travel_booking_tour/data/models/schedule_json.dart';
+import 'package:travel_booking_tour/data/models/schedule_point_json.dart';
+import 'package:travel_booking_tour/data/models/tour_detail_json.dart';
+import 'package:travel_booking_tour/data/models/tour_guide_detail_json.dart';
+import 'package:travel_booking_tour/data/models/tour_provider_json.dart';
 import 'package:travel_booking_tour/res/images.dart';
 
+import '../../../data/models/review_json.dart';
+
 class ExploreRepository implements BaseRepository {
-  Future<List<TopJourneyJson>> getListTopJourney() async {
-    return <TopJourneyJson>[
-      const TopJourneyJson(
-          destinationTitle: 'Da Nang - Ba Na - Hoi An',
-          dateStart: 'Jan 30, 2022',
-          imageUrl: AppImages.daNangBanaHoiAn,
+  Future<List<TourDetailJson>> getListTopJourney() async {
+    return <TourDetailJson>[
+      const TourDetailJson(
+          destination: 'Da Nang - Ba Na - Hoi An',
+          departureDate: 'Thurday 30, 2022',
+          images: [
+            AppImages.daNangBanaHoiAn1,
+            AppImages.daNangBanaHoiAn,
+            AppImages.cungVanHoaThieuNhi
+          ],
+          likes: 1333,
+          price: 450.00,
+          departurePlace: 'Ho Chi Minh',
+          description: '1 day at Ba Na hill',
+          duration: '2 days, 2 nights',
+          isFavorite: true,
+          provider: TourProviderJson(id: 1, name: 'dulichviet'),
+          reviews: 145,
+          id: 0,
+          prices: {
+            'Adult (>10 years old)': '\$400.00',
+            'Child (5 - 10 years old)': '\$320.00',
+            'Child (<5 years old)': 'Free'
+          },
+          saleOff: 400.00,
+          schedule: [
+            ScheduleJson(id: 0, name: 'Ho Chi Minh - Da Nang', schedules: [
+              SchedulePointJson(
+                  id: 0,
+                  time: '6:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '7:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '8:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '9:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '10:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.')
+            ]),
+            ScheduleJson(id: 1, name: 'Da Nang - Hue', schedules: [
+              SchedulePointJson(
+                  id: 0,
+                  time: '16:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '17:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '18:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '19:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '20:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.')
+            ])
+          ],
+          tourGuideId: 0,
+          rating: 1),
+      const TourDetailJson(
+          destination: 'Da Nang - Ba Na - Hoi An',
+          departureDate: 'Jan 30, 2022',
+          images: [
+            AppImages.daNangBanaHoiAn1,
+            AppImages.daNangBanaHoiAn,
+            AppImages.cungVanHoaThieuNhi
+          ],
           likes: 1247,
-          price: 400.00,
-          quantities: 3,
-          ratings: 1),
-      const TopJourneyJson(
-          destinationTitle: 'Da Nang - Ba Na - Hoi An',
-          dateStart: 'Jan 30, 2022',
-          imageUrl: AppImages.daNangBanaHoiAn,
-          likes: 1248,
-          price: 4030.00,
-          quantities: 3,
-          ratings: 2),
-      const TopJourneyJson(
-          destinationTitle: 'Da Nang - Ba Na - Hoi An',
-          dateStart: 'Jan 30, 2022',
-          imageUrl: AppImages.daNangBanaHoiAn,
-          likes: 1249,
-          price: 4010.00,
-          quantities: 3,
-          ratings: 3),
-      const TopJourneyJson(
-          destinationTitle: 'Da Nang - Ba Na - Hoi An',
-          dateStart: 'Jan 30, 2022',
-          imageUrl: AppImages.daNangBanaHoiAn,
-          likes: 1250,
-          price: 4030.00,
-          quantities: 3,
-          ratings: 4),
-      const TopJourneyJson(
-          destinationTitle: 'Da Nang - Ba Na - Hoi An',
-          dateStart: 'Jan 30, 2022',
-          imageUrl: AppImages.daNangBanaHoiAn,
-          likes: 1251,
-          price: 4001.00,
-          quantities: 3,
-          ratings: 5),
-      const TopJourneyJson(
-          destinationTitle: 'Da Nang - Ba Na - Hoi An',
-          dateStart: 'Jan 30, 2022',
-          imageUrl: AppImages.daNangBanaHoiAn,
-          likes: 1252,
-          price: 4005.00,
-          quantities: 3,
-          ratings: 6),
+          price: 450.00,
+          departurePlace: 'Ho Chi Minh',
+          description: '1 day at Ba Na hill',
+          duration: '2 days, 2 nights',
+          isFavorite: false,
+          provider: TourProviderJson(id: 1, name: 'dulichviet'),
+          reviews: 145,
+          id: 0,
+          prices: {
+            'Adult (>10 years old)': '\$400.00',
+            'Child (5 - 10 years old)': '\$320.00',
+            'Child (<5 years old)': 'Free'
+          },
+          saleOff: 400.00,
+          schedule: [
+            ScheduleJson(id: 0, name: 'Ho Chi Minh - Da Nang', schedules: [
+              SchedulePointJson(
+                  id: 0,
+                  time: '6:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '7:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '8:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '9:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '10:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.')
+            ]),
+            ScheduleJson(id: 1, name: 'Da Nang - Hue', schedules: [
+              SchedulePointJson(
+                  id: 0,
+                  time: '16:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '17:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '18:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '19:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '20:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.')
+            ])
+          ],
+          tourGuideId: 1,
+          rating: 1),
+      const TourDetailJson(
+          destination: 'Da Nang - Ba Na - Hoi An',
+          departureDate: 'Jan 30, 2022',
+          images: [
+            AppImages.daNangBanaHoiAn1,
+            AppImages.daNangBanaHoiAn,
+            AppImages.cungVanHoaThieuNhi
+          ],
+          likes: 1247,
+          price: 450.00,
+          departurePlace: 'Ho Chi Minh',
+          description: '1 day at Ba Na hill',
+          duration: '2 days, 2 nights',
+          isFavorite: true,
+          provider: TourProviderJson(id: 1, name: 'dulichviet'),
+          reviews: 145,
+          id: 0,
+          prices: {
+            'Adult (>10 years old)': '\$400.00',
+            'Child (5 - 10 years old)': '\$320.00',
+            'Child (<5 years old)': 'Free'
+          },
+          saleOff: 400.00,
+          schedule: [
+            ScheduleJson(id: 0, name: 'Ho Chi Minh - Da Nang', schedules: [
+              SchedulePointJson(
+                  id: 0,
+                  time: '6:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '7:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '8:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '9:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '10:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.')
+            ]),
+            ScheduleJson(id: 1, name: 'Da Nang - Hue', schedules: [
+              SchedulePointJson(
+                  id: 0,
+                  time: '16:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '17:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '18:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '19:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '20:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.')
+            ])
+          ],
+          tourGuideId: 2,
+          rating: 1),
+      const TourDetailJson(
+          destination: 'Da Nang - Ba Na - Hoi An',
+          departureDate: 'Jan 30, 2022',
+          images: [
+            AppImages.daNangBanaHoiAn1,
+            AppImages.daNangBanaHoiAn,
+            AppImages.cungVanHoaThieuNhi
+          ],
+          likes: 1247,
+          price: 450.00,
+          departurePlace: 'Ho Chi Minh',
+          description: '1 day at Ba Na hill',
+          duration: '2 days, 2 nights',
+          isFavorite: false,
+          provider: TourProviderJson(id: 1, name: 'dulichviet'),
+          reviews: 145,
+          id: 0,
+          prices: {
+            'Adult (>10 years old)': '\$400.00',
+            'Child (5 - 10 years old)': '\$320.00',
+            'Child (<5 years old)': 'Free'
+          },
+          saleOff: 400.00,
+          schedule: [
+            ScheduleJson(id: 0, name: 'Ho Chi Minh - Da Nang', schedules: [
+              SchedulePointJson(
+                  id: 0,
+                  time: '6:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '7:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '8:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '9:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '10:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.')
+            ]),
+            ScheduleJson(id: 1, name: 'Da Nang - Hue', schedules: [
+              SchedulePointJson(
+                  id: 0,
+                  time: '16:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '17:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '18:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '19:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '20:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.')
+            ])
+          ],
+          tourGuideId: 3,
+          rating: 1),
+      const TourDetailJson(
+          destination: 'Da Nang - Ba Na - Hoi An',
+          departureDate: 'Jan 30, 2022',
+          images: [
+            AppImages.daNangBanaHoiAn1,
+            AppImages.daNangBanaHoiAn,
+            AppImages.cungVanHoaThieuNhi
+          ],
+          likes: 1247,
+          price: 450.00,
+          departurePlace: 'Ho Chi Minh',
+          description: '1 day at Ba Na hill',
+          duration: '2 days, 2 nights',
+          isFavorite: false,
+          provider: TourProviderJson(id: 1, name: 'dulichviet'),
+          reviews: 145,
+          id: 0,
+          prices: {
+            'Adult (>10 years old)': '\$400.00',
+            'Child (5 - 10 years old)': '\$320.00',
+            'Child (<5 years old)': 'Free'
+          },
+          saleOff: 400.00,
+          schedule: [
+            ScheduleJson(id: 0, name: 'Ho Chi Minh - Da Nang', schedules: [
+              SchedulePointJson(
+                  id: 0,
+                  time: '6:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '7:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '8:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '9:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '10:00 AM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.')
+            ]),
+            ScheduleJson(id: 1, name: 'Da Nang - Hue', schedules: [
+              SchedulePointJson(
+                  id: 0,
+                  time: '16:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '17:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '18:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '19:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.'),
+              SchedulePointJson(
+                  id: 0,
+                  time: '20:00 PM',
+                  description:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.')
+            ])
+          ],
+          tourGuideId: 0,
+          rating: 1)
     ];
   }
 
-  Future<List<BestGuideJson>> getListBestGuide() async {
-    return <BestGuideJson>[
-      const BestGuideJson(
-          address: 'Da Nang - Viet Nam',
-          imageUrl: AppImages.emmy,
-          reviews: 127,
-          name: 'Emmy',
-          ratings: 1),
-      const BestGuideJson(
-          address: 'Ho Chi Minh - Viet Nam',
-          imageUrl: AppImages.emmy,
-          reviews: 122,
-          name: 'Eric Pham',
-          ratings: 2),
-      const BestGuideJson(
-          address: 'Ha Noi - Viet Nam',
-          imageUrl: AppImages.emmy,
-          reviews: 100,
-          name: 'Khan Pham',
-          ratings: 3),
-      const BestGuideJson(
-          address: 'Phu Yen - Viet Nam',
-          imageUrl: AppImages.emmy,
-          reviews: 111,
-          name: 'Tuong Vi',
-          ratings: 4),
-    ];
+  Future<TourGuideDetailJson> getTourGuideDetail(int id) async {
+    return await Future.delayed(
+      const Duration(seconds: 0),
+      () => tourGuides.firstWhere((element) => element.id == id),
+    );
   }
 
-  Future<List<TopExperienceJson>> getListTopExperiences() async {
-    return <TopExperienceJson>[
-      const TopExperienceJson(
-          address: 'Hoi An, Viet Nam',
-          description: '2 Hour Bicycle Tour exploring Hoi An',
-          destinationImageUrl: AppImages.hoiAn,
-          guideImageUrl: AppImages.emmy,
-          name: 'Emmy'),
-      const TopExperienceJson(
-          address: 'TPHCM, Viet Nam',
-          description: '2 Hour Bicycle Tour exploring Hoi An',
-          destinationImageUrl: AppImages.hoiAn,
-          guideImageUrl: AppImages.emmy,
-          name: 'Duy Khan'),
-      const TopExperienceJson(
-          address: 'Ha Noi, Viet Nam',
-          description: '2 Hour Bicycle Tour exploring Hoi An',
-          destinationImageUrl: AppImages.hoiAn,
-          guideImageUrl: AppImages.emmy,
-          name: 'Tuong Vi'),
-      const TopExperienceJson(
-          address: 'Hoi An, Viet Nam',
-          description: '2 Hour Bicycle Tour exploring Hoi An',
-          destinationImageUrl: AppImages.hoiAn,
-          guideImageUrl: AppImages.emmy,
-          name: 'Emmy'),
-      // ignore: prefer_const_constructors
-      TopExperienceJson(
-          address: 'Hoi An, Viet Nam',
-          description: '2 Hour Bicycle Tour exploring Hoi An',
-          destinationImageUrl: AppImages.hoiAn,
-          guideImageUrl: AppImages.emmy,
-          name: 'Emmy')
-    ];
+  Future<List<TourGuideDetailJson>> getListTourGuide() async {
+    return tourGuides;
   }
 
-  Future<List<FeatureTourJson>> getListFeatureTour() async {
-    return <FeatureTourJson>[
-      const FeatureTourJson(
-          address: 'Da Nang - Ba Na - Hoi An',
-          dateStart: 'Jan 30, 2020',
-          destinationImageUrl: AppImages.daNangBanaHoiAn1,
-          likes: 1250,
-          quantities: 3,
-          prices: 100.00,
-          ratings: 2),
-      // ignore: prefer_const_constructors
-      FeatureTourJson(
-          address: 'Da Nang - Ba Na - Hoi An',
-          dateStart: 'Jan 30, 2020',
-          destinationImageUrl: AppImages.daNangBanaHoiAn1,
-          likes: 1250,
-          prices: 200.00,
-          quantities: 3,
-          ratings: 3),
-      const FeatureTourJson(
-          address: 'Da Nang - Ba Na - Hoi An',
-          dateStart: 'Jan 30, 2020',
-          destinationImageUrl: AppImages.daNangBanaHoiAn1,
-          prices: 300.00,
-          likes: 1250,
-          quantities: 3,
-          ratings: 4),
-      const FeatureTourJson(
-          address: 'Da Nang - Ba Na - Hoi An',
-          dateStart: 'Jan 30, 2020',
-          destinationImageUrl: AppImages.daNangBanaHoiAn1,
-          prices: 400.00,
-          likes: 1250,
-          quantities: 3,
-          ratings: 1),
-      const FeatureTourJson(
-          address: 'Da Nang - Ba Na - Hoi An',
-          dateStart: 'Jan 30, 2020',
-          destinationImageUrl: AppImages.daNangBanaHoiAn1,
-          likes: 1250,
-          prices: 500.00,
-          quantities: 3,
-          ratings: 5)
-    ];
-  }
-
-  Future<List<TravelNewJson>> getListTravelNews() async {
-    return <TravelNewJson>[
-      const TravelNewJson(
-          dateStart: 'Feb 6, 2022',
-          destinationImageUrl: AppImages.cungVanHoaThieuNhi,
-          destinationTitle: ' Da Nang City'),
-      const TravelNewJson(
-          dateStart: 'Feb 6, 2022',
-          destinationImageUrl: AppImages.cungVanHoaThieuNhi,
-          destinationTitle: 'New Destination in Da Nang City'),
-      const TravelNewJson(
-          dateStart: 'Feb 6, 2022',
-          destinationImageUrl: AppImages.cungVanHoaThieuNhi,
-          destinationTitle: 'New Destination '),
-      const TravelNewJson(
-          dateStart: 'Feb 6, 2022',
-          destinationImageUrl: AppImages.cungVanHoaThieuNhi,
-          destinationTitle: 'New Destination in Da Nang City'),
-      const TravelNewJson(
-          dateStart: 'Feb 6, 2022',
-          destinationImageUrl: AppImages.cungVanHoaThieuNhi,
-          destinationTitle: 'New Da Nang City'),
-      const TravelNewJson(
-          dateStart: 'Feb 6, 2022',
-          destinationImageUrl: AppImages.cungVanHoaThieuNhi,
-          destinationTitle: 'New Destination in Da Nang City')
-    ];
-  }
+  List<TourGuideDetailJson> tourGuides = const [
+    TourGuideDetailJson(
+        id: 0,
+        name: 'Tuan Tran',
+        address: 'Da Nang, Viet Nam',
+        coverImageUrl: AppImages.tuanTran,
+        profileImageUrl: AppImages.tuanTran,
+        rating: 2,
+        languages: ['Vietnamese', 'Chinese', 'Korean'],
+        prices: {
+          '1 - 3 Travelers': '\$10/ hour',
+          '4 - 6 Travelers': '\$14/ hour',
+          '7 - 9 Travelers': '\$17/ hour'
+        },
+        videoIntroductionUrl:
+            'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+        description:
+            'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+        experiences: [
+          TourDetailJson(
+            id: 0,
+            departureDate: 'Jan 25. 2023',
+            destination: 'Hoi An, Viet Nam',
+            description: '2 Hour Bicycle Tour exploring Hoi An',
+            likes: 1234,
+            isFavorite: false,
+            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+          ),
+          TourDetailJson(
+            id: 0,
+            departureDate: 'Jan 25. 2023',
+            destination: 'Hoi An, Viet Nam',
+            description: 'Food tour in Da Nang',
+            likes: 234,
+            isFavorite: false,
+            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+          )
+        ],
+        reviews: [
+          ReviewJson(
+              id: 0,
+              content:
+                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+              createdAt: '09-3-2023',
+              ratersImage: AppImages.emmy,
+              ratersName: 'Pena John',
+              rating: 2),
+          ReviewJson(
+              id: 1,
+              content:
+                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+              createdAt: '09-3-2023',
+              ratersImage: AppImages.emmy,
+              ratersName: 'Pena John',
+              rating: 3),
+          ReviewJson(
+              id: 2,
+              content:
+                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+              createdAt: '09-3-2023',
+              ratersImage: AppImages.emmy,
+              ratersName: 'Pena John',
+              rating: 5)
+        ]),
+    TourGuideDetailJson(
+        id: 1,
+        name: 'Emmy',
+        rating: 2,
+        address: 'Ho Chi Minh, Viet Nam',
+        languages: ['Vietnamese', 'Korean'],
+        videoIntroductionUrl:
+            'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+        coverImageUrl: AppImages.emmy,
+        profileImageUrl: AppImages.emmy,
+        prices: {
+          '1 - 3 Travelers': '\$10/ hour',
+          '4 - 6 Travelers': '\$14/ hour',
+          '7 - 9 Travelers': '\$17/ hour'
+        },
+        description:
+            'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+        experiences: [
+          TourDetailJson(
+            id: 0,
+            departureDate: 'Jan 25. 2023',
+            destination: 'Hoi An, Viet Nam',
+            description: '2 Hour Bicycle Tour exploring Hoi An',
+            likes: 5555,
+            isFavorite: false,
+            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+          ),
+          TourDetailJson(
+            id: 0,
+            departureDate: 'Jan 25. 2023',
+            destination: 'Hoi An, Viet Nam',
+            description: 'Food tour in Da Nang',
+            likes: 6666,
+            isFavorite: false,
+            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+          )
+        ],
+        reviews: [
+          ReviewJson(
+              id: 0,
+              content:
+                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+              createdAt: '09-3-2023',
+              ratersImage: AppImages.tuanTran,
+              ratersName: 'Pena John',
+              rating: 2),
+          ReviewJson(
+              id: 1,
+              content:
+                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+              createdAt: '09-3-2023',
+              ratersImage: AppImages.tuanTran,
+              ratersName: 'Pena John',
+              rating: 3),
+          ReviewJson(
+              id: 2,
+              content:
+                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+              createdAt: '09-3-2023',
+              ratersImage: AppImages.tuanTran,
+              ratersName: 'Pena John',
+              rating: 5)
+        ]),
+    TourGuideDetailJson(
+        id: 2,
+        name: 'Tuan Tran',
+        rating: 2,
+        videoIntroductionUrl:
+            'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+        address: 'Da Nang, Viet Nam',
+        coverImageUrl: AppImages.tuanTran,
+        profileImageUrl: AppImages.tuanTran,
+        languages: ['Vietnamese', 'Spanish', 'Korean'],
+        prices: {
+          '1 - 3 Travelers': '\$10/ hour',
+          '4 - 6 Travelers': '\$14/ hour',
+          '7 - 9 Travelers': '\$17/ hour'
+        },
+        description:
+            'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+        experiences: [
+          TourDetailJson(
+            id: 0,
+            departureDate: 'Jan 25. 2023',
+            destination: 'Hoi An, Viet Nam',
+            description: '2 Hour Bicycle Tour exploring Hoi An',
+            likes: 1234,
+            isFavorite: false,
+            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+          ),
+          TourDetailJson(
+            id: 0,
+            departureDate: 'Jan 25. 2023',
+            destination: 'Hoi An, Viet Nam',
+            description: 'Food tour in Da Nang',
+            likes: 234,
+            isFavorite: false,
+            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+          )
+        ],
+        reviews: [
+          ReviewJson(
+              id: 0,
+              content:
+                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+              createdAt: '09-3-2023',
+              ratersImage: AppImages.emmy,
+              ratersName: 'Pena John',
+              rating: 2),
+          ReviewJson(
+              id: 1,
+              content:
+                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+              createdAt: '09-3-2023',
+              ratersImage: AppImages.emmy,
+              ratersName: 'Pena John',
+              rating: 3),
+          ReviewJson(
+              id: 2,
+              content:
+                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+              createdAt: '09-3-2023',
+              ratersImage: AppImages.emmy,
+              ratersName: 'Pena John',
+              rating: 5)
+        ]),
+    TourGuideDetailJson(
+        id: 3,
+        name: 'Emmy',
+        rating: 2,
+        languages: ['Vietnamese', 'Korean'],
+        videoIntroductionUrl:
+            'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+        address: 'Ho Chi Minh, Viet Nam',
+        profileImageUrl: AppImages.emmy,
+        prices: {
+          '1 - 3 Travelers': '\$10/ hour',
+          '4 - 6 Travelers': '\$14/ hour',
+          '7 - 9 Travelers': '\$17/ hour'
+        },
+        coverImageUrl: AppImages.emmy,
+        description:
+            'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+        experiences: [
+          TourDetailJson(
+            id: 0,
+            departureDate: 'Jan 25. 2023',
+            destination: 'Hoi An, Viet Nam',
+            description: '2 Hour Bicycle Tour exploring Hoi An',
+            likes: 5555,
+            isFavorite: false,
+            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+          ),
+          TourDetailJson(
+            id: 0,
+            departureDate: 'Jan 25. 2023',
+            destination: 'Hoi An, Viet Nam',
+            description: 'Food tour in Da Nang',
+            likes: 6666,
+            isFavorite: false,
+            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+          )
+        ],
+        reviews: [
+          ReviewJson(
+              id: 0,
+              content:
+                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+              createdAt: '09-3-2023',
+              ratersImage: AppImages.tuanTran,
+              ratersName: 'Pena John',
+              rating: 2),
+          ReviewJson(
+              id: 1,
+              content:
+                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+              createdAt: '09-3-2023',
+              ratersImage: AppImages.tuanTran,
+              ratersName: 'Pena John',
+              rating: 3),
+          ReviewJson(
+              id: 2,
+              content:
+                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+              createdAt: '09-3-2023',
+              ratersImage: AppImages.tuanTran,
+              ratersName: 'Pena John',
+              rating: 5)
+        ])
+  ];
 
   @override
   void onInitialData() {}

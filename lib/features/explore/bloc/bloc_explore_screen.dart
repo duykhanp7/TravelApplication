@@ -1,14 +1,12 @@
 import 'package:bloc/bloc.dart';
+import 'package:travel_booking_tour/data/models/tour_detail_json.dart';
+import 'package:travel_booking_tour/data/models/tour_guide_detail_json.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_event.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_state.dart';
-import 'package:travel_booking_tour/features/explore/models/best_guide_preview_json.dart';
-import 'package:travel_booking_tour/features/explore/models/feature_tour_preview_json.dart';
-import 'package:travel_booking_tour/features/explore/models/top_experiences_preview_json.dart';
-import 'package:travel_booking_tour/features/explore/models/top_journey_preview_json.dart';
-import 'package:travel_booking_tour/features/explore/models/travel_news_preview_json.dart';
 import 'package:travel_booking_tour/features/explore/repositories/explore_repository.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
+import '../../../common/enums/enums.dart';
 import '../../../router/routes.dart';
 
 class BlocExploreScreen extends Bloc<BlocExploreEvent, BlocExploreState> {
@@ -16,22 +14,22 @@ class BlocExploreScreen extends Bloc<BlocExploreEvent, BlocExploreState> {
 
   BlocExploreScreen() : super(BlocExploreStateInitial()) {
     on<BlocExploreEventInitial>((event, emit) async {
-      List<TopJourneyJson> topJourneyJsons = [];
-      List<BestGuideJson> bestGuideJsons = [];
-      List<TopExperienceJson> topExperienceJsons = [];
-      List<FeatureTourJson> featuresTourJsons = [];
-      List<TravelNewJson> travelNewJsons = [];
+      List<TourDetailJson> topJourneyJsons = [];
+      List<TourGuideDetailJson> bestGuideJsons = [];
+      List<TourDetailJson> topExperienceJsons = [];
+      List<TourDetailJson> featuresTourJsons = [];
+      List<TourDetailJson> travelNewJsons = [];
       await Future.forEach(event.objects!, (element) async {
-        if (element is FeatureTourJson) {
-          featuresTourJsons = await _exploreRepository.getListFeatureTour();
-        } else if (element is BestGuideJson) {
-          bestGuideJsons = await _exploreRepository.getListBestGuide();
-        } else if (element is TopExperienceJson) {
-          topExperienceJsons = await _exploreRepository.getListTopExperiences();
-        } else if (element is TopJourneyJson) {
+        if (element == TypeDestination.featureTourJson) {
+          featuresTourJsons = await _exploreRepository.getListTopJourney();
+        } else if (element == TypeDestination.bestGuideJson) {
+          bestGuideJsons = await _exploreRepository.getListTourGuide();
+        } else if (element == TypeDestination.topExperienceJson) {
+          topExperienceJsons = await _exploreRepository.getListTopJourney();
+        } else if (element == TypeDestination.topJourneyJson) {
           topJourneyJsons = await _exploreRepository.getListTopJourney();
-        } else if (element is TravelNewJson) {
-          travelNewJsons = await _exploreRepository.getListTravelNews();
+        } else if (element == TypeDestination.travelNewJson) {
+          travelNewJsons = await _exploreRepository.getListTopJourney();
         } else {}
       });
 
@@ -43,9 +41,15 @@ class BlocExploreScreen extends Bloc<BlocExploreEvent, BlocExploreState> {
           travelNewJsons: travelNewJsons));
     });
     on<BlocExploreEventReloadData>((event, emit) {});
-    on<BlocExploreEventOnTopJourneyClick>((event, emit) {});
-    on<BlocExploreEventOnBestGuideClick>((event, emit) {
-      Routes.navigateTo(AppPath.guide, {'video': event.videoUrl});
+    on<BlocExploreEventOnTourClick>((event, emit) {
+      Routes.navigateTo(AppPath.tourDetail, {'data': event.tourDetailJson});
     });
+    on<BlocExploreEventOnBestGuideClick>((event, emit) {
+      Routes.navigateTo(AppPath.guide, {'data': event.tourGuideDetailJson});
+    });
+  }
+
+  Future<TourGuideDetailJson> getTourGuideDetail(int id) async {
+    return await _exploreRepository.getTourGuideDetail(id);
   }
 }

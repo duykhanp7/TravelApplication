@@ -18,3 +18,11 @@ enum DateInWeek {
 }
 
 enum CameraOrRecorder { camera, recorder }
+
+enum TypeDestination {
+  bestGuideJson,
+  featureTourJson,
+  topExperienceJson,
+  topJourneyJson,
+  travelNewJson
+}
