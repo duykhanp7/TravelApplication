@@ -30,6 +30,9 @@ class BlocTourDetailScreen
       emit(BlocTourDetailStateChangeIndexSchedule(index: event.index));
     } else if (event is BlocTourDetailEventChangeIndexImageSlider) {
       emit(BlocTourDetailStateChangeIndexImageSlider(index: event.index));
+    } else if (event is BlocTourDetailEventShowBottomSheetShare) {
+      emit(BlocTourDetailStateShowBottomSheetShare(
+          current: DateTime.now().millisecond));
     }
   }
 }

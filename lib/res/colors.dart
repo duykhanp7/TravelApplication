@@ -30,4 +30,7 @@ class AppColors {
   static const Color link = Color(0xFF00CEA6);
   static const Color timeLineIndicator = Color(0xFF00BC97);
   static const Color colorOptional = Color(0xFF2196F3);
+  static const Color googleBgColor = Color(0xFFFF3E3E);
+  static const Color whatAppBgColor = Color(0xFF1AC021);
+  static const Color twitterBgColor = Color(0xFF1FA5F0);
 }

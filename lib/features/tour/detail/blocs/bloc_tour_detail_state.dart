@@ -39,3 +39,25 @@ class BlocTourDetailStateLoadingSuccess extends BlocTourDetailState {
   @override
   List<Object?> get props => [];
 }
+
+class BlocTourDetailStateShowBottomSheetShare extends BlocTourDetailState {
+  BlocTourDetailStateShowBottomSheetShare({required this.current});
+  final int current;
+
+  @override
+  List<Object?> get props => [current];
+}
+
+class BlocTourDetailStateShareSuccesss extends BlocTourDetailState {
+  BlocTourDetailStateShareSuccesss();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class BlocTourDetailStateShareFail extends BlocTourDetailState {
+  BlocTourDetailStateShareFail();
+
+  @override
+  List<Object?> get props => [];
+}

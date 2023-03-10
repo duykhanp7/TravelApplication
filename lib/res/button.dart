@@ -107,9 +107,11 @@ class SocialButton extends StatelessWidget {
       required this.voidCallback,
       this.width,
       this.height,
-      this.radius});
+      this.radius,
+      this.title});
 
   final String icon;
+  final String? title;
   final Color background;
   final Color splash;
   final VoidCallback voidCallback;
@@ -119,25 +121,40 @@ class SocialButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      width: width ?? 40,
-      height: height ?? 40,
-      decoration: BoxDecoration(
-          color: background, borderRadius: BorderRadius.circular(radius ?? 7)),
-      child: Material(
-        borderRadius: BorderRadius.circular(radius ?? 7),
-        color: AppColors.transparent,
-        child: InkWell(
-          splashColor: splash,
-          borderRadius: BorderRadius.circular(radius ?? 7),
-          onTap: voidCallback,
-          child: Container(
-            alignment: Alignment.center,
-            child: SvgPicture.asset(icon),
+    return Column(
+      children: [
+        Container(
+          alignment: Alignment.center,
+          width: width ?? 40,
+          height: height ?? 40,
+          decoration: BoxDecoration(
+              color: background,
+              borderRadius: BorderRadius.circular(radius ?? 7)),
+          child: Material(
+            borderRadius: BorderRadius.circular(radius ?? 7),
+            color: AppColors.transparent,
+            child: InkWell(
+              splashColor: splash,
+              borderRadius: BorderRadius.circular(radius ?? 7),
+              onTap: voidCallback,
+              child: Container(
+                alignment: Alignment.center,
+                child: SvgPicture.asset(icon),
+              ),
+            ),
           ),
         ),
-      ),
+        title == null ? Container() : const SizedBox(height: 6),
+        title == null
+            ? Container()
+            : Text(
+                title!,
+                style: context.textStyle.titleMedium?.copyWith(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.textOnboardingBrown),
+              )
+      ],
     );
   }
 }
