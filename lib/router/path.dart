@@ -15,4 +15,5 @@ class AppPath {
   static const String termAndCondition = '/termAndCondition';
   static const String tourGuideAddProfile = '/tourGuideAddProfile';
   static const String camera = '/camera';
+  static const String tourDetail = '/tourDetail';
 }

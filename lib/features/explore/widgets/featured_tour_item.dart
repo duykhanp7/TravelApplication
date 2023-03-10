@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/features/explore/models/feature_tour_preview_json.dart';
+import 'package:travel_booking_tour/data/models/tour_detail_json.dart';
 
 import '../../../res/colors.dart';
 import '../../../res/icons.dart';
-import '../../../res/images.dart';
 import '../../../res/vertical_star_widget.dart';
 
 class FeaturedTourItem extends StatefulWidget {
   const FeaturedTourItem({
     super.key,
     required this.callback,
-    required this.featureTourJson,
+    required this.tourDetailJson,
   });
   final VoidCallback callback;
-  final FeatureTourJson featureTourJson;
+  final TourDetailJson tourDetailJson;
   @override
   State<StatefulWidget> createState() {
     return _FeaturedTourItem();
@@ -41,7 +40,7 @@ class _FeaturedTourItem extends State<FeaturedTourItem> {
             Column(
               children: [
                 Flexible(
-                    flex: 1,
+                    flex: 2,
                     child: Stack(
                       children: [
                         Container(
@@ -55,9 +54,10 @@ class _FeaturedTourItem extends State<FeaturedTourItem> {
                                 topLeft: Radius.circular(15),
                                 topRight: Radius.circular(15)),
                             child: Image.asset(
-                              AppImages.daNangBanaHoiAn1,
+                              widget.tourDetailJson.images?[0] ?? '',
                               filterQuality: FilterQuality.high,
                               fit: BoxFit.cover,
+                              height: 150,
                             ),
                           ),
                         ),
@@ -68,13 +68,12 @@ class _FeaturedTourItem extends State<FeaturedTourItem> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 HorizontalStarWidget(
-                                    rating:
-                                        widget.featureTourJson.ratings ?? 0),
+                                    rating: widget.tourDetailJson.rating ?? 0),
                                 const SizedBox(
                                   width: 13,
                                 ),
                                 Text(
-                                  '${widget.featureTourJson.likes} likes',
+                                  '${widget.tourDetailJson.likes} likes',
                                   style: context.textStyle.titleSmall?.copyWith(
                                       fontSize: 12,
                                       color: AppColors.white,
@@ -101,7 +100,7 @@ class _FeaturedTourItem extends State<FeaturedTourItem> {
                               Container(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  widget.featureTourJson.address ?? '',
+                                  widget.tourDetailJson.destination ?? '',
                                   overflow: TextOverflow.ellipsis,
                                   style: context.textStyle.titleMedium
                                       ?.copyWith(fontWeight: FontWeight.w500),
@@ -125,7 +124,7 @@ class _FeaturedTourItem extends State<FeaturedTourItem> {
                                 width: 9,
                               ),
                               Text(
-                                widget.featureTourJson.dateStart ??
+                                widget.tourDetailJson.departureDate ??
                                     '00-00-0000',
                                 style: context.textStyle.titleSmall?.copyWith(
                                     fontWeight: FontWeight.w400,
@@ -148,7 +147,7 @@ class _FeaturedTourItem extends State<FeaturedTourItem> {
                                 width: 9,
                               ),
                               Text(
-                                '${widget.featureTourJson.quantities} days',
+                                '${widget.tourDetailJson.schedule?.length ?? 0} days',
                                 style: context.textStyle.titleSmall?.copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: AppColors.textOnboardingBrown),
@@ -157,7 +156,7 @@ class _FeaturedTourItem extends State<FeaturedTourItem> {
                               Container(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  '\$${widget.featureTourJson.prices ?? 0}',
+                                  '\$${widget.tourDetailJson.price ?? 0}',
                                   style: context.textStyle.titleMedium
                                       ?.copyWith(
                                           fontWeight: FontWeight.w100,
@@ -166,9 +165,6 @@ class _FeaturedTourItem extends State<FeaturedTourItem> {
                                 ),
                               )
                             ],
-                          ),
-                          const SizedBox(
-                            height: 8,
                           ),
                         ],
                       ),
@@ -230,14 +226,19 @@ class _FeaturedTourItem extends State<FeaturedTourItem> {
                 )),
             Positioned(
                 right: 12,
-                top: 40,
+                top: 80,
                 bottom: 0,
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
                     Container(
                       alignment: Alignment.center,
-                      child: SvgPicture.asset(AppIcons.favoriteNone),
+                      child: SvgPicture.asset(
+                          widget.tourDetailJson.isFavorite == null
+                              ? AppIcons.favoriteNone
+                              : widget.tourDetailJson.isFavorite!
+                                  ? AppIcons.favoriteFill
+                                  : AppIcons.favoriteNone),
                     ),
                     Container(
                       width: 40,

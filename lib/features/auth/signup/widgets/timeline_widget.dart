@@ -59,14 +59,14 @@ class TimelineIndicator extends StatefulWidget {
   const TimelineIndicator(
       {super.key,
       required this.isActive,
-      required this.title,
+      this.title,
       this.color,
       this.overlap});
 
   final bool isActive;
   final Color? color;
   final Color? overlap;
-  final String title;
+  final String? title;
 
   @override
   State<StatefulWidget> createState() {
@@ -109,15 +109,17 @@ class _TimelineIndicator extends State<TimelineIndicator> {
           const SizedBox(
             height: 5,
           ),
-          Text(
-            widget.title,
-            style: context.textStyle.titleMedium?.copyWith(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: widget.isActive
-                    ? AppColors.primary
-                    : AppColors.textHintColor),
-          )
+          widget.title == null
+              ? Container()
+              : Text(
+                  widget.title!,
+                  style: context.textStyle.titleMedium?.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: widget.isActive
+                          ? AppColors.primary
+                          : AppColors.textHintColor),
+                )
         ],
       ),
     );

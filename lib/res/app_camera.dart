@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 import 'dart:async';
-import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
@@ -60,16 +59,15 @@ class _AppCameraState extends State<AppCamera>
   VideoPlayerController? videoController;
   VoidCallback? videoPlayerListener;
   bool enableAudio = true;
-  double _maxAvailableExposureOffset = 0.0;
-  double _currentExposureOffset = 0.0;
+  //final double _maxAvailableExposureOffset = 0.0;
+  //double _currentExposureOffset = 0.0;
   late AnimationController _flashModeControlRowAnimationController;
   late Animation<double> _flashModeControlRowAnimation;
   late AnimationController _exposureModeControlRowAnimationController;
-  late Animation<double> _exposureModeControlRowAnimation;
   late AnimationController _focusModeControlRowAnimationController;
-  late Animation<double> _focusModeControlRowAnimation;
-  double _minAvailableZoom = 1.0;
-  double _maxAvailableZoom = 1.0;
+  //late Animation<double> _focusModeControlRowAnimation;
+  final double _minAvailableZoom = 1.0;
+  final double _maxAvailableZoom = 1.0;
   double _currentScale = 1.0;
   double _baseScale = 1.0;
   CameraLensDirection cameraLensDirection = CameraLensDirection.front;
@@ -98,18 +96,14 @@ class _AppCameraState extends State<AppCamera>
       duration: const Duration(milliseconds: 300),
       vsync: this,
     );
-    _exposureModeControlRowAnimation = CurvedAnimation(
-      parent: _exposureModeControlRowAnimationController,
-      curve: Curves.easeInCubic,
-    );
     _focusModeControlRowAnimationController = AnimationController(
       duration: const Duration(milliseconds: 300),
       vsync: this,
     );
-    _focusModeControlRowAnimation = CurvedAnimation(
-      parent: _focusModeControlRowAnimationController,
-      curve: Curves.easeInCubic,
-    );
+    // _focusModeControlRowAnimation = CurvedAnimation(
+    //   parent: _focusModeControlRowAnimationController,
+    //   curve: Curves.easeInCubic,
+    // );
 
     onNewCameraSelected(widget.cameras[0]);
   }
@@ -929,7 +923,6 @@ class _AppCameraState extends State<AppCamera>
         videoController?.dispose();
         videoController = null;
         if (imageFile != null) {
-          debugPrint('Taske image not null');
           imageFile = await cropImage(imageFile);
           await Future.delayed(
             const Duration(seconds: 0),
@@ -1175,9 +1168,9 @@ class _AppCameraState extends State<AppCamera>
       return;
     }
 
-    setState(() {
-      _currentExposureOffset = offset;
-    });
+    // setState(() {
+    //   _currentExposureOffset = offset;
+    // });
     try {
       offset = await controller!.setExposureOffset(offset);
     } on CameraException catch (e) {
@@ -1199,36 +1192,36 @@ class _AppCameraState extends State<AppCamera>
     }
   }
 
-  Future<void> _startVideoPlayer() async {
-    if (videoFile == null) {
-      return;
-    }
+  // Future<void> _startVideoPlayer() async {
+  //   if (videoFile == null) {
+  //     return;
+  //   }
 
-    final VideoPlayerController vController = kIsWeb
-        ? VideoPlayerController.network(videoFile!.path)
-        : VideoPlayerController.file(File(videoFile!.path));
+  //   final VideoPlayerController vController = kIsWeb
+  //       ? VideoPlayerController.network(videoFile!.path)
+  //       : VideoPlayerController.file(File(videoFile!.path));
 
-    videoPlayerListener = () {
-      if (videoController != null) {
-        // Refreshing the state to update video player with the correct ratio.
-        if (mounted) {
-          setState(() {});
-        }
-        videoController!.removeListener(videoPlayerListener!);
-      }
-    };
-    vController.addListener(videoPlayerListener!);
-    await vController.setLooping(true);
-    await vController.initialize();
-    await videoController?.dispose();
-    if (mounted) {
-      setState(() {
-        imageFile = null;
-        videoController = vController;
-      });
-    }
-    await vController.play();
-  }
+  //   videoPlayerListener = () {
+  //     if (videoController != null) {
+  //       // Refreshing the state to update video player with the correct ratio.
+  //       if (mounted) {
+  //         setState(() {});
+  //       }
+  //       videoController!.removeListener(videoPlayerListener!);
+  //     }
+  //   };
+  //   vController.addListener(videoPlayerListener!);
+  //   await vController.setLooping(true);
+  //   await vController.initialize();
+  //   await videoController?.dispose();
+  //   if (mounted) {
+  //     setState(() {
+  //       imageFile = null;
+  //       videoController = vController;
+  //     });
+  //   }
+  //   await vController.play();
+  // }
 
   Future<XFile?> takePicture() async {
     final CameraController? cameraController = controller;

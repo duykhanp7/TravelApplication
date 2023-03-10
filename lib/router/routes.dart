@@ -9,6 +9,7 @@ import 'package:travel_booking_tour/features/guide/detail/screens/guide_descript
 import 'package:travel_booking_tour/features/guide/detail/screens/choose_guide_trip_information_page.dart';
 import 'package:travel_booking_tour/features/main/main_page.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/terms_and_conditions_screen.dart';
+import 'package:travel_booking_tour/features/tour/detail/tour_detail_screen.dart';
 import 'package:travel_booking_tour/res/app_camera.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
@@ -41,6 +42,7 @@ class Routes {
     AppPath.termAndCondition: (context) => const TermAndConditionScreen(),
     AppPath.tourGuideAddProfile: (context) =>
         const SignUpTourGuideInformationScreen(),
+    AppPath.tourDetail: (context) => const TourDetailScreen(),
   };
 
   static Future<void> initializedCamera() async {
@@ -54,12 +56,10 @@ class Routes {
   }
 
   static void navigateTo(String namePage, Map<String, dynamic> arguments) {
-    debugPrint('Breakpoint 1');
     navigator.currentState?.pushNamed(
       namePage,
       arguments: arguments,
     );
-    debugPrint('Breakpoint 2');
   }
 
   static void navigatoReplacement(

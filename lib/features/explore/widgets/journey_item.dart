@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/features/explore/models/top_journey_preview_json.dart';
+import 'package:travel_booking_tour/data/models/tour_detail_json.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/icons.dart';
 import 'package:travel_booking_tour/res/vertical_star_widget.dart';
 
 class JourneyItem extends StatefulWidget {
   const JourneyItem(
-      {super.key, required this.callback, required this.journeyJson});
+      {super.key, required this.callback, required this.tourDetailJson});
   final VoidCallback callback;
-  final TopJourneyJson journeyJson;
+  final TourDetailJson tourDetailJson;
   @override
   State<StatefulWidget> createState() {
     return _JourneyItem();
@@ -51,9 +51,10 @@ class _JourneyItem extends State<JourneyItem> {
                                 topLeft: Radius.circular(15),
                                 topRight: Radius.circular(15)),
                             child: Image.asset(
-                              widget.journeyJson.imageUrl ?? '',
+                              widget.tourDetailJson.images?[0] ?? '',
                               filterQuality: FilterQuality.high,
                               width: 235,
+                              height: 135,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -65,12 +66,12 @@ class _JourneyItem extends State<JourneyItem> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 HorizontalStarWidget(
-                                    rating: widget.journeyJson.ratings ?? 0),
+                                    rating: widget.tourDetailJson.rating ?? 0),
                                 const SizedBox(
                                   width: 13,
                                 ),
                                 Text(
-                                  '${widget.journeyJson.likes} likes',
+                                  '${widget.tourDetailJson.likes} likes',
                                   style: context.textStyle.titleSmall?.copyWith(
                                       fontSize: 12,
                                       color: AppColors.white,
@@ -96,7 +97,7 @@ class _JourneyItem extends State<JourneyItem> {
                           Container(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              widget.journeyJson.destinationTitle ?? '',
+                              widget.tourDetailJson.destination ?? '',
                               overflow: TextOverflow.ellipsis,
                               style: context.textStyle.titleMedium
                                   ?.copyWith(fontWeight: FontWeight.w500),
@@ -117,7 +118,7 @@ class _JourneyItem extends State<JourneyItem> {
                                 width: 9,
                               ),
                               Text(
-                                widget.journeyJson.dateStart ?? '',
+                                widget.tourDetailJson.departureDate ?? '',
                                 style: context.textStyle.titleSmall?.copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: AppColors.textOnboardingBrown),
@@ -139,7 +140,7 @@ class _JourneyItem extends State<JourneyItem> {
                                 width: 9,
                               ),
                               Text(
-                                '${widget.journeyJson.quantities} days',
+                                '${widget.tourDetailJson.schedule?.length ?? '0'} days',
                                 style: context.textStyle.titleSmall?.copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: AppColors.textOnboardingBrown),
@@ -152,7 +153,7 @@ class _JourneyItem extends State<JourneyItem> {
                           Container(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              '\$${widget.journeyJson.price}',
+                              '\$${widget.tourDetailJson.price}',
                               style: context.textStyle.titleMedium?.copyWith(
                                   fontWeight: FontWeight.w100,
                                   color: AppColors.primary,
@@ -192,7 +193,12 @@ class _JourneyItem extends State<JourneyItem> {
                       width: 13,
                       height: 20,
                       color: AppColors.transparent,
-                      child: SvgPicture.asset(AppIcons.bookMarkNone),
+                      child: SvgPicture.asset(
+                          widget.tourDetailJson.isFavorite == null
+                              ? AppIcons.bookMarkNone
+                              : widget.tourDetailJson.isFavorite!
+                                  ? AppIcons.bookMarkFill
+                                  : AppIcons.bookMarkNone),
                     ),
                     Container(
                       alignment: Alignment.center,

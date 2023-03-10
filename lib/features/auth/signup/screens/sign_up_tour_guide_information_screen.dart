@@ -12,7 +12,6 @@ import 'package:travel_booking_tour/features/auth/signup/blocs/bloc_sign_up_tour
 import 'package:travel_booking_tour/features/auth/signup/widgets/choose_date_widget.dart';
 import 'package:travel_booking_tour/features/auth/signup/widgets/timeline_widget.dart';
 import 'package:travel_booking_tour/res/app_dialog.dart';
-import 'package:travel_booking_tour/res/app_video.dart';
 import 'package:travel_booking_tour/res/background.dart';
 import 'package:travel_booking_tour/res/button.dart';
 import 'package:travel_booking_tour/res/dotted_border/dotted_border.dart';

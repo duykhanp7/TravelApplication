@@ -127,4 +127,11 @@ class AppIcons {
   static const String icDropDown = '$parentPathIcons/ic_drop_down.svg';
   static const String icSwitchCamera = '$parentPathIcons/ic_switch_camera.svg';
   static const String icGallery = '$parentPathIcons/ic_gallery.svg';
+  static const String icShare = '$parentPathIcons/ic_share.svg';
+  static const String icFavoriteWhiteNull =
+      '$parentPathIcons/ic_favorite_white_null.svg';
+  static const String icBookMarkWhiteNull =
+      '$parentPathIcons/ic_book_mark_white_null.svg';
+  static const String icSchedule = '$parentPathIcons/ic_schedule.svg';
+  static const String icDollarCircle = '$parentPathIcons/ic_dollar_circle.svg';
 }

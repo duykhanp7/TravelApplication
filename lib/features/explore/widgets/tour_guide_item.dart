@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
+import 'package:travel_booking_tour/data/models/tour_guide_detail_json.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/icons.dart';
-import 'package:travel_booking_tour/res/images.dart';
 import 'package:travel_booking_tour/res/vertical_star_widget.dart';
 
 class TourGuideItem extends StatefulWidget {
-  const TourGuideItem({super.key, required this.callback});
+  const TourGuideItem(
+      {super.key, required this.callback, required this.tourGuideDetailJson});
 
   final VoidCallback callback;
+  final TourGuideDetailJson tourGuideDetailJson;
 
   @override
   State<StatefulWidget> createState() {
@@ -37,7 +39,7 @@ class _TourGuideItem extends State<TourGuideItem> {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(12)),
                           child: Image.asset(
-                            AppImages.emmy,
+                            widget.tourGuideDetailJson.profileImageUrl ?? '',
                             width: 220,
                             filterQuality: FilterQuality.high,
                             fit: BoxFit.cover,
@@ -50,14 +52,16 @@ class _TourGuideItem extends State<TourGuideItem> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const HorizontalStarWidget(rating: 5),
+                                HorizontalStarWidget(
+                                    rating:
+                                        widget.tourGuideDetailJson.rating ?? 0),
                                 const SizedBox(
                                   height: 4,
                                 ),
                                 Container(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
-                                    '127 reviews',
+                                    '${widget.tourGuideDetailJson.reviews?.length ?? 0} reviews',
                                     textAlign: TextAlign.start,
                                     style: context.textStyle.titleSmall
                                         ?.copyWith(
@@ -86,7 +90,7 @@ class _TourGuideItem extends State<TourGuideItem> {
                           ),
                           Text(
                             overflow: TextOverflow.ellipsis,
-                            'Emmy',
+                            widget.tourGuideDetailJson.name ?? '',
                             style: context.textStyle.titleMedium
                                 ?.copyWith(fontWeight: FontWeight.w500),
                           ),
@@ -102,7 +106,7 @@ class _TourGuideItem extends State<TourGuideItem> {
                                   width: 6,
                                 ),
                                 Text(
-                                  'Da Nang, Viet Nam',
+                                  widget.tourGuideDetailJson.address ?? '',
                                   overflow: TextOverflow.ellipsis,
                                   style: context.textStyle.titleSmall?.copyWith(
                                       fontWeight: FontWeight.w400,
@@ -116,21 +120,22 @@ class _TourGuideItem extends State<TourGuideItem> {
                     )),
               ],
             ),
-            Container(
-              width: 170,
-              height: 220,
-              decoration: const BoxDecoration(
-                  color: AppColors.transparent,
-                  borderRadius: BorderRadius.all(Radius.circular(12))),
-              alignment: Alignment.center,
-              child: Material(
-                borderRadius: const BorderRadius.all(Radius.circular(12)),
-                color: AppColors.transparent,
-                child: InkWell(
-                  highlightColor: AppColors.white.withOpacity(0.1),
-                  splashColor: AppColors.white.withOpacity(0.1),
+            AspectRatio(
+              aspectRatio: 1 / 1.35,
+              child: Container(
+                decoration: const BoxDecoration(
+                    color: AppColors.transparent,
+                    borderRadius: BorderRadius.all(Radius.circular(12))),
+                alignment: Alignment.center,
+                child: Material(
                   borderRadius: const BorderRadius.all(Radius.circular(12)),
-                  onTap: widget.callback,
+                  color: AppColors.transparent,
+                  child: InkWell(
+                    highlightColor: AppColors.white.withOpacity(0.1),
+                    splashColor: AppColors.white.withOpacity(0.1),
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
+                    onTap: widget.callback,
+                  ),
                 ),
               ),
             )

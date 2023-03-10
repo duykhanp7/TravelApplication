@@ -7,11 +7,13 @@ import 'package:travel_booking_tour/features/auth/signin/blocs/bloc_sign_in_scre
 import 'package:travel_booking_tour/features/auth/signin/blocs/bloc_sign_in_state.dart';
 import 'package:travel_booking_tour/res/background.dart';
 import 'package:travel_booking_tour/res/res.dart';
+import 'package:travel_booking_tour/router/path.dart';
 
 import '../../../l10n/generated/l10n.dart';
 import '../../../res/app_dialog.dart';
 import '../../../res/button.dart';
 import '../../../res/input_field.dart';
+import '../../../router/routes.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -47,14 +49,15 @@ class _SignInScreen extends State<SignInScreen> {
                 current is BlocSignInStateServerError,
             listener: (context, state) {
               if (state is BlocSignInStateValidateSuccess) {
-                showDialog(
-                  context: context,
-                  builder: (context) => AppDialog(
-                    typeDialog: TypeDialog.success,
-                    content: 'Congratulation!\nSign up successfully.',
-                    positiveAction: () => Navigator.of(context).pop(),
-                  ),
-                );
+                // showDialog(
+                //   context: context,
+                //   builder: (context) => AppDialog(
+                //     typeDialog: TypeDialog.success,
+                //     content: 'Congratulation!\nSign up successfully.',
+                //     positiveAction: () => Navigator.of(context).pop(),
+                //   ),
+                // );
+                Routes.navigateToAndRemoveUntil(AppPath.mainScreen, {});
               } else if (state is BlocSignInStateServerError) {
                 showDialog(
                   context: context,

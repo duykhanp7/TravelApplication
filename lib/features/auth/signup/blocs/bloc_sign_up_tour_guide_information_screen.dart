@@ -28,7 +28,6 @@ class BlocSignUpTourGuideInformationScreen extends Bloc<
   String fee79 = '0';
   String fee1014 = '0';
 
-  final ImagePicker _imagePicker = ImagePicker();
   XFile? imageProfile;
   XFile? imageGuideLicense;
   XFile? imageIdentityCard;

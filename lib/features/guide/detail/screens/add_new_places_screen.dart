@@ -50,7 +50,6 @@ class _AddNewPlacesScreen extends State<AddNewPlacesScreen> {
                 color: AppColors.primary),
           ),
         ),
-        suffixAction: () {},
       ),
       body: GestureDetector(
         child: Container(
