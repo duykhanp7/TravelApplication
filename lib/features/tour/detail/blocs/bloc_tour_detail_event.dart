@@ -23,3 +23,9 @@ class BlocTourDetailEventChangeIndexSchedule extends BlocTourDetailEvent {
   @override
   List<Object?> get props => [index];
 }
+
+class BlocTourDetailEventShowBottomSheetShare extends BlocTourDetailEvent {
+  BlocTourDetailEventShowBottomSheetShare();
+  @override
+  List<Object?> get props => [];
+}

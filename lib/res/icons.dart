@@ -9,6 +9,7 @@ class AppIcons {
   static const String childPathForgotPassword = '/forgot_password';
   static const String childPathExplore = '/explore';
   static const String childPathProfile = '/profile';
+  static const String childPathShare = '/share';
 
   static const String appLogo = '$parentPathIcons/app_icon.svg';
 
@@ -134,4 +135,15 @@ class AppIcons {
       '$parentPathIcons/ic_book_mark_white_null.svg';
   static const String icSchedule = '$parentPathIcons/ic_schedule.svg';
   static const String icDollarCircle = '$parentPathIcons/ic_dollar_circle.svg';
+
+  static const String icFacebookFrame =
+      '$parentPathIcons$childPathShare/ic_facebook_frame.svg';
+  static const String icGoogleFrame =
+      '$parentPathIcons$childPathShare/ic_gg_frame.svg';
+  static const String icTalkFrame =
+      '$parentPathIcons$childPathShare/ic_talk_frame.svg';
+  static const String icTwitterFrame =
+      '$parentPathIcons$childPathShare/ic_twitter_frame.svg';
+  static const String icWhatAppFrame =
+      '$parentPathIcons$childPathShare/ic_whatapp_frame.svg';
 }

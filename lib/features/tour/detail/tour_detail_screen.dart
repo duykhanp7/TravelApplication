@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,7 +60,10 @@ class _TourDetailScreen extends State<TourDetailScreen> {
             children: [
               AppInkWell(
                   size: const Size(30, 30),
-                  voidCallBack: () {},
+                  voidCallBack: () {
+                    _blocTourDetailScreen
+                        .add(BlocTourDetailEventShowBottomSheetShare());
+                  },
                   icon: AppIcons.icShare),
               const SizedBox(width: 14),
               AppInkWell(
@@ -103,10 +107,123 @@ class _TourDetailScreen extends State<TourDetailScreen> {
           },
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          color: AppColors.white,
-          child: _buildbody(),
+      body: BlocListener<BlocTourDetailScreen, BlocTourDetailState>(
+        listenWhen: (previous, current) =>
+            current is BlocTourDetailStateShowBottomSheetShare,
+        listener: (context, state) {
+          if (state is BlocTourDetailStateShowBottomSheetShare) {
+            showCupertinoModalPopup(
+              context: context,
+              barrierDismissible: true,
+              builder: (context) => CupertinoActionSheet(
+                actions: [
+                  Container(
+                    color: AppColors.white,
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.fromLTRB(16, 14, 16, 0),
+                    child: Column(
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Share on',
+                            style: context.textStyle.titleMedium?.copyWith(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.black),
+                          ),
+                        ),
+                        const SizedBox(height: 23),
+                        Container(
+                          alignment: Alignment.center,
+                          height: 100,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            children: [
+                              SocialButton(
+                                width: 60,
+                                height: 60,
+                                radius: 14,
+                                title: 'Facebook',
+                                icon: AppIcons.icFacebookFrame,
+                                background: AppColors.facebookBgColor,
+                                splash: AppColors.white.withOpacity(0.2),
+                                voidCallback: () {},
+                              ),
+                              const SizedBox(width: 10),
+                              SocialButton(
+                                width: 60,
+                                height: 60,
+                                radius: 14,
+                                title: 'Google',
+                                icon: AppIcons.icGoogleFrame,
+                                background: AppColors.googleBgColor,
+                                splash: AppColors.white.withOpacity(0.2),
+                                voidCallback: () {},
+                              ),
+                              const SizedBox(width: 10),
+                              SocialButton(
+                                width: 60,
+                                height: 60,
+                                radius: 14,
+                                title: 'Kakao Talk',
+                                icon: AppIcons.icTalkFrame,
+                                background: AppColors.talkBgColor,
+                                splash: AppColors.white.withOpacity(0.2),
+                                voidCallback: () {},
+                              ),
+                              const SizedBox(width: 10),
+                              SocialButton(
+                                width: 60,
+                                height: 60,
+                                radius: 14,
+                                title: 'Whatsapp',
+                                icon: AppIcons.icWhatAppFrame,
+                                background: AppColors.whatAppBgColor,
+                                splash: AppColors.white.withOpacity(0.2),
+                                voidCallback: () {},
+                              ),
+                              const SizedBox(width: 10),
+                              SocialButton(
+                                width: 60,
+                                height: 60,
+                                radius: 14,
+                                title: 'Twitter',
+                                icon: AppIcons.icTwitterFrame,
+                                background: AppColors.twitterBgColor,
+                                splash: AppColors.white.withOpacity(0.2),
+                                voidCallback: () {},
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+                cancelButton: CupertinoActionSheetAction(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      'Cancel',
+                      style: context.textStyle.titleMedium?.copyWith(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w100,
+                          fontStyle: FontStyle.italic,
+                          color: AppColors.primary),
+                    )),
+              ),
+            );
+          }
+        },
+        child: SingleChildScrollView(
+          child: Container(
+            color: AppColors.white,
+            child: _buildbody(),
+          ),
         ),
       ),
       bottomSheet: Container(
@@ -189,6 +306,7 @@ class _TourDetailScreen extends State<TourDetailScreen> {
   }
 
   Widget _buildbody() {
+    debugPrint('Rebuild when show dialog');
     return Container(
       padding: const EdgeInsets.fromLTRB(16, 20, 16, 50),
       child: Column(

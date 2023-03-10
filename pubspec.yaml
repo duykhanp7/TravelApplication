@@ -85,6 +85,7 @@ flutter:
     - assets/icons/signin/
     - assets/icons/explore/
     - assets/icons/profile/
+    - assets/icons/share/
     - assets/images/
     - assets/images/onboarding/
     - assets/images/forgot_password/
