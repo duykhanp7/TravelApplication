@@ -31,7 +31,8 @@ class AppTextField extends StatefulWidget {
       this.focusNode,
       this.maxLines,
       this.onEditingCompleted,
-      this.maxLength});
+      this.maxLength,
+      this.cursorColor});
 
   final String? initialText;
   final String? hintText;
@@ -59,6 +60,7 @@ class AppTextField extends StatefulWidget {
   final FocusNode? focusNode;
   final int? maxLines;
   final int? maxLength;
+  final Color? cursorColor;
 
   @override
   State<StatefulWidget> createState() {
@@ -141,7 +143,7 @@ class _AppTextField extends State<AppTextField> {
             validator: widget.validator,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             textInputAction: TextInputAction.done,
-            cursorColor: AppColors.primary,
+            cursorColor: widget.cursorColor ?? AppColors.primary,
             style: widget.textStyle ??
                 context.textStyle.titleSmall!.copyWith(
                     fontWeight: FontWeight.w400,

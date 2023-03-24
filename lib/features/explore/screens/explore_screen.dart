@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 import 'package:travel_booking_tour/data/models/tour_detail_json.dart';
 import 'package:travel_booking_tour/data/models/tour_guide_detail_json.dart';
-import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_event.dart';
-import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_screen.dart';
-import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_state.dart';
+import 'package:travel_booking_tour/features/explore/blocs/bloc_explore_event.dart';
+import 'package:travel_booking_tour/features/explore/blocs/bloc_explore_screen.dart';
+import 'package:travel_booking_tour/features/explore/blocs/bloc_explore_state.dart';
 
 import 'package:travel_booking_tour/features/explore/widgets/featured_tour_item.dart';
 import 'package:travel_booking_tour/features/explore/widgets/journey_item.dart';
@@ -17,7 +17,7 @@ import 'package:travel_booking_tour/l10n/generated/l10n.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/system.dart';
 
-import '../../common/enums/enums.dart';
+import '../../../common/enums/enums.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({super.key, required this.scrollController});
@@ -48,6 +48,7 @@ class _ExploreScreen extends State<ExploreScreen> {
           child: _buildbody(context),
         ),
       ),
+      resizeToAvoidBottomInset: false,
     );
   }
 
@@ -76,13 +77,9 @@ class _ExploreScreen extends State<ExploreScreen> {
               physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 200,
-                  ),
+                  const SizedBox(height: 20),
                   _buildTopJourneyWidget(exploreState.topJourneyJsons),
-                  const SizedBox(
-                    height: 30,
-                  ),
+                  const SizedBox(height: 30),
                   _buildBestGuide(exploreState.bestGuideJsons),
                   _buildTopExperiences(exploreState.topExperienceJsons),
                   _buildFeaturedTours(exploreState.featuresTourJsons),
@@ -176,7 +173,10 @@ class _ExploreScreen extends State<ExploreScreen> {
                       style: context.textStyle.titleSmall
                           ?.copyWith(color: AppColors.primary),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      _blocExploreScreen.add(BlocExploreEventOnSeeMoreClick(
+                          seeMoreType: SeeMoreType.guide));
+                    },
                   ),
                 ),
               )
@@ -281,7 +281,10 @@ class _ExploreScreen extends State<ExploreScreen> {
                       style: context.textStyle.titleSmall
                           ?.copyWith(color: AppColors.primary),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      _blocExploreScreen.add(BlocExploreEventOnSeeMoreClick(
+                          seeMoreType: SeeMoreType.tour));
+                    },
                   ),
                 ),
               )
@@ -342,7 +345,10 @@ class _ExploreScreen extends State<ExploreScreen> {
                       style: context.textStyle.titleSmall
                           ?.copyWith(color: AppColors.primary),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      _blocExploreScreen.add(BlocExploreEventOnSeeMoreClick(
+                          seeMoreType: SeeMoreType.news));
+                    },
                   ),
                 ),
               )

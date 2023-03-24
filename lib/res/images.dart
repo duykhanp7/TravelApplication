@@ -42,4 +42,6 @@ class AppImages {
   static const String myex2 = '$parentPathImages/myex2.png';
   static const String myex3 = '$parentPathImages/myex3.png';
   static const String tuanTran = '$parentPathImages/tuan_tran.png';
+  static const String seeMoreHeaderImage =
+      '$parentPathImages/see_more_header_image.png';
 }

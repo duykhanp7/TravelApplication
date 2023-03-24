@@ -5,7 +5,7 @@ import 'package:travel_booking_tour/data/network/network_exception.dart';
 class ApiService implements ApiInterface {
   //final String _baseURL = 'https://be-travel.onrender.com';
   final String _baseURL = 'http://10.0.2.2:1337';
-  //final BaseOptions _baseOptions = BaseOptions();
+  // final BaseOptions _baseOptions = BaseOptions();
   final Dio dio = Dio();
 
   ApiService() {

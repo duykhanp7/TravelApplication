@@ -33,4 +33,5 @@ class AppColors {
   static const Color googleBgColor = Color(0xFFFF3E3E);
   static const Color whatAppBgColor = Color(0xFF1AC021);
   static const Color twitterBgColor = Color(0xFF1FA5F0);
+  static const Color bgBLlur = Color(0xFFC4C4C4);
 }

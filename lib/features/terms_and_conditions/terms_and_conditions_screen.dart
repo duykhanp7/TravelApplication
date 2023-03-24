@@ -5,7 +5,7 @@ import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/blocs/bloc_terms_and_conditions_event.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/blocs/bloc_terms_and_conditions_screen.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/blocs/bloc_terms_and_conditions_state.dart';
-import 'package:travel_booking_tour/res/appbar_app_widget.dart';
+import 'package:travel_booking_tour/res/app_appbar.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 
 import '../../res/system.dart';

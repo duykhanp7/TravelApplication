@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:travel_booking_tour/data/models/tour_detail_json.dart';
 import 'package:travel_booking_tour/data/models/tour_guide_detail_json.dart';
-import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_event.dart';
-import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_state.dart';
+import 'package:travel_booking_tour/features/explore/blocs/bloc_explore_event.dart';
+import 'package:travel_booking_tour/features/explore/blocs/bloc_explore_state.dart';
 import 'package:travel_booking_tour/features/explore/repositories/explore_repository.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
@@ -13,7 +13,12 @@ class BlocExploreScreen extends Bloc<BlocExploreEvent, BlocExploreState> {
   final ExploreRepository _exploreRepository = ExploreRepository();
 
   BlocExploreScreen() : super(BlocExploreStateInitial()) {
-    on<BlocExploreEventInitial>((event, emit) async {
+    on<BlocExploreEvent>((event, emit) => mapStateToEvent(event, emit));
+  }
+
+  void mapStateToEvent(
+      BlocExploreEvent event, Emitter<BlocExploreState> emit) async {
+    if (event is BlocExploreEventInitial) {
       List<TourDetailJson> topJourneyJsons = [];
       List<TourGuideDetailJson> bestGuideJsons = [];
       List<TourDetailJson> topExperienceJsons = [];
@@ -39,14 +44,13 @@ class BlocExploreScreen extends Bloc<BlocExploreEvent, BlocExploreState> {
           topExperienceJsons: topExperienceJsons,
           featuresTourJsons: featuresTourJsons,
           travelNewJsons: travelNewJsons));
-    });
-    on<BlocExploreEventReloadData>((event, emit) {});
-    on<BlocExploreEventOnTourClick>((event, emit) {
+    } else if (event is BlocExploreEventOnTourClick) {
       Routes.navigateTo(AppPath.tourDetail, {'data': event.tourDetailJson});
-    });
-    on<BlocExploreEventOnBestGuideClick>((event, emit) {
+    } else if (event is BlocExploreEventOnBestGuideClick) {
       Routes.navigateTo(AppPath.guide, {'data': event.tourGuideDetailJson});
-    });
+    } else if (event is BlocExploreEventOnSeeMoreClick) {
+      Routes.navigateTo(AppPath.seeMore, {'data': event.seeMoreType});
+    }
   }
 
   Future<TourGuideDetailJson> getTourGuideDetail(int id) async {

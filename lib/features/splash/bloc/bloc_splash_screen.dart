@@ -10,7 +10,7 @@ class BlocSplashScreen extends Bloc<BlocSplashEvent, BlocSplashState> {
     on<BlocSplashEventInitial>((event, emit) => {
           Future.delayed(
             const Duration(seconds: 3),
-            () => Routes.navigatoReplacement(AppPath.signInScreen, {}),
+            () => Routes.navigatoReplacement(AppPath.onBoardingSCreen, {}),
           )
         });
   }

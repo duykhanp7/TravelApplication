@@ -9,8 +9,8 @@ class BlocOnboardingScreen
     extends Bloc<BlocOnboardingEvent, BlocOnboardingState> {
   BlocOnboardingScreen() : super(BlocOnboardingStateInitial()) {
     on<BlocOnboardingEventOnButtonSkipClick>((event, emit) =>
-        {Routes.navigateToAndRemoveUntil(AppPath.signUpScreen, {})});
+        {Routes.navigateToAndRemoveUntil(AppPath.signInScreen, {})});
     on<BlocOnboardingEventOnButtonGetStartedClick>((event, emit) =>
-        {Routes.navigateToAndRemoveUntil(AppPath.signUpScreen, {})});
+        {Routes.navigateToAndRemoveUntil(AppPath.signInScreen, {})});
   }
 }

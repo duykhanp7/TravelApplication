@@ -44,7 +44,7 @@ class _FeaturedTourItem extends State<FeaturedTourItem> {
                     child: Stack(
                       children: [
                         Container(
-                          width: MediaQuery.of(context).size.width,
+                          width: double.infinity,
                           decoration: const BoxDecoration(
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(15),
@@ -172,7 +172,7 @@ class _FeaturedTourItem extends State<FeaturedTourItem> {
               ],
             ),
             Container(
-              width: MediaQuery.of(context).size.width,
+              width: double.infinity,
               height: 260,
               decoration: const BoxDecoration(
                   color: AppColors.transparent,

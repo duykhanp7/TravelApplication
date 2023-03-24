@@ -1,10 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_trip_information_event.dart';
-import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_trip_information_state.dart';
+import 'package:travel_booking_tour/features/guide/choose_guide/model/destination_json.dart';
+import 'package:travel_booking_tour/features/guide/choose_guide/repository/add_trip_information_repository.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
 import '../../../../router/routes.dart';
+import 'bloc_add_trip_information_event.dart';
+import 'bloc_add_trip_information_state.dart';
 
 class BlocTripInformationScreen
     extends Bloc<BlocTripInformationEvent, BlocTripInformationState> {
@@ -29,6 +31,9 @@ class BlocTripInformationScreen
   TextEditingController textEditingControllerNumberOfTravelers =
       TextEditingController(text: '');
 
+  final AddTripInformationRepository _addTripInformationRepository =
+      AddTripInformationRepository();
+
   void mapStateToEvent(BlocTripInformationEvent event,
       Emitter<BlocTripInformationState> emit) async {
     if (event is BlocTripInformationEventInitial) {
@@ -38,30 +43,23 @@ class BlocTripInformationScreen
       textEditingControllerCity.text = '';
       textEditingControllerNumberOfTravelers.text = '1';
       numberOfTravelers = textEditingControllerNumberOfTravelers.text;
-    }
-    if (event is BlocTripInformationEventChangeDate) {
+    } else if (event is BlocTripInformationEventChangeDate) {
       date = event.date;
-    }
-    if (event is BlocTripInformationEventChangeTimeFrom) {
+    } else if (event is BlocTripInformationEventChangeTimeFrom) {
       timeFrom = event.timeFrom;
-    }
-    if (event is BlocTripInformationEventChangeTimeTo) {
+    } else if (event is BlocTripInformationEventChangeTimeTo) {
       timeTo = event.timeTo;
-    }
-    if (event is BlocTripInformationEventChangeCity) {
+    } else if (event is BlocTripInformationEventChangeCity) {
       city = event.city;
-    }
-    if (event is BlocTripInformationEventChangeNumberOfTravelers) {
+    } else if (event is BlocTripInformationEventChangeNumberOfTravelers) {
       numberOfTravelers = event.numberOfTravelers;
-    }
-    if (event is BlocTripInformationEventAddNumberOfTravelers) {
+    } else if (event is BlocTripInformationEventAddNumberOfTravelers) {
       if (numberOfTravelers != null) {
         textEditingControllerNumberOfTravelers.text =
             (int.parse(numberOfTravelers!) + 1).toString();
         numberOfTravelers = textEditingControllerNumberOfTravelers.text;
       }
-    }
-    if (event is BlocTripInformationEventSubtractNumberOfTravelers) {
+    } else if (event is BlocTripInformationEventSubtractNumberOfTravelers) {
       if (numberOfTravelers != null) {
         if (int.parse(numberOfTravelers!) > 0) {
           textEditingControllerNumberOfTravelers.text =
@@ -69,16 +67,25 @@ class BlocTripInformationScreen
           numberOfTravelers = textEditingControllerNumberOfTravelers.text;
         }
       }
-    }
-    if (event is BlocTripInformationEventCheckAttractions) {
+    } else if (event is BlocTripInformationEventCheckAttractions) {
       emit(BlocTripInformationStateCheck(current: DateTime.now().microsecond));
-    }
-    if (event is BlocTripInformationEventUnCheckAttractions) {
+    } else if (event is BlocTripInformationEventUnCheckAttractions) {
       emit(BlocTripInformationStateCheck(current: DateTime.now().microsecond));
-    }
-    if (event is BlocTripInformationEventChangeAddNewAttractions) {
+    } else if (event is BlocTripInformationEventChangeAddNewAttractions) {
       Routes.navigateTo(AppPath.addNewPlaces, {});
+    } else if (event is BlocTripInformationEventDone) {
+    } else if (event is BlocTripInformationEventSearchDestination) {
+      emit(BlocTripInformationStateSearchDestinationLoading());
+      List<DestinationJson>? items =
+          await _addTripInformationRepository.getDestination(event.name);
+      if (items != null) {
+        emit(BlocTripInformationStateSearchDestinationLoadingSuccess(
+            data: items));
+      } else {
+        emit(BlocTripInformationStateSearchDestinationLoadingFail());
+      }
+    } else if (event is BlocTripInformationEventBack) {
+      emit(BlocTripInformationStateClose());
     }
-    if (event is BlocTripInformationEventDone) {}
   }
 }
