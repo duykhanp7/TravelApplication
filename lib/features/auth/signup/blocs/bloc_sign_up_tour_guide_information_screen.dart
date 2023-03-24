@@ -87,15 +87,12 @@ class BlocSignUpTourGuideInformationScreen extends Bloc<
 
       TimeFromTo? timeFromTo = mapTimes[dateInWeek];
       if (timeFromTo != null) {
-        debugPrint('Time From To Not Null');
         if (timeFromTo.timeFrom != null) {
           textEditingControllerTimeFrom.text = timeFromTo.timeFrom!;
         }
         if (timeFromTo.timeTo != null) {
           textEditingControllerTimeTo.text = timeFromTo.timeTo!;
         }
-      } else {
-        debugPrint('Nulllllllllll');
       }
 
       emit(BlocSignUpTourGuideInformationStateChangeIndexDate(

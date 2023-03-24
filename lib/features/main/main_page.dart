@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/features/explore/explore_screen.dart';
+import 'package:travel_booking_tour/features/explore/screens/explore_screen.dart';
 import 'package:travel_booking_tour/features/location/trip_screen.dart';
 import 'package:travel_booking_tour/features/main/blocs/bloc_main_event.dart';
 import 'package:travel_booking_tour/features/main/blocs/bloc_main_screen.dart';
@@ -11,6 +11,8 @@ import 'package:travel_booking_tour/features/main/blocs/bloc_main_state.dart';
 import 'package:travel_booking_tour/features/message/chat_screen.dart';
 import 'package:travel_booking_tour/features/notification/notification_screen.dart';
 import 'package:travel_booking_tour/features/profile/profile_screen.dart';
+import 'package:travel_booking_tour/res/app_appbar.dart';
+import 'package:travel_booking_tour/res/app_search.dart';
 
 import '../../l10n/generated/l10n.dart';
 import '../../res/colors.dart';
@@ -40,6 +42,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
   final ScrollController _scrollControllerTabProfile = ScrollController();
   late TabController _tabController;
   late List<ScrollController> _scrollController;
+  late BlocMainScreen _blocMainScreen;
 
   @override
   void initState() {
@@ -75,26 +78,32 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
 
     _tabController = TabController(length: 5, vsync: this);
 
+    _blocMainScreen = BlocProvider.of<BlocMainScreen>(context);
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<BlocMainScreen>(context).add(BlocmainEventInitial());
+    _blocMainScreen.add(BlocmainEventInitial());
     localization = SLocalization.of(context);
     SystemChrome.setSystemUIOverlayStyle(AppSystem.systemTransparentStatusBar);
-    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: AppColors.white,
+      appBar: _buildHeader(double.infinity),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
         child: Container(
           alignment: Alignment.topCenter,
           child: Stack(
-            children: [_buildBody(), _buildHeader(width)],
+            children: [
+              _buildBody(),
+            ],
           ),
         ),
       ),
+      extendBody: false,
+      extendBodyBehindAppBar: false,
       bottomNavigationBar: _buildBottomNavigationBar(context),
     );
   }
@@ -109,38 +118,163 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
     );
   }
 
-  Widget _buildHeader(double width) {
-    return SizedBox(
-      width: width,
-      child: BlocBuilder<BlocMainScreen, BlocMainState>(
-        builder: (context, blocMainState) {
-          if (blocMainState is BlocMainStateChangeTabIndex) {
-            if (blocMainState.index == 0) {
-              return _buildExploreHeader(context);
-            } else if (blocMainState.index == 4) {
-              return _buildProfileHeader(width, context);
-            } else {
-              return _buildTripChatNotificationHeader(
-                  width, blocMainState, context);
-            }
-          }
-          return Container();
-        },
+  PreferredSizeWidget _buildHeader(double width) {
+    return PreferredSize(
+        preferredSize: Size(width, 155),
+        child: SizedBox(
+          width: width,
+          child: BlocBuilder<BlocMainScreen, BlocMainState>(
+            builder: (context, blocMainState) {
+              if (blocMainState is BlocMainStateChangeTabIndex) {
+                return AppbarAppWidget(
+                  prefixWidget: Container(),
+                  height: blocMainState.index == 4 ? 155 : 155,
+                  flexibleSpace: blocMainState.index == 0
+                      ? _buildExploreHeader(context)
+                      : blocMainState.index == 4
+                          ? _buildProfileHeader(width, context)
+                          : _buildTripChatNotificationHeader(
+                              width, blocMainState, context),
+                  bottom: _buildBottom(blocMainState.index),
+                );
+              }
+              return Container();
+            },
+          ),
+        ));
+  }
+
+  PreferredSize? _buildBottom(int index) {
+    return PreferredSize(
+        preferredSize: const Size(double.infinity, 50),
+        child: index == 0
+            ? _buildBottomTabExplore()
+            : index == 4
+                ? _buildBottomTabPersonal()
+                : Container());
+  }
+
+  Widget _buildBottomTabPersonal() {
+    return Container(
+      alignment: Alignment.centerLeft,
+      child: Stack(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(left: 10),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  color: AppColors.transparent,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(40),
+                    child: Image.asset(
+                      AppImages.imageProfile,
+                      filterQuality: FilterQuality.high,
+                      fit: BoxFit.contain,
+                      height: 80,
+                      width: 80,
+                    ),
+                  ),
+                ),
+                Container(
+                  color: AppColors.transparent,
+                  child: Material(
+                      borderRadius: BorderRadius.circular(40),
+                      color: AppColors.transparent,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(40),
+                        highlightColor: AppColors.white.withOpacity(0.1),
+                        splashColor: AppColors.white.withOpacity(0.1),
+                        child: const SizedBox(
+                          height: 80,
+                          width: 80,
+                        ),
+                        onTap: () {},
+                      )),
+                ),
+                Positioned(
+                    bottom: 0,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Container(
+                          width: 24,
+                          height: 24,
+                          margin: const EdgeInsets.only(top: 15),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
+                                    offset: const Offset(-2, 2),
+                                    blurRadius: 5,
+                                    color: AppColors.black.withOpacity(0.25)),
+                                BoxShadow(
+                                    offset: const Offset(2, 2),
+                                    blurRadius: 5,
+                                    color: AppColors.black.withOpacity(0.25))
+                              ],
+                              color: AppColors.white),
+                          child: Material(
+                              color: AppColors.transparent,
+                              borderRadius: BorderRadius.circular(12),
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(12),
+                                highlightColor:
+                                    AppColors.primary.withOpacity(0.5),
+                                splashColor: AppColors.primary.withOpacity(0.5),
+                                child: SvgPicture.asset(
+                                  AppIcons.camera,
+                                  color: AppColors.primary,
+                                  width: 14,
+                                  height: 11,
+                                ),
+                              )),
+                        ),
+                        Container(
+                          width: 24,
+                          height: 24,
+                          margin: const EdgeInsets.only(top: 15),
+                          alignment: Alignment.center,
+                          child: Material(
+                              color: AppColors.transparent,
+                              borderRadius: BorderRadius.circular(12),
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(12),
+                                highlightColor:
+                                    AppColors.white.withOpacity(0.3),
+                                splashColor: AppColors.white.withOpacity(0.3),
+                                onTap: () {},
+                              )),
+                        )
+                      ],
+                    ))
+              ],
+            ),
+          ),
+        ],
       ),
+    );
+  }
+
+  Widget _buildBottomTabExplore() {
+    return AppSearch(
+      hintText: localization.hi_where_do_u_want_to_explore,
     );
   }
 
   SizedBox _buildTripChatNotificationHeader(double width,
       BlocMainStateChangeTabIndex blocMainState, BuildContext context) {
     return SizedBox(
-      height: 185,
       child: Stack(
         children: [
           Container(
             alignment: Alignment.topCenter,
             child: Image.asset(
               AppImages.bgHeaderXplore,
-              fit: BoxFit.contain,
+              fit: BoxFit.cover,
+              height: 156,
             ),
           ),
           SizedBox(
@@ -212,7 +346,6 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
   Container _buildProfileHeader(double width, BuildContext context) {
     return Container(
       color: AppColors.white,
-      height: 225,
       child: Stack(
         children: [
           Positioned(
@@ -224,7 +357,6 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
               children: [
                 SizedBox(
                     width: width,
-                    height: 156,
                     child: Stack(
                       children: [
                         SizedBox(
@@ -233,6 +365,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                             AppImages.defaultBg,
                             filterQuality: FilterQuality.high,
                             fit: BoxFit.cover,
+                            height: 156,
                           ),
                         ),
                         Positioned(
@@ -275,7 +408,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                                     splashColor:
                                         AppColors.white.withOpacity(0.1),
                                     child: Container(
-                                      height: 15,
+                                      height: 24,
                                       width: 24,
                                       alignment: Alignment.center,
                                       child: SvgPicture.asset(
@@ -287,138 +420,9 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                             ))
                       ],
                     )),
-                Container(
-                  alignment: Alignment.centerRight,
-                  padding: const EdgeInsets.only(right: 30, top: 6),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Yoo Jin',
-                        textAlign: TextAlign.right,
-                        style: context.textStyle.titleLarge?.copyWith(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w100,
-                            fontStyle: FontStyle.italic),
-                      ),
-                      const SizedBox(
-                        height: 3,
-                      ),
-                      Text(
-                        'yoojin@gmail.com',
-                        textAlign: TextAlign.right,
-                        style: context.textStyle.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.textSkipColor),
-                      )
-                    ],
-                  ),
-                )
               ],
             ),
           ),
-          Positioned(
-              left: 16,
-              bottom: 25,
-              child: SizedBox(
-                height: 100,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      color: AppColors.transparent,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(40),
-                        child: Image.asset(
-                          AppImages.imageProfile,
-                          filterQuality: FilterQuality.high,
-                          fit: BoxFit.contain,
-                          height: 80,
-                          width: 80,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      color: AppColors.transparent,
-                      child: Material(
-                          borderRadius: BorderRadius.circular(40),
-                          color: AppColors.transparent,
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(40),
-                            highlightColor: AppColors.white.withOpacity(0.1),
-                            splashColor: AppColors.white.withOpacity(0.1),
-                            child: const SizedBox(
-                              height: 80,
-                              width: 80,
-                            ),
-                            onTap: () {},
-                          )),
-                    ),
-                    Positioned(
-                        bottom: 0,
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Container(
-                              width: 24,
-                              height: 24,
-                              margin: const EdgeInsets.only(top: 15),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  boxShadow: <BoxShadow>[
-                                    BoxShadow(
-                                        offset: const Offset(-2, 2),
-                                        blurRadius: 5,
-                                        color:
-                                            AppColors.black.withOpacity(0.25)),
-                                    BoxShadow(
-                                        offset: const Offset(2, 2),
-                                        blurRadius: 5,
-                                        color:
-                                            AppColors.black.withOpacity(0.25))
-                                  ],
-                                  color: AppColors.white),
-                              child: Material(
-                                  color: AppColors.transparent,
-                                  borderRadius: BorderRadius.circular(12),
-                                  child: InkWell(
-                                    borderRadius: BorderRadius.circular(12),
-                                    highlightColor:
-                                        AppColors.primary.withOpacity(0.5),
-                                    splashColor:
-                                        AppColors.primary.withOpacity(0.5),
-                                    child: SvgPicture.asset(
-                                      AppIcons.camera,
-                                      color: AppColors.primary,
-                                      width: 14,
-                                      height: 11,
-                                    ),
-                                  )),
-                            ),
-                            Container(
-                              width: 24,
-                              height: 24,
-                              margin: const EdgeInsets.only(top: 15),
-                              alignment: Alignment.center,
-                              child: Material(
-                                  color: AppColors.transparent,
-                                  borderRadius: BorderRadius.circular(12),
-                                  child: InkWell(
-                                    borderRadius: BorderRadius.circular(12),
-                                    highlightColor:
-                                        AppColors.white.withOpacity(0.3),
-                                    splashColor:
-                                        AppColors.white.withOpacity(0.3),
-                                    onTap: () {},
-                                  )),
-                            )
-                          ],
-                        ))
-                  ],
-                ),
-              ))
         ],
       ),
     );
@@ -426,7 +430,6 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
 
   Container _buildExploreHeader(BuildContext context) {
     return Container(
-      height: 185,
       alignment: Alignment.center,
       child: Stack(
         alignment: Alignment.center,
@@ -435,7 +438,8 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
             alignment: Alignment.topCenter,
             child: Image.asset(
               AppImages.bgHeaderXplore,
-              fit: BoxFit.contain,
+              fit: BoxFit.cover,
+              height: 156,
             ),
           ),
           Positioned(
@@ -496,60 +500,6 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                   )
                 ],
               )),
-          Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                alignment: Alignment.center,
-                margin: const EdgeInsets.only(left: 16, right: 16, bottom: 10),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: AppColors.white,
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                          offset: const Offset(-2, 2),
-                          blurRadius: 3,
-                          color: AppColors.textSkipColor.withOpacity(0.3))
-                    ]),
-                height: 40,
-                child: TextFormField(
-                  style: context.textStyle.titleMedium?.copyWith(
-                      color: AppColors.black, fontWeight: FontWeight.w400),
-                  cursorColor: AppColors.textSkipColor,
-                  decoration: InputDecoration(
-                      prefixIcon: SizedBox(
-                        width: 16,
-                        height: 16,
-                        child: SvgPicture.asset(
-                          AppIcons.search,
-                          width: 16,
-                          height: 16,
-                          fit: BoxFit.none,
-                        ),
-                      ),
-                      hintStyle: context.textStyle.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.textSkipColor),
-                      contentPadding: EdgeInsets.zero,
-                      border: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: AppColors.transparent, width: 0),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: AppColors.transparent, width: 0),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: AppColors.transparent, width: 0),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      hintText: localization.hi_where_do_u_want_to_explore),
-                ),
-              ))
         ],
       ),
     );
@@ -563,34 +513,9 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
             height: 60,
             color: AppColors.white,
             child: CustomPaint(
-              size: Size(MediaQuery.of(context).size.width, 60),
+              size: const Size(double.infinity, 60),
               painter: RPSCustomPainter(),
             )),
-        // Container(
-        //   alignment: Alignment.center,
-        //   height: 60,
-        //   color: AppColors.white,
-        //   child: Row(
-        //     children: List.generate(
-        //         icons.length,
-        //         (index) => BottomNavItem(
-        //               index: index,
-        //               icon: icons[index],
-        //               title: titles[index],
-        //               clicked: index == indexClick,
-        //               onClick: (index) {
-        //                 setState(() {
-        //                   indexClick = index;
-        //                   if (indexClick == 0) {
-        //                     scrollController.animateTo(0,
-        //                         duration: const Duration(seconds: 2),
-        //                         curve: Curves.fastLinearToSlowEaseIn);
-        //                   }
-        //                 });
-        //               },
-        //             )),
-        //   ),
-        // ),
         BlocBuilder<BlocMainScreen, BlocMainState>(
           builder: (context, blocMainState) {
             if (blocMainState is BlocMainStateChangeTabIndex) {

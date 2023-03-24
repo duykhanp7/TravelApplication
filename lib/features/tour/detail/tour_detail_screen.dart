@@ -306,7 +306,6 @@ class _TourDetailScreen extends State<TourDetailScreen> {
   }
 
   Widget _buildbody() {
-    debugPrint('Rebuild when show dialog');
     return Container(
       padding: const EdgeInsets.fromLTRB(16, 20, 16, 50),
       child: Column(

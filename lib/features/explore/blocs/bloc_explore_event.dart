@@ -32,3 +32,10 @@ class BlocExploreEventOnBestGuideClick extends BlocExploreEvent {
   @override
   List<Object?> get props => [tourGuideDetailJson];
 }
+
+class BlocExploreEventOnSeeMoreClick extends BlocExploreEvent {
+  BlocExploreEventOnSeeMoreClick({required this.seeMoreType});
+  final SeeMoreType seeMoreType;
+  @override
+  List<Object?> get props => [seeMoreType];
+}

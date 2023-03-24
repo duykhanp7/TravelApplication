@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 import 'package:travel_booking_tour/res/colors.dart';
-import 'package:travel_booking_tour/router/routes.dart';
 
 class AppbarAppWidget extends StatefulWidget implements PreferredSizeWidget {
   const AppbarAppWidget({
@@ -60,7 +59,7 @@ class _AppbarAppWidget extends State<AppbarAppWidget> {
                       color: AppColors.black,
                       size: 25,
                     ),
-                onTap: () => Routes.backTo(),
+                onTap: () => Navigator.of(context).maybePop(),
               ),
             ),
           ),

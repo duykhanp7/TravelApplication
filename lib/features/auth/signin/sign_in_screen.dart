@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 import 'package:travel_booking_tour/features/auth/signin/blocs/bloc_sign_in_event.dart';
@@ -32,6 +33,7 @@ class _SignInScreen extends State<SignInScreen> {
   @override
   void initState() {
     _blocSignInScreen = BlocProvider.of<BlocSignInScreen>(context);
+    SystemChrome.setSystemUIOverlayStyle(AppSystem.systemStyle);
     super.initState();
   }
 

@@ -3,12 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_trip_information_event.dart';
-import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_trip_information_screen.dart';
-import 'package:travel_booking_tour/features/guide/detail/widgets/destination_item.dart';
+import 'package:travel_booking_tour/features/guide/choose_guide/widget/destination_item.dart';
 import 'package:travel_booking_tour/res/button.dart';
 import 'package:travel_booking_tour/res/input_field.dart';
 import 'package:travel_booking_tour/res/res.dart';
+
+import '../blocs/bloc_add_trip_information_event.dart';
+import '../blocs/bloc_add_trip_information_screen.dart';
 
 class ChooseGuideTripInformationScreen extends StatefulWidget {
   const ChooseGuideTripInformationScreen({super.key});

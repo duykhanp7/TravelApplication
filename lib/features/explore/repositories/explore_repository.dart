@@ -15,7 +15,7 @@ class ExploreRepository implements BaseRepository {
           destination: 'Da Nang - Ba Na - Hoi An',
           departureDate: 'Thurday 30, 2022',
           images: [
-            AppImages.daNangBanaHoiAn1,
+            AppImages.cungVanHoaThieuNhi,
             AppImages.daNangBanaHoiAn,
             AppImages.cungVanHoaThieuNhi
           ],
@@ -96,7 +96,7 @@ class ExploreRepository implements BaseRepository {
           destination: 'Da Nang - Ba Na - Hoi An',
           departureDate: 'Jan 30, 2022',
           images: [
-            AppImages.daNangBanaHoiAn1,
+            AppImages.cungVanHoaThieuNhi,
             AppImages.daNangBanaHoiAn,
             AppImages.cungVanHoaThieuNhi
           ],
@@ -108,7 +108,7 @@ class ExploreRepository implements BaseRepository {
           isFavorite: false,
           provider: TourProviderJson(id: 1, name: 'dulichviet'),
           reviews: 145,
-          id: 0,
+          id: 1,
           prices: {
             'Adult (>10 years old)': '\$400.00',
             'Child (5 - 10 years old)': '\$320.00',
@@ -177,7 +177,7 @@ class ExploreRepository implements BaseRepository {
           destination: 'Da Nang - Ba Na - Hoi An',
           departureDate: 'Jan 30, 2022',
           images: [
-            AppImages.daNangBanaHoiAn1,
+            AppImages.cungVanHoaThieuNhi,
             AppImages.daNangBanaHoiAn,
             AppImages.cungVanHoaThieuNhi
           ],
@@ -189,7 +189,7 @@ class ExploreRepository implements BaseRepository {
           isFavorite: true,
           provider: TourProviderJson(id: 1, name: 'dulichviet'),
           reviews: 145,
-          id: 0,
+          id: 2,
           prices: {
             'Adult (>10 years old)': '\$400.00',
             'Child (5 - 10 years old)': '\$320.00',
@@ -258,7 +258,7 @@ class ExploreRepository implements BaseRepository {
           destination: 'Da Nang - Ba Na - Hoi An',
           departureDate: 'Jan 30, 2022',
           images: [
-            AppImages.daNangBanaHoiAn1,
+            AppImages.cungVanHoaThieuNhi,
             AppImages.daNangBanaHoiAn,
             AppImages.cungVanHoaThieuNhi
           ],
@@ -270,7 +270,7 @@ class ExploreRepository implements BaseRepository {
           isFavorite: false,
           provider: TourProviderJson(id: 1, name: 'dulichviet'),
           reviews: 145,
-          id: 0,
+          id: 3,
           prices: {
             'Adult (>10 years old)': '\$400.00',
             'Child (5 - 10 years old)': '\$320.00',
@@ -339,7 +339,7 @@ class ExploreRepository implements BaseRepository {
           destination: 'Da Nang - Ba Na - Hoi An',
           departureDate: 'Jan 30, 2022',
           images: [
-            AppImages.daNangBanaHoiAn1,
+            AppImages.cungVanHoaThieuNhi,
             AppImages.daNangBanaHoiAn,
             AppImages.cungVanHoaThieuNhi
           ],
@@ -351,7 +351,7 @@ class ExploreRepository implements BaseRepository {
           isFavorite: false,
           provider: TourProviderJson(id: 1, name: 'dulichviet'),
           reviews: 145,
-          id: 0,
+          id: 4,
           prices: {
             'Adult (>10 years old)': '\$400.00',
             'Child (5 - 10 years old)': '\$320.00',
@@ -450,7 +450,7 @@ class ExploreRepository implements BaseRepository {
             'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
         experiences: [
           TourDetailJson(
-            id: 0,
+            id: 5,
             departureDate: 'Jan 25. 2023',
             destination: 'Hoi An, Viet Nam',
             description: '2 Hour Bicycle Tour exploring Hoi An',
@@ -459,7 +459,7 @@ class ExploreRepository implements BaseRepository {
             images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
           ),
           TourDetailJson(
-            id: 0,
+            id: 6,
             departureDate: 'Jan 25. 2023',
             destination: 'Hoi An, Viet Nam',
             description: 'Food tour in Da Nang',
@@ -513,7 +513,7 @@ class ExploreRepository implements BaseRepository {
             'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
         experiences: [
           TourDetailJson(
-            id: 0,
+            id: 7,
             departureDate: 'Jan 25. 2023',
             destination: 'Hoi An, Viet Nam',
             description: '2 Hour Bicycle Tour exploring Hoi An',
@@ -522,7 +522,7 @@ class ExploreRepository implements BaseRepository {
             images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
           ),
           TourDetailJson(
-            id: 0,
+            id: 8,
             departureDate: 'Jan 25. 2023',
             destination: 'Hoi An, Viet Nam',
             description: 'Food tour in Da Nang',
@@ -576,7 +576,7 @@ class ExploreRepository implements BaseRepository {
             'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
         experiences: [
           TourDetailJson(
-            id: 0,
+            id: 9,
             departureDate: 'Jan 25. 2023',
             destination: 'Hoi An, Viet Nam',
             description: '2 Hour Bicycle Tour exploring Hoi An',
@@ -585,7 +585,7 @@ class ExploreRepository implements BaseRepository {
             images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
           ),
           TourDetailJson(
-            id: 0,
+            id: 10,
             departureDate: 'Jan 25. 2023',
             destination: 'Hoi An, Viet Nam',
             description: 'Food tour in Da Nang',
@@ -639,7 +639,7 @@ class ExploreRepository implements BaseRepository {
             'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
         experiences: [
           TourDetailJson(
-            id: 0,
+            id: 11,
             departureDate: 'Jan 25. 2023',
             destination: 'Hoi An, Viet Nam',
             description: '2 Hour Bicycle Tour exploring Hoi An',
@@ -648,7 +648,7 @@ class ExploreRepository implements BaseRepository {
             images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
           ),
           TourDetailJson(
-            id: 0,
+            id: 12,
             departureDate: 'Jan 25. 2023',
             destination: 'Hoi An, Viet Nam',
             description: 'Food tour in Da Nang',
@@ -684,6 +684,14 @@ class ExploreRepository implements BaseRepository {
               rating: 5)
         ])
   ];
+
+  Future<List<TourGuideDetailJson>> loadMoreTourGuide() async {
+    return tourGuides;
+  }
+
+  Future<List<TourGuideDetailJson>> loadMoreTour() async {
+    return await getListTourGuide();
+  }
 
   @override
   void onInitialData() {}

@@ -49,8 +49,10 @@ abstract class NetworkException with _$NetworkException implements Exception {
 
   static T convertResponse<T>(Response response, Converter<T>? converter) {
     if (converter != null) {
-      if ((response.data as Map)['user'] != null) {
-        return converter((response.data as Map)['user']);
+      dynamic result = (response.data as Map)['user'];
+      if (result != null) {
+        dev.log(result.toString());
+        return converter(result);
       }
       return (response.data as Map)['user'] as T;
     }
@@ -164,11 +166,10 @@ abstract class NetworkException with _$NetworkException implements Exception {
 
 extension NetworkExceptionEx on NetworkException {
   String get getTextError => when(
-        apiException: (statusCode, statetusText) =>
-            'StatusCode $statusCode - StatusTetx $statetusText',
+        apiException: (statusCode, statetusText) => '$statetusText',
         requestCancelled: () => 'requestCancelled',
         unauthorisedRequest: () => 'unauthorisedRequest',
-        badRequest: () => '',
+        badRequest: () => 'badRequest',
         notFound: (reason) => reason,
         methodNotAllowed: () => 'methodNotAllowed',
         notAcceptable: () => 'notAcceptable',

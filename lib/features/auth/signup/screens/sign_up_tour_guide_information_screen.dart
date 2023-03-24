@@ -1035,7 +1035,6 @@ class _SignUpTourGuideInformationScreen
               Map<String, VideoSource>? source =
                   _blocSignUpTourGuideInformationScreen.getSourceVideo(
                       _blocSignUpTourGuideInformationScreen.videoIntroduction);
-              debugPrint('Source Data is ${source.toString()}');
               if (state is BlocSignUpTourGuideInformationStatePickVideoDone ||
                   source != null) {
                 if (state is BlocSignUpTourGuideInformationStatePickVideoDone) {

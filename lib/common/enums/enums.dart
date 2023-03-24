@@ -26,3 +26,7 @@ enum TypeDestination {
   topJourneyJson,
   travelNewJson
 }
+
+enum SeeMoreType { guide, tour, news }
+
+enum Argument { data }

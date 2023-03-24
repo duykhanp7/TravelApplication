@@ -78,3 +78,17 @@ class BlocTripInformationEventUnCheckAttractions
   @override
   List<Object?> get props => [];
 }
+
+class BlocTripInformationEventSearchDestination
+    extends BlocTripInformationEvent {
+  BlocTripInformationEventSearchDestination({required this.name});
+  final String name;
+  @override
+  List<Object?> get props => [name];
+}
+
+class BlocTripInformationEventBack extends BlocTripInformationEvent {
+  BlocTripInformationEventBack();
+  @override
+  List<Object?> get props => [];
+}
