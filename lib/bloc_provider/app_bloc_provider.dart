@@ -3,9 +3,10 @@ import 'package:travel_booking_tour/features/auth/signup/blocs/bloc_sign_up_tour
 import 'package:travel_booking_tour/features/explore/blocs/bloc_explore_screen.dart';
 import 'package:travel_booking_tour/features/forgot_password/bloc/bloc_forgot_password_screen.dart';
 import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_detail_guide_screen.dart';
-import 'package:travel_booking_tour/features/main/blocs/bloc_main_screen.dart';
+import 'package:travel_booking_tour/features/main/bloc/bloc_main_screen.dart';
 import 'package:travel_booking_tour/features/auth/signin/blocs/bloc_sign_in_screen.dart';
 import 'package:travel_booking_tour/features/auth/signup/blocs/bloc_sign_up_screen.dart';
+import 'package:travel_booking_tour/features/main/bloc/bloc_search_system_screen.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/blocs/bloc_terms_and_conditions_screen.dart';
 import 'package:travel_booking_tour/features/tour/detail/blocs/bloc_tour_detail_screen.dart';
 
@@ -49,5 +50,7 @@ class AppBlocProvider {
     BlocProvider<BlocTourDetailScreen>(
         create: (context) => BlocTourDetailScreen()),
     BlocProvider<BlocSeeMoreScreen>(create: (context) => BlocSeeMoreScreen()),
+    BlocProvider<BlocSearchSystemScreen>(
+        create: (context) => BlocSearchSystemScreen()),
   ];
 }

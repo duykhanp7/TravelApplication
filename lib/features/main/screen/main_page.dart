@@ -2,23 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:travel_booking_tour/common/app_constant.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 import 'package:travel_booking_tour/features/explore/screens/explore_screen.dart';
 import 'package:travel_booking_tour/features/location/trip_screen.dart';
-import 'package:travel_booking_tour/features/main/blocs/bloc_main_event.dart';
-import 'package:travel_booking_tour/features/main/blocs/bloc_main_screen.dart';
-import 'package:travel_booking_tour/features/main/blocs/bloc_main_state.dart';
+import 'package:travel_booking_tour/features/main/bloc/bloc_main_event.dart';
+import 'package:travel_booking_tour/features/main/bloc/bloc_main_screen.dart';
+import 'package:travel_booking_tour/features/main/bloc/bloc_main_state.dart';
 import 'package:travel_booking_tour/features/message/chat_screen.dart';
 import 'package:travel_booking_tour/features/notification/notification_screen.dart';
 import 'package:travel_booking_tour/features/profile/profile_screen.dart';
 import 'package:travel_booking_tour/res/app_appbar.dart';
 import 'package:travel_booking_tour/res/app_search.dart';
 
-import '../../l10n/generated/l10n.dart';
-import '../../res/colors.dart';
-import '../../res/icons.dart';
-import '../../res/images.dart';
-import '../../res/system.dart';
+import '../../../l10n/generated/l10n.dart';
+import '../../../res/colors.dart';
+import '../../../res/icons.dart';
+import '../../../res/images.dart';
+import '../../../res/system.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -85,7 +86,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    _blocMainScreen.add(BlocmainEventInitial());
+    _blocMainScreen.add(BlocMainEventInitial());
     localization = SLocalization.of(context);
     SystemChrome.setSystemUIOverlayStyle(AppSystem.systemTransparentStatusBar);
     return Scaffold(
@@ -259,8 +260,26 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
   }
 
   Widget _buildBottomTabExplore() {
-    return AppSearch(
-      hintText: localization.hi_where_do_u_want_to_explore,
+    return InkWell(
+      splashColor: AppColors.transparent,
+      highlightColor: AppColors.transparent,
+      child: Container(
+        alignment: Alignment.center,
+        child: Hero(
+          tag: AppConstant.HERO_SEARCH_VIEW,
+          child: Material(
+            type: MaterialType.transparency,
+            child: AppSearch(
+              readOnly: true,
+              enable: false,
+              hintText: localization.hi_where_do_u_want_to_explore,
+            ),
+          ),
+        ),
+      ),
+      onTap: () {
+        _blocMainScreen.add(BlocMainEventSearchSystemClick());
+      },
     );
   }
 
@@ -540,7 +559,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                             curve: Curves.fastLinearToSlowEaseIn);
                       }
                       BlocProvider.of<BlocMainScreen>(context)
-                          .add(BlocmainEventChangeTabIndex(index: value));
+                          .add(BlocMainEventChangeTabIndex(index: value));
                     },
                     tabs: List.generate(
                         icons.length,

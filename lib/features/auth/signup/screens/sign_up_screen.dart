@@ -232,7 +232,7 @@ class _SignUpScreen extends State<SignUpScreen> {
               builder: (context, state) => Container(
                 alignment: Alignment.center,
                 margin: const EdgeInsets.only(top: 14),
-                child: PrimaryButton(
+                child: PrimaryActiveButton(
                   text: localization.sign_up,
                   isLoading: state is BlocSignUpStateValidateLoading,
                   onTap: () {

@@ -61,7 +61,7 @@ class _ChooseGuideTripInformationScreen
           const SizedBox(
             height: 40,
           ),
-          PrimaryButton(
+          PrimaryActiveButton(
             text: 'DONE',
             allCaps: true,
             margin: const EdgeInsets.all(0),

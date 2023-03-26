@@ -11,3 +11,4 @@ export 'app_camera.dart';
 export 'app_video.dart';
 export 'app_table.dart';
 export 'app_search.dart';
+export 'app_search_filter.dart';

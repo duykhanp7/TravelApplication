@@ -430,7 +430,7 @@ class _SignUpTourGuideInformationScreen
             ),
           ),
           const SizedBox(height: 56),
-          PrimaryButton(
+          PrimaryActiveButton(
             margin: EdgeInsets.zero,
             text: 'Finish',
             onTap: () {},
@@ -1127,7 +1127,7 @@ class _SignUpTourGuideInformationScreen
             },
           ),
           const SizedBox(height: 44),
-          PrimaryButton(
+          PrimaryActiveButton(
             text: 'Next',
             allCaps: true,
             margin: EdgeInsets.zero,

@@ -116,7 +116,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
   }
 
   Widget _buildButtonGetStarted() {
-    return PrimaryButton(
+    return PrimaryActiveButton(
       text: 'GET STARTED',
       onTap: () {
         BlocProvider.of<BlocOnboardingScreen>(context)

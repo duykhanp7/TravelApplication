@@ -146,4 +146,6 @@ class AppIcons {
       '$parentPathIcons$childPathShare/ic_twitter_frame.svg';
   static const String icWhatAppFrame =
       '$parentPathIcons$childPathShare/ic_whatapp_frame.svg';
+
+  static const String icFilter = '$parentPathIcons/ic_filter.svg';
 }

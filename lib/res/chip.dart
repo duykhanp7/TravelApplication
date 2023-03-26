@@ -24,8 +24,9 @@ class AppListChipWidget extends StatelessWidget {
 }
 
 class AppChip extends StatelessWidget {
-  const AppChip({super.key, required this.chip});
+  const AppChip({super.key, required this.chip, this.width});
   final String chip;
+  final double? width;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,6 +34,7 @@ class AppChip extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(6, 3, 6, 3),
       alignment: Alignment.center,
       height: 20,
+      width: width,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100), color: AppColors.chipBg),
       child: Text(

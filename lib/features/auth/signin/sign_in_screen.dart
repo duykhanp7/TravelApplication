@@ -109,7 +109,7 @@ class _SignInScreen extends State<SignInScreen> {
                 current is BlocSignInStateValidateSuccess ||
                 current is BlocSignInStateValidateFail ||
                 current is BlocSignInStateServerError,
-            builder: (context, state) => PrimaryButton(
+            builder: (context, state) => PrimaryActiveButton(
               text: localization.sign_in,
               isLoading: state is BlocSignInStateValidateLoading,
               onTap: () {

@@ -211,7 +211,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                   flex: 1,
                   child: Container(
                     alignment: Alignment.centerRight,
-                    child: PrimaryButton(
+                    child: PrimaryActiveButton(
                       text: 'Choose This Guide',
                       onTap: () {
                         _blocDetailGuideScreen.add(

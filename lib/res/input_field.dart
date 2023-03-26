@@ -114,6 +114,8 @@ class _AppTextField extends State<AppTextField> {
                         const BoxConstraints(minHeight: 25, minWidth: 25),
                     prefixIcon: widget.prefixIcon,
                     suffixIcon: widget.suffixIcon,
+                    suffixIconConstraints:
+                        const BoxConstraints(minHeight: 25, minWidth: 25),
                     hintText: widget.hintText,
                     hintStyle: widget.hintTextStyle ??
                         context.textStyle.titleMedium!.copyWith(

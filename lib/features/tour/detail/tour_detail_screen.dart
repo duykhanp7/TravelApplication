@@ -236,7 +236,7 @@ class _TourDetailScreen extends State<TourDetailScreen> {
               blurRadius: 13,
               color: AppColors.black.withOpacity(0.1))
         ], color: AppColors.white),
-        child: PrimaryButton(
+        child: PrimaryActiveButton(
           margin: EdgeInsets.zero,
           text: 'Book this tour',
           onTap: () {},
