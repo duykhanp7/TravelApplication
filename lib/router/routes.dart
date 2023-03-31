@@ -6,7 +6,8 @@ import 'package:travel_booking_tour/features/explore/screens/see_more_screen.dar
 import 'package:travel_booking_tour/features/forgot_password/forgot_password_screen.dart';
 import 'package:travel_booking_tour/features/forgot_password/screens/check_email_screen.dart';
 import 'package:travel_booking_tour/features/guide/detail/screens/guide_description._screen.dart';
-import 'package:travel_booking_tour/features/main/main_page.dart';
+import 'package:travel_booking_tour/features/main/screen/main_page.dart';
+import 'package:travel_booking_tour/features/main/screen/search_system.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/terms_and_conditions_screen.dart';
 import 'package:travel_booking_tour/features/tour/detail/tour_detail_screen.dart';
 import 'package:travel_booking_tour/res/app_camera.dart';
@@ -45,6 +46,7 @@ class Routes {
         const SignUpTourGuideInformationScreen(),
     AppPath.tourDetail: (context) => const TourDetailScreen(),
     AppPath.seeMore: (context) => const SeeMoreScreen(),
+    AppPath.searchSystem: (context) => const SearchSystem(),
   };
 
   static Future<void> initializedCamera() async {
@@ -79,7 +81,7 @@ class Routes {
 
   static void backTo({String? namePage, Map<String, dynamic>? arguments}) {
     namePage == null
-        ? navigator.currentState?.pop()
+        ? navigator.currentState?.pop(arguments)
         : navigator.currentState
             ?.popAndPushNamed(namePage, arguments: arguments);
   }

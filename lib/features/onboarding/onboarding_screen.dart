@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/features/onboarding/blocs/bloc_onboarding_event.dart';
-import 'package:travel_booking_tour/features/onboarding/blocs/bloc_onboarding_screen.dart';
-import 'package:travel_booking_tour/features/onboarding/blocs/bloc_onboarding_state.dart';
+import 'package:travel_booking_tour/features/onboarding/bloc/bloc_onboarding_event.dart';
+import 'package:travel_booking_tour/features/onboarding/bloc/bloc_onboarding_screen.dart';
+import 'package:travel_booking_tour/features/onboarding/bloc/bloc_onboarding_state.dart';
+import 'package:travel_booking_tour/features/onboarding/model/onboarding_json.dart';
 import 'package:travel_booking_tour/features/onboarding/onboarding_Page.dart';
 import 'package:travel_booking_tour/features/onboarding/widgets/onboarding_header.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
 import '../../res/button.dart';
-import 'models/onboarding_json.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -116,7 +116,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
   }
 
   Widget _buildButtonGetStarted() {
-    return PrimaryButton(
+    return PrimaryActiveButton(
       text: 'GET STARTED',
       onTap: () {
         BlocProvider.of<BlocOnboardingScreen>(context)

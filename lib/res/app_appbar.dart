@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 
-class AppbarAppWidget extends StatefulWidget implements PreferredSizeWidget {
+class AppbarAppWidget extends StatefulWidget with PreferredSizeWidget {
   const AppbarAppWidget({
     super.key,
     this.title,

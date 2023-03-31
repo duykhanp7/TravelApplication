@@ -6,7 +6,7 @@ import 'package:travel_booking_tour/res/system.dart';
 
 import 'bloc_observer.dart';
 
-void main() {
+void main() async {
   Bloc.observer = MyBlocObserver();
 
   SystemChrome.setSystemUIOverlayStyle(AppSystem.systemStyle);

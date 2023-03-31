@@ -64,7 +64,7 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
                       const SizedBox(
                         height: 52,
                       ),
-                      PrimaryButton(
+                      PrimaryActiveButton(
                         text: localization.send,
                         onTap: () {
                           BlocProvider.of<BlocForgotPasswordScreen>(context)

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
@@ -104,9 +103,6 @@ class _AppTextField extends State<AppTextField> {
             enableIMEPersonalizedLearning: false,
             focusNode: widget.focusNode,
             onEditingComplete: widget.onEditingCompleted,
-            inputFormatters: [
-              LengthLimitingTextInputFormatter(widget.maxLength),
-            ],
             decoration: widget.inputDecoration ??
                 InputDecoration(
                     icon: widget.icon,
@@ -114,6 +110,8 @@ class _AppTextField extends State<AppTextField> {
                         const BoxConstraints(minHeight: 25, minWidth: 25),
                     prefixIcon: widget.prefixIcon,
                     suffixIcon: widget.suffixIcon,
+                    suffixIconConstraints:
+                        const BoxConstraints(minHeight: 25, minWidth: 25),
                     hintText: widget.hintText,
                     hintStyle: widget.hintTextStyle ??
                         context.textStyle.titleMedium!.copyWith(

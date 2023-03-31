@@ -14,6 +14,7 @@ import 'package:travel_booking_tour/features/explore/widgets/top_experience_item
 import 'package:travel_booking_tour/features/explore/widgets/tour_guide_item.dart';
 import 'package:travel_booking_tour/features/explore/widgets/travel_new_item.dart';
 import 'package:travel_booking_tour/l10n/generated/l10n.dart';
+import 'package:travel_booking_tour/res/app_layout_shimmer.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/system.dart';
 
@@ -89,13 +90,7 @@ class _ExploreScreen extends State<ExploreScreen> {
             ),
           );
         }
-        return Container(
-          alignment: Alignment.center,
-          color: AppColors.white,
-          child: const CircularProgressIndicator(
-            color: AppColors.primary,
-          ),
-        );
+        return const AppLayoutShimmer();
       },
     );
   }

@@ -6,6 +6,7 @@ import 'package:travel_booking_tour/features/guide/choose_guide/blocs/bloc_add_t
 import 'package:travel_booking_tour/features/guide/choose_guide/blocs/bloc_add_trip_information_state.dart';
 import 'package:travel_booking_tour/features/guide/choose_guide/widget/destination_item.dart';
 import 'package:travel_booking_tour/res/app_appbar.dart';
+import 'package:travel_booking_tour/res/app_layout_shimmer.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/icons.dart';
 import 'package:travel_booking_tour/res/input_field.dart';
@@ -89,10 +90,7 @@ class _AddNewPlacesScreen extends State<AddNewPlacesScreen> {
             return Container(
               alignment: Alignment.center,
               color: AppColors.white,
-              child: const CircularProgressIndicator(
-                backgroundColor: AppColors.white,
-                color: AppColors.primary,
-              ),
+              child: const AppLayoutShimmer(),
             );
           } else if (state
               is BlocTripInformationStateSearchDestinationLoadingSuccess) {

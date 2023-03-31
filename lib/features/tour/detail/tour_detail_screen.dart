@@ -95,10 +95,7 @@ class _TourDetailScreen extends State<TourDetailScreen> {
               return Container(
                 alignment: Alignment.center,
                 color: AppColors.black.withOpacity(0.1),
-                child: const CircularProgressIndicator(
-                    color: AppColors.primary,
-                    strokeWidth: 2,
-                    backgroundColor: AppColors.white),
+                child: const AppLayoutShimmer(),
               );
             } else if (state is BlocTourDetailStateLoadingSuccess) {
               return _buildImageSlider(_tourDetailJson.images ?? []);
@@ -236,7 +233,7 @@ class _TourDetailScreen extends State<TourDetailScreen> {
               blurRadius: 13,
               color: AppColors.black.withOpacity(0.1))
         ], color: AppColors.white),
-        child: PrimaryButton(
+        child: PrimaryActiveButton(
           margin: EdgeInsets.zero,
           text: 'Book this tour',
           onTap: () {},

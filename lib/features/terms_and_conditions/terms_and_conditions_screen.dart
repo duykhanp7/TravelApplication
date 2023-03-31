@@ -6,6 +6,7 @@ import 'package:travel_booking_tour/features/terms_and_conditions/blocs/bloc_ter
 import 'package:travel_booking_tour/features/terms_and_conditions/blocs/bloc_terms_and_conditions_screen.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/blocs/bloc_terms_and_conditions_state.dart';
 import 'package:travel_booking_tour/res/app_appbar.dart';
+import 'package:travel_booking_tour/res/app_layout_shimmer.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 
 import '../../res/system.dart';
@@ -90,13 +91,7 @@ class _TermAndConditionScreen extends State<TermAndConditionScreen> {
                 ),
               );
             }
-            return Container(
-              height: MediaQuery.of(context).size.height,
-              alignment: Alignment.center,
-              child: const CircularProgressIndicator(
-                color: AppColors.white,
-              ),
-            );
+            return const AppLayoutShimmer();
           },
         ),
       )),

@@ -146,4 +146,13 @@ class AppIcons {
       '$parentPathIcons$childPathShare/ic_twitter_frame.svg';
   static const String icWhatAppFrame =
       '$parentPathIcons$childPathShare/ic_whatapp_frame.svg';
+
+  static const String icFilter = '$parentPathIcons/ic_filter.svg';
+
+  static const String icChat = '$parentPathIcons/ic_chat.svg';
+  static const String icDetail = '$parentPathIcons/ic_detail.svg';
+  static const String icDone = '$parentPathIcons/ic_done.svg';
+  static const String icMore = '$parentPathIcons/ic_more.svg';
+  static const String icPay = '$parentPathIcons/ic_pay.svg';
+  static const String icPerson = '$parentPathIcons/ic_person.svg';
 }

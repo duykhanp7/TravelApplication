@@ -30,3 +30,7 @@ enum TypeDestination {
 enum SeeMoreType { guide, tour, news }
 
 enum Argument { data }
+
+enum ResultState { loading, success, fail }
+
+enum TabMyList { currentTrips, nextTrips, pastTrips, wishListTrips }

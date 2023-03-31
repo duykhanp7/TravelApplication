@@ -4,8 +4,122 @@ import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 
 import 'colors.dart';
 
-class PrimaryButton extends StatefulWidget {
-  const PrimaryButton(
+class PrimaryActiveButton extends StatefulWidget {
+  const PrimaryActiveButton(
+      {super.key,
+      required this.text,
+      this.textStyle,
+      this.borderRadius,
+      this.width,
+      this.height,
+      this.color,
+      this.ripple,
+      required this.onTap,
+      this.allCaps,
+      this.margin,
+      this.isLoading,
+      this.icon,
+      this.border});
+
+  final String text;
+  final TextStyle? textStyle;
+  final BorderRadius? borderRadius;
+  final double? width;
+  final double? height;
+  final Color? color;
+  final Color? ripple;
+  final VoidCallback onTap;
+  final bool? allCaps;
+  final EdgeInsetsGeometry? margin;
+  final bool? isLoading;
+  final Widget? icon;
+  final Border? border;
+
+  @override
+  State<StatefulWidget> createState() {
+    return _PrimaryActiveButton();
+  }
+}
+
+class _PrimaryActiveButton extends State<PrimaryActiveButton> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: widget.margin ?? const EdgeInsets.only(left: 33, right: 33),
+      height: widget.height ?? 50,
+      width: widget.width ?? double.infinity,
+      decoration: BoxDecoration(
+          color: widget.color ?? AppColors.primary,
+          border: widget.border,
+          borderRadius: widget.borderRadius ??
+              const BorderRadius.all(Radius.circular(6))),
+      child: Material(
+        borderRadius:
+            widget.borderRadius ?? const BorderRadius.all(Radius.circular(6)),
+        color: AppColors.transparent,
+        child: InkWell(
+          splashColor: widget.ripple ?? AppColors.buttonRipple,
+          borderRadius: widget.borderRadius ?? BorderRadius.circular(6),
+          onTap: () {
+            if (widget.isLoading != null) {
+              widget.isLoading! ? () {} : widget.onTap();
+              FocusScope.of(context).requestFocus(FocusNode());
+            } else {
+              widget.onTap();
+            }
+          },
+          child: Container(
+            alignment: Alignment.center,
+            child: widget.isLoading == null
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      widget.icon ?? Container(),
+                      Text(
+                        widget.allCaps == false
+                            ? widget.text
+                            : widget.text.toUpperCase(),
+                        style: widget.textStyle ??
+                            context.textStyle.titleSmall!
+                                .copyWith(color: AppColors.white),
+                      )
+                    ],
+                  )
+                : widget.isLoading!
+                    ? Container(
+                        alignment: Alignment.center,
+                        width: 26,
+                        height: 26,
+                        child: const CircularProgressIndicator(
+                          color: AppColors.white,
+                          strokeWidth: 3,
+                        ),
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          widget.icon ?? Container(),
+                          Text(
+                            widget.allCaps == false
+                                ? widget.text
+                                : widget.text.toUpperCase(),
+                            style: widget.textStyle ??
+                                context.textStyle.titleSmall!
+                                    .copyWith(color: AppColors.white),
+                          )
+                        ],
+                      ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class PrimaryInactiveButton extends StatefulWidget {
+  const PrimaryInactiveButton(
       {super.key,
       required this.text,
       this.textStyle,
@@ -33,18 +147,20 @@ class PrimaryButton extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _PrimaryButton();
+    return _PrimaryInactiveButton();
   }
 }
 
-class _PrimaryButton extends State<PrimaryButton> {
+class _PrimaryInactiveButton extends State<PrimaryInactiveButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: widget.margin ?? const EdgeInsets.only(left: 33, right: 33),
       height: widget.height ?? 50,
+      width: widget.width ?? double.infinity,
       decoration: BoxDecoration(
-          color: widget.color ?? AppColors.primary,
+          color: widget.color ?? AppColors.white,
+          border: Border.all(width: 1, color: AppColors.tableBorder),
           borderRadius: widget.borderRadius ??
               const BorderRadius.all(Radius.circular(6))),
       child: Material(
@@ -52,7 +168,7 @@ class _PrimaryButton extends State<PrimaryButton> {
             widget.borderRadius ?? const BorderRadius.all(Radius.circular(6)),
         color: AppColors.transparent,
         child: InkWell(
-          splashColor: widget.ripple ?? AppColors.buttonRipple,
+          splashColor: widget.ripple ?? AppColors.black.withOpacity(0.1),
           borderRadius: widget.borderRadius ?? BorderRadius.circular(6),
           onTap: () {
             if (widget.isLoading != null) {
@@ -71,7 +187,7 @@ class _PrimaryButton extends State<PrimaryButton> {
                         : widget.text.toUpperCase(),
                     style: widget.textStyle ??
                         context.textStyle.titleSmall!
-                            .copyWith(color: AppColors.white),
+                            .copyWith(color: AppColors.black),
                   )
                 : widget.isLoading!
                     ? Container(

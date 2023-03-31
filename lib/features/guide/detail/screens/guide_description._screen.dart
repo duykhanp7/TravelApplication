@@ -211,7 +211,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                   flex: 1,
                   child: Container(
                     alignment: Alignment.centerRight,
-                    child: PrimaryButton(
+                    child: PrimaryActiveButton(
                       text: 'Choose This Guide',
                       onTap: () {
                         _blocDetailGuideScreen.add(
@@ -281,10 +281,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                   alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width,
                   height: 200,
-                  child: const CircularProgressIndicator(
-                      color: AppColors.primary,
-                      strokeWidth: 2,
-                      backgroundColor: AppColors.white),
+                  child: const AppLayoutShimmer(),
                 );
               }
               return Container(
@@ -294,10 +291,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                 decoration: BoxDecoration(
                     color: AppColors.black.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(10)),
-                child: const CircularProgressIndicator(
-                    color: AppColors.primary,
-                    strokeWidth: 2,
-                    backgroundColor: AppColors.white),
+                child: const AppLayoutShimmer(),
               );
             },
           ),
