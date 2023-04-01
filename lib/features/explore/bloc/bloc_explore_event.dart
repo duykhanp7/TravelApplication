@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
-import 'package:travel_booking_tour/common/enums/enums.dart';
-import 'package:travel_booking_tour/data/models/tour_detail_json.dart';
-import 'package:travel_booking_tour/data/models/tour_guide_detail_json.dart';
+
+import '../../../common/enum/enums.dart';
+import '../../../data/model/tour_detail_json.dart';
+import '../../../data/model/tour_guide_detail_json.dart';
 
 abstract class BlocExploreEvent extends Equatable {}
 

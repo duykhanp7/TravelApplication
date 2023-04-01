@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 
-import '../../../common/enums/enums.dart';
+import '../../../common/enum/enums.dart';
 import '../../../res/app_layout_shimmer.dart';
 import '../bloc/bloc_my_trips_event.dart';
 import '../bloc/bloc_my_trips_screen.dart';

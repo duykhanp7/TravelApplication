@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:travel_booking_tour/common/enums/enums.dart';
+
+import '../../../common/enum/enums.dart';
 
 abstract class BlocSeeMoreEvent extends Equatable {}
 

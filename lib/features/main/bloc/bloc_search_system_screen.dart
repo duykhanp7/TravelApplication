@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:travel_booking_tour/base/result.dart';
-import 'package:travel_booking_tour/common/enums/enums.dart';
-import 'package:travel_booking_tour/data/models/language_json.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_search_system_event.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_search_system_state.dart';
 import 'package:travel_booking_tour/features/main/repository/search_system_repository.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import '../../../common/enum/enums.dart';
+import '../../../data/model/language_json.dart';
 import '../model/type_filter_json.dart';
 
 class BlocSearchSystemScreen

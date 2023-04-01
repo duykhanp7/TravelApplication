@@ -2,13 +2,13 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:travel_booking_tour/base/result.dart';
-import 'package:travel_booking_tour/common/enums/enums.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_event.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_state.dart';
 import 'package:travel_booking_tour/router/path.dart';
 import 'package:travel_booking_tour/router/routes.dart';
 
-import '../../../../data/models/user.dart';
+import '../../../../common/enum/enums.dart';
+import '../../../../data/model/user.dart';
 import '../../../../data/network/network_exception.dart';
 import '../../repository/auth_repository.dart';
 

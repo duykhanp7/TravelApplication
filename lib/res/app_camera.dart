@@ -11,11 +11,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:travel_booking_tour/common/enums/enums.dart';
 import 'package:travel_booking_tour/res/app_dialog.dart';
 import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/router/routes.dart';
 import 'package:video_player/video_player.dart';
+
+import '../common/enum/enums.dart';
 
 class AppCamera extends StatefulWidget {
   final List<CameraDescription> cameras;

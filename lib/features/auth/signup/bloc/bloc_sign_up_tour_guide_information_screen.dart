@@ -5,13 +5,14 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:travel_booking_tour/common/enums/enums.dart';
-import 'package:travel_booking_tour/data/models/time_from_to.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_tour_guide_information_event.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_tour_guide_information_state.dart';
 import "package:path/path.dart" as p;
 import 'package:travel_booking_tour/router/routes.dart';
 import 'package:video_viewer/video_viewer.dart';
+
+import '../../../../common/enum/enums.dart';
+import '../../../../data/model/time_from_to.dart';
 
 class BlocSignUpTourGuideInformationScreen extends Bloc<
     BlocSignUpTourGuideInformationEvent, BlocSignUpTourGuideInformationState> {

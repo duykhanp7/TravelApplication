@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:travel_booking_tour/common/enums/enums.dart';
-import 'package:travel_booking_tour/common/extensions/context_extension.dart';
+import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/guide/choose_guide/widget/destination_item.dart';
 import 'package:travel_booking_tour/res/app_appbar.dart';
 import 'package:travel_booking_tour/res/app_layout_shimmer.dart';
@@ -10,6 +9,7 @@ import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/icons.dart';
 import 'package:travel_booking_tour/res/input_field.dart';
 
+import '../../../../common/enum/enums.dart';
 import '../bloc/bloc_add_trip_information_event.dart';
 import '../bloc/bloc_add_trip_information_screen.dart';
 import '../bloc/bloc_add_trip_information_state.dart';

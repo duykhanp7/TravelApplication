@@ -1,15 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:travel_booking_tour/base/result.dart';
-import 'package:travel_booking_tour/data/models/tour_detail_json.dart';
-import 'package:travel_booking_tour/data/models/tour_guide_detail_json.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_event.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_state.dart';
 import 'package:travel_booking_tour/features/explore/repository/explore_repository.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
 import '../../../common/app_constant.dart';
-import '../../../common/enums/enums.dart';
+import '../../../common/enum/enums.dart';
+import '../../../data/model/tour_detail_json.dart';
+import '../../../data/model/tour_guide_detail_json.dart';
 import '../../../router/routes.dart';
 
 class BlocExploreScreen extends Bloc<BlocExploreEvent, BlocExploreState> {

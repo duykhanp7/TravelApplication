@@ -2,8 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travel_booking_tour/common/enums/enums.dart';
-import 'package:travel_booking_tour/common/extensions/context_extension.dart';
+import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_event.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_screen.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_state.dart';
@@ -12,6 +11,7 @@ import 'package:travel_booking_tour/res/app_dialog.dart';
 import 'package:travel_booking_tour/res/background.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
+import '../../../../common/enum/enums.dart';
 import '../../../../res/button.dart';
 import '../../../../res/input_field.dart';
 import '../../../../res/radio.dart';

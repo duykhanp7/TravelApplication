@@ -1,12 +1,12 @@
 import 'package:travel_booking_tour/base/base_repository.dart';
-import 'package:travel_booking_tour/data/models/schedule_json.dart';
-import 'package:travel_booking_tour/data/models/schedule_point_json.dart';
-import 'package:travel_booking_tour/data/models/tour_detail_json.dart';
-import 'package:travel_booking_tour/data/models/tour_guide_detail_json.dart';
-import 'package:travel_booking_tour/data/models/tour_provider_json.dart';
 import 'package:travel_booking_tour/res/images.dart';
 
-import '../../../data/models/review_json.dart';
+import '../../../data/model/review_json.dart';
+import '../../../data/model/schedule_json.dart';
+import '../../../data/model/schedule_point_json.dart';
+import '../../../data/model/tour_detail_json.dart';
+import '../../../data/model/tour_guide_detail_json.dart';
+import '../../../data/model/tour_provider_json.dart';
 
 class ExploreRepository implements BaseRepository {
   Future<List<TourDetailJson>> getListTopJourney() async {

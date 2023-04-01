@@ -4,12 +4,12 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:travel_booking_tour/common/app_constant.dart';
 import 'package:travel_booking_tour/data/local/app_storage.dart';
-import 'package:travel_booking_tour/data/models/user.dart';
 import 'package:travel_booking_tour/features/auth/repository/auth_repository.dart';
 import 'package:travel_booking_tour/features/splash/bloc/bloc_splash_event.dart';
 import 'package:travel_booking_tour/features/splash/bloc/bloc_splash_state.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
+import '../../../data/model/user.dart';
 import '../../../router/routes.dart';
 
 class BlocSplashScreen extends Bloc<BlocSplashEvent, BlocSplashState> {

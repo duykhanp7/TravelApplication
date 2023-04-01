@@ -2,11 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:travel_booking_tour/base/result.dart';
-import 'package:travel_booking_tour/common/enums/enums.dart';
 import 'package:travel_booking_tour/features/guide/choose_guide/model/destination_json.dart';
 import 'package:travel_booking_tour/features/guide/choose_guide/repository/add_trip_information_repository.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
+import '../../../../common/enum/enums.dart';
 import '../../../../router/routes.dart';
 import 'bloc_add_trip_information_event.dart';
 import 'bloc_add_trip_information_state.dart';

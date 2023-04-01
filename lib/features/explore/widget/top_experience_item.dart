@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/data/models/tour_detail_json.dart';
+import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_screen.dart';
 
+import '../../../data/model/tour_detail_json.dart';
 import '../../../res/colors.dart';
 import '../../../res/icons.dart';
 

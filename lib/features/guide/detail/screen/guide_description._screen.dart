@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/data/models/tour_guide_detail_json.dart';
-import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_detail_guide_event.dart';
-import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_detail_guide_screen.dart';
-import 'package:travel_booking_tour/features/guide/detail/widgets/my_experience_item.dart';
-import 'package:travel_booking_tour/features/guide/detail/widgets/review_guide_item.dart';
+import 'package:travel_booking_tour/common/extension/context_extension.dart';
+import 'package:travel_booking_tour/features/guide/detail/bloc/bloc_detail_guide_event.dart';
+import 'package:travel_booking_tour/features/guide/detail/bloc/bloc_detail_guide_screen.dart';
+import 'package:travel_booking_tour/features/guide/detail/widget/my_experience_item.dart';
+import 'package:travel_booking_tour/features/guide/detail/widget/review_guide_item.dart';
 
 import 'package:travel_booking_tour/res/button.dart';
 import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/res/vertical_star_widget.dart';
 
 import '../../../../common/app_constant.dart';
-import '../blocs/bloc_detail_guide_state.dart';
+import '../../../../data/model/tour_guide_detail_json.dart';
+import '../bloc/bloc_detail_guide_state.dart';
 
 class GuideDescriptionScreen extends StatefulWidget {
   const GuideDescriptionScreen({super.key});
