@@ -5,9 +5,9 @@ import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/icons.dart';
 import 'package:travel_booking_tour/res/images.dart';
 
-import '../blocs/bloc_add_trip_information_event.dart';
-import '../blocs/bloc_add_trip_information_screen.dart';
-import '../blocs/bloc_add_trip_information_state.dart';
+import '../bloc/bloc_add_trip_information_event.dart';
+import '../bloc/bloc_add_trip_information_screen.dart';
+import '../bloc/bloc_add_trip_information_state.dart';
 
 class DestinationItem extends StatefulWidget {
   const DestinationItem({super.key, required this.check});

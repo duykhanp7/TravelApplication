@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:travel_booking_tour/base/result.dart';
+import 'package:travel_booking_tour/common/enums/enums.dart';
 import 'package:travel_booking_tour/data/models/language_json.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_search_system_event.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_search_system_state.dart';
@@ -37,14 +39,20 @@ class BlocSearchSystemScreen
     } else if (event is BlocSearchSystemEventClearSearch) {
       emit(BlocSearchSystemStateClearSearching());
     } else if (event is BlocSearchSystemEventSearching) {
-      emit(BlocSearchSystemStateSearching());
+      emit(BlocSearchSystemStateSearching(
+          appResult: AppResult(state: ResultState.loading)));
       final itemTourGuides = await _searchSystemRepository.getTourGuides();
       final itemTours = await _searchSystemRepository.getListTopJourney();
       await Future.delayed(
         const Duration(seconds: 3),
         () {
-          emit(BlocSearchSystemStateSearchingSuccess(
-              itemTourGuides: itemTourGuides, itemsTours: itemTours));
+          Map<Searching, List<dynamic>> mapData = {
+            Searching.itemTourGuides: itemTourGuides,
+            Searching.itemsTours: itemTours
+          };
+          emit(BlocSearchSystemStateSearching(
+              appResult:
+                  AppResult(state: ResultState.success, result: mapData)));
         },
       );
     }

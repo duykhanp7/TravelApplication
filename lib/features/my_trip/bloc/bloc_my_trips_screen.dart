@@ -27,7 +27,7 @@ class BlocMyTripScreen extends Bloc<BlocMyTripEvent, BlocMyTripState> {
             await _myTripRepository.getListBooking();
         emit(BlocMyTripStateLoadCurrentTrips(
           appResult: AppResult<List<BookingTripJson>>(
-              resultState: ResultState.success, result: currentTrips),
+              state: ResultState.success, result: currentTrips),
         ));
       } else if (event.tabMyList == TabMyList.nextTrips) {
         final List<BookingTripJson>? nextTrips =
@@ -35,14 +35,14 @@ class BlocMyTripScreen extends Bloc<BlocMyTripEvent, BlocMyTripState> {
 
         emit(BlocMyTripStateLoadNextTrips(
           appResult: AppResult<List<BookingTripJson>>(
-              resultState: ResultState.success, result: nextTrips),
+              state: ResultState.success, result: nextTrips),
         ));
       } else if (event.tabMyList == TabMyList.pastTrips) {
         final List<BookingTripJson>? pastTrips =
             await _myTripRepository.getListBooking();
         emit(BlocMyTripStateLoadPastTrips(
           appResult: AppResult<List<BookingTripJson>>(
-              resultState: ResultState.success, result: pastTrips),
+              state: ResultState.success, result: pastTrips),
         ));
       } else if (event.tabMyList == TabMyList.wishListTrips) {
         final List<BookingTripJson>? wishListTrips =
@@ -50,7 +50,7 @@ class BlocMyTripScreen extends Bloc<BlocMyTripEvent, BlocMyTripState> {
 
         emit(BlocMyTripStateLoadWishListTrips(
           appResult: AppResult<List<BookingTripJson>>(
-              resultState: ResultState.success, result: wishListTrips),
+              state: ResultState.success, result: wishListTrips),
         ));
       }
     } else if (event is BlocMyTripEventChangeIndex) {

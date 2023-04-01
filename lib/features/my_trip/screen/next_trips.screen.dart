@@ -42,7 +42,7 @@ class _NextTripsScreen extends State<NextTripsScreen> {
       buildWhen: (previous, current) => current is BlocMyTripStateLoadNextTrips,
       builder: (context, state) {
         if (state is BlocMyTripStateLoadNextTrips) {
-          if (state.appResult.resultState == ResultState.fail) {
+          if (state.appResult.state == ResultState.fail) {
             return Container(
               alignment: Alignment.center,
               child: const Text(
@@ -50,7 +50,7 @@ class _NextTripsScreen extends State<NextTripsScreen> {
                 style: TextStyle(fontSize: 20, color: AppColors.black),
               ),
             );
-          } else if (state.appResult.resultState == ResultState.success) {
+          } else if (state.appResult.state == ResultState.success) {
             final List<BookingTripJson> items =
                 state.appResult.result as List<BookingTripJson>;
             return ListView.builder(

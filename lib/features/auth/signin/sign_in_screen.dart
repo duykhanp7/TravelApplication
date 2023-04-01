@@ -2,10 +2,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travel_booking_tour/common/enums/enums.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/features/auth/signin/blocs/bloc_sign_in_event.dart';
-import 'package:travel_booking_tour/features/auth/signin/blocs/bloc_sign_in_screen.dart';
-import 'package:travel_booking_tour/features/auth/signin/blocs/bloc_sign_in_state.dart';
+import 'package:travel_booking_tour/features/auth/signin/bloc/bloc_sign_in_event.dart';
+import 'package:travel_booking_tour/features/auth/signin/bloc/bloc_sign_in_screen.dart';
+import 'package:travel_booking_tour/features/auth/signin/bloc/bloc_sign_in_state.dart';
 import 'package:travel_booking_tour/res/background.dart';
 import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/router/path.dart';
@@ -47,28 +48,21 @@ class _SignInScreen extends State<SignInScreen> {
         child: SingleChildScrollView(
           child: BlocListener<BlocSignInScreen, BlocSignInState>(
             listenWhen: (previous, current) =>
-                current is BlocSignInStateValidateSuccess ||
-                current is BlocSignInStateServerError,
+                current is BlocSignInStateValidate,
             listener: (context, state) {
-              if (state is BlocSignInStateValidateSuccess) {
-                // showDialog(
-                //   context: context,
-                //   builder: (context) => AppDialog(
-                //     typeDialog: TypeDialog.success,
-                //     content: 'Congratulation!\nSign up successfully.',
-                //     positiveAction: () => Navigator.of(context).pop(),
-                //   ),
-                // );
-                Routes.navigateToAndRemoveUntil(AppPath.mainScreen, {});
-              } else if (state is BlocSignInStateServerError) {
-                showDialog(
-                  context: context,
-                  builder: (context) => AppDialog(
-                    typeDialog: TypeDialog.error,
-                    content: 'Opp Sorry!\nSomething went wrong, try later!',
-                    positiveAction: () => Navigator.of(context).pop(),
-                  ),
-                );
+              if (state is BlocSignInStateValidate) {
+                if (state.appResult.state == ResultState.success) {
+                  Routes.navigateToAndRemoveUntil(AppPath.mainScreen, {});
+                } else if (state.appResult.state == ResultState.error) {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AppDialog(
+                      typeDialog: TypeDialog.error,
+                      content: 'Opp Sorry!\nSomething went wrong, try later!',
+                      positiveAction: () => Navigator.of(context).pop(),
+                    ),
+                  );
+                }
               }
             },
             child: Container(
@@ -104,21 +98,21 @@ class _SignInScreen extends State<SignInScreen> {
             height: 25,
           ),
           BlocBuilder<BlocSignInScreen, BlocSignInState>(
-            buildWhen: (previous, current) =>
-                current is BlocSignInStateValidateLoading ||
-                current is BlocSignInStateValidateSuccess ||
-                current is BlocSignInStateValidateFail ||
-                current is BlocSignInStateServerError,
-            builder: (context, state) => PrimaryActiveButton(
-              text: localization.sign_in,
-              isLoading: state is BlocSignInStateValidateLoading,
-              onTap: () {
-                _blocSignInScreen.add(BlocSignInEventSignInClick(
-                    signInGlobalKey: signInGlobalKey));
-              },
-              allCaps: true,
-            ),
-          ),
+              buildWhen: (previous, current) =>
+                  current is BlocSignInStateValidate,
+              builder: (context, state) {
+                bool isLoading = state is BlocSignInStateValidate &&
+                    state.appResult.state == ResultState.loading;
+                return PrimaryActiveButton(
+                  text: localization.sign_in,
+                  isLoading: isLoading,
+                  onTap: () {
+                    _blocSignInScreen.add(BlocSignInEventSignInClick(
+                        signInGlobalKey: signInGlobalKey));
+                  },
+                  allCaps: true,
+                );
+              }),
           const SizedBox(
             height: 34,
           ),

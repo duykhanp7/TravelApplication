@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel_booking_tour/common/app_constant.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/features/explore/screens/explore_screen.dart';
+import 'package:travel_booking_tour/features/explore/screen/explore_screen.dart';
 import 'package:travel_booking_tour/features/my_trip/screen/my_trips_screen.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_main_event.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_main_screen.dart';

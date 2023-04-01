@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel_booking_tour/common/app_constant.dart';
+import 'package:travel_booking_tour/common/enums/enums.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 import 'package:travel_booking_tour/data/models/language_json.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_search_system_event.dart';
@@ -15,8 +16,8 @@ import '../../../data/models/tour_guide_detail_json.dart';
 import '../../../res/button.dart';
 import '../../../res/input_field.dart';
 import '../../../router/routes.dart';
-import '../../explore/widgets/featured_tour_item.dart';
-import '../../explore/widgets/tour_guide_item.dart';
+import '../../explore/widget/featured_tour_item.dart';
+import '../../explore/widget/tour_guide_item.dart';
 
 class SearchSystem extends StatefulWidget {
   const SearchSystem({super.key});
@@ -67,12 +68,11 @@ class _SearchSystem extends State<SearchSystem> {
   Widget _buildSearchView() {
     return BlocBuilder<BlocSearchSystemScreen, BlocSearchSystemState>(
       buildWhen: (previous, current) =>
-          current is BlocSearchSystemStateSearchingSuccess ||
           current is BlocSearchSystemStateClearSearching,
       builder: (context, state) {
         bool visibilityFilter = false;
-        if (state is BlocSearchSystemStateSearchingSuccess) {
-          visibilityFilter = true;
+        if (state is BlocSearchSystemStateSearching) {
+          visibilityFilter = state.appResult.state == ResultState.loading;
         }
         return Container(
           alignment: Alignment.center,
@@ -284,7 +284,8 @@ class _SearchSystem extends State<SearchSystem> {
                     text: 'Apply Filters',
                     allCaps: true,
                     onTap: () {
-                      Routes.backTo(arguments: {'data': 'Do NGu NGoc'});
+                      Routes.backTo(
+                          arguments: {AppConstant.data: 'Do NGu NGoc'});
                     },
                     margin: EdgeInsets.zero,
                   )
@@ -305,17 +306,17 @@ class _SearchSystem extends State<SearchSystem> {
     return BlocBuilder<BlocSearchSystemScreen, BlocSearchSystemState>(
       buildWhen: (previous, current) =>
           current is BlocSearchSystemStateSearching ||
-          current is BlocSearchSystemStateSearchingSuccess ||
-          current is BlocSearchSystemStateSearchingFail ||
           current is BlocSearchSystemStateClearSearching,
       builder: (context, state) {
         if (state is BlocSearchSystemStateSearching) {
-          debugPrint('_buildLoadingWidget');
-          return _buildLoadingWidget();
-        } else if (state is BlocSearchSystemStateSearchingSuccess) {
-          return _buildBodySuccess(state.itemTourGuides, state.itemsTours);
-        } else if (state is BlocSearchSystemStateSearchingFail) {}
-        debugPrint('_buildSuggestions');
+          if (state.appResult.state == ResultState.success) {
+            return _buildBodySuccess(
+                state.appResult.result[Searching.itemTourGuides],
+                state.appResult.result[Searching.itemsTours]);
+          } else if (state.appResult.state == ResultState.loading) {
+            return _buildLoadingWidget();
+          }
+        }
         return _buildSuggestions();
       },
     );

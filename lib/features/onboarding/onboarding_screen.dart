@@ -7,7 +7,7 @@ import 'package:travel_booking_tour/features/onboarding/bloc/bloc_onboarding_scr
 import 'package:travel_booking_tour/features/onboarding/bloc/bloc_onboarding_state.dart';
 import 'package:travel_booking_tour/features/onboarding/model/onboarding_json.dart';
 import 'package:travel_booking_tour/features/onboarding/onboarding_Page.dart';
-import 'package:travel_booking_tour/features/onboarding/widgets/onboarding_header.dart';
+import 'package:travel_booking_tour/features/onboarding/widget/onboarding_header.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
 import '../../res/button.dart';
