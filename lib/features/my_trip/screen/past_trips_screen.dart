@@ -43,7 +43,7 @@ class _PastTripsScreen extends State<PastTripsScreen> {
       buildWhen: (previous, current) => current is BlocMyTripStateLoadPastTrips,
       builder: (context, state) {
         if (state is BlocMyTripStateLoadPastTrips) {
-          if (state.appResult.resultState == ResultState.fail) {
+          if (state.appResult.state == ResultState.fail) {
             return Container(
               alignment: Alignment.center,
               child: const Text(
@@ -51,7 +51,7 @@ class _PastTripsScreen extends State<PastTripsScreen> {
                 style: TextStyle(fontSize: 20, color: AppColors.black),
               ),
             );
-          } else if (state.appResult.resultState == ResultState.success) {
+          } else if (state.appResult.state == ResultState.success) {
             final List<BookingTripJson> items =
                 state.appResult.result as List<BookingTripJson>;
             return ListView.builder(

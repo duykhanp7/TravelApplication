@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_main_event.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_main_state.dart';
 import 'package:travel_booking_tour/router/path.dart';
@@ -7,7 +8,7 @@ import 'package:travel_booking_tour/router/routes.dart';
 class BlocMainScreen extends Bloc<BlocMainEvent, BlocMainState> {
   int index = 0;
   BlocMainScreen() : super(BlocMainStateInitial()) {
-    on<BlocMainEvent>((event, emit) => mapStateToEvent(event, emit));
+    on<BlocMainEvent>(mapStateToEvent, transformer: restartable());
   }
 
   void mapStateToEvent(BlocMainEvent event, Emitter<BlocMainState> emit) async {

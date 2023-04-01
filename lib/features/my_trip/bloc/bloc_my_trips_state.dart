@@ -23,23 +23,11 @@ class BlocMyTripStateLoadCurrentTrips extends BlocMyTripState {
   List<Object?> get props => [appResult];
 }
 
-class BlocMyTripStateLoadCurrentTripsFail extends BlocMyTripState {
-  BlocMyTripStateLoadCurrentTripsFail();
-  @override
-  List<Object?> get props => [];
-}
-
 class BlocMyTripStateLoadNextTrips extends BlocMyTripState {
   BlocMyTripStateLoadNextTrips({required this.appResult});
   final AppResult appResult;
   @override
   List<Object?> get props => [appResult];
-}
-
-class BlocMyTripStateLoadNextTripsFail extends BlocMyTripState {
-  BlocMyTripStateLoadNextTripsFail();
-  @override
-  List<Object?> get props => [];
 }
 
 class BlocMyTripStateLoadPastTrips extends BlocMyTripState {
@@ -49,22 +37,10 @@ class BlocMyTripStateLoadPastTrips extends BlocMyTripState {
   List<Object?> get props => [appResult];
 }
 
-class BlocMyTripStateLoadPassTripsFail extends BlocMyTripState {
-  BlocMyTripStateLoadPassTripsFail();
-  @override
-  List<Object?> get props => [];
-}
-
 class BlocMyTripStateLoadWishListTrips extends BlocMyTripState {
   BlocMyTripStateLoadWishListTrips({required this.appResult});
   final AppResult appResult;
 
   @override
   List<Object?> get props => [appResult];
-}
-
-class BlocMyTripStateLoadWishListTripsFail extends BlocMyTripState {
-  BlocMyTripStateLoadWishListTripsFail();
-  @override
-  List<Object?> get props => [];
 }

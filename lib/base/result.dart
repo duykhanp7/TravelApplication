@@ -1,7 +1,7 @@
 import 'package:travel_booking_tour/common/enums/enums.dart';
 
 class AppResult<T> {
-  final ResultState resultState;
+  final ResultState state;
   final T? result;
-  AppResult({required this.resultState, required this.result});
+  AppResult({required this.state, this.result});
 }

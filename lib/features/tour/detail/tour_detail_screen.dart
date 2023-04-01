@@ -6,16 +6,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/common/extensions/context_extension.dart';
 import 'package:travel_booking_tour/data/models/schedule_json.dart';
 import 'package:travel_booking_tour/data/models/tour_detail_json.dart';
-import 'package:travel_booking_tour/features/auth/signup/widgets/choose_date_widget.dart';
-import 'package:travel_booking_tour/features/tour/detail/blocs/bloc_tour_detail_event.dart';
-import 'package:travel_booking_tour/features/tour/detail/blocs/bloc_tour_detail_screen.dart';
-import 'package:travel_booking_tour/features/tour/detail/blocs/bloc_tour_detail_state.dart';
-import 'package:travel_booking_tour/features/tour/detail/widgets/schedule_point.dart';
+import 'package:travel_booking_tour/features/auth/signup/widget/choose_date_widget.dart';
+import 'package:travel_booking_tour/features/tour/detail/bloc/bloc_tour_detail_event.dart';
+import 'package:travel_booking_tour/features/tour/detail/bloc/bloc_tour_detail_screen.dart';
+import 'package:travel_booking_tour/features/tour/detail/bloc/bloc_tour_detail_state.dart';
+import 'package:travel_booking_tour/features/tour/detail/widget/schedule_point.dart';
 import 'package:travel_booking_tour/res/app_inkwell.dart';
 import 'package:travel_booking_tour/res/button.dart';
 import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/res/vertical_star_widget.dart';
 
+import '../../../common/app_constant.dart';
 import '../../../router/routes.dart';
 
 class TourDetailScreen extends StatefulWidget {
@@ -44,7 +45,7 @@ class _TourDetailScreen extends State<TourDetailScreen> {
   Widget build(BuildContext context) {
     Map<String, dynamic> datas =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
-    _tourDetailJson = datas['data'] as TourDetailJson;
+    _tourDetailJson = datas[AppConstant.data] as TourDetailJson;
     _blocTourDetailScreen.add(BlocTourDetailEventInitial());
 
     return Scaffold(

@@ -8,8 +8,8 @@ import 'package:travel_booking_tour/l10n/generated/l10n.dart';
 import 'package:travel_booking_tour/res/background.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
-import '../../res/button.dart';
-import '../../res/input_field.dart';
+import '../../../res/button.dart';
+import '../../../res/input_field.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});

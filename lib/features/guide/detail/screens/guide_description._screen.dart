@@ -13,6 +13,7 @@ import 'package:travel_booking_tour/res/button.dart';
 import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/res/vertical_star_widget.dart';
 
+import '../../../../common/app_constant.dart';
 import '../blocs/bloc_detail_guide_state.dart';
 
 class GuideDescriptionScreen extends StatefulWidget {
@@ -41,7 +42,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
     Map<String, dynamic> datas =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
 
-    tourGuideDetailJson = datas['data'] as TourGuideDetailJson;
+    tourGuideDetailJson = datas[AppConstant.data] as TourGuideDetailJson;
 
     _blocDetailGuideScreen.add(BlocDetailGuideEventLoadVideo(
         videoUrl: tourGuideDetailJson.videoIntroductionUrl ?? ''));
