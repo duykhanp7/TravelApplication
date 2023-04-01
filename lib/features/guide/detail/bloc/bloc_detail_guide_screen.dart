@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_detail_guide_event.dart';
-import 'package:travel_booking_tour/features/guide/detail/blocs/bloc_detail_guide_state.dart';
+import 'package:travel_booking_tour/features/guide/detail/bloc/bloc_detail_guide_event.dart';
+import 'package:travel_booking_tour/features/guide/detail/bloc/bloc_detail_guide_state.dart';
 import 'package:travel_booking_tour/router/path.dart';
 import 'package:travel_booking_tour/router/routes.dart';
 import 'package:video_viewer/video_viewer.dart';

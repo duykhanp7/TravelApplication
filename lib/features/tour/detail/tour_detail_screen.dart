@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/data/models/schedule_json.dart';
-import 'package:travel_booking_tour/data/models/tour_detail_json.dart';
+import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/auth/signup/widget/choose_date_widget.dart';
 import 'package:travel_booking_tour/features/tour/detail/bloc/bloc_tour_detail_event.dart';
 import 'package:travel_booking_tour/features/tour/detail/bloc/bloc_tour_detail_screen.dart';
@@ -17,6 +15,8 @@ import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/res/vertical_star_widget.dart';
 
 import '../../../common/app_constant.dart';
+import '../../../data/model/schedule_json.dart';
+import '../../../data/model/tour_detail_json.dart';
 import '../../../router/routes.dart';
 
 class TourDetailScreen extends StatefulWidget {

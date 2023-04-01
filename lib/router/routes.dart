@@ -1,10 +1,9 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:travel_booking_tour/common/enums/enums.dart';
 import 'package:travel_booking_tour/features/empty/empty.dart';
 import 'package:travel_booking_tour/features/explore/screen/see_more_screen.dart';
 import 'package:travel_booking_tour/features/forgot_password/screen/check_email_screen.dart';
-import 'package:travel_booking_tour/features/guide/detail/screens/guide_description._screen.dart';
+import 'package:travel_booking_tour/features/guide/detail/screen/guide_description._screen.dart';
 import 'package:travel_booking_tour/features/main/screen/main_page.dart';
 import 'package:travel_booking_tour/features/main/screen/search_system.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/terms_and_conditions_screen.dart';
@@ -12,6 +11,7 @@ import 'package:travel_booking_tour/features/tour/detail/tour_detail_screen.dart
 import 'package:travel_booking_tour/res/app_camera.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
+import '../common/enum/enums.dart';
 import '../features/auth/signup/screen/sign_up_screen.dart';
 import '../features/auth/signup/screen/sign_up_tour_guide_information_screen.dart';
 import '../features/forgot_password/forgot_password_screen.dart';

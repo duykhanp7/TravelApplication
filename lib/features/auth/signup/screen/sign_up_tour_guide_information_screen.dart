@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:travel_booking_tour/common/enums/enums.dart';
-import 'package:travel_booking_tour/common/extensions/context_extension.dart';
+import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_tour_guide_information_event.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_tour_guide_information_screen.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_tour_guide_information_state.dart';
@@ -18,6 +17,8 @@ import 'package:travel_booking_tour/res/dotted_border/dotted_border.dart';
 import 'package:travel_booking_tour/res/input_field.dart';
 import 'package:travel_booking_tour/res/res.dart';
 import 'package:video_viewer/domain/entities/video_source.dart';
+
+import '../../../../common/enum/enums.dart';
 
 class SignUpTourGuideInformationScreen extends StatefulWidget {
   const SignUpTourGuideInformationScreen({super.key});

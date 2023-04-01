@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/data/models/review_json.dart';
+import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/vertical_star_widget.dart';
+
+import '../../../../data/model/review_json.dart';
 
 class ReviewGuideItem extends StatefulWidget {
   const ReviewGuideItem({super.key, required this.reviewJson});

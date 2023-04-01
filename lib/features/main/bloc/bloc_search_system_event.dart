@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:travel_booking_tour/data/models/language_json.dart';
 import 'package:travel_booking_tour/features/main/model/type_filter_json.dart';
+
+import '../../../data/model/language_json.dart';
 
 abstract class BlocSearchSystemEvent extends Equatable {}
 

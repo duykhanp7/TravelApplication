@@ -1,5 +1,6 @@
 import 'package:travel_booking_tour/data/dio/api_client.dart';
-import 'package:travel_booking_tour/data/models/user.dart';
+
+import '../../../data/model/user.dart';
 
 class AuthRepository {
   final ApiService _apiService = ApiService();

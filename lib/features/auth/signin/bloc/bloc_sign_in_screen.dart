@@ -5,14 +5,14 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:travel_booking_tour/base/result.dart';
 import 'package:travel_booking_tour/common/app_constant.dart';
-import 'package:travel_booking_tour/common/enums/enums.dart';
 import 'package:travel_booking_tour/data/local/app_storage.dart';
 import 'package:travel_booking_tour/features/auth/signin/bloc/bloc_sign_in_event.dart';
 import 'package:travel_booking_tour/features/auth/signin/bloc/bloc_sign_in_state.dart';
 import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
-import '../../../../data/models/user.dart';
+import '../../../../common/enum/enums.dart';
+import '../../../../data/model/user.dart';
 import '../../../../data/network/network_exception.dart';
 import '../../../../router/routes.dart';
 import '../../repository/auth_repository.dart';

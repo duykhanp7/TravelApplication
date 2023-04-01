@@ -1,12 +1,13 @@
-import 'package:travel_booking_tour/data/models/language_json.dart';
 import 'package:travel_booking_tour/features/main/model/type_filter_json.dart';
 
-import '../../../data/models/review_json.dart';
-import '../../../data/models/schedule_json.dart';
-import '../../../data/models/schedule_point_json.dart';
-import '../../../data/models/tour_detail_json.dart';
-import '../../../data/models/tour_guide_detail_json.dart';
-import '../../../data/models/tour_provider_json.dart';
+import '../../../data/model/language_json.dart';
+import '../../../data/model/review_json.dart';
+import '../../../data/model/schedule_json.dart';
+import '../../../data/model/schedule_point_json.dart';
+import '../../../data/model/tour_detail_json.dart';
+import '../../../data/model/tour_guide_detail_json.dart';
+
+import '../../../data/model/tour_provider_json.dart';
 import '../../../res/images.dart';
 
 class SearchSystemRepository {

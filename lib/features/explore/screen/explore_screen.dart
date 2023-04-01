@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travel_booking_tour/common/extensions/context_extension.dart';
-import 'package:travel_booking_tour/data/models/tour_detail_json.dart';
-import 'package:travel_booking_tour/data/models/tour_guide_detail_json.dart';
+import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_event.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_screen.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_state.dart';
@@ -18,7 +16,9 @@ import 'package:travel_booking_tour/res/app_layout_shimmer.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/system.dart';
 
-import '../../../common/enums/enums.dart';
+import '../../../common/enum/enums.dart';
+import '../../../data/model/tour_detail_json.dart';
+import '../../../data/model/tour_guide_detail_json.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({super.key, required this.scrollController});

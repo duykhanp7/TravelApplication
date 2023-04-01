@@ -1,12 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:travel_booking_tour/base/result.dart';
-import 'package:travel_booking_tour/common/enums/enums.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_see_more_event.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_see_more_state.dart';
 import 'package:travel_booking_tour/features/explore/repository/explore_repository.dart';
 import 'package:travel_booking_tour/router/path.dart';
 import 'package:travel_booking_tour/router/routes.dart';
+
+import '../../../common/enum/enums.dart';
 
 class BlocSeeMoreScreen extends Bloc<BlocSeeMoreEvent, BlocSeeMoreState> {
   BlocSeeMoreScreen() : super(BlocSeeMoreStateInitial()) {

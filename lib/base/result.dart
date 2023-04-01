@@ -1,4 +1,4 @@
-import 'package:travel_booking_tour/common/enums/enums.dart';
+import '../common/enum/enums.dart';
 
 class AppResult<T> {
   final ResultState state;

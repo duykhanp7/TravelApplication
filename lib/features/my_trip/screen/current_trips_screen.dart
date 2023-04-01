@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travel_booking_tour/common/enums/enums.dart';
 import 'package:travel_booking_tour/features/my_trip/bloc/bloc_my_trips_event.dart';
 import 'package:travel_booking_tour/features/my_trip/bloc/bloc_my_trips_screen.dart';
 import 'package:travel_booking_tour/features/my_trip/bloc/bloc_my_trips_state.dart';
@@ -8,6 +7,8 @@ import 'package:travel_booking_tour/features/my_trip/model/booking_trip_json.dar
 import 'package:travel_booking_tour/features/my_trip/widget/booking_trip_item.dart';
 import 'package:travel_booking_tour/res/app_layout_shimmer.dart';
 import 'package:travel_booking_tour/res/colors.dart';
+
+import '../../../common/enum/enums.dart';
 
 class CurrentTripsScreen extends StatefulWidget {
   const CurrentTripsScreen({super.key});

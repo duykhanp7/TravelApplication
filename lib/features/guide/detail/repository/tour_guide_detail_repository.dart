@@ -1,6 +1,7 @@
 import 'package:travel_booking_tour/base/base_repository.dart';
-import 'package:travel_booking_tour/features/guide/detail/models/my_experience_json.dart';
 import 'package:travel_booking_tour/res/images.dart';
+
+import '../model/my_experience_json.dart';
 
 class DetailGuidetourRepository extends BaseRepository {
   @override
