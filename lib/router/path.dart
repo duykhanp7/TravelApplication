@@ -9,8 +9,7 @@ class AppPath {
   static const String exploreScreen = '/exploreScreen';
   static const String empty = '/empty';
   static const String guide = '/guide';
-  static const String chooseGuideTripInformation =
-      '/chooseGuideTripInformation';
+  static const String editTripInformation = '/chooseGuideTripInformation';
   static const String addNewPlaces = '/addNewPlaces';
   static const String termAndCondition = '/termAndCondition';
   static const String tourGuideAddProfile = '/tourGuideAddProfile';

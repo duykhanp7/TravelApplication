@@ -7,6 +7,11 @@ import 'package:travel_booking_tour/features/my_trip/screen/next_trips.screen.da
 import 'package:travel_booking_tour/features/my_trip/screen/past_trips_screen.dart';
 import 'package:travel_booking_tour/features/my_trip/screen/wish_list_screen.dart';
 import 'package:travel_booking_tour/res/res.dart';
+import 'package:travel_booking_tour/router/path.dart';
+
+import '../../../common/app_constant.dart';
+import '../../../common/enum/enums.dart';
+import '../../../router/routes.dart';
 
 class MyTripScreen extends StatefulWidget {
   const MyTripScreen({super.key, required this.scrollController});
@@ -95,6 +100,10 @@ class _MyTripScreen extends State<MyTripScreen> with TickerProviderStateMixin {
               borderRadius: BorderRadius.circular(30),
               onTap: () {
                 //Floating button
+                Routes.navigateTo(AppPath.editTripInformation, {
+                  AppConstant.tripInformationMode:
+                      EditTripInformationMode.createNewTrip
+                });
               },
             ),
           ),

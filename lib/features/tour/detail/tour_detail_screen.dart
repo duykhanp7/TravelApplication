@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/auth/signup/widget/choose_date_widget.dart';
 import 'package:travel_booking_tour/features/tour/detail/bloc/bloc_tour_detail_event.dart';
 import 'package:travel_booking_tour/features/tour/detail/bloc/bloc_tour_detail_screen.dart';
@@ -125,7 +124,7 @@ class _TourDetailScreen extends State<TourDetailScreen> {
                           alignment: Alignment.center,
                           child: Text(
                             'Share on',
-                            style: context.textStyle.titleMedium?.copyWith(
+                            style: AppStyles.titleMedium.copyWith(
                                 fontSize: 17,
                                 fontWeight: FontWeight.w500,
                                 color: AppColors.black),
@@ -207,7 +206,7 @@ class _TourDetailScreen extends State<TourDetailScreen> {
                     },
                     child: Text(
                       'Cancel',
-                      style: context.textStyle.titleMedium?.copyWith(
+                      style: AppStyles.titleMedium.copyWith(
                           fontSize: 20,
                           fontWeight: FontWeight.w100,
                           fontStyle: FontStyle.italic,
@@ -313,13 +312,13 @@ class _TourDetailScreen extends State<TourDetailScreen> {
             children: [
               Text(
                 _tourDetailJson.destination ?? '',
-                style: context.textStyle.titleMedium?.copyWith(
+                style: AppStyles.titleMedium.copyWith(
                     fontWeight: FontWeight.w500,
                     fontSize: 18,
                     color: AppColors.black),
               ),
               Text('\$${_tourDetailJson.price ?? 0}',
-                  style: context.textStyle.titleMedium?.copyWith(
+                  style: AppStyles.titleMedium.copyWith(
                       fontSize: 18,
                       fontWeight: FontWeight.w100,
                       color: AppColors.primary,
@@ -336,7 +335,7 @@ class _TourDetailScreen extends State<TourDetailScreen> {
                   const SizedBox(width: 10),
                   Text(
                     '${_tourDetailJson.reviews ?? 0} reviews',
-                    style: context.textStyle.titleSmall?.copyWith(
+                    style: AppStyles.titleSmall.copyWith(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
                         color: AppColors.textHintColor),
@@ -345,7 +344,7 @@ class _TourDetailScreen extends State<TourDetailScreen> {
               ),
               Text(
                 '\$${_tourDetailJson.saleOff}',
-                style: context.textStyle.titleSmall?.copyWith(
+                style: AppStyles.titleSmall.copyWith(
                     fontWeight: FontWeight.w400,
                     color: AppColors.textHintColor,
                     decoration: TextDecoration.lineThrough),
@@ -357,13 +356,13 @@ class _TourDetailScreen extends State<TourDetailScreen> {
             children: [
               Text(
                 'Provider',
-                style: context.textStyle.titleMedium?.copyWith(
+                style: AppStyles.titleMedium.copyWith(
                     fontWeight: FontWeight.w400,
                     color: AppColors.textByAgreeColor),
               ),
               const SizedBox(width: 24),
               Text(_tourDetailJson.provider?.name ?? '',
-                  style: context.textStyle.titleMedium?.copyWith(
+                  style: AppStyles.titleMedium.copyWith(
                       fontWeight: FontWeight.w500, color: AppColors.primary))
             ],
           ),
@@ -387,48 +386,48 @@ class _TourDetailScreen extends State<TourDetailScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Summary',
-                      style: context.textStyle.titleMedium?.copyWith(
+                      style: AppStyles.titleMedium.copyWith(
                           fontWeight: FontWeight.w500,
                           fontSize: 20,
                           color: AppColors.black)),
                   const SizedBox(height: 15),
                   Text('Itinerary',
-                      style: context.textStyle.titleMedium?.copyWith(
+                      style: AppStyles.titleMedium.copyWith(
                           fontWeight: FontWeight.w500,
                           color: AppColors.textByAgreeColor)),
                   const SizedBox(height: 4),
                   Text(_tourDetailJson.destination ?? '',
-                      style: context.textStyle.titleMedium?.copyWith(
+                      style: AppStyles.titleMedium.copyWith(
                           fontWeight: FontWeight.w400,
                           color: AppColors.textOnboardingBlack)),
                   const SizedBox(height: 14),
                   Text('Duration',
-                      style: context.textStyle.titleMedium?.copyWith(
+                      style: AppStyles.titleMedium.copyWith(
                           fontWeight: FontWeight.w500,
                           color: AppColors.textByAgreeColor)),
                   const SizedBox(height: 4),
                   Text(_tourDetailJson.duration ?? '',
-                      style: context.textStyle.titleMedium?.copyWith(
+                      style: AppStyles.titleMedium.copyWith(
                           fontWeight: FontWeight.w400,
                           color: AppColors.textOnboardingBlack)),
                   const SizedBox(height: 14),
                   Text('Departure date',
-                      style: context.textStyle.titleMedium?.copyWith(
+                      style: AppStyles.titleMedium.copyWith(
                           fontWeight: FontWeight.w500,
                           color: AppColors.textByAgreeColor)),
                   const SizedBox(height: 4),
                   Text(_tourDetailJson.departureDate ?? '',
-                      style: context.textStyle.titleMedium?.copyWith(
+                      style: AppStyles.titleMedium.copyWith(
                           fontWeight: FontWeight.w400,
                           color: AppColors.textOnboardingBlack)),
                   const SizedBox(height: 14),
                   Text('Departure place',
-                      style: context.textStyle.titleMedium?.copyWith(
+                      style: AppStyles.titleMedium.copyWith(
                           fontWeight: FontWeight.w500,
                           color: AppColors.textByAgreeColor)),
                   const SizedBox(height: 4),
                   Text(_tourDetailJson.departurePlace ?? '',
-                      style: context.textStyle.titleMedium?.copyWith(
+                      style: AppStyles.titleMedium.copyWith(
                           fontWeight: FontWeight.w400,
                           color: AppColors.textOnboardingBlack)),
                 ],
@@ -455,7 +454,7 @@ class _TourDetailScreen extends State<TourDetailScreen> {
             ),
             const SizedBox(width: 12),
             Text('Schedule',
-                style: context.textStyle.titleMedium?.copyWith(
+                style: AppStyles.titleMedium.copyWith(
                     fontWeight: FontWeight.w500,
                     fontSize: 20,
                     color: AppColors.black))
@@ -483,8 +482,8 @@ class _TourDetailScreen extends State<TourDetailScreen> {
                   ),
                   const SizedBox(height: 12),
                   Text(scheduleJson?.name ?? 'No departure palace',
-                      style: context.textStyle.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w500, fontSize: 16)),
+                      style: AppStyles.titleMedium
+                          .copyWith(fontWeight: FontWeight.w500, fontSize: 16)),
                   const SizedBox(height: 14),
                   ListView.builder(
                     itemCount: scheduleJson?.schedules?.length ?? 0,
@@ -511,7 +510,7 @@ class _TourDetailScreen extends State<TourDetailScreen> {
                 SvgPicture.asset(AppIcons.icDollarCircle),
                 const SizedBox(width: 7),
                 Text('Price',
-                    style: context.textStyle.titleMedium?.copyWith(
+                    style: AppStyles.titleMedium.copyWith(
                         fontWeight: FontWeight.w500,
                         fontSize: 22,
                         color: AppColors.black))

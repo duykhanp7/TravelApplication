@@ -5,4 +5,5 @@ class AppConstant {
   static const String user = 'user';
   static const String password = 'password';
   static const String data = 'data';
+  static const String tripInformationMode = 'tripInformationMode';
 }

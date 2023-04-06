@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
-import 'package:travel_booking_tour/res/colors.dart';
-import 'package:travel_booking_tour/res/icons.dart';
+import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/res/vertical_star_widget.dart';
 
 import '../../../data/model/tour_guide_detail_json.dart';
@@ -64,11 +62,10 @@ class _TourGuideItem extends State<TourGuideItem> {
                                   child: Text(
                                     '${widget.tourGuideDetailJson.reviews?.length ?? 0} reviews',
                                     textAlign: TextAlign.start,
-                                    style: context.textStyle.titleSmall
-                                        ?.copyWith(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w400,
-                                            color: AppColors.white),
+                                    style: AppStyles.titleSmall.copyWith(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColors.white),
                                   ),
                                 )
                               ],
@@ -92,8 +89,8 @@ class _TourGuideItem extends State<TourGuideItem> {
                           Text(
                             overflow: TextOverflow.ellipsis,
                             widget.tourGuideDetailJson.name ?? '',
-                            style: context.textStyle.titleMedium
-                                ?.copyWith(fontWeight: FontWeight.w500),
+                            style: AppStyles.titleMedium
+                                .copyWith(fontWeight: FontWeight.w500),
                           ),
                           const SizedBox(
                             height: 7,
@@ -109,7 +106,7 @@ class _TourGuideItem extends State<TourGuideItem> {
                                 Text(
                                   widget.tourGuideDetailJson.address ?? '',
                                   overflow: TextOverflow.ellipsis,
-                                  style: context.textStyle.titleSmall?.copyWith(
+                                  style: AppStyles.titleSmall.copyWith(
                                       fontWeight: FontWeight.w400,
                                       color: AppColors.primary),
                                 )

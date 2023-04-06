@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
 class AppTextField extends StatefulWidget {
@@ -82,7 +81,7 @@ class _AppTextField extends State<AppTextField> {
                   child: Text(
                     widget.labelText ?? '',
                     style: widget.labelTextStyle ??
-                        context.textStyle.titleMedium!.copyWith(
+                        AppStyles.titleMedium.copyWith(
                             fontWeight: FontWeight.w500,
                             color: AppColors.black,
                             fontStyle: FontStyle.normal),
@@ -114,7 +113,7 @@ class _AppTextField extends State<AppTextField> {
                         const BoxConstraints(minHeight: 25, minWidth: 25),
                     hintText: widget.hintText,
                     hintStyle: widget.hintTextStyle ??
-                        context.textStyle.titleMedium!.copyWith(
+                        AppStyles.titleMedium.copyWith(
                             fontWeight: FontWeight.w400,
                             color: AppColors.textHintColor,
                             fontStyle: FontStyle.normal),
@@ -143,7 +142,7 @@ class _AppTextField extends State<AppTextField> {
             textInputAction: TextInputAction.done,
             cursorColor: widget.cursorColor ?? AppColors.primary,
             style: widget.textStyle ??
-                context.textStyle.titleSmall!.copyWith(
+                AppStyles.titleSmall.copyWith(
                     fontWeight: FontWeight.w400,
                     color: AppColors.black,
                     fontSize: 16,

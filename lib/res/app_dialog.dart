@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/icons.dart';
+import 'package:travel_booking_tour/res/styles.dart';
 
 enum TypeDialog { error, success, warning, info, link }
 
@@ -72,7 +72,7 @@ class _AppDialog extends State<AppDialog> {
                 Text(
                   widget.content,
                   textAlign: TextAlign.center,
-                  style: context.textStyle.titleMedium?.copyWith(
+                  style: AppStyles.titleMedium.copyWith(
                       color: AppColors.white,
                       fontSize: 20,
                       fontWeight: FontWeight.w400),
@@ -93,7 +93,7 @@ class _AppDialog extends State<AppDialog> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: AppColors.black.withOpacity(0.3)),
                             child: Text(widget.negativeTitle ?? 'Cancel',
-                                style: context.textStyle.titleMedium?.copyWith(
+                                style: AppStyles.titleMedium.copyWith(
                                     color: AppColors.white,
                                     fontWeight: FontWeight.w400,
                                     fontSize: 18)),
@@ -131,7 +131,7 @@ class _AppDialog extends State<AppDialog> {
                                 color: AppColors.primary.withOpacity(0.8)),
                             child: Text(
                               widget.positiveTitle ?? 'OK',
-                              style: context.textStyle.titleMedium?.copyWith(
+                              style: AppStyles.titleMedium.copyWith(
                                   color: AppColors.white,
                                   fontWeight: FontWeight.w400,
                                   fontSize: 18),

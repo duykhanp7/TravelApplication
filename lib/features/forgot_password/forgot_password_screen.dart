@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/forgot_password/bloc/bloc_forgot_password_event.dart';
 import 'package:travel_booking_tour/features/forgot_password/bloc/bloc_forgot_password_screen.dart';
 import 'package:travel_booking_tour/l10n/generated/l10n.dart';
@@ -22,7 +21,15 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
   late SLocalization localization;
-  final GlobalKey<FormState> forgotPasswordGlobalKey = GlobalKey<FormState>();
+  late BlocForgotPasswordScreen _blocForgotPasswordScreen;
+
+  @override
+  void initState() {
+    _blocForgotPasswordScreen =
+        BlocProvider.of<BlocForgotPasswordScreen>(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     localization = SLocalization.of(context);
@@ -35,7 +42,7 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
           child: AppBackground(
               header: localization.forgot_password,
               children: Form(
-                key: forgotPasswordGlobalKey,
+                key: _blocForgotPasswordScreen.forgotPasswordGlobalKey,
                 child: Container(
                   alignment: Alignment.center,
                   child: Column(
@@ -68,9 +75,7 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
                         text: localization.send,
                         onTap: () {
                           BlocProvider.of<BlocForgotPasswordScreen>(context)
-                              .add(BlocForgotPasswordEventSendEmailClick(
-                                  forgotPasswordGlobalKey:
-                                      forgotPasswordGlobalKey));
+                              .add(BlocForgotPasswordEventSendEmailClick());
                         },
                         allCaps: true,
                       ),
@@ -81,13 +86,13 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
                         alignment: Alignment.center,
                         child: Text.rich(TextSpan(
                             text: localization.back_to,
-                            style: context.textStyle.titleSmall!.copyWith(
+                            style: AppStyles.titleSmall.copyWith(
                                 fontWeight: FontWeight.w400,
                                 color: AppColors.textByAgreeColor),
                             children: <TextSpan>[
                               TextSpan(
                                   text: localization.sign_in,
-                                  style: context.textStyle.titleSmall!.copyWith(
+                                  style: AppStyles.titleSmall.copyWith(
                                       fontWeight: FontWeight.w400,
                                       color: AppColors.primary),
                                   recognizer: TapGestureRecognizer()
@@ -114,7 +119,7 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
       child: Text(
         localization
             .input_your_email_we_will_send_you_an_instruction_to_reset_your_password,
-        style: context.textStyle.titleMedium!.copyWith(
+        style: AppStyles.titleMedium.copyWith(
             fontWeight: FontWeight.w400, color: AppColors.textOnboardingBrown),
       ),
     );

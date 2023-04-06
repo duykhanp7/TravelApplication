@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/res/colors.dart';
+import 'package:travel_booking_tour/res/styles.dart';
 
 class AppbarAppWidget extends StatefulWidget with PreferredSizeWidget {
   const AppbarAppWidget({
@@ -64,7 +64,7 @@ class _AppbarAppWidget extends State<AppbarAppWidget> {
             ),
           ),
       titleTextStyle: widget.titleStyle ??
-          context.textStyle.titleMedium?.copyWith(
+          AppStyles.titleMedium.copyWith(
               fontSize: 22,
               fontWeight: FontWeight.w100,
               fontStyle: FontStyle.italic,

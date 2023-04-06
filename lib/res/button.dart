@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
+import 'package:travel_booking_tour/res/styles.dart';
 
 import 'colors.dart';
 
@@ -81,7 +81,7 @@ class _PrimaryActiveButton extends State<PrimaryActiveButton> {
                             ? widget.text
                             : widget.text.toUpperCase(),
                         style: widget.textStyle ??
-                            context.textStyle.titleSmall!
+                            AppStyles.titleSmall
                                 .copyWith(color: AppColors.white),
                       )
                     ],
@@ -106,7 +106,7 @@ class _PrimaryActiveButton extends State<PrimaryActiveButton> {
                                 ? widget.text
                                 : widget.text.toUpperCase(),
                             style: widget.textStyle ??
-                                context.textStyle.titleSmall!
+                                AppStyles.titleSmall
                                     .copyWith(color: AppColors.white),
                           )
                         ],
@@ -186,8 +186,7 @@ class _PrimaryInactiveButton extends State<PrimaryInactiveButton> {
                         ? widget.text
                         : widget.text.toUpperCase(),
                     style: widget.textStyle ??
-                        context.textStyle.titleSmall!
-                            .copyWith(color: AppColors.black),
+                        AppStyles.titleSmall.copyWith(color: AppColors.black),
                   )
                 : widget.isLoading!
                     ? Container(
@@ -204,7 +203,7 @@ class _PrimaryInactiveButton extends State<PrimaryInactiveButton> {
                             ? widget.text
                             : widget.text.toUpperCase(),
                         style: widget.textStyle ??
-                            context.textStyle.titleSmall!
+                            AppStyles.titleSmall
                                 .copyWith(color: AppColors.white),
                       ),
           ),
@@ -265,7 +264,7 @@ class SocialButton extends StatelessWidget {
             ? Container()
             : Text(
                 title!,
-                style: context.textStyle.titleMedium?.copyWith(
+                style: AppStyles.titleMedium.copyWith(
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
                     color: AppColors.textOnboardingBrown),

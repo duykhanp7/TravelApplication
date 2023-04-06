@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
-import 'package:travel_booking_tour/res/colors.dart';
-import 'package:travel_booking_tour/res/icons.dart';
+import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/res/vertical_star_widget.dart';
 
 import '../../../data/model/tour_detail_json.dart';
@@ -73,7 +71,7 @@ class _JourneyItem extends State<JourneyItem> {
                                 ),
                                 Text(
                                   '${widget.tourDetailJson.likes} likes',
-                                  style: context.textStyle.titleSmall?.copyWith(
+                                  style: AppStyles.titleSmall.copyWith(
                                       fontSize: 12,
                                       color: AppColors.white,
                                       fontWeight: FontWeight.w400),
@@ -100,8 +98,8 @@ class _JourneyItem extends State<JourneyItem> {
                             child: Text(
                               widget.tourDetailJson.destination ?? '',
                               overflow: TextOverflow.ellipsis,
-                              style: context.textStyle.titleMedium
-                                  ?.copyWith(fontWeight: FontWeight.w500),
+                              style: AppStyles.titleMedium
+                                  .copyWith(fontWeight: FontWeight.w500),
                             ),
                           ),
                           const SizedBox(
@@ -120,7 +118,7 @@ class _JourneyItem extends State<JourneyItem> {
                               ),
                               Text(
                                 widget.tourDetailJson.departureDate ?? '',
-                                style: context.textStyle.titleSmall?.copyWith(
+                                style: AppStyles.titleSmall.copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: AppColors.textOnboardingBrown),
                               )
@@ -142,7 +140,7 @@ class _JourneyItem extends State<JourneyItem> {
                               ),
                               Text(
                                 '${widget.tourDetailJson.schedule?.length ?? '0'} days',
-                                style: context.textStyle.titleSmall?.copyWith(
+                                style: AppStyles.titleSmall.copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: AppColors.textOnboardingBrown),
                               )
@@ -155,7 +153,7 @@ class _JourneyItem extends State<JourneyItem> {
                             alignment: Alignment.centerLeft,
                             child: Text(
                               '\$${widget.tourDetailJson.price}',
-                              style: context.textStyle.titleMedium?.copyWith(
+                              style: AppStyles.titleMedium.copyWith(
                                   fontWeight: FontWeight.w100,
                                   color: AppColors.primary,
                                   fontStyle: FontStyle.italic),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/res/colors.dart';
+import 'package:travel_booking_tour/res/styles.dart';
 
 class AppRadioButton extends StatefulWidget {
   const AppRadioButton(
@@ -89,7 +89,7 @@ class _AppRadioButton extends State<AppRadioButton> {
           Text(
             widget.text,
             style: widget.textStyle ??
-                context.textStyle.titleMedium!.copyWith(
+                AppStyles.titleMedium.copyWith(
                     fontSize: 18,
                     fontWeight: FontWeight.w100,
                     fontStyle: FontStyle.italic,

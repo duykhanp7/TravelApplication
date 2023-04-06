@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/widgets.dart';
 
 abstract class BlocSignInEvent extends Equatable {}
 
@@ -9,8 +8,7 @@ class BlocSignInEventInitial extends BlocSignInEvent {
 }
 
 class BlocSignInEventSignInClick extends BlocSignInEvent {
-  final GlobalKey<FormState> signInGlobalKey;
-  BlocSignInEventSignInClick({required this.signInGlobalKey});
+  BlocSignInEventSignInClick();
   @override
   List<Object?> get props => [];
 }

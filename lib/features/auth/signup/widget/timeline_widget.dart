@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/res/colors.dart';
+
+import '../../../../res/styles.dart';
 
 class TimelineWidget extends StatefulWidget {
   const TimelineWidget(
@@ -113,7 +114,7 @@ class _TimelineIndicator extends State<TimelineIndicator> {
               ? Container()
               : Text(
                   widget.title!,
-                  style: context.textStyle.titleMedium?.copyWith(
+                  style: AppStyles.titleMedium.copyWith(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                       color: widget.isActive

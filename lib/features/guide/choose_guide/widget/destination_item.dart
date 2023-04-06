@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:travel_booking_tour/res/colors.dart';
-import 'package:travel_booking_tour/res/icons.dart';
-import 'package:travel_booking_tour/res/images.dart';
+import 'package:travel_booking_tour/features/guide/choose_guide/model/destination_json.dart';
+import 'package:travel_booking_tour/res/res.dart';
 
-import '../bloc/bloc_add_trip_information_event.dart';
-import '../bloc/bloc_add_trip_information_screen.dart';
-import '../bloc/bloc_add_trip_information_state.dart';
+import '../bloc/bloc_edit_trip_information_event.dart';
+import '../bloc/bloc_edit_trip_information_screen.dart';
+import '../bloc/bloc_edit_trip_information_state.dart';
 
 class DestinationItem extends StatefulWidget {
-  const DestinationItem({super.key, required this.check});
+  const DestinationItem(
+      {super.key, required this.check, required this.destinationJson});
   final bool check;
+  final DestinationJson destinationJson;
 
   @override
   State<StatefulWidget> createState() {
@@ -37,7 +38,7 @@ class _DestinationItem extends State<DestinationItem> {
             fit: StackFit.expand,
             children: [
               Image.asset(
-                AppImages.daNangBanaHoiAn,
+                widget.destinationJson.url ?? '',
                 filterQuality: FilterQuality.high,
                 fit: BoxFit.cover,
               ),
@@ -78,6 +79,13 @@ class _DestinationItem extends State<DestinationItem> {
                 ),
               )),
         ),
+        Positioned(
+            left: 10,
+            bottom: 7,
+            child: Text(
+              widget.destinationJson.name ?? '',
+              style: AppStyles.titleSmall.copyWith(color: AppColors.white),
+            ))
       ],
     );
   }

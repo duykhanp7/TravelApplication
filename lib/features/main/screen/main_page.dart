@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel_booking_tour/common/app_constant.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/explore/screen/explore_screen.dart';
 import 'package:travel_booking_tour/features/my_trip/screen/my_trips_screen.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_main_event.dart';
@@ -20,6 +19,7 @@ import '../../../res/button.dart';
 import '../../../res/colors.dart';
 import '../../../res/icons.dart';
 import '../../../res/images.dart';
+import '../../../res/styles.dart';
 import '../../../res/system.dart';
 import '../../my_trip/bloc/bloc_my_trips_event.dart';
 import '../../my_trip/bloc/bloc_my_trips_screen.dart';
@@ -219,7 +219,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                   ? AppColors.primary
                   : AppColors.black.withOpacity(0.2),
               allCaps: false,
-              textStyle: context.textStyle.titleSmall?.copyWith(
+              textStyle: AppStyles.titleSmall.copyWith(
                   fontWeight: FontWeight.w400,
                   color: indexTab == index
                       ? AppColors.white
@@ -475,7 +475,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                     child: Container(
                       padding: const EdgeInsets.only(left: 16, bottom: 20),
                       child: Text(titles[blocMainState.index],
-                          style: context.textStyle.titleLarge?.copyWith(
+                          style: AppStyles.titleLarge.copyWith(
                               fontSize: 34,
                               fontWeight: FontWeight.w100,
                               fontStyle: FontStyle.italic,
@@ -579,7 +579,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
             left: 16,
             child: Text(
               localization.explore,
-              style: context.textStyle.titleLarge?.copyWith(
+              style: AppStyles.titleLarge.copyWith(
                   fontSize: 34,
                   fontWeight: FontWeight.w100,
                   fontStyle: FontStyle.italic,
@@ -610,7 +610,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                           ),
                           Text(
                             'Da Nang',
-                            style: context.textStyle.titleSmall?.copyWith(
+                            style: AppStyles.titleSmall.copyWith(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w100,
                                 fontStyle: FontStyle.italic,
@@ -626,7 +626,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                         child: Text(
                           '26\u00B0',
                           textAlign: TextAlign.right,
-                          style: context.textStyle.titleLarge?.copyWith(
+                          style: AppStyles.titleLarge.copyWith(
                               fontSize: 28,
                               fontWeight: FontWeight.w400,
                               color: AppColors.white),
@@ -672,7 +672,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                     indicator: const BoxDecoration(color: AppColors.white),
                     indicatorColor: AppColors.white,
                     labelPadding: EdgeInsets.zero,
-                    labelStyle: context.textStyle.titleSmall?.copyWith(
+                    labelStyle: AppStyles.titleSmall.copyWith(
                         fontSize: 10,
                         color: AppColors.primary,
                         fontWeight: FontWeight.w500),

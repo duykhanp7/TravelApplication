@@ -12,7 +12,7 @@ import 'package:travel_booking_tour/features/terms_and_conditions/bloc/bloc_term
 import 'package:travel_booking_tour/features/tour/detail/bloc/bloc_tour_detail_screen.dart';
 
 import '../features/explore/bloc/bloc_see_more_screen.dart';
-import '../features/guide/choose_guide/bloc/bloc_add_trip_information_screen.dart';
+import '../features/guide/choose_guide/bloc/bloc_edit_trip_information_screen.dart';
 import '../features/onboarding/bloc/bloc_onboarding_screen.dart';
 import '../features/splash/bloc/bloc_splash_event.dart';
 import '../features/splash/bloc/bloc_splash_screen.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/res/colors.dart';
+import 'package:travel_booking_tour/res/styles.dart';
 
 class AppListChipWidget extends StatelessWidget {
   const AppListChipWidget({super.key, required this.chips});
@@ -39,7 +39,7 @@ class AppChip extends StatelessWidget {
           borderRadius: BorderRadius.circular(100), color: AppColors.chipBg),
       child: Text(
         chip,
-        style: context.textStyle.titleSmall?.copyWith(
+        style: AppStyles.titleSmall.copyWith(
             fontSize: 12,
             fontWeight: FontWeight.w400,
             color: AppColors.inActiveRadioBorderColor),

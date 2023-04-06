@@ -2,7 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/auth/signin/bloc/bloc_sign_in_event.dart';
 import 'package:travel_booking_tour/features/auth/signin/bloc/bloc_sign_in_screen.dart';
 import 'package:travel_booking_tour/features/auth/signin/bloc/bloc_sign_in_state.dart';
@@ -28,7 +27,6 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreen extends State<SignInScreen> {
   late SLocalization localization;
-  final GlobalKey<FormState> signInGlobalKey = GlobalKey<FormState>();
   late BlocSignInScreen _blocSignInScreen;
 
   @override
@@ -107,8 +105,7 @@ class _SignInScreen extends State<SignInScreen> {
                   text: localization.sign_in,
                   isLoading: isLoading,
                   onTap: () {
-                    _blocSignInScreen.add(BlocSignInEventSignInClick(
-                        signInGlobalKey: signInGlobalKey));
+                    _blocSignInScreen.add(BlocSignInEventSignInClick());
                   },
                   allCaps: true,
                 );
@@ -120,7 +117,7 @@ class _SignInScreen extends State<SignInScreen> {
             alignment: Alignment.center,
             child: Text(
               localization.or_sign_in_with,
-              style: context.textStyle.titleSmall!.copyWith(
+              style: AppStyles.titleSmall.copyWith(
                   fontSize: 12,
                   color: AppColors.inActiveRadioBorderColor,
                   fontWeight: FontWeight.w500),
@@ -138,12 +135,12 @@ class _SignInScreen extends State<SignInScreen> {
             child: Text.rich(TextSpan(children: <TextSpan>[
               TextSpan(
                   text: localization.dont_have_an_account,
-                  style: context.textStyle.titleSmall!.copyWith(
+                  style: AppStyles.titleSmall.copyWith(
                       fontWeight: FontWeight.w400,
                       color: AppColors.textByAgreeColor)),
               TextSpan(
                   text: localization.sign_up,
-                  style: context.textStyle.titleSmall!.copyWith(
+                  style: AppStyles.titleSmall.copyWith(
                       fontWeight: FontWeight.w400, color: AppColors.primary),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
@@ -161,7 +158,7 @@ class _SignInScreen extends State<SignInScreen> {
       alignment: Alignment.centerLeft,
       child: Text(
         '${localization.welcom_back}Yoo Jin',
-        style: context.textStyle.titleLarge!.copyWith(
+        style: AppStyles.titleLarge.copyWith(
             fontSize: 24,
             fontWeight: FontWeight.w500,
             color: AppColors.primary),
@@ -206,7 +203,7 @@ class _SignInScreen extends State<SignInScreen> {
 
   Widget _buildInputFields() {
     return Form(
-      key: signInGlobalKey,
+      key: _blocSignInScreen.signInGlobalKey,
       child: Container(
         alignment: Alignment.center,
         padding: const EdgeInsets.only(top: 50),
@@ -243,7 +240,7 @@ class _SignInScreen extends State<SignInScreen> {
                   child: InkWell(
                     child: Text(
                       localization.forgot_password,
-                      style: context.textStyle.titleSmall!.copyWith(
+                      style: AppStyles.titleSmall.copyWith(
                           fontWeight: FontWeight.w400,
                           color: AppColors.textByAgreeColor),
                     ),

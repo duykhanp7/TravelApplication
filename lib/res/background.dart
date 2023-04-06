@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
+import 'package:travel_booking_tour/res/styles.dart';
 
 import 'clip_path.dart';
 import 'colors.dart';
@@ -131,7 +131,7 @@ class AppBackground extends StatelessWidget {
                     child: Text(
                       header,
                       style: headerStyle ??
-                          context.textStyle.titleLarge!.copyWith(
+                          AppStyles.titleLarge.copyWith(
                               fontSize: 34,
                               fontWeight: FontWeight.w100,
                               fontStyle: FontStyle.italic),

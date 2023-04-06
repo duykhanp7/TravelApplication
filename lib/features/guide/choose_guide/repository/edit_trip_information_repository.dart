@@ -2,7 +2,7 @@ import 'package:travel_booking_tour/base/base_repository.dart';
 import 'package:travel_booking_tour/features/guide/choose_guide/model/destination_json.dart';
 import 'package:travel_booking_tour/res/images.dart';
 
-class AddTripInformationRepository extends BaseRepository {
+class EditTripInformationRepository extends BaseRepository {
   @override
   void onInitialData() {}
 

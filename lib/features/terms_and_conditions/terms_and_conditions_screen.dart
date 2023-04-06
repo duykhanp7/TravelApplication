@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/bloc/bloc_terms_and_conditions_event.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/bloc/bloc_terms_and_conditions_screen.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/bloc/bloc_terms_and_conditions_state.dart';
@@ -10,6 +9,7 @@ import 'package:travel_booking_tour/res/app_layout_shimmer.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 
 import '../../common/enum/enums.dart';
+import '../../res/styles.dart';
 import '../../res/system.dart';
 import '../../router/routes.dart';
 
@@ -58,7 +58,7 @@ class _TermAndConditionScreen extends State<TermAndConditionScreen> {
             ),
           ),
         ),
-        titleStyle: context.textStyle.titleMedium?.copyWith(
+        titleStyle: AppStyles.titleMedium.copyWith(
             fontSize: 22,
             fontWeight: FontWeight.w500,
             fontStyle: FontStyle.italic,
@@ -87,7 +87,7 @@ class _TermAndConditionScreen extends State<TermAndConditionScreen> {
                     child: Text(
                       textAlign: TextAlign.start,
                       '\u2022 ${termsAndConditions[index]}',
-                      style: context.textStyle.titleMedium?.copyWith(
+                      style: AppStyles.titleMedium.copyWith(
                           fontWeight: FontWeight.w400, color: AppColors.white),
                     ),
                   ),

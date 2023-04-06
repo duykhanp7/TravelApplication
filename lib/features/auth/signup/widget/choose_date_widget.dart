@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/res/colors.dart';
+
+import '../../../../res/styles.dart';
 
 class ChooseDateWidget extends StatefulWidget {
   const ChooseDateWidget(
@@ -77,7 +78,7 @@ class _DateItemWidget extends State<DateItemWidget> {
               borderRadius: BorderRadius.circular(4)),
           child: Text(
             widget.title,
-            style: context.textStyle.titleSmall?.copyWith(
+            style: AppStyles.titleSmall.copyWith(
                 fontWeight: FontWeight.w400,
                 fontSize: 14,
                 color: widget.isChosen

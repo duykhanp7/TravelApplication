@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/icons.dart';
 
 import '../../../../data/model/tour_detail_json.dart';
+import '../../../../res/styles.dart';
 
 class MyExperienceItem extends StatefulWidget {
   const MyExperienceItem({super.key, required this.tourDetailJson});
@@ -84,11 +84,10 @@ class _MyExperienceItem extends State<MyExperienceItem> {
                               child: Text(
                                   widget.tourDetailJson?.description ?? '',
                                   textAlign: TextAlign.start,
-                                  style: context.textStyle.titleMedium
-                                      ?.copyWith(
-                                          color: AppColors.black,
-                                          fontWeight: FontWeight.w500,
-                                          overflow: TextOverflow.ellipsis)),
+                                  style: AppStyles.titleMedium.copyWith(
+                                      color: AppColors.black,
+                                      fontWeight: FontWeight.w500,
+                                      overflow: TextOverflow.ellipsis)),
                             ),
                             const SizedBox(
                               height: 10,
@@ -101,7 +100,7 @@ class _MyExperienceItem extends State<MyExperienceItem> {
                                 ),
                                 Text(
                                   widget.tourDetailJson?.destination ?? '',
-                                  style: context.textStyle.titleSmall?.copyWith(
+                                  style: AppStyles.titleSmall.copyWith(
                                       fontWeight: FontWeight.w400,
                                       fontSize: 12,
                                       color: AppColors.primary),
@@ -145,7 +144,7 @@ class _MyExperienceItem extends State<MyExperienceItem> {
                     child: Text(
                       widget.tourDetailJson?.departureDate ?? '',
                       textAlign: TextAlign.start,
-                      style: context.textStyle.titleSmall?.copyWith(
+                      style: AppStyles.titleSmall.copyWith(
                           fontWeight: FontWeight.w400,
                           fontSize: 14,
                           color: AppColors.textSkipColor),
@@ -184,7 +183,7 @@ class _MyExperienceItem extends State<MyExperienceItem> {
                           ],
                         ),
                         Text('${widget.tourDetailJson?.likes ?? 0} likes',
-                            style: context.textStyle.titleSmall?.copyWith(
+                            style: AppStyles.titleSmall.copyWith(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12,
                                 color: AppColors.textSkipColor))

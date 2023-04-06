@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/res/colors.dart';
+
+import '../../res/styles.dart';
 
 class EmptyPage extends StatelessWidget {
   const EmptyPage({super.key});
@@ -14,7 +15,7 @@ class EmptyPage extends StatelessWidget {
         color: AppColors.primary,
         child: Text(
           'Something go wrong!',
-          style: context.textStyle.titleLarge?.copyWith(color: AppColors.white),
+          style: AppStyles.titleLarge.copyWith(color: AppColors.white),
         ),
       )),
     );

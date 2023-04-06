@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/res/colors.dart';
+
+import '../../../res/styles.dart';
 
 class BottomNavItem extends StatefulWidget {
   const BottomNavItem(
@@ -66,7 +67,7 @@ class _BottomNavItem extends State<BottomNavItem> {
                   ),
                   Text(
                     widget.clicked ? widget.title : '',
-                    style: context.textStyle.titleSmall?.copyWith(
+                    style: AppStyles.titleSmall.copyWith(
                         fontSize: 10,
                         color: widget.clicked
                             ? AppColors.primary
