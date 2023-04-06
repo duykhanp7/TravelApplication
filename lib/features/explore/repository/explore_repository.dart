@@ -456,7 +456,7 @@ class ExploreRepository implements BaseRepository {
             description: '2 Hour Bicycle Tour exploring Hoi An',
             likes: 1234,
             isFavorite: false,
-            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+            images: [AppImages.myex2, AppImages.myex1, AppImages.myex3],
           ),
           TourDetailJson(
             id: 6,
@@ -465,7 +465,7 @@ class ExploreRepository implements BaseRepository {
             description: 'Food tour in Da Nang',
             likes: 234,
             isFavorite: false,
-            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+            images: [AppImages.myex2, AppImages.myex1, AppImages.myex3],
           )
         ],
         reviews: [
@@ -519,7 +519,7 @@ class ExploreRepository implements BaseRepository {
             description: '2 Hour Bicycle Tour exploring Hoi An',
             likes: 5555,
             isFavorite: false,
-            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+            images: [AppImages.myex2, AppImages.myex1, AppImages.myex3],
           ),
           TourDetailJson(
             id: 8,
@@ -528,7 +528,7 @@ class ExploreRepository implements BaseRepository {
             description: 'Food tour in Da Nang',
             likes: 6666,
             isFavorite: false,
-            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+            images: [AppImages.myex2, AppImages.myex1, AppImages.myex3],
           )
         ],
         reviews: [
@@ -582,7 +582,7 @@ class ExploreRepository implements BaseRepository {
             description: '2 Hour Bicycle Tour exploring Hoi An',
             likes: 1234,
             isFavorite: false,
-            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+            images: [AppImages.myex2, AppImages.myex1, AppImages.myex3],
           ),
           TourDetailJson(
             id: 10,
@@ -591,7 +591,7 @@ class ExploreRepository implements BaseRepository {
             description: 'Food tour in Da Nang',
             likes: 234,
             isFavorite: false,
-            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+            images: [AppImages.myex2, AppImages.myex1, AppImages.myex3],
           )
         ],
         reviews: [
@@ -645,7 +645,7 @@ class ExploreRepository implements BaseRepository {
             description: '2 Hour Bicycle Tour exploring Hoi An',
             likes: 5555,
             isFavorite: false,
-            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+            images: [AppImages.myex2, AppImages.myex1, AppImages.myex3],
           ),
           TourDetailJson(
             id: 12,
@@ -654,7 +654,7 @@ class ExploreRepository implements BaseRepository {
             description: 'Food tour in Da Nang',
             likes: 6666,
             isFavorite: false,
-            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+            images: [AppImages.myex2, AppImages.myex1, AppImages.myex3],
           )
         ],
         reviews: [

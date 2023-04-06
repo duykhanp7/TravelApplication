@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/guide/detail/bloc/bloc_detail_guide_event.dart';
 import 'package:travel_booking_tour/features/guide/detail/bloc/bloc_detail_guide_screen.dart';
 import 'package:travel_booking_tour/features/guide/detail/widget/my_experience_item.dart';
 import 'package:travel_booking_tour/features/guide/detail/widget/review_guide_item.dart';
-
 import 'package:travel_booking_tour/res/button.dart';
 import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/res/vertical_star_widget.dart';
@@ -180,7 +178,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             tourGuideDetailJson.name ?? '',
-                            style: context.textStyle.titleLarge?.copyWith(
+                            style: AppStyles.titleLarge.copyWith(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w100,
                                 color: AppColors.blackDefault,
@@ -199,7 +197,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                             ),
                             Text(
                               '${tourGuideDetailJson.reviews?.length ?? 0} reviews',
-                              style: context.textStyle.titleSmall?.copyWith(
+                              style: AppStyles.titleSmall.copyWith(
                                   fontWeight: FontWeight.w400,
                                   color: AppColors.inActiveRadioBorderColor),
                             )
@@ -248,7 +246,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                 ),
                 Text(
                   tourGuideDetailJson.address ?? '',
-                  style: context.textStyle.titleSmall?.copyWith(
+                  style: AppStyles.titleSmall.copyWith(
                       fontWeight: FontWeight.w400, color: AppColors.primary),
                 )
               ],
@@ -259,7 +257,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
           ),
           Text(
             tourGuideDetailJson.description ?? '',
-            style: context.textStyle.titleMedium?.copyWith(
+            style: AppStyles.titleMedium.copyWith(
                 fontWeight: FontWeight.w400,
                 color: AppColors.textRadioItalicColor,
                 height: 1.5),
@@ -321,7 +319,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
               Text(
                 'My Experiences',
                 textAlign: TextAlign.left,
-                style: context.textStyle.titleLarge?.copyWith(
+                style: AppStyles.titleLarge.copyWith(
                     fontSize: 24,
                     fontWeight: FontWeight.w100,
                     color: AppColors.textOnboardingBlack,
@@ -351,7 +349,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Reviews',
-                  style: context.textStyle.titleLarge?.copyWith(
+                  style: AppStyles.titleLarge.copyWith(
                       fontSize: 24,
                       fontWeight: FontWeight.w100,
                       color: AppColors.textOnboardingBlack,
@@ -368,8 +366,8 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                     splashColor: AppColors.primary.withOpacity(0.1),
                     child: Text(
                       'SEE MORE',
-                      style: context.textStyle.titleSmall
-                          ?.copyWith(color: AppColors.primary),
+                      style: AppStyles.titleSmall
+                          .copyWith(color: AppColors.primary),
                     ),
                     onTap: () {},
                   ),

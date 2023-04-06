@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_tour_guide_information_event.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_tour_guide_information_screen.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_tour_guide_information_state.dart';
@@ -85,7 +84,7 @@ class _SignUpTourGuideInformationScreen
                 child: AppBackground(
                     header:
                         'Please finish your profile so that\nTravelers can find you easily!',
-                    headerStyle: context.textStyle.titleMedium?.copyWith(
+                    headerStyle: AppStyles.titleMedium.copyWith(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                         fontStyle: FontStyle.normal),
@@ -94,7 +93,7 @@ class _SignUpTourGuideInformationScreen
                       margin: const EdgeInsets.only(top: 32, left: 8),
                       child: Text(
                         'Welcome, Tuan',
-                        style: context.textStyle.titleMedium?.copyWith(
+                        style: AppStyles.titleMedium.copyWith(
                             fontSize: 34,
                             fontStyle: FontStyle.italic,
                             fontWeight: FontWeight.w100,
@@ -294,7 +293,7 @@ class _SignUpTourGuideInformationScreen
           Text(
             'Set Fee',
             textAlign: TextAlign.left,
-            style: context.textStyle.titleMedium?.copyWith(
+            style: AppStyles.titleMedium.copyWith(
                 fontSize: 24,
                 fontWeight: FontWeight.w500,
                 color: AppColors.black),
@@ -303,7 +302,7 @@ class _SignUpTourGuideInformationScreen
           Text(
             'The price unit is US \$/hour',
             textAlign: TextAlign.left,
-            style: context.textStyle.titleMedium?.copyWith(
+            style: AppStyles.titleMedium.copyWith(
                 fontWeight: FontWeight.w400, color: AppColors.textHintColor),
           ),
           const SizedBox(height: 15),
@@ -312,7 +311,7 @@ class _SignUpTourGuideInformationScreen
           Text(
             'Set Available Time',
             textAlign: TextAlign.left,
-            style: context.textStyle.titleMedium?.copyWith(
+            style: AppStyles.titleMedium.copyWith(
                 fontSize: 24,
                 fontWeight: FontWeight.w500,
                 color: AppColors.black),
@@ -321,7 +320,7 @@ class _SignUpTourGuideInformationScreen
           Text(
             'The time you can work on Fellow4U as a Guide',
             textAlign: TextAlign.left,
-            style: context.textStyle.titleMedium?.copyWith(
+            style: AppStyles.titleMedium.copyWith(
                 fontWeight: FontWeight.w400, color: AppColors.textHintColor),
           ),
           const SizedBox(height: 21),
@@ -419,7 +418,7 @@ class _SignUpTourGuideInformationScreen
                     const SizedBox(width: 6),
                     Text(
                       'Add another time',
-                      style: context.textStyle.titleSmall?.copyWith(
+                      style: AppStyles.titleSmall.copyWith(
                           fontWeight: FontWeight.w500,
                           fontSize: 14,
                           color: AppColors.primary),
@@ -465,7 +464,7 @@ class _SignUpTourGuideInformationScreen
               height: 40,
               child: Text('1-3 Travelers',
                   textAlign: TextAlign.center,
-                  style: context.textStyle.titleMedium?.copyWith(
+                  style: AppStyles.titleMedium.copyWith(
                       color: AppColors.inActiveRadioBorderColor,
                       fontWeight: FontWeight.w500)),
             ),
@@ -480,7 +479,7 @@ class _SignUpTourGuideInformationScreen
                 maxLength: 4,
                 inputDecoration: InputDecoration(
                     hintText: 'Input the fee',
-                    hintStyle: context.textStyle.titleMedium?.copyWith(
+                    hintStyle: AppStyles.titleMedium.copyWith(
                         color: AppColors.textHintColor,
                         fontWeight: FontWeight.w400),
                     constraints: const BoxConstraints(maxHeight: 40),
@@ -514,7 +513,7 @@ class _SignUpTourGuideInformationScreen
               height: 40,
               child: Text('4-6 Travelers',
                   textAlign: TextAlign.center,
-                  style: context.textStyle.titleMedium?.copyWith(
+                  style: AppStyles.titleMedium.copyWith(
                       color: AppColors.inActiveRadioBorderColor,
                       fontWeight: FontWeight.w500)),
             ),
@@ -529,7 +528,7 @@ class _SignUpTourGuideInformationScreen
                   maxLength: 4,
                   inputDecoration: InputDecoration(
                       hintText: 'Input the fee',
-                      hintStyle: context.textStyle.titleMedium?.copyWith(
+                      hintStyle: AppStyles.titleMedium.copyWith(
                           color: AppColors.textHintColor,
                           fontWeight: FontWeight.w400),
                       constraints: const BoxConstraints(maxHeight: 40),
@@ -559,7 +558,7 @@ class _SignUpTourGuideInformationScreen
               height: 40,
               child: Text('7-9 Travelers',
                   textAlign: TextAlign.center,
-                  style: context.textStyle.titleMedium?.copyWith(
+                  style: AppStyles.titleMedium.copyWith(
                       color: AppColors.inActiveRadioBorderColor,
                       fontWeight: FontWeight.w500)),
             ),
@@ -574,7 +573,7 @@ class _SignUpTourGuideInformationScreen
                   maxLength: 4,
                   inputDecoration: InputDecoration(
                       hintText: 'Input the fee',
-                      hintStyle: context.textStyle.titleMedium?.copyWith(
+                      hintStyle: AppStyles.titleMedium.copyWith(
                           color: AppColors.textHintColor,
                           fontWeight: FontWeight.w400),
                       constraints: const BoxConstraints(maxHeight: 40),
@@ -605,7 +604,7 @@ class _SignUpTourGuideInformationScreen
               height: 40,
               child: Text('10-14 Travelers',
                   textAlign: TextAlign.center,
-                  style: context.textStyle.titleMedium?.copyWith(
+                  style: AppStyles.titleMedium.copyWith(
                       color: AppColors.inActiveRadioBorderColor,
                       fontWeight: FontWeight.w500)),
             ),
@@ -620,7 +619,7 @@ class _SignUpTourGuideInformationScreen
                   maxLength: 4,
                   inputDecoration: InputDecoration(
                       hintText: 'Input the fee',
-                      hintStyle: context.textStyle.titleMedium?.copyWith(
+                      hintStyle: AppStyles.titleMedium.copyWith(
                           color: AppColors.textHintColor,
                           fontWeight: FontWeight.w400),
                       constraints: const BoxConstraints(maxHeight: 40),
@@ -661,7 +660,7 @@ class _SignUpTourGuideInformationScreen
             labelText: 'Address',
             textEditingController: _blocSignUpTourGuideInformationScreen
                 .textEditingControllerAddress,
-            hintTextStyle: context.textStyle.titleMedium?.copyWith(
+            hintTextStyle: AppStyles.titleMedium.copyWith(
                 fontWeight: FontWeight.w400, color: AppColors.textHintColor),
             validator: AppValidator.validateTextFieldAddress,
             onChange: (value) => _blocSignUpTourGuideInformationScreen.add(
@@ -678,7 +677,7 @@ class _SignUpTourGuideInformationScreen
                       textEditingController:
                           _blocSignUpTourGuideInformationScreen
                               .textEditingControllerCity,
-                      hintTextStyle: context.textStyle.titleMedium?.copyWith(
+                      hintTextStyle: AppStyles.titleMedium.copyWith(
                           fontWeight: FontWeight.w400,
                           color: AppColors.textHintColor),
                       validator: AppValidator.validateTextFieldCity,
@@ -693,7 +692,7 @@ class _SignUpTourGuideInformationScreen
                       textEditingController:
                           _blocSignUpTourGuideInformationScreen
                               .textEditingControllerCountry,
-                      hintTextStyle: context.textStyle.titleMedium?.copyWith(
+                      hintTextStyle: AppStyles.titleMedium.copyWith(
                           fontWeight: FontWeight.w400,
                           color: AppColors.textHintColor),
                       validator: AppValidator.validateTextFieldCountry,
@@ -720,7 +719,7 @@ class _SignUpTourGuideInformationScreen
                         children: [
                           Text(
                             '(+84)',
-                            style: context.textStyle.titleSmall?.copyWith(
+                            style: AppStyles.titleSmall.copyWith(
                                 color: AppColors.black,
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500),
@@ -733,7 +732,7 @@ class _SignUpTourGuideInformationScreen
               ),
               validator: AppValidator.validateTextFieldPhoneNumber,
               contentPadding: const EdgeInsets.only(bottom: 0),
-              hintTextStyle: context.textStyle.titleMedium?.copyWith(
+              hintTextStyle: AppStyles.titleMedium.copyWith(
                   fontWeight: FontWeight.w400, color: AppColors.textHintColor),
               onChange: (value) => _blocSignUpTourGuideInformationScreen.add(
                   BlocSignUpTourGuideInformationEventChangePhoneNumber(
@@ -742,8 +741,7 @@ class _SignUpTourGuideInformationScreen
           Text(
             'Guide License',
             textAlign: TextAlign.start,
-            style: context.textStyle.titleMedium
-                ?.copyWith(fontWeight: FontWeight.w500),
+            style: AppStyles.titleMedium.copyWith(fontWeight: FontWeight.w500),
           ),
           const SizedBox(height: 16),
           Container(
@@ -841,7 +839,7 @@ class _SignUpTourGuideInformationScreen
                               const SizedBox(width: 8),
                               Text(
                                 'Upload Photo',
-                                style: context.textStyle.titleMedium?.copyWith(
+                                style: AppStyles.titleMedium.copyWith(
                                     color: AppColors.primary,
                                     fontWeight: FontWeight.w500,
                                     fontSize: 14),
@@ -858,8 +856,7 @@ class _SignUpTourGuideInformationScreen
           Text(
             'Identify Card',
             textAlign: TextAlign.start,
-            style: context.textStyle.titleMedium
-                ?.copyWith(fontWeight: FontWeight.w500),
+            style: AppStyles.titleMedium.copyWith(fontWeight: FontWeight.w500),
           ),
           const SizedBox(height: 16),
           Container(
@@ -957,7 +954,7 @@ class _SignUpTourGuideInformationScreen
                               const SizedBox(width: 8),
                               Text(
                                 'Upload Photo',
-                                style: context.textStyle.titleMedium?.copyWith(
+                                style: AppStyles.titleMedium.copyWith(
                                     color: AppColors.primary,
                                     fontWeight: FontWeight.w500,
                                     fontSize: 14),
@@ -1009,11 +1006,11 @@ class _SignUpTourGuideInformationScreen
           Row(
             children: [
               Text('Video Introduction',
-                  style: context.textStyle.titleMedium
-                      ?.copyWith(fontWeight: FontWeight.w500)),
+                  style: AppStyles.titleMedium
+                      .copyWith(fontWeight: FontWeight.w500)),
               const SizedBox(width: 22),
               Text('(Optional)',
-                  style: context.textStyle.titleMedium?.copyWith(
+                  style: AppStyles.titleMedium.copyWith(
                       fontWeight: FontWeight.w400,
                       fontSize: 14,
                       color: AppColors.colorOptional))
@@ -1022,7 +1019,7 @@ class _SignUpTourGuideInformationScreen
           const SizedBox(height: 11),
           Text(
             'A video introduction will more impress Travelers',
-            style: context.textStyle.titleMedium?.copyWith(
+            style: AppStyles.titleMedium.copyWith(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
                 color: AppColors.textHintColor),
@@ -1114,11 +1111,10 @@ class _SignUpTourGuideInformationScreen
                                 ),
                                 Text(
                                   'Upload Video',
-                                  style: context.textStyle.titleMedium
-                                      ?.copyWith(
-                                          color: AppColors.primary,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 14),
+                                  style: AppStyles.titleMedium.copyWith(
+                                      color: AppColors.primary,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14),
                                 )
                               ],
                             ),

@@ -3,13 +3,13 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:travel_booking_tour/base/result.dart';
 import 'package:travel_booking_tour/features/guide/choose_guide/model/destination_json.dart';
-import 'package:travel_booking_tour/features/guide/choose_guide/repository/add_trip_information_repository.dart';
+import 'package:travel_booking_tour/features/guide/choose_guide/repository/edit_trip_information_repository.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
 import '../../../../common/enum/enums.dart';
 import '../../../../router/routes.dart';
-import 'bloc_add_trip_information_event.dart';
-import 'bloc_add_trip_information_state.dart';
+import 'bloc_edit_trip_information_event.dart';
+import 'bloc_edit_trip_information_state.dart';
 
 class BlocTripInformationScreen
     extends Bloc<BlocTripInformationEvent, BlocTripInformationState> {
@@ -34,8 +34,8 @@ class BlocTripInformationScreen
   TextEditingController textEditingControllerNumberOfTravelers =
       TextEditingController(text: '');
 
-  final AddTripInformationRepository _addTripInformationRepository =
-      AddTripInformationRepository();
+  final EditTripInformationRepository _editTripInformationRepository =
+      EditTripInformationRepository();
 
   void mapStateToEvent(BlocTripInformationEvent event,
       Emitter<BlocTripInformationState> emit) async {
@@ -46,6 +46,9 @@ class BlocTripInformationScreen
       textEditingControllerCity.text = '';
       textEditingControllerNumberOfTravelers.text = '1';
       numberOfTravelers = textEditingControllerNumberOfTravelers.text;
+      final data = _editTripInformationRepository.destinations;
+      emit(BlocTripInformationStateLoadDestination(
+          appResult: AppResult(state: ResultState.success, result: data)));
     } else if (event is BlocTripInformationEventChangeDate) {
       date = event.date;
     } else if (event is BlocTripInformationEventChangeTimeFrom) {
@@ -81,7 +84,7 @@ class BlocTripInformationScreen
       emit(BlocTripInformationStateSearchDestination(
           appResult: AppResult(state: ResultState.loading)));
       List<DestinationJson>? items =
-          await _addTripInformationRepository.getDestination(event.name);
+          await _editTripInformationRepository.getDestination(event.name);
       if (items != null) {
         emit(BlocTripInformationStateSearchDestination(
             appResult: AppResult(state: ResultState.success, result: items)));

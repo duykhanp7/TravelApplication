@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
+import 'package:travel_booking_tour/features/guide/choose_guide/model/destination_json.dart';
 import 'package:travel_booking_tour/features/guide/choose_guide/widget/destination_item.dart';
 import 'package:travel_booking_tour/res/app_appbar.dart';
 import 'package:travel_booking_tour/res/app_layout_shimmer.dart';
@@ -10,9 +10,10 @@ import 'package:travel_booking_tour/res/icons.dart';
 import 'package:travel_booking_tour/res/input_field.dart';
 
 import '../../../../common/enum/enums.dart';
-import '../bloc/bloc_add_trip_information_event.dart';
-import '../bloc/bloc_add_trip_information_screen.dart';
-import '../bloc/bloc_add_trip_information_state.dart';
+import '../../../../res/styles.dart';
+import '../bloc/bloc_edit_trip_information_event.dart';
+import '../bloc/bloc_edit_trip_information_screen.dart';
+import '../bloc/bloc_edit_trip_information_state.dart';
 
 class AddNewPlacesScreen extends StatefulWidget {
   const AddNewPlacesScreen({super.key});
@@ -50,7 +51,7 @@ class _AddNewPlacesScreen extends State<AddNewPlacesScreen> {
             padding: const EdgeInsets.only(left: 5, right: 16),
             child: Text(
               'DONE',
-              style: context.textStyle.titleMedium?.copyWith(
+              style: AppStyles.titleMedium.copyWith(
                   fontWeight: FontWeight.w500,
                   fontSize: 17,
                   color: AppColors.primary),
@@ -93,6 +94,8 @@ class _AddNewPlacesScreen extends State<AddNewPlacesScreen> {
               );
             } else if (state.appResult.state == ResultState.success) {
               if (state.appResult.result.isNotEmpty) {
+                List<DestinationJson> destinations =
+                    state.appResult.result as List<DestinationJson>;
                 return Container(
                   margin: const EdgeInsets.only(top: 100),
                   child: GridView.count(
@@ -104,8 +107,12 @@ class _AddNewPlacesScreen extends State<AddNewPlacesScreen> {
                     childAspectRatio: 3 / 2,
                     crossAxisSpacing: 15,
                     mainAxisSpacing: 10,
-                    children: List.generate(state.appResult.result.length,
-                        (index) => const DestinationItem(check: true)),
+                    children: List.generate(
+                        state.appResult.result.length,
+                        (index) => DestinationItem(
+                              check: true,
+                              destinationJson: destinations[index],
+                            )),
                   ),
                 );
               }
@@ -113,8 +120,8 @@ class _AddNewPlacesScreen extends State<AddNewPlacesScreen> {
                 alignment: Alignment.center,
                 child: Text(
                   'No trip available, try to find others trip',
-                  style: context.textStyle.titleMedium
-                      ?.copyWith(fontWeight: FontWeight.w500),
+                  style: AppStyles.titleMedium
+                      .copyWith(fontWeight: FontWeight.w500),
                 ),
               );
             }
@@ -231,7 +238,7 @@ class _AddNewPlacesScreen extends State<AddNewPlacesScreen> {
                 child: AppTextField(
                   focusNode: focusNode,
                   textEditingController: textEditingController,
-                  textStyle: context.textStyle.titleMedium?.copyWith(
+                  textStyle: AppStyles.titleMedium.copyWith(
                       fontWeight: FontWeight.w400,
                       fontSize: 16,
                       color: AppColors.textOnboardingBlack),
@@ -253,7 +260,7 @@ class _AddNewPlacesScreen extends State<AddNewPlacesScreen> {
                           color: AppColors.white,
                         ),
                       ),
-                      hintStyle: context.textStyle.titleMedium?.copyWith(
+                      hintStyle: AppStyles.titleMedium.copyWith(
                           color: AppColors.textHintColor,
                           fontSize: 16,
                           fontWeight: FontWeight.w400),

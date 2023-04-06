@@ -2,27 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
+import 'package:travel_booking_tour/common/app_constant.dart';
+import 'package:travel_booking_tour/features/guide/choose_guide/bloc/bloc_edit_trip_information_state.dart';
+import 'package:travel_booking_tour/features/guide/choose_guide/model/destination_json.dart';
 import 'package:travel_booking_tour/features/guide/choose_guide/widget/destination_item.dart';
 import 'package:travel_booking_tour/res/button.dart';
 import 'package:travel_booking_tour/res/input_field.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
-import '../bloc/bloc_add_trip_information_event.dart';
-import '../bloc/bloc_add_trip_information_screen.dart';
+import '../../../../common/enum/enums.dart';
+import '../bloc/bloc_edit_trip_information_event.dart';
+import '../bloc/bloc_edit_trip_information_screen.dart';
 
-class ChooseGuideTripInformationScreen extends StatefulWidget {
-  const ChooseGuideTripInformationScreen({super.key});
+class EditTripInformationScreen extends StatefulWidget {
+  const EditTripInformationScreen({super.key});
 
   @override
   State<StatefulWidget> createState() {
-    return _ChooseGuideTripInformationScreen();
+    return _EditTripInformationScreen();
   }
 }
 
-class _ChooseGuideTripInformationScreen
-    extends State<ChooseGuideTripInformationScreen> {
+class _EditTripInformationScreen extends State<EditTripInformationScreen> {
   late BlocTripInformationScreen _blocTripInformationScreen;
+  EditTripInformationMode editTripInformationMode =
+      EditTripInformationMode.createNewTrip;
 
   @override
   void initState() {
@@ -35,10 +39,19 @@ class _ChooseGuideTripInformationScreen
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(AppSystem.systemLightStatusBar);
+
+    Map<String, dynamic> datas =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+    editTripInformationMode =
+        datas[AppConstant.tripInformationMode] as EditTripInformationMode;
+
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: const AppbarAppWidget(
-        title: 'Trip information',
+      appBar: AppbarAppWidget(
+        title: editTripInformationMode ==
+                EditTripInformationMode.editTripInformation
+            ? 'Trip information'
+            : 'Create New Trip',
       ),
       body: SafeArea(
           child: GestureDetector(
@@ -77,6 +90,34 @@ class _ChooseGuideTripInformationScreen
   Widget _buildFieldsInput() {
     return Column(
       children: [
+        Visibility(
+            visible: editTripInformationMode ==
+                EditTripInformationMode.createNewTrip,
+            child: Column(
+              children: [
+                AppTextField(
+                    textEditingController:
+                        _blocTripInformationScreen.textEditingControllerDate,
+                    hintText: '',
+                    obsecureText: false,
+                    labelText: 'Where do you want to explore?',
+                    isDense: true,
+                    onChange: (value) => _blocTripInformationScreen
+                        .add(BlocTripInformationEventChangeDate(date: value)),
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.only(bottom: 10, right: 5),
+                      child: SvgPicture.asset(
+                        AppIcons.icLocationBorderBlack,
+                        width: 20,
+                        height: 20,
+                      ),
+                    ),
+                    validator: null),
+                const SizedBox(
+                  height: 20,
+                )
+              ],
+            )),
         AppTextField(
             textEditingController:
                 _blocTripInformationScreen.textEditingControllerDate,
@@ -95,9 +136,7 @@ class _ChooseGuideTripInformationScreen
               ),
             ),
             validator: null),
-        const SizedBox(
-          height: 20,
-        ),
+        const SizedBox(height: 20),
         Row(
           children: [
             Flexible(
@@ -150,32 +189,39 @@ class _ChooseGuideTripInformationScreen
         const SizedBox(
           height: 20,
         ),
-        AppTextField(
-            textEditingController:
-                _blocTripInformationScreen.textEditingControllerCity,
-            hintText: 'City',
-            obsecureText: false,
-            labelText: 'City',
-            onChange: (value) => _blocTripInformationScreen
-                .add(BlocTripInformationEventChangeCity(city: value)),
-            isDense: true,
-            prefixIcon: Padding(
-              padding: const EdgeInsets.only(bottom: 10, right: 5),
-              child: SvgPicture.asset(
-                AppIcons.icLocationBorderBlack,
-                width: 20,
-                height: 20,
-              ),
-            ),
-            validator: null),
-        const SizedBox(
-          height: 24,
-        ),
+        Visibility(
+            visible: editTripInformationMode ==
+                EditTripInformationMode.editTripInformation,
+            child: Column(
+              children: [
+                AppTextField(
+                    textEditingController:
+                        _blocTripInformationScreen.textEditingControllerCity,
+                    hintText: 'City',
+                    obsecureText: false,
+                    labelText: 'City',
+                    onChange: (value) => _blocTripInformationScreen
+                        .add(BlocTripInformationEventChangeCity(city: value)),
+                    isDense: true,
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.only(bottom: 10, right: 5),
+                      child: SvgPicture.asset(
+                        AppIcons.icLocationBorderBlack,
+                        width: 20,
+                        height: 20,
+                      ),
+                    ),
+                    validator: null),
+                const SizedBox(
+                  height: 24,
+                )
+              ],
+            )),
         Container(
           alignment: Alignment.centerLeft,
           child: Text(
             'Number of travelers',
-            style: context.textStyle.titleMedium?.copyWith(
+            style: AppStyles.titleMedium.copyWith(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
                 color: AppColors.black),
@@ -260,32 +306,131 @@ class _ChooseGuideTripInformationScreen
               ],
             )
           ],
-        )
+        ),
+        Visibility(
+            visible: editTripInformationMode ==
+                EditTripInformationMode.createNewTrip,
+            child: Column(
+              children: [
+                const SizedBox(height: 24),
+                AppTextField(
+                    hintText: 'Fee',
+                    obsecureText: false,
+                    labelText: 'Fee',
+                    isDense: true,
+                    textInputType: TextInputType.number,
+                    onChange: (value) {},
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.only(bottom: 10, right: 5),
+                      child: SvgPicture.asset(
+                        AppIcons.icDollarCircle,
+                        width: 20,
+                        height: 20,
+                      ),
+                    ),
+                    suffixIcon: Text(
+                      '(\$/hour)',
+                      style: AppStyles.titleMedium.copyWith(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                          color: AppColors.black),
+                    ),
+                    validator: null),
+                const SizedBox(height: 24),
+                AppTextField(
+                    textEditingController:
+                        _blocTripInformationScreen.textEditingControllerDate,
+                    hintText: '',
+                    obsecureText: false,
+                    labelText: 'Guide’s Language',
+                    isDense: true,
+                    onChange: (value) => _blocTripInformationScreen
+                        .add(BlocTripInformationEventChangeDate(date: value)),
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.only(bottom: 10, right: 5),
+                      child: SvgPicture.asset(
+                        AppIcons.icEarth,
+                        width: 20,
+                        height: 20,
+                      ),
+                    ),
+                    validator: null),
+              ],
+            ))
       ],
     );
   }
 
   Widget _buidldAttractionsWidget() {
-    return Container(
-      margin: const EdgeInsets.only(top: 24),
-      alignment: Alignment.center,
-      child: GridView(
-        scrollDirection: Axis.vertical,
-        padding: EdgeInsets.zero,
-        shrinkWrap: true,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: 3 / 2,
-            crossAxisCount: 2,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10),
-        children: List.generate(
-            4,
-            (index) => index == 0
-                ? _buildWigetAddDestination()
-                : const DestinationItem(
-                    check: false,
-                  )),
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 24),
+        Container(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            'Attractions',
+            style: AppStyles.titleMedium.copyWith(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: AppColors.black),
+          ),
+        ),
+        BlocBuilder<BlocTripInformationScreen, BlocTripInformationState>(
+          buildWhen: (previous, current) =>
+              current is BlocTripInformationStateLoadDestination,
+          builder: (context, state) {
+            if (state is BlocTripInformationStateLoadDestination) {
+              if (state.appResult.state == ResultState.success) {
+                List<DestinationJson> items =
+                    state.appResult.result as List<DestinationJson>;
+                if (items.isNotEmpty) {
+                  return Container(
+                      margin: const EdgeInsets.only(top: 16),
+                      alignment: Alignment.center,
+                      child: GridView(
+                        scrollDirection: Axis.vertical,
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                childAspectRatio: 3 / 2,
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 10),
+                        children: List.generate(
+                            4,
+                            (index) => index == 0
+                                ? _buildWigetAddDestination()
+                                : DestinationItem(
+                                    check: false,
+                                    destinationJson: items[index],
+                                  )),
+                      ));
+                } else {
+                  return Container(
+                    alignment: Alignment.centerLeft,
+                    width: 150,
+                    height: 100,
+                    child: _buildWigetAddDestination(),
+                  );
+                }
+              } else if (state.appResult.state == ResultState.fail) {
+                return Container(
+                  alignment: Alignment.centerLeft,
+                  width: 150,
+                  height: 100,
+                  child: _buildWigetAddDestination(),
+                );
+              }
+            }
+            return const SizedBox(
+              height: 200,
+              child: AppLayoutShimmer(),
+            );
+          },
+        )
+      ],
     );
   }
 
@@ -297,7 +442,7 @@ class _ChooseGuideTripInformationScreen
           decoration: BoxDecoration(
               color: AppColors.white,
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(width: 1, color: AppColors.primary)),
+              border: Border.all(width: 1, color: AppColors.chipBg)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

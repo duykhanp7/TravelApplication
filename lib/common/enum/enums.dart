@@ -36,3 +36,5 @@ enum ResultState { loading, success, fail, error, loadingMore }
 enum TabMyList { currentTrips, nextTrips, pastTrips, wishListTrips }
 
 enum Searching { itemTourGuides, itemsTours }
+
+enum EditTripInformationMode { createNewTrip, editTripInformation }

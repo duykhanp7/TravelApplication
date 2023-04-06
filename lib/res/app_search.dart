@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
+import 'package:travel_booking_tour/res/styles.dart';
 
 import 'colors.dart';
 import 'icons.dart';
@@ -100,8 +100,8 @@ class _AppSearch extends State<AppSearch> {
         textInputAction: TextInputAction.done,
         controller: _textEditingController,
         style: widget.textStyle ??
-            context.textStyle.titleMedium
-                ?.copyWith(color: AppColors.black, fontWeight: FontWeight.w400),
+            AppStyles.titleMedium
+                .copyWith(color: AppColors.black, fontWeight: FontWeight.w400),
         cursorColor: AppColors.textSkipColor,
         decoration: widget.inputDecoration ??
             InputDecoration(
@@ -145,7 +145,7 @@ class _AppSearch extends State<AppSearch> {
                         });
                       },
                     )),
-                hintStyle: context.textStyle.titleMedium?.copyWith(
+                hintStyle: AppStyles.titleMedium.copyWith(
                     fontWeight: FontWeight.w400,
                     color: AppColors.textSkipColor),
                 contentPadding: EdgeInsets.zero,

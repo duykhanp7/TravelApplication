@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_event.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_screen.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_state.dart';
@@ -19,6 +18,7 @@ import 'package:travel_booking_tour/res/system.dart';
 import '../../../common/enum/enums.dart';
 import '../../../data/model/tour_detail_json.dart';
 import '../../../data/model/tour_guide_detail_json.dart';
+import '../../../res/styles.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({super.key, required this.scrollController});
@@ -110,7 +110,7 @@ class _ExploreScreen extends State<ExploreScreen> {
             alignment: Alignment.centerLeft,
             child: Text(
               'Top Journeys',
-              style: context.textStyle.titleLarge?.copyWith(
+              style: AppStyles.titleLarge.copyWith(
                   fontSize: 24,
                   color: AppColors.black,
                   fontWeight: FontWeight.w100,
@@ -154,7 +154,7 @@ class _ExploreScreen extends State<ExploreScreen> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Best Guides',
-                  style: context.textStyle.titleLarge?.copyWith(
+                  style: AppStyles.titleLarge.copyWith(
                       fontSize: 24,
                       fontWeight: FontWeight.w100,
                       color: AppColors.textOnboardingBlack,
@@ -171,8 +171,8 @@ class _ExploreScreen extends State<ExploreScreen> {
                     splashColor: AppColors.primary.withOpacity(0.1),
                     child: Text(
                       'SEE MORE',
-                      style: context.textStyle.titleSmall
-                          ?.copyWith(color: AppColors.primary),
+                      style: AppStyles.titleSmall
+                          .copyWith(color: AppColors.primary),
                     ),
                     onTap: () {
                       _blocExploreScreen.add(BlocExploreEventOnSeeMoreClick(
@@ -219,7 +219,7 @@ class _ExploreScreen extends State<ExploreScreen> {
             alignment: Alignment.centerLeft,
             child: Text(
               'Top Experiences',
-              style: context.textStyle.titleLarge?.copyWith(
+              style: AppStyles.titleLarge.copyWith(
                   fontSize: 24,
                   fontWeight: FontWeight.w100,
                   fontStyle: FontStyle.italic),
@@ -262,7 +262,7 @@ class _ExploreScreen extends State<ExploreScreen> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Featured Tours',
-                  style: context.textStyle.titleLarge?.copyWith(
+                  style: AppStyles.titleLarge.copyWith(
                       fontSize: 24,
                       fontWeight: FontWeight.w100,
                       color: AppColors.textOnboardingBlack,
@@ -279,8 +279,8 @@ class _ExploreScreen extends State<ExploreScreen> {
                     splashColor: AppColors.primary.withOpacity(0.1),
                     child: Text(
                       'SEE MORE',
-                      style: context.textStyle.titleSmall
-                          ?.copyWith(color: AppColors.primary),
+                      style: AppStyles.titleSmall
+                          .copyWith(color: AppColors.primary),
                     ),
                     onTap: () {
                       _blocExploreScreen.add(BlocExploreEventOnSeeMoreClick(
@@ -326,7 +326,7 @@ class _ExploreScreen extends State<ExploreScreen> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Travel News',
-                  style: context.textStyle.titleLarge?.copyWith(
+                  style: AppStyles.titleLarge.copyWith(
                       fontSize: 24,
                       fontWeight: FontWeight.w100,
                       color: AppColors.textOnboardingBlack,
@@ -343,8 +343,8 @@ class _ExploreScreen extends State<ExploreScreen> {
                     splashColor: AppColors.primary.withOpacity(0.1),
                     child: Text(
                       'SEE MORE',
-                      style: context.textStyle.titleSmall
-                          ?.copyWith(color: AppColors.primary),
+                      style: AppStyles.titleSmall
+                          .copyWith(color: AppColors.primary),
                     ),
                     onTap: () {
                       _blocExploreScreen.add(BlocExploreEventOnSeeMoreClick(

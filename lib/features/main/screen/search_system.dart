@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel_booking_tour/common/app_constant.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_search_system_event.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_search_system_screen.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_search_system_state.dart';
@@ -128,8 +127,8 @@ class _SearchSystem extends State<SearchSystem> {
           appBar: AppbarAppWidget(
             background: AppColors.transparent,
             title: 'Filters',
-            titleStyle: context.textStyle.titleMedium
-                ?.copyWith(fontSize: 17, fontWeight: FontWeight.w500),
+            titleStyle: AppStyles.titleMedium
+                .copyWith(fontSize: 17, fontWeight: FontWeight.w500),
           ),
           body: SingleChildScrollView(
             child: Container(
@@ -205,7 +204,7 @@ class _SearchSystem extends State<SearchSystem> {
                   const SizedBox(height: 24),
                   Text(
                     '''Guide's language''',
-                    style: context.textStyle.titleMedium!.copyWith(
+                    style: AppStyles.titleMedium.copyWith(
                         fontWeight: FontWeight.w500,
                         color: AppColors.black,
                         fontStyle: FontStyle.normal),
@@ -273,7 +272,7 @@ class _SearchSystem extends State<SearchSystem> {
                       ),
                       suffixIcon: Text(
                         '(\$/hour)',
-                        style: context.textStyle.titleMedium?.copyWith(
+                        style: AppStyles.titleMedium.copyWith(
                             fontWeight: FontWeight.w400,
                             fontSize: 16,
                             color: AppColors.black),
@@ -336,7 +335,7 @@ class _SearchSystem extends State<SearchSystem> {
                   'Guides',
                   maxLines: 1,
                   textAlign: TextAlign.left,
-                  style: context.textStyle.titleLarge?.copyWith(
+                  style: AppStyles.titleLarge.copyWith(
                       fontSize: 24,
                       fontWeight: FontWeight.w500,
                       color: AppColors.textOnboardingBlack),
@@ -351,8 +350,8 @@ class _SearchSystem extends State<SearchSystem> {
                       splashColor: AppColors.primary.withOpacity(0.1),
                       child: Text(
                         'SEE MORE',
-                        style: context.textStyle.titleSmall
-                            ?.copyWith(color: AppColors.primary),
+                        style: AppStyles.titleSmall
+                            .copyWith(color: AppColors.primary),
                       ),
                       onTap: () {
                         //To do
@@ -391,7 +390,7 @@ class _SearchSystem extends State<SearchSystem> {
                     maxLines: 1,
                     textAlign: TextAlign.left,
                     softWrap: true,
-                    style: context.textStyle.titleLarge?.copyWith(
+                    style: AppStyles.titleLarge.copyWith(
                         fontSize: 24,
                         fontWeight: FontWeight.w500,
                         color: AppColors.textOnboardingBlack),
@@ -407,8 +406,8 @@ class _SearchSystem extends State<SearchSystem> {
                       splashColor: AppColors.primary.withOpacity(0.1),
                       child: Text(
                         'SEE MORE',
-                        style: context.textStyle.titleSmall
-                            ?.copyWith(color: AppColors.primary),
+                        style: AppStyles.titleSmall
+                            .copyWith(color: AppColors.primary),
                       ),
                       onTap: () {
                         //To do
@@ -457,7 +456,7 @@ class _SearchSystem extends State<SearchSystem> {
           children: [
             Text(
               'Popular destinations',
-              style: context.textStyle.titleSmall?.copyWith(
+              style: AppStyles.titleSmall.copyWith(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   color: AppColors.textOnboardingBrown),
@@ -465,7 +464,7 @@ class _SearchSystem extends State<SearchSystem> {
             const SizedBox(height: 10),
             Chip(
               label: Text('Da Nang, Viet Nam',
-                  style: context.textStyle.titleSmall?.copyWith(
+                  style: AppStyles.titleSmall.copyWith(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       color: AppColors.textRadioItalicColor)),
@@ -475,7 +474,7 @@ class _SearchSystem extends State<SearchSystem> {
             ),
             Chip(
               label: Text('Ho Chi Minh, Viet Nam',
-                  style: context.textStyle.titleSmall?.copyWith(
+                  style: AppStyles.titleSmall.copyWith(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       color: AppColors.textRadioItalicColor)),
@@ -485,7 +484,7 @@ class _SearchSystem extends State<SearchSystem> {
             ),
             Chip(
               label: Text('Venice, Viet Nam',
-                  style: context.textStyle.titleSmall?.copyWith(
+                  style: AppStyles.titleSmall.copyWith(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       color: AppColors.textRadioItalicColor)),

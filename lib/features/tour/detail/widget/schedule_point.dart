@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/res/colors.dart';
+
+import '../../../../res/styles.dart';
 
 class DestinationPoint extends StatefulWidget {
   const DestinationPoint(
@@ -47,7 +48,7 @@ class _DestinationPoint extends State<DestinationPoint> {
               ),
               const SizedBox(width: 10),
               Text(widget.time,
-                  style: context.textStyle.titleMedium?.copyWith(
+                  style: AppStyles.titleMedium.copyWith(
                       fontWeight: FontWeight.w500, color: AppColors.primary))
             ],
           ),
@@ -55,7 +56,7 @@ class _DestinationPoint extends State<DestinationPoint> {
             padding: const EdgeInsets.only(left: 30),
             child: Text(
               widget.description,
-              style: context.textStyle.titleMedium?.copyWith(
+              style: AppStyles.titleMedium.copyWith(
                   fontWeight: FontWeight.w400,
                   height: 1.5,
                   color: AppColors.textOnboardingBrown),

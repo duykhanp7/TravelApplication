@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/vertical_star_widget.dart';
 
 import '../../../../data/model/review_json.dart';
+import '../../../../res/styles.dart';
 
 class ReviewGuideItem extends StatefulWidget {
   const ReviewGuideItem({super.key, required this.reviewJson});
@@ -44,7 +44,7 @@ class _ReviewGuideItem extends State<ReviewGuideItem> {
                   Text(
                     widget.reviewJson?.ratersName ?? '',
                     textAlign: TextAlign.left,
-                    style: context.textStyle.titleMedium?.copyWith(
+                    style: AppStyles.titleMedium.copyWith(
                         color: AppColors.blackDefault,
                         fontWeight: FontWeight.w500,
                         fontSize: 16),
@@ -58,7 +58,7 @@ class _ReviewGuideItem extends State<ReviewGuideItem> {
                       ),
                       Text(
                         widget.reviewJson?.createdAt ?? '',
-                        style: context.textStyle.titleSmall?.copyWith(
+                        style: AppStyles.titleSmall.copyWith(
                             fontSize: 12,
                             color: AppColors.textByAgreeColor,
                             fontWeight: FontWeight.w400),
@@ -76,7 +76,7 @@ class _ReviewGuideItem extends State<ReviewGuideItem> {
             widget.reviewJson?.content ?? '',
             maxLines: 6,
             overflow: TextOverflow.ellipsis,
-            style: context.textStyle.titleMedium?.copyWith(
+            style: AppStyles.titleMedium.copyWith(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
                 height: 1.3,

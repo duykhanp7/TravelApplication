@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 
 import '../../../data/model/tour_detail_json.dart';
 import '../../../res/colors.dart';
+import '../../../res/styles.dart';
 
 class TravelNewItem extends StatefulWidget {
   const TravelNewItem(
@@ -34,15 +34,15 @@ class _TravelNewItem extends State<TravelNewItem> {
                 Text(
                   widget.tourDetailJson.destination ?? '',
                   overflow: TextOverflow.ellipsis,
-                  style: context.textStyle.titleMedium
-                      ?.copyWith(fontWeight: FontWeight.w500),
+                  style: AppStyles.titleMedium
+                      .copyWith(fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(
                   height: 4,
                 ),
                 Text(
                   widget.tourDetailJson.departureDate ?? '',
-                  style: context.textStyle.titleSmall?.copyWith(
+                  style: AppStyles.titleSmall.copyWith(
                       fontWeight: FontWeight.w400,
                       color: AppColors.textSkipColor),
                   overflow: TextOverflow.ellipsis,

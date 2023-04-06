@@ -17,13 +17,13 @@ class DetailGuidetourRepository extends BaseRepository {
           destinationName: 'Hoi An, Viet Nam',
           dateStart: 'Jan 25, 2020',
           countLikes: '1234 likes',
-          images: [AppImages.myex1, AppImages.myex2, AppImages.myex3]),
+          images: [AppImages.myex2, AppImages.myex2, AppImages.myex3]),
       MyExperienceJson(
           destinationTitle: 'Food tour in Danang',
           destinationName: 'Da Nang, Viet Nam',
           dateStart: 'Jan 25, 2020',
           countLikes: '234 likes',
-          images: [AppImages.myex1, AppImages.myex2, AppImages.myex3])
+          images: [AppImages.myex2, AppImages.myex2, AppImages.myex3])
     ];
   }
 }

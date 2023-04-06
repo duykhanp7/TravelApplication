@@ -12,7 +12,7 @@ class BlocSignUpStateValidate extends BlocSignUpState {
   BlocSignUpStateValidate({required this.appResult});
   final AppResult appResult;
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [appResult];
 }
 
 class BlocSignUpStateChangeTypeAccount extends BlocSignUpState {

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
+import 'package:travel_booking_tour/res/styles.dart';
 
 import 'colors.dart';
 
@@ -44,7 +44,7 @@ class _AppTable extends State<AppTable> {
                     height: 40,
                     child: Text(widget.datas.entries.elementAt(index).key,
                         textAlign: TextAlign.center,
-                        style: context.textStyle.titleMedium?.copyWith(
+                        style: AppStyles.titleMedium.copyWith(
                             color: AppColors.inActiveRadioBorderColor,
                             fontWeight: FontWeight.w500)),
                   ),
@@ -53,7 +53,7 @@ class _AppTable extends State<AppTable> {
                     height: 40,
                     child: Text(widget.datas.entries.elementAt(index).value,
                         textAlign: TextAlign.center,
-                        style: context.textStyle.titleMedium?.copyWith(
+                        style: AppStyles.titleMedium.copyWith(
                             color: AppColors.blackDefault,
                             fontWeight: FontWeight.w500)),
                   )

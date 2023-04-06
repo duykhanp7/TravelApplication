@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/my_trip/model/booking_trip_json.dart';
 import 'package:travel_booking_tour/res/button.dart';
 
 import '../../../res/colors.dart';
 import '../../../res/icons.dart';
+import '../../../res/styles.dart';
 
 class BookingTripItem extends StatefulWidget {
   const BookingTripItem({
@@ -73,7 +73,7 @@ class _BookingTripItem extends State<BookingTripItem> {
                                 ),
                                 Text(
                                   '${widget.bookingTripJson.destination}',
-                                  style: context.textStyle.titleSmall?.copyWith(
+                                  style: AppStyles.titleSmall.copyWith(
                                       fontSize: 14,
                                       fontStyle: FontStyle.italic,
                                       color: AppColors.white,
@@ -105,9 +105,8 @@ class _BookingTripItem extends State<BookingTripItem> {
                                     child: Text(
                                       widget.bookingTripJson.destination ?? '',
                                       overflow: TextOverflow.ellipsis,
-                                      style: context.textStyle.titleMedium
-                                          ?.copyWith(
-                                              fontWeight: FontWeight.w500),
+                                      style: AppStyles.titleMedium.copyWith(
+                                          fontWeight: FontWeight.w500),
                                     ),
                                   ),
                                   const Spacer(),
@@ -130,11 +129,9 @@ class _BookingTripItem extends State<BookingTripItem> {
                                   Text(
                                     widget.bookingTripJson.departureDate ??
                                         '00-00-0000',
-                                    style: context.textStyle.titleSmall
-                                        ?.copyWith(
-                                            fontWeight: FontWeight.w400,
-                                            color:
-                                                AppColors.textOnboardingBrown),
+                                    style: AppStyles.titleSmall.copyWith(
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColors.textOnboardingBrown),
                                   )
                                 ],
                               ),
@@ -152,11 +149,9 @@ class _BookingTripItem extends State<BookingTripItem> {
                                   ),
                                   Text(
                                     '${widget.bookingTripJson.departureDate}',
-                                    style: context.textStyle.titleSmall
-                                        ?.copyWith(
-                                            fontWeight: FontWeight.w400,
-                                            color:
-                                                AppColors.textOnboardingBrown),
+                                    style: AppStyles.titleSmall.copyWith(
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColors.textOnboardingBrown),
                                   ),
                                   const Spacer(),
                                 ],
@@ -175,11 +170,9 @@ class _BookingTripItem extends State<BookingTripItem> {
                                   ),
                                   Text(
                                     '${widget.bookingTripJson.nameTourGuide}',
-                                    style: context.textStyle.titleSmall
-                                        ?.copyWith(
-                                            fontWeight: FontWeight.w400,
-                                            color:
-                                                AppColors.textOnboardingBrown),
+                                    style: AppStyles.titleSmall.copyWith(
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColors.textOnboardingBrown),
                                   ),
                                   const Spacer(),
                                 ],
@@ -206,7 +199,7 @@ class _BookingTripItem extends State<BookingTripItem> {
                                       ),
                                       border: Border.all(
                                           color: AppColors.primary, width: 1),
-                                      textStyle: context.textStyle.titleSmall!
+                                      textStyle: AppStyles.titleSmall
                                           .copyWith(color: AppColors.primary),
                                       color: AppColors.white,
                                       ripple: AppColors.white.withOpacity(0.1),
@@ -227,7 +220,7 @@ class _BookingTripItem extends State<BookingTripItem> {
                                       ripple: AppColors.white.withOpacity(0.1),
                                       border: Border.all(
                                           color: AppColors.primary, width: 1),
-                                      textStyle: context.textStyle.titleSmall!
+                                      textStyle: AppStyles.titleSmall
                                           .copyWith(color: AppColors.primary),
                                       color: AppColors.white,
                                       borderRadius: BorderRadius.circular(6),
@@ -246,7 +239,7 @@ class _BookingTripItem extends State<BookingTripItem> {
                                       ),
                                       border: Border.all(
                                           color: AppColors.primary, width: 1),
-                                      textStyle: context.textStyle.titleSmall!
+                                      textStyle: AppStyles.titleSmall
                                           .copyWith(color: AppColors.primary),
                                       color: AppColors.white,
                                       borderRadius: BorderRadius.circular(6),
@@ -356,9 +349,10 @@ class _BookingTripItem extends State<BookingTripItem> {
                         children: [
                           SvgPicture.asset(AppIcons.icDone),
                           const SizedBox(width: 8),
+                          // ignore: prefer_const_constructors
                           Text(
                             'Mark Finshed',
-                            style: context.textStyle.titleSmall,
+                            style: AppStyles.titleSmall,
                           )
                         ],
                       ),

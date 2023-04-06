@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 
+import '../../res/styles.dart';
 import 'model/onboarding_json.dart';
 
 class OnboardingPage extends StatelessWidget {
@@ -31,7 +31,7 @@ class OnboardingPage extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(
                 onboardingModel.description,
-                style: context.textStyle.titleLarge!.copyWith(
+                style: AppStyles.titleLarge.copyWith(
                     color: AppColors.textOnboardingBlack,
                     fontWeight: FontWeight.w500,
                     fontSize: 24),
@@ -44,7 +44,7 @@ class OnboardingPage extends StatelessWidget {
               child: Text(
                 textAlign: TextAlign.center,
                 onboardingModel.content,
-                style: context.textStyle.titleMedium!.copyWith(
+                style: AppStyles.titleMedium.copyWith(
                     fontWeight: FontWeight.w400,
                     color: AppColors.textOnboardingBrown),
               ),

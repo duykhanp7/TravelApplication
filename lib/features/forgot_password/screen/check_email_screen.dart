@@ -1,12 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/l10n/generated/l10n.dart';
 import 'package:travel_booking_tour/res/background.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/images.dart';
 
+import '../../../res/styles.dart';
 import '../bloc/bloc_forgot_password_event.dart';
 import '../bloc/bloc_forgot_password_screen.dart';
 
@@ -51,13 +51,13 @@ class _CheckEmailScreen extends State<CheckEmailScreen> {
                       alignment: Alignment.center,
                       child: Text.rich(TextSpan(
                           text: localization.back_to,
-                          style: context.textStyle.titleSmall!.copyWith(
+                          style: AppStyles.titleSmall.copyWith(
                               fontWeight: FontWeight.w400,
                               color: AppColors.textByAgreeColor),
                           children: <TextSpan>[
                             TextSpan(
                                 text: localization.sign_in,
-                                style: context.textStyle.titleSmall!.copyWith(
+                                style: AppStyles.titleSmall.copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: AppColors.primary),
                                 recognizer: TapGestureRecognizer()
@@ -82,7 +82,7 @@ class _CheckEmailScreen extends State<CheckEmailScreen> {
       alignment: Alignment.centerLeft,
       child: Text(
         localization.please_check_u_email,
-        style: context.textStyle.titleMedium!.copyWith(
+        style: AppStyles.titleMedium.copyWith(
             fontWeight: FontWeight.w400,
             color: AppColors.inActiveRadioBorderColor),
       ),

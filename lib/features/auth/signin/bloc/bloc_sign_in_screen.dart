@@ -25,6 +25,7 @@ class BlocSignInScreen extends Bloc<BlocSignInEvent, BlocSignInState> {
   final AuthRepository _authRepository = AuthRepository();
   final AppStorage _appStorage = AppStorage();
   String errorText = 'This email has not been signed up, try sign up';
+  final GlobalKey<FormState> signInGlobalKey = GlobalKey<FormState>();
 
   BlocSignInScreen() : super(BlocSignInStateInitial()) {
     on<BlocSignInEvent>(mapStateToEvent, transformer: restartable());
@@ -35,13 +36,12 @@ class BlocSignInScreen extends Bloc<BlocSignInEvent, BlocSignInState> {
     if (event is BlocSignInEventSignInClick) {
       emit(BlocSignInStateValidate(
           appResult: AppResult(state: ResultState.loading)));
-      if (event.signInGlobalKey.currentState?.validate() ?? false) {
+      if (signInGlobalKey.currentState?.validate() ?? false) {
         try {
           Map<String, dynamic> data = {
             "identifier": email,
             "password": password
           };
-          Routes.navigateToAndRemoveUntil(AppPath.mainScreen, {});
 
           UserJson? userJson = await _authRepository.signIn(data);
           if (userJson != null) {
@@ -63,7 +63,9 @@ class BlocSignInScreen extends Bloc<BlocSignInEvent, BlocSignInState> {
                 appResult: AppResult(state: ResultState.error)));
           } else {
             isValidEmail = false;
-            event.signInGlobalKey.currentState?.validate();
+            signInGlobalKey.currentState?.validate();
+            emit(BlocSignInStateValidate(
+                appResult: AppResult(state: ResultState.fail)));
           }
         }
       } else {

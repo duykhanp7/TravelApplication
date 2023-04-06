@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/onboarding/bloc/bloc_onboarding_event.dart';
 import 'package:travel_booking_tour/features/onboarding/bloc/bloc_onboarding_screen.dart';
 import 'package:travel_booking_tour/features/onboarding/bloc/bloc_onboarding_state.dart';
@@ -78,7 +77,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
                         width: 50,
                         child: Text(
                           'SKIP',
-                          style: context.textStyle.titleSmall!
+                          style: AppStyles.titleSmall
                               .copyWith(color: AppColors.textSkipColor),
                         ),
                       ),

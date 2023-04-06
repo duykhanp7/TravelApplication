@@ -2,7 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_event.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_screen.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_state.dart';
@@ -17,8 +16,7 @@ import '../../../../res/input_field.dart';
 import '../../../../res/radio.dart';
 
 class SignUpScreen extends StatefulWidget {
-  SignUpScreen({super.key});
-  final GlobalKey<FormState> signUpGlobalKey = GlobalKey<FormState>();
+  const SignUpScreen({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -101,7 +99,7 @@ class _SignUpScreen extends State<SignUpScreen> {
     return Container(
       alignment: Alignment.center,
       child: Form(
-        key: widget.signUpGlobalKey,
+        key: _blocSignInScreen.signUpGlobalKey,
         child: Column(
           children: [
             Container(
@@ -202,14 +200,14 @@ class _SignUpScreen extends State<SignUpScreen> {
                     alignment: Alignment.center,
                     child: Text.rich(TextSpan(
                         text: localization.by_singing_up_you_agree_to_our,
-                        style: context.textStyle.labelMedium!.copyWith(
+                        style: AppStyles.labelMedium.copyWith(
                             fontWeight: FontWeight.w400,
                             fontStyle: FontStyle.normal,
                             color: AppColors.textByAgreeColor),
                         children: <TextSpan>[
                           TextSpan(
                               text: localization.tern_conditions,
-                              style: context.textStyle.labelMedium!.copyWith(
+                              style: AppStyles.labelMedium.copyWith(
                                 fontWeight: FontWeight.w500,
                                 fontStyle: FontStyle.normal,
                                 color: AppColors.primary,
@@ -238,8 +236,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                     text: localization.sign_up,
                     isLoading: isLoading,
                     onTap: () {
-                      _blocSignInScreen.add(BlocSignUpEventValidate(
-                          signUpGlobalKey: widget.signUpGlobalKey));
+                      _blocSignInScreen.add(BlocSignUpEventValidate());
                     },
                     allCaps: true,
                     margin: const EdgeInsets.only(left: 33, right: 33),
@@ -254,14 +251,14 @@ class _SignUpScreen extends State<SignUpScreen> {
               alignment: Alignment.center,
               child: Text.rich(TextSpan(
                   text: localization.already_have_an_account,
-                  style: context.textStyle.titleSmall!.copyWith(
+                  style: AppStyles.titleSmall.copyWith(
                       fontWeight: FontWeight.w400,
                       fontStyle: FontStyle.normal,
                       color: AppColors.textByAgreeColor),
                   children: <TextSpan>[
                     TextSpan(
                         text: localization.sign_in,
-                        style: context.textStyle.titleSmall!.copyWith(
+                        style: AppStyles.titleSmall.copyWith(
                             fontWeight: FontWeight.w400,
                             fontStyle: FontStyle.normal,
                             color: AppColors.primary),

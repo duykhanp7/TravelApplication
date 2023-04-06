@@ -16,7 +16,7 @@ import '../features/auth/signup/screen/sign_up_screen.dart';
 import '../features/auth/signup/screen/sign_up_tour_guide_information_screen.dart';
 import '../features/forgot_password/forgot_password_screen.dart';
 import '../features/guide/choose_guide/screen/add_new_places_screen.dart';
-import '../features/guide/choose_guide/screen/choose_guide_trip_information_page.dart';
+import '../features/guide/choose_guide/screen/edit_trip_information_page.dart';
 import '../features/onboarding/onboarding_screen.dart';
 import '../features/auth/signin/sign_in_screen.dart';
 import '../features/splash/splash_screen.dart';
@@ -32,14 +32,13 @@ class Routes {
     AppPath.splashScreen: (context) => const SplashScreen(),
     AppPath.onBoardingSCreen: (context) => const OnboardingScreen(),
     AppPath.mainScreen: (context) => const MainPage(),
-    AppPath.signUpScreen: (context) => SignUpScreen(),
+    AppPath.signUpScreen: (context) => const SignUpScreen(),
     AppPath.signInScreen: (context) => const SignInScreen(),
     AppPath.forgotPassword: (context) => const ForgotPasswordScreen(),
     AppPath.checkEmail: (context) => const CheckEmailScreen(),
     AppPath.empty: (context) => const EmptyPage(),
     AppPath.guide: (context) => const GuideDescriptionScreen(),
-    AppPath.chooseGuideTripInformation: (context) =>
-        const ChooseGuideTripInformationScreen(),
+    AppPath.editTripInformation: (context) => const EditTripInformationScreen(),
     AppPath.addNewPlaces: (context) => const AddNewPlacesScreen(),
     AppPath.termAndCondition: (context) => const TermAndConditionScreen(),
     AppPath.tourGuideAddProfile: (context) =>

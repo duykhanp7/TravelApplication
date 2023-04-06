@@ -27,3 +27,10 @@ class BlocTripInformationStateClose extends BlocTripInformationState {
   @override
   List<Object?> get props => [];
 }
+
+class BlocTripInformationStateLoadDestination extends BlocTripInformationState {
+  BlocTripInformationStateLoadDestination({required this.appResult});
+  final AppResult appResult;
+  @override
+  List<Object?> get props => [appResult];
+}

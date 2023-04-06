@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_screen.dart';
+import 'package:travel_booking_tour/res/res.dart';
 
 import '../../../data/model/tour_detail_json.dart';
-import '../../../res/colors.dart';
-import '../../../res/icons.dart';
 
 class TopExperienceItem extends StatefulWidget {
   const TopExperienceItem(
@@ -105,11 +103,10 @@ class _TopExperienceItem extends State<TopExperienceItem> {
                                           overflow: TextOverflow.ellipsis,
                                           softWrap: true,
                                           textAlign: TextAlign.center,
-                                          style: context.textStyle.titleSmall
-                                              ?.copyWith(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: AppColors.white),
+                                          style: AppStyles.titleSmall.copyWith(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              color: AppColors.white),
                                         ),
                                       )
                                     ],
@@ -138,8 +135,8 @@ class _TopExperienceItem extends State<TopExperienceItem> {
                             widget.tourDetailJson.description ?? '',
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
-                            style: context.textStyle.titleMedium
-                                ?.copyWith(fontWeight: FontWeight.w500),
+                            style: AppStyles.titleMedium
+                                .copyWith(fontWeight: FontWeight.w500),
                           ),
                           const SizedBox(
                             height: 7,
@@ -156,7 +153,7 @@ class _TopExperienceItem extends State<TopExperienceItem> {
                                   widget.tourDetailJson.destination ?? '',
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style: context.textStyle.titleSmall?.copyWith(
+                                  style: AppStyles.titleSmall.copyWith(
                                       fontWeight: FontWeight.w400,
                                       color: AppColors.primary),
                                 )

@@ -23,6 +23,7 @@ class BlocSignupScreen extends Bloc<BlocSignUpEvent, BlocSignUpState> {
   bool isValidEmail = true;
 
   final AuthRepository _authRepository = AuthRepository();
+  final GlobalKey<FormState> signUpGlobalKey = GlobalKey<FormState>();
 
   BlocSignupScreen() : super(BlocSignUpStateInitial()) {
     on<BlocSignUpEvent>(mapEventToState, transformer: restartable());
@@ -33,40 +34,43 @@ class BlocSignupScreen extends Bloc<BlocSignUpEvent, BlocSignUpState> {
     if (event is BlocSignUpEventValidate) {
       emit(BlocSignUpStateValidate(
           appResult: AppResult(state: ResultState.loading)));
-      if (typeAccount == 0) {
-        emit(BlocSignUpStateValidate(
-            appResult: AppResult(state: ResultState.success)));
-      } else if (typeAccount == 1) {
-        Routes.navigateTo(AppPath.tourGuideAddProfile, {});
-      }
-      if (event.signUpGlobalKey.currentState?.validate() ?? false) {
-        try {
-          Map<String, dynamic> data = {
-            "email": email,
-            "username": email,
-            "password": password,
-            "fisrtName": firstName,
-            "lastName": lastName
-          };
-          final UserJson? user = await _authRepository.signUp(data);
-          if (user != null) {
-            emit(BlocSignUpStateValidate(
-                appResult: AppResult(state: ResultState.success)));
+      if (signUpGlobalKey.currentState?.validate() ?? false) {
+        if (typeAccount == 0) {
+          try {
+            debugPrint(
+                'Log Information : $email $password $firstName $lastName $country');
+            Map<String, dynamic> data = {
+              "email": email,
+              "username": email,
+              "password": password,
+              "firstName": firstName,
+              "lastName": lastName,
+              "country": country
+            };
+            final UserJson? user = await _authRepository.signUp(data);
+            if (user != null) {
+              emit(BlocSignUpStateValidate(
+                  appResult: AppResult(state: ResultState.success)));
+            }
+          } on NetworkException catch (ex) {
+            debugPrint('Expcetion Sign Up ${ex.toString()}');
+            if (ex.statusCode == 0 ||
+                ex.statusCode == 500 ||
+                ex.statusCode == 503 ||
+                ex.statusCode == 401) {
+              emit(BlocSignUpStateValidate(
+                  appResult: AppResult(state: ResultState.error)));
+            } else {
+              isValidEmail = false;
+              signUpGlobalKey.currentState?.validate();
+              emit(BlocSignUpStateValidate(
+                  appResult: AppResult(state: ResultState.fail)));
+            }
           }
-        } on NetworkException catch (ex) {
-          debugPrint('Expcetion Sign Up ${ex.toString()}');
-          if (ex.statusCode == 0 ||
-              ex.statusCode == 500 ||
-              ex.statusCode == 503 ||
-              ex.statusCode == 401) {
-            emit(BlocSignUpStateValidate(
-                appResult: AppResult(state: ResultState.error)));
-          } else {
-            isValidEmail = false;
-            event.signUpGlobalKey.currentState?.validate();
-            emit(BlocSignUpStateValidate(
-                appResult: AppResult(state: ResultState.fail)));
-          }
+        } else if (typeAccount == 1) {
+          emit(BlocSignUpStateValidate(
+              appResult: AppResult(state: ResultState.fail)));
+          Routes.navigateTo(AppPath.tourGuideAddProfile, {});
         }
       } else {
         emit(BlocSignUpStateValidate(
@@ -97,7 +101,7 @@ class BlocSignupScreen extends Bloc<BlocSignUpEvent, BlocSignUpState> {
 
   String? validateTextFieldEmail(String? value) {
     if (!isValidEmail) {
-      return 'The email has been not signed up';
+      return 'The email has been used';
     } else if (value == null || value.isEmpty) {
       return 'Please enter your email';
     } else {

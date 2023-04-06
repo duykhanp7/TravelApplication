@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_see_more_event.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_see_more_screen.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_see_more_state.dart';
@@ -182,7 +181,7 @@ class _SeeMoreScreen extends State<SeeMoreScreen> {
               seeMoreType == SeeMoreType.guide
                   ? 'Book your own private local\nGuide and explore the city'
                   : 'Plenty of amazing of tours are waiting for you',
-              style: context.textStyle.titleMedium?.copyWith(
+              style: AppStyles.titleMedium.copyWith(
                   fontSize: 22,
                   fontWeight: FontWeight.w500,
                   color: AppColors.white),

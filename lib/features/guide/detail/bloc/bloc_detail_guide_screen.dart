@@ -1,9 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travel_booking_tour/common/app_constant.dart';
 import 'package:travel_booking_tour/features/guide/detail/bloc/bloc_detail_guide_event.dart';
 import 'package:travel_booking_tour/features/guide/detail/bloc/bloc_detail_guide_state.dart';
 import 'package:travel_booking_tour/router/path.dart';
 import 'package:travel_booking_tour/router/routes.dart';
 import 'package:video_viewer/video_viewer.dart';
+
+import '../../../../common/enum/enums.dart';
 
 class BlocDetailGuideScreen
     extends Bloc<BlocDetailGuideEvent, BlocDetailGuideState> {
@@ -31,7 +34,10 @@ class BlocDetailGuideScreen
     }
 
     if (event is BlocDetailGuideEventChooseThisGuide) {
-      Routes.navigateTo(AppPath.chooseGuideTripInformation, {});
+      Routes.navigateTo(AppPath.editTripInformation, {
+        AppConstant.tripInformationMode:
+            EditTripInformationMode.editTripInformation
+      });
     }
   }
 }
