@@ -157,4 +157,6 @@ class AppIcons {
   static const String icPerson = '$parentPathIcons/ic_person.svg';
 
   static const String icEarth = '$parentPathIcons/ic_earth.svg';
+  static const String icCardInformation =
+      '$parentPathIcons/ic_card_information.svg';
 }

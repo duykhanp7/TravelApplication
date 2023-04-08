@@ -157,8 +157,8 @@ class _SeeMoreScreen extends State<SeeMoreScreen> {
     );
   }
 
-  AppbarAppWidget _buildAppBarWidget() {
-    return AppbarAppWidget(
+  AppbarApp _buildAppBarWidget() {
+    return AppbarApp(
       background: AppColors.transparent,
       height: 190,
       flexibleSpace: Stack(

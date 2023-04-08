@@ -113,6 +113,8 @@ class _SignUpTourGuideInformationScreen
                               alignment: Alignment.center,
                               margin: const EdgeInsets.only(top: 20),
                               child: TimelineWidget(
+                                  padding: const EdgeInsets.only(
+                                      left: 15, right: 30),
                                   currentStep:
                                       _blocSignUpTourGuideInformationScreen
                                           .currentIndexStep,

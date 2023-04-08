@@ -48,7 +48,7 @@ class _SearchSystem extends State<SearchSystem> {
       },
       child: Scaffold(
         backgroundColor: AppColors.white,
-        appBar: const AppbarAppWidget(),
+        appBar: const AppbarApp(),
         body: SafeArea(
             child: Container(
           padding: const EdgeInsets.only(top: 20, left: 16, right: 16),
@@ -124,7 +124,7 @@ class _SearchSystem extends State<SearchSystem> {
         child: Scaffold(
           resizeToAvoidBottomInset: true,
           backgroundColor: AppColors.transparent,
-          appBar: AppbarAppWidget(
+          appBar: AppbarApp(
             background: AppColors.transparent,
             title: 'Filters',
             titleStyle: AppStyles.titleMedium

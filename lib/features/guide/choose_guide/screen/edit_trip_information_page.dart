@@ -47,7 +47,7 @@ class _EditTripInformationScreen extends State<EditTripInformationScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: AppbarAppWidget(
+      appBar: AppbarApp(
         title: editTripInformationMode ==
                 EditTripInformationMode.editTripInformation
             ? 'Trip information'
