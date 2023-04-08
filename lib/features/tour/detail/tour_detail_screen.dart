@@ -48,7 +48,7 @@ class _TourDetailScreen extends State<TourDetailScreen> {
     _blocTourDetailScreen.add(BlocTourDetailEventInitial());
 
     return Scaffold(
-      appBar: AppbarAppWidget(
+      appBar: AppbarApp(
         background: AppColors.transparent,
         prefixWidget: AppInkWell(
             voidCallBack: () => Routes.backTo(),
@@ -122,12 +122,14 @@ class _TourDetailScreen extends State<TourDetailScreen> {
                       children: [
                         Container(
                           alignment: Alignment.center,
-                          child: Text(
-                            'Share on',
-                            style: AppStyles.titleMedium.copyWith(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.black),
+                          child: Material(
+                            child: Text(
+                              'Share on',
+                              style: AppStyles.titleMedium.copyWith(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.black),
+                            ),
                           ),
                         ),
                         const SizedBox(height: 23),
@@ -139,59 +141,69 @@ class _TourDetailScreen extends State<TourDetailScreen> {
                             shrinkWrap: true,
                             physics: const BouncingScrollPhysics(),
                             children: [
-                              SocialButton(
-                                width: 60,
-                                height: 60,
-                                radius: 14,
-                                title: 'Facebook',
-                                icon: AppIcons.icFacebookFrame,
-                                background: AppColors.facebookBgColor,
-                                splash: AppColors.white.withOpacity(0.2),
-                                voidCallback: () {},
+                              Material(
+                                child: SocialButton(
+                                  width: 60,
+                                  height: 60,
+                                  radius: 14,
+                                  title: 'Facebook',
+                                  icon: AppIcons.icFacebookFrame,
+                                  background: AppColors.facebookBgColor,
+                                  splash: AppColors.white.withOpacity(0.2),
+                                  voidCallback: () {},
+                                ),
                               ),
                               const SizedBox(width: 10),
-                              SocialButton(
-                                width: 60,
-                                height: 60,
-                                radius: 14,
-                                title: 'Google',
-                                icon: AppIcons.icGoogleFrame,
-                                background: AppColors.googleBgColor,
-                                splash: AppColors.white.withOpacity(0.2),
-                                voidCallback: () {},
+                              Material(
+                                child: SocialButton(
+                                  width: 60,
+                                  height: 60,
+                                  radius: 14,
+                                  title: 'Google',
+                                  icon: AppIcons.icGoogleFrame,
+                                  background: AppColors.googleBgColor,
+                                  splash: AppColors.white.withOpacity(0.2),
+                                  voidCallback: () {},
+                                ),
                               ),
                               const SizedBox(width: 10),
-                              SocialButton(
-                                width: 60,
-                                height: 60,
-                                radius: 14,
-                                title: 'Kakao Talk',
-                                icon: AppIcons.icTalkFrame,
-                                background: AppColors.talkBgColor,
-                                splash: AppColors.white.withOpacity(0.2),
-                                voidCallback: () {},
+                              Material(
+                                child: SocialButton(
+                                  width: 60,
+                                  height: 60,
+                                  radius: 14,
+                                  title: 'Kakao Talk',
+                                  icon: AppIcons.icTalkFrame,
+                                  background: AppColors.talkBgColor,
+                                  splash: AppColors.white.withOpacity(0.2),
+                                  voidCallback: () {},
+                                ),
                               ),
                               const SizedBox(width: 10),
-                              SocialButton(
-                                width: 60,
-                                height: 60,
-                                radius: 14,
-                                title: 'Whatsapp',
-                                icon: AppIcons.icWhatAppFrame,
-                                background: AppColors.whatAppBgColor,
-                                splash: AppColors.white.withOpacity(0.2),
-                                voidCallback: () {},
+                              Material(
+                                child: SocialButton(
+                                  width: 60,
+                                  height: 60,
+                                  radius: 14,
+                                  title: 'Whatsapp',
+                                  icon: AppIcons.icWhatAppFrame,
+                                  background: AppColors.whatAppBgColor,
+                                  splash: AppColors.white.withOpacity(0.2),
+                                  voidCallback: () {},
+                                ),
                               ),
                               const SizedBox(width: 10),
-                              SocialButton(
-                                width: 60,
-                                height: 60,
-                                radius: 14,
-                                title: 'Twitter',
-                                icon: AppIcons.icTwitterFrame,
-                                background: AppColors.twitterBgColor,
-                                splash: AppColors.white.withOpacity(0.2),
-                                voidCallback: () {},
+                              Material(
+                                child: SocialButton(
+                                  width: 60,
+                                  height: 60,
+                                  radius: 14,
+                                  title: 'Twitter',
+                                  icon: AppIcons.icTwitterFrame,
+                                  background: AppColors.twitterBgColor,
+                                  splash: AppColors.white.withOpacity(0.2),
+                                  voidCallback: () {},
+                                ),
                               ),
                             ],
                           ),

@@ -8,10 +8,14 @@ class TimelineWidget extends StatefulWidget {
       {super.key,
       this.background,
       required this.currentStep,
-      required this.titles});
+      required this.titles,
+      required this.padding,
+      this.paddingParent});
 
   final Color? background;
   final int currentStep;
+  final EdgeInsets padding;
+  final EdgeInsets? paddingParent;
   final List<String> titles;
 
   @override
@@ -27,28 +31,55 @@ class _TimelineWidget extends State<TimelineWidget> {
       children: [
         Container(
           alignment: Alignment.center,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: HorizontalDotSeperated(
-                    isActive: widget.currentStep == 1, length: 40),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TimelineIndicator(
-                    isActive: true,
-                    title: widget.titles[0],
+          child: Container(
+            margin: widget.paddingParent ??
+                const EdgeInsets.only(left: 50, right: 50),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const TimelineIndicator(
+                      isActive: true,
+                    ),
+                    HorizontalDotSeperated(
+                        isActive: widget.currentStep == 1, length: 40),
+                    TimelineIndicator(
+                      isActive: widget.currentStep == 1,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                Container(
+                  padding: widget.padding,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        widget.titles[0],
+                        style: AppStyles.titleMedium.copyWith(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.primary),
+                      ),
+                      Text(
+                        widget.titles[1],
+                        style: AppStyles.titleMedium.copyWith(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: widget.currentStep == 1
+                                ? AppColors.primary
+                                : AppColors.textHintColor),
+                      )
+                    ],
                   ),
-                  TimelineIndicator(
-                    isActive: widget.currentStep == 1,
-                    title: widget.titles[1],
-                  ),
-                ],
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ],
@@ -58,16 +89,11 @@ class _TimelineWidget extends State<TimelineWidget> {
 
 class TimelineIndicator extends StatefulWidget {
   const TimelineIndicator(
-      {super.key,
-      required this.isActive,
-      this.title,
-      this.color,
-      this.overlap});
+      {super.key, required this.isActive, this.color, this.overlap});
 
   final bool isActive;
   final Color? color;
   final Color? overlap;
-  final String? title;
 
   @override
   State<StatefulWidget> createState() {
@@ -107,20 +133,20 @@ class _TimelineIndicator extends State<TimelineIndicator> {
               )
             ],
           ),
-          const SizedBox(
-            height: 5,
-          ),
-          widget.title == null
-              ? Container()
-              : Text(
-                  widget.title!,
-                  style: AppStyles.titleMedium.copyWith(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: widget.isActive
-                          ? AppColors.primary
-                          : AppColors.textHintColor),
-                )
+          // const SizedBox(
+          //   height: 5,
+          // ),
+          // widget.title == null
+          //     ? Container()
+          //     : Text(
+          //         widget.title!,
+          //         style: AppStyles.titleMedium.copyWith(
+          //             fontSize: 14,
+          //             fontWeight: FontWeight.w500,
+          //             color: widget.isActive
+          //                 ? AppColors.primary
+          //                 : AppColors.textHintColor),
+          //       )
         ],
       ),
     );
@@ -143,19 +169,24 @@ class HorizontalDotSeperated extends StatefulWidget {
 class _HorizontalDotSeperated extends State<HorizontalDotSeperated> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: List.generate(
-          widget.length,
-          (index) => Container(
-                margin: const EdgeInsets.only(left: 2),
-                height: 1,
-                width: 2,
-                color: widget.isActive
-                    ? AppColors.primary
-                    : AppColors.underLineTextFieldColor,
-              )),
+    return Padding(
+      padding: const EdgeInsets.only(left: 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: List.generate(
+            widget.length,
+            (index) => Padding(
+                  padding: const EdgeInsets.only(left: 1, right: 1),
+                  child: Container(
+                    height: 1,
+                    width: 2,
+                    color: widget.isActive
+                        ? AppColors.primary
+                        : AppColors.underLineTextFieldColor,
+                  ),
+                )),
+      ),
     );
   }
 }

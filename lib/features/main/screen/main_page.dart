@@ -131,7 +131,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
           child: BlocBuilder<BlocMainScreen, BlocMainState>(
             builder: (context, blocMainState) {
               if (blocMainState is BlocMainStateChangeTabIndex) {
-                return AppbarAppWidget(
+                return AppbarApp(
                   prefixWidget: Container(),
                   flexibleSpace: Container(
                     height: 205,

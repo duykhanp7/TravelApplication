@@ -44,7 +44,7 @@ class _AddNewPlacesScreen extends State<AddNewPlacesScreen> {
     return WillPopScope(
       child: Scaffold(
         backgroundColor: AppColors.white,
-        appBar: AppbarAppWidget(
+        appBar: AppbarApp(
           title: 'New Attraction',
           suffixWidget: Container(
             alignment: Alignment.center,

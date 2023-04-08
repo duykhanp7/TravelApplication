@@ -17,4 +17,6 @@ class AppPath {
   static const String tourDetail = '/tourDetail';
   static const String seeMore = '/seeMore';
   static const String searchSystem = '/searchSystem';
+  static const String tripViewDetail = '/tripViewDetail';
+  static const String payment = '/payment';
 }

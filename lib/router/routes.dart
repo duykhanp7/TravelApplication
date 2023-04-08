@@ -6,6 +6,8 @@ import 'package:travel_booking_tour/features/forgot_password/screen/check_email_
 import 'package:travel_booking_tour/features/guide/detail/screen/guide_description._screen.dart';
 import 'package:travel_booking_tour/features/main/screen/main_page.dart';
 import 'package:travel_booking_tour/features/main/screen/search_system.dart';
+import 'package:travel_booking_tour/features/my_trip/screen/trip_view_detail.dart';
+import 'package:travel_booking_tour/features/payment/screen/payment_screen.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/terms_and_conditions_screen.dart';
 import 'package:travel_booking_tour/features/tour/detail/tour_detail_screen.dart';
 import 'package:travel_booking_tour/res/app_camera.dart';
@@ -46,6 +48,8 @@ class Routes {
     AppPath.tourDetail: (context) => const TourDetailScreen(),
     AppPath.seeMore: (context) => const SeeMoreScreen(),
     AppPath.searchSystem: (context) => const SearchSystem(),
+    AppPath.tripViewDetail: (context) => const TripViewDetail(),
+    AppPath.payment: (context) => const PaymentScreen(),
   };
 
   static Future<void> initializedCamera() async {
@@ -83,5 +87,10 @@ class Routes {
         ? navigator.currentState?.pop(arguments)
         : navigator.currentState
             ?.popAndPushNamed(namePage, arguments: arguments);
+  }
+
+  static void backToUntilPage(String namePage) {
+    navigator.currentState
+        ?.popUntil((route) => route.settings.name == namePage);
   }
 }

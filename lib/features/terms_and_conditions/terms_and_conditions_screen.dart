@@ -38,7 +38,7 @@ class _TermAndConditionScreen extends State<TermAndConditionScreen> {
     SystemChrome.setSystemUIOverlayStyle(AppSystem.systemStyle);
     return Scaffold(
       backgroundColor: AppColors.primary,
-      appBar: AppbarAppWidget(
+      appBar: AppbarApp(
         title: 'Terms and conditions',
         prefixWidget: Container(
           width: 25,
