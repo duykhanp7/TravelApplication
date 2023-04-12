@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "279437370202",
+    "project_id": "travel-booking-tour-6ad25",
+    "storage_bucket": "travel-booking-tour-6ad25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:279437370202:android:7c4366406c36f684740963",
+        "android_client_info": {
+          "package_name": "com.example.travel_booking_tour"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "279437370202-ausd051n2tnj2di5tcb2htdp6c5fsk22.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.travel_booking_tour",
+            "certificate_hash": "51f93305471a4a1c6f1ea031a35d9ed0841c42b5"
+          }
+        },
+        {
+          "client_id": "279437370202-65eqb701fcldjk7b837qjc85ageqclme.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvhmGXVzd8dsaHxpy1Yfb3-vmEQBT80Lk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "279437370202-65eqb701fcldjk7b837qjc85ageqclme.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -38,3 +38,5 @@ enum TabMyList { currentTrips, nextTrips, pastTrips, wishListTrips }
 enum Searching { itemTourGuides, itemsTours }
 
 enum EditTripInformationMode { createNewTrip, editTripInformation }
+
+enum Password { reset, change }

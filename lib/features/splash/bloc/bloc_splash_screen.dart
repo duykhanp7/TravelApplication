@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:travel_booking_tour/common/app_constant.dart';
+import 'package:travel_booking_tour/common/enum/enums.dart';
 import 'package:travel_booking_tour/data/local/app_storage.dart';
 import 'package:travel_booking_tour/features/auth/repository/auth_repository.dart';
 import 'package:travel_booking_tour/features/splash/bloc/bloc_splash_event.dart';
@@ -35,7 +36,15 @@ class BlocSplashScreen extends Bloc<BlocSplashEvent, BlocSplashState> {
           Routes.navigateToAndRemoveUntil(AppPath.mainScreen, {});
         }
       } else {
-        Routes.navigateToAndRemoveUntil(AppPath.signInScreen, {});
+        AppStorage appStorage = AppStorage();
+        String? deepLink = await appStorage.getData(AppConstant.deeplink);
+        if (deepLink != null) {
+          _appStorage.delete(AppConstant.deeplink);
+          Routes.navigateToAndRemoveUntil(AppPath.settingChangePassword,
+              {AppConstant.data: Password.reset});
+        } else {
+          Routes.navigateToAndRemoveUntil(AppPath.signInScreen, {});
+        }
       }
     }
   }

@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:travel_booking_tour/features/auth/signin/bloc/bloc_sign_in_event.dart';
 import 'package:travel_booking_tour/features/auth/signin/bloc/bloc_sign_in_screen.dart';
 import 'package:travel_booking_tour/features/auth/signin/bloc/bloc_sign_in_state.dart';
@@ -9,6 +10,7 @@ import 'package:travel_booking_tour/res/background.dart';
 import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
+import '../../../common/app_constant.dart';
 import '../../../common/enum/enums.dart';
 import '../../../l10n/generated/l10n.dart';
 import '../../../res/app_dialog.dart';
@@ -28,17 +30,35 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreen extends State<SignInScreen> {
   late SLocalization localization;
   late BlocSignInScreen _blocSignInScreen;
+  late FToast fToast;
 
   @override
   void initState() {
     _blocSignInScreen = BlocProvider.of<BlocSignInScreen>(context);
     SystemChrome.setSystemUIOverlayStyle(AppSystem.systemStyle);
+
+    fToast = FToast();
+    fToast.init(context);
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     localization = SLocalization.of(context);
+
+    SystemChrome.setSystemUIOverlayStyle(AppSystem.systemStyle);
+
+    Map<String, dynamic>? argument =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+
+    if (argument != null) {
+      Uri? uri = argument[AppConstant.data] as Uri?;
+      if (uri != null) {
+        fToast.showToast(child: Text('Uri getting is : ${uri.toString()}'));
+      }
+    }
+
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SafeArea(

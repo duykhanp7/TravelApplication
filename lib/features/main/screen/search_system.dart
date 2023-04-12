@@ -67,11 +67,12 @@ class _SearchSystem extends State<SearchSystem> {
   Widget _buildSearchView() {
     return BlocBuilder<BlocSearchSystemScreen, BlocSearchSystemState>(
       buildWhen: (previous, current) =>
-          current is BlocSearchSystemStateClearSearching,
+          current is BlocSearchSystemStateClearSearching ||
+          current is BlocSearchSystemStateSearching,
       builder: (context, state) {
         bool visibilityFilter = false;
         if (state is BlocSearchSystemStateSearching) {
-          visibilityFilter = state.appResult.state == ResultState.loading;
+          visibilityFilter = state.appResult.state == ResultState.success;
         }
         return Container(
           alignment: Alignment.center,

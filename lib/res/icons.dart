@@ -10,6 +10,7 @@ class AppIcons {
   static const String childPathExplore = '/explore';
   static const String childPathProfile = '/profile';
   static const String childPathShare = '/share';
+  static const String childPathSetting = '/setting';
 
   static const String appLogo = '$parentPathIcons/app_icon.svg';
 
@@ -108,8 +109,14 @@ class AppIcons {
   //Profile
   static const String setting = '$parentPathIcons$childPathProfile/setting.svg';
   static const String camera = '$parentPathIcons$childPathProfile/camera.svg';
+  static const String icMoreNext =
+      '$parentPathIcons$childPathProfile/ic_more_next.svg';
   static const String cameraFill =
       '$parentPathIcons$childPathProfile/camera_fill.svg';
+  static const String icCheckWhite =
+      '$parentPathIcons$childPathProfile/ic_check_white.svg';
+  static const String icUnCheckWhite =
+      '$parentPathIcons$childPathProfile/ic_uncheck_white.svg';
 
   static const String icBack = '$parentPathIcons/ic_back.svg';
   static const String icPause = '$parentPathIcons/ic_pause.svg';
@@ -159,4 +166,20 @@ class AppIcons {
   static const String icEarth = '$parentPathIcons/ic_earth.svg';
   static const String icCardInformation =
       '$parentPathIcons/ic_card_information.svg';
+
+  //Setting
+  static const String icFeedBack =
+      '$parentPathIcons$childPathSetting/ic_feed_back.svg';
+  static const String icLanguage =
+      '$parentPathIcons$childPathSetting/ic_language.svg';
+  static const String icNotificationSetting =
+      '$parentPathIcons$childPathSetting/ic_notification_setting.svg';
+  static const String icPayment =
+      '$parentPathIcons$childPathSetting/ic_payment.svg';
+  static const String icPolicy =
+      '$parentPathIcons$childPathSetting/ic_policy.svg';
+  static const String icUsage =
+      '$parentPathIcons$childPathSetting/ic_usage.svg';
+  static const String icArrowNext =
+      '$parentPathIcons$childPathSetting/ic_arrow_next.svg';
 }

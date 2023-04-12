@@ -55,6 +55,10 @@ dependencies:
   shimmer: ^2.0.0
   flutter_secure_storage: ^8.0.0
   fluttertoast: ^8.2.1
+  path_provider: ^2.0.14
+  permission_handler: ^10.2.0
+  firebase_dynamic_links: ^5.1.0
+  firebase_core: ^2.9.0
 
 dev_dependencies:
   flutter_test:
@@ -90,6 +94,8 @@ flutter:
     - assets/icons/explore/
     - assets/icons/profile/
     - assets/icons/share/
+    - assets/icons/setting/
+    
     - assets/images/
     - assets/images/onboarding/
     - assets/images/forgot_password/
