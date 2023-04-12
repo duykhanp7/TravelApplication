@@ -10,9 +10,10 @@ import 'package:travel_booking_tour/features/main/bloc/bloc_main_screen.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_main_state.dart';
 import 'package:travel_booking_tour/features/message/chat_screen.dart';
 import 'package:travel_booking_tour/features/notification/notification_screen.dart';
-import 'package:travel_booking_tour/features/profile/profile_screen.dart';
+import 'package:travel_booking_tour/features/profile/screen/profile_screen.dart';
 import 'package:travel_booking_tour/res/app_appbar.dart';
 import 'package:travel_booking_tour/res/app_search.dart';
+import 'package:travel_booking_tour/router/path.dart';
 
 import '../../../l10n/generated/l10n.dart';
 import '../../../res/button.dart';
@@ -21,6 +22,7 @@ import '../../../res/icons.dart';
 import '../../../res/images.dart';
 import '../../../res/styles.dart';
 import '../../../res/system.dart';
+import '../../../router/routes.dart';
 import '../../my_trip/bloc/bloc_my_trips_event.dart';
 import '../../my_trip/bloc/bloc_my_trips_screen.dart';
 import '../../my_trip/bloc/bloc_my_trips_state.dart';
@@ -96,6 +98,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
     _blocMainScreen.add(BlocMainEventInitial());
     localization = SLocalization.of(context);
     SystemChrome.setSystemUIOverlayStyle(AppSystem.systemTransparentStatusBar);
+
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: _buildHeader(double.infinity),
@@ -373,6 +376,24 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                     ),
                     onTap: () {},
                   )),
+            )),
+        Positioned(
+            right: 16,
+            bottom: 20,
+            child: Text(
+              'Yoo Jin',
+              style: AppStyles.headlineLarge.copyWith(
+                  fontWeight: FontWeight.w100,
+                  fontStyle: FontStyle.italic,
+                  color: AppColors.black),
+            )),
+        Positioned(
+            right: 16,
+            bottom: 0,
+            child: Text(
+              'yoojin@gmail.com',
+              style: AppStyles.titleMedium.copyWith(
+                  fontWeight: FontWeight.w400, color: AppColors.textHintColor),
             ))
       ],
     );
@@ -545,7 +566,8 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                                         AppIcons.setting,
                                       ),
                                     ),
-                                    onTap: () {},
+                                    onTap: () =>
+                                        Routes.navigateTo(AppPath.settings, {}),
                                   )),
                             )),
                       ],

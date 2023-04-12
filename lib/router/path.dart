@@ -19,4 +19,11 @@ class AppPath {
   static const String searchSystem = '/searchSystem';
   static const String tripViewDetail = '/tripViewDetail';
   static const String payment = '/payment';
+  static const String settings = '/settings';
+  static const String editingProfile = '/editingProfile';
+  static const String settingChangePassword = '/settingChangePassword';
+  static const String myPhotos = '/myPhotos';
+  static const String myPhotosAddMore = '/myPhotosAddMore';
+  static const String myJourneysAddMore = '/myJourneysAddMore';
+  static const String myJourneys = '/myJourneys';
 }

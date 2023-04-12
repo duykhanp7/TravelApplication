@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/features/splash/bloc/bloc_splash_screen.dart';
 import 'package:travel_booking_tour/features/splash/bloc/bloc_splash_state.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<StatefulWidget> createState() {
+    return _SplashScreen();
+  }
+}
+
+class _SplashScreen extends State<SplashScreen> {
+  @override
+  void initState() {
+    SystemChrome.setSystemUIOverlayStyle(AppSystem.systemStyle);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

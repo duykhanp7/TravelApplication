@@ -6,7 +6,6 @@ import 'package:travel_booking_tour/bloc_provider/app_bloc_provider.dart';
 import 'package:travel_booking_tour/features/empty/empty.dart';
 import 'package:travel_booking_tour/features/splash/splash_screen.dart';
 import 'package:travel_booking_tour/res/colors.dart';
-import 'package:travel_booking_tour/router/path.dart';
 import 'package:travel_booking_tour/router/routes.dart';
 
 import 'l10n/generated/l10n.dart';
@@ -23,7 +22,7 @@ class MainApp extends StatelessWidget {
           title: "Fellow 4U",
           theme:
               ThemeData(backgroundColor: AppColors.white, fontFamily: 'Roboto'),
-          initialRoute: AppPath.splashScreen,
+          initialRoute: Routes.initialRoute,
           home: const SplashScreen(),
           routes: Routes.routes,
           navigatorKey: Routes.navigator,

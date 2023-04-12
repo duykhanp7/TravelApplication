@@ -8,6 +8,13 @@ import 'package:travel_booking_tour/features/main/screen/main_page.dart';
 import 'package:travel_booking_tour/features/main/screen/search_system.dart';
 import 'package:travel_booking_tour/features/my_trip/screen/trip_view_detail.dart';
 import 'package:travel_booking_tour/features/payment/screen/payment_screen.dart';
+import 'package:travel_booking_tour/features/profile/screen/my_journeys_screen.dart';
+import 'package:travel_booking_tour/features/profile/screen/my_photos_screen.dart';
+import 'package:travel_booking_tour/features/profile/screen/profile_add_more_journeys.dart';
+import 'package:travel_booking_tour/features/profile/screen/profile_add_more_photos.dart';
+import 'package:travel_booking_tour/features/setting/screen/change_password_screen.dart';
+import 'package:travel_booking_tour/features/setting/screen/editing_profile_screen.dart';
+import 'package:travel_booking_tour/features/setting/screen/setting_screen.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/terms_and_conditions_screen.dart';
 import 'package:travel_booking_tour/features/tour/detail/tour_detail_screen.dart';
 import 'package:travel_booking_tour/res/app_camera.dart';
@@ -30,6 +37,8 @@ class Routes {
   static late List<CameraDescription> cameras;
   static CameraOrRecorder cameraType = CameraOrRecorder.camera;
 
+  static String initialRoute = AppPath.splashScreen;
+
   static final routes = {
     AppPath.splashScreen: (context) => const SplashScreen(),
     AppPath.onBoardingSCreen: (context) => const OnboardingScreen(),
@@ -50,30 +59,36 @@ class Routes {
     AppPath.searchSystem: (context) => const SearchSystem(),
     AppPath.tripViewDetail: (context) => const TripViewDetail(),
     AppPath.payment: (context) => const PaymentScreen(),
+    AppPath.settings: (context) => const SettingScreen(),
+    AppPath.editingProfile: (context) => const EditingProfile(),
+    AppPath.settingChangePassword: (context) => const ChangePasswordScreen(),
+    AppPath.myPhotos: (context) => const MyPhotosScreen(),
+    AppPath.myPhotosAddMore: (context) => const ProfileAddMorePhotos(),
+    AppPath.myJourneysAddMore: (context) => const ProfileAddMoreJourneys(),
+    AppPath.myJourneys: (context) => const MyJourneysScreen(),
   };
 
   static Future<void> initializedCamera() async {
     cameras = await availableCameras();
   }
 
-  static void navigateToAndRemoveUntil(
-      String namePage, Map<String, dynamic> arguments) {
-    navigator.currentState?.pushNamedAndRemoveUntil(namePage, (route) => false,
-        arguments: arguments);
-  }
+  static Future<T?> navigateToAndRemoveUntil<T>(
+          String namePage, Map<String, dynamic> arguments) async =>
+      navigator.currentState?.pushNamedAndRemoveUntil<T>(
+          namePage, (route) => false,
+          arguments: arguments);
 
-  static void navigateTo(String namePage, Map<String, dynamic> arguments) {
-    navigator.currentState?.pushNamed(
-      namePage,
-      arguments: arguments,
-    );
-  }
+  static Future<T?> navigateTo<T>(
+          String namePage, Map<String, dynamic> arguments) async =>
+      navigator.currentState?.pushNamed(
+        namePage,
+        arguments: arguments,
+      );
 
-  static void navigatoReplacement(
-      String namePage, Map<String, dynamic> arguments) {
-    navigator.currentState
-        ?.pushReplacementNamed(namePage, arguments: arguments);
-  }
+  static Future<T?> navigatoReplacement<T>(
+          String namePage, Map<String, dynamic> arguments) async =>
+      navigator.currentState
+          ?.pushReplacementNamed(namePage, arguments: arguments);
 
   static Future<XFile?> navigateToCamera() async {
     await initializedCamera();

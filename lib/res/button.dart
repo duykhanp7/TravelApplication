@@ -131,7 +131,8 @@ class PrimaryInactiveButton extends StatefulWidget {
       required this.onTap,
       this.allCaps,
       this.margin,
-      this.isLoading});
+      this.isLoading,
+      this.borderColor});
 
   final String text;
   final TextStyle? textStyle;
@@ -139,6 +140,7 @@ class PrimaryInactiveButton extends StatefulWidget {
   final double? width;
   final double? height;
   final Color? color;
+  final Color? borderColor;
   final Color? ripple;
   final VoidCallback onTap;
   final bool? allCaps;
@@ -160,7 +162,8 @@ class _PrimaryInactiveButton extends State<PrimaryInactiveButton> {
       width: widget.width ?? double.infinity,
       decoration: BoxDecoration(
           color: widget.color ?? AppColors.white,
-          border: Border.all(width: 1, color: AppColors.tableBorder),
+          border: Border.all(
+              width: 1, color: widget.borderColor ?? AppColors.tableBorder),
           borderRadius: widget.borderRadius ??
               const BorderRadius.all(Radius.circular(6))),
       child: Material(
