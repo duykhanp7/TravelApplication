@@ -31,7 +31,7 @@ mixin _$TourGuideDetailJson {
   String? get videoIntroductionUrl => throw _privateConstructorUsedError;
   Map<String, String>? get prices => throw _privateConstructorUsedError;
   List<ReviewJson>? get reviews => throw _privateConstructorUsedError;
-  List<TourDetailJson>? get experiences => throw _privateConstructorUsedError;
+  List<MyExperienceJson>? get experiences => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -57,7 +57,7 @@ abstract class $TourGuideDetailJsonCopyWith<$Res> {
       String? videoIntroductionUrl,
       Map<String, String>? prices,
       List<ReviewJson>? reviews,
-      List<TourDetailJson>? experiences});
+      List<MyExperienceJson>? experiences});
 }
 
 /// @nodoc
@@ -134,7 +134,7 @@ class _$TourGuideDetailJsonCopyWithImpl<$Res, $Val extends TourGuideDetailJson>
       experiences: freezed == experiences
           ? _value.experiences
           : experiences // ignore: cast_nullable_to_non_nullable
-              as List<TourDetailJson>?,
+              as List<MyExperienceJson>?,
     ) as $Val);
   }
 }
@@ -159,7 +159,7 @@ abstract class _$$_TourGuideDetailJsonCopyWith<$Res>
       String? videoIntroductionUrl,
       Map<String, String>? prices,
       List<ReviewJson>? reviews,
-      List<TourDetailJson>? experiences});
+      List<MyExperienceJson>? experiences});
 }
 
 /// @nodoc
@@ -234,7 +234,7 @@ class __$$_TourGuideDetailJsonCopyWithImpl<$Res>
       experiences: freezed == experiences
           ? _value._experiences
           : experiences // ignore: cast_nullable_to_non_nullable
-              as List<TourDetailJson>?,
+              as List<MyExperienceJson>?,
     ));
   }
 }
@@ -256,7 +256,7 @@ class _$_TourGuideDetailJson
       this.videoIntroductionUrl,
       final Map<String, String>? prices,
       final List<ReviewJson>? reviews,
-      final List<TourDetailJson>? experiences})
+      final List<MyExperienceJson>? experiences})
       : _languages = languages,
         _prices = prices,
         _reviews = reviews,
@@ -311,9 +311,9 @@ class _$_TourGuideDetailJson
     return EqualUnmodifiableListView(value);
   }
 
-  final List<TourDetailJson>? _experiences;
+  final List<MyExperienceJson>? _experiences;
   @override
-  List<TourDetailJson>? get experiences {
+  List<MyExperienceJson>? get experiences {
     final value = _experiences;
     if (value == null) return null;
     if (_experiences is EqualUnmodifiableListView) return _experiences;
@@ -415,7 +415,7 @@ abstract class _TourGuideDetailJson implements TourGuideDetailJson {
       final String? videoIntroductionUrl,
       final Map<String, String>? prices,
       final List<ReviewJson>? reviews,
-      final List<TourDetailJson>? experiences}) = _$_TourGuideDetailJson;
+      final List<MyExperienceJson>? experiences}) = _$_TourGuideDetailJson;
 
   factory _TourGuideDetailJson.fromJson(Map<String, dynamic> json) =
       _$_TourGuideDetailJson.fromJson;
@@ -443,7 +443,7 @@ abstract class _TourGuideDetailJson implements TourGuideDetailJson {
   @override
   List<ReviewJson>? get reviews;
   @override
-  List<TourDetailJson>? get experiences;
+  List<MyExperienceJson>? get experiences;
   @override
   @JsonKey(ignore: true)
   _$$_TourGuideDetailJsonCopyWith<_$_TourGuideDetailJson> get copyWith =>

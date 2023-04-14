@@ -27,7 +27,7 @@ _$_TourGuideDetailJson _$$_TourGuideDetailJsonFromJson(
           ?.map((e) => ReviewJson.fromJson(e as Map<String, dynamic>))
           .toList(),
       experiences: (json['experiences'] as List<dynamic>?)
-          ?.map((e) => TourDetailJson.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => MyExperienceJson.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

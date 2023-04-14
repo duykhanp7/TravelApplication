@@ -9,7 +9,8 @@ import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_scree
 import 'package:travel_booking_tour/features/main/bloc/bloc_search_system_screen.dart';
 import 'package:travel_booking_tour/features/my_trip/bloc/bloc_my_trips_screen.dart';
 import 'package:travel_booking_tour/features/payment/bloc/bloc_payment_screen.dart';
-import 'package:travel_booking_tour/features/profile/bloc/bloc_profile_screen.dart';
+import 'package:travel_booking_tour/features/profile/bloc/my_journeys/bloc_my_journeys_screen.dart';
+import 'package:travel_booking_tour/features/profile/bloc/my_photos/bloc_my_photos_screen.dart';
 import 'package:travel_booking_tour/features/setting/bloc/bloc_setting_screen.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/bloc/bloc_terms_and_conditions_screen.dart';
 import 'package:travel_booking_tour/features/tour/detail/bloc/bloc_tour_detail_screen.dart';
@@ -17,6 +18,7 @@ import 'package:travel_booking_tour/features/tour/detail/bloc/bloc_tour_detail_s
 import '../features/explore/bloc/bloc_see_more_screen.dart';
 import '../features/guide/choose_guide/bloc/bloc_edit_trip_information_screen.dart';
 import '../features/onboarding/bloc/bloc_onboarding_screen.dart';
+import '../features/profile/bloc/profile/bloc_profile_screen.dart';
 import '../features/splash/bloc/bloc_splash_event.dart';
 import '../features/splash/bloc/bloc_splash_screen.dart';
 
@@ -60,5 +62,8 @@ class AppBlocProvider {
     BlocProvider<BlocPaymentScreen>(create: (context) => BlocPaymentScreen()),
     BlocProvider<BlocSettingScreen>(create: (context) => BlocSettingScreen()),
     BlocProvider<BlocProfileScreen>(create: (context) => BlocProfileScreen()),
+    BlocProvider<BlocMyPhotosScreen>(create: (context) => BlocMyPhotosScreen()),
+    BlocProvider<BlocMyJourneysScreen>(
+        create: (context) => BlocMyJourneysScreen()),
   ];
 }

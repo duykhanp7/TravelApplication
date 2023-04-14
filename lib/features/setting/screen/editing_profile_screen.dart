@@ -6,6 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
+import '../../../common/app_constant.dart';
+import '../../../common/enum/enums.dart';
 import '../../../res/input_field.dart';
 import '../../../router/routes.dart';
 
@@ -129,54 +131,51 @@ class _EditingProfile extends State<EditingProfile> {
   Widget _buildEditInputFields() {
     return Column(
       children: [
-        Row(
-          children: [
-            Container(
-              alignment: Alignment.centerLeft,
-              width: 150,
-              child: AppTextField(
-                hintText: 'Nguyen',
+        Row(children: [
+          Container(
+            alignment: Alignment.centerLeft,
+            width: 150,
+            child: AppTextField(
+              hintText: 'Nguyen',
+              obsecureText: false,
+              labelText: 'First Name',
+              validator: AppValidator.validateTextFieldFirstName,
+              onChange: (value) {},
+            ),
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            width: 150,
+            child: AppTextField(
+                hintText: ' Van A',
                 obsecureText: false,
-                labelText: 'First Name',
-                validator: AppValidator.validateTextFieldFirstName,
-                onChange: (value) {},
-              ),
-            ),
-            const SizedBox(
-              width: 20,
-            ),
-            Container(
-              alignment: Alignment.centerLeft,
-              width: 150,
-              child: AppTextField(
-                  hintText: ' Van A',
-                  obsecureText: false,
-                  labelText: 'Last Name',
-                  validator: AppValidator.validateTextFieldLastName,
-                  onChange: (value) {}),
-            ),
-          ],
-        ),
+                labelText: 'Last Name',
+                validator: AppValidator.validateTextFieldLastName,
+                onChange: (value) {}),
+          )
+        ]),
         const SizedBox(height: 40),
         Container(
-          alignment: Alignment.centerLeft,
-          child: AppTextField(
-              hintText: '*********',
-              obsecureText: true,
-              labelText: "Password",
-              validator: AppValidator.validateTextFieldPasword,
-              onChange: (value) {}),
-        ),
+            alignment: Alignment.centerLeft,
+            child: AppTextField(
+                hintText: '*********',
+                obsecureText: true,
+                labelText: "Password",
+                validator: AppValidator.validateTextFieldPasword,
+                onChange: (value) {})),
         const SizedBox(height: 24),
         Container(
           alignment: Alignment.centerLeft,
           child: InkWell(
-            onTap: () => Routes.navigateTo(AppPath.settingChangePassword, {}),
-            child: Text(
-              'Change password',
-              style: AppStyles.titleSmall.copyWith(color: AppColors.primary),
-            ),
-          ),
+              onTap: () => Routes.navigateTo(AppPath.settingChangePassword,
+                  {AppConstant.data: Password.change}),
+              child: Text(
+                'Change password',
+                style: AppStyles.titleSmall.copyWith(color: AppColors.primary),
+              )),
         ),
       ],
     );

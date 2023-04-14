@@ -1,6 +1,7 @@
 import 'package:travel_booking_tour/features/main/model/type_filter_json.dart';
 
 import '../../../data/model/language_json.dart';
+import '../../../data/model/my_experience_json.dart';
 import '../../../data/model/review_json.dart';
 import '../../../data/model/schedule_json.dart';
 import '../../../data/model/schedule_point_json.dart';
@@ -51,23 +52,23 @@ class SearchSystemRepository {
         description:
             'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
         experiences: [
-          TourDetailJson(
-            id: 5,
-            departureDate: 'Jan 25. 2023',
+          MyExperienceJson(
+            id: '5',
+            createdAt: 'Jan 25. 2023',
             destination: 'Hoi An, Viet Nam',
-            description: '2 Hour Bicycle Tour exploring Hoi An',
+            name: '2 Hour Bicycle Tour exploring Hoi An',
             likes: 1234,
             isFavorite: false,
-            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+            photos: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
           ),
-          TourDetailJson(
-            id: 6,
-            departureDate: 'Jan 25. 2023',
+          MyExperienceJson(
+            id: '6',
+            createdAt: 'Jan 25. 2023',
             destination: 'Hoi An, Viet Nam',
-            description: 'Food tour in Da Nang',
+            name: 'Food tour in Da Nang',
             likes: 234,
             isFavorite: false,
-            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+            photos: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
           )
         ],
         reviews: [
@@ -114,23 +115,23 @@ class SearchSystemRepository {
         description:
             'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
         experiences: [
-          TourDetailJson(
-            id: 7,
-            departureDate: 'Jan 25. 2023',
+          MyExperienceJson(
+            id: '7',
+            createdAt: 'Jan 25. 2023',
             destination: 'Hoi An, Viet Nam',
-            description: '2 Hour Bicycle Tour exploring Hoi An',
+            name: '2 Hour Bicycle Tour exploring Hoi An',
             likes: 5555,
             isFavorite: false,
-            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+            photos: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
           ),
-          TourDetailJson(
-            id: 8,
-            departureDate: 'Jan 25. 2023',
+          MyExperienceJson(
+            id: '8',
+            createdAt: 'Jan 25. 2023',
             destination: 'Hoi An, Viet Nam',
-            description: 'Food tour in Da Nang',
+            name: 'Food tour in Da Nang',
             likes: 6666,
             isFavorite: false,
-            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+            photos: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
           )
         ],
         reviews: [
@@ -177,23 +178,23 @@ class SearchSystemRepository {
         description:
             'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
         experiences: [
-          TourDetailJson(
-            id: 9,
-            departureDate: 'Jan 25. 2023',
+          MyExperienceJson(
+            id: '9',
+            createdAt: 'Jan 25. 2023',
             destination: 'Hoi An, Viet Nam',
-            description: '2 Hour Bicycle Tour exploring Hoi An',
+            name: '2 Hour Bicycle Tour exploring Hoi An',
             likes: 1234,
             isFavorite: false,
-            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+            photos: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
           ),
-          TourDetailJson(
-            id: 10,
-            departureDate: 'Jan 25. 2023',
+          MyExperienceJson(
+            id: '10',
+            createdAt: 'Jan 25. 2023',
             destination: 'Hoi An, Viet Nam',
-            description: 'Food tour in Da Nang',
+            name: 'Food tour in Da Nang',
             likes: 234,
             isFavorite: false,
-            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+            photos: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
           )
         ],
         reviews: [
@@ -240,23 +241,23 @@ class SearchSystemRepository {
         description:
             'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
         experiences: [
-          TourDetailJson(
-            id: 11,
-            departureDate: 'Jan 25. 2023',
+          MyExperienceJson(
+            id: '11',
+            createdAt: 'Jan 25. 2023',
             destination: 'Hoi An, Viet Nam',
-            description: '2 Hour Bicycle Tour exploring Hoi An',
+            name: '2 Hour Bicycle Tour exploring Hoi An',
             likes: 5555,
             isFavorite: false,
-            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+            photos: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
           ),
-          TourDetailJson(
-            id: 12,
-            departureDate: 'Jan 25. 2023',
+          MyExperienceJson(
+            id: '12',
+            createdAt: 'Jan 25. 2023',
             destination: 'Hoi An, Viet Nam',
-            description: 'Food tour in Da Nang',
+            name: 'Food tour in Da Nang',
             likes: 6666,
             isFavorite: false,
-            images: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
+            photos: [AppImages.myex1, AppImages.myex3, AppImages.myex3],
           )
         ],
         reviews: [

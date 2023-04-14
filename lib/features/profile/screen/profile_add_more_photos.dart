@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/common/enum/enums.dart';
-import 'package:travel_booking_tour/features/profile/bloc/bloc_profile_screen.dart';
-import 'package:travel_booking_tour/features/profile/bloc/bloc_profile_state.dart';
+import 'package:travel_booking_tour/features/profile/bloc/my_photos/bloc_my_photos_event.dart';
+import 'package:travel_booking_tour/features/profile/bloc/my_photos/bloc_my_photos_screen.dart';
+import 'package:travel_booking_tour/features/profile/bloc/my_photos/bloc_my_photos_state.dart';
 import 'package:travel_booking_tour/features/profile/widget/photo_item.dart';
 import 'package:travel_booking_tour/res/res.dart';
-
-import '../bloc/bloc_profile_event.dart';
 
 class ProfileAddMorePhotos extends StatefulWidget {
   const ProfileAddMorePhotos({super.key});
@@ -21,12 +20,11 @@ class ProfileAddMorePhotos extends StatefulWidget {
 }
 
 class _ProfileAddMorePhotos extends State<ProfileAddMorePhotos> {
-  late BlocProfileScreen _blocProfileScreen;
+  late BlocMyPhotosScreen _blocMyPhotosScreen;
 
   @override
   void initState() {
-    _blocProfileScreen = BlocProvider.of<BlocProfileScreen>(context);
-    _blocProfileScreen.add(BlocProfileEventLoadLocalImages());
+    _blocMyPhotosScreen = BlocProvider.of<BlocMyPhotosScreen>(context);
     super.initState();
   }
 
@@ -47,7 +45,8 @@ class _ProfileAddMorePhotos extends State<ProfileAddMorePhotos> {
                   fontWeight: FontWeight.w500,
                   color: AppColors.primary),
             ),
-            onTap: () {},
+            onTap: () => _blocMyPhotosScreen
+                .add(BlocMyPhotosEventClickButtonSelectPhotosDone()),
           ),
         ),
       ),
@@ -55,12 +54,12 @@ class _ProfileAddMorePhotos extends State<ProfileAddMorePhotos> {
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 24, 0, 24),
-        child: BlocBuilder<BlocProfileScreen, BlocProfileState>(
+        child: BlocBuilder<BlocMyPhotosScreen, BlocMyPhotosState>(
           buildWhen: (previous, current) =>
-              current is BlocProfileStateLoadLocalImages,
+              current is BlocMyPhotosStateLoadLocalPhotos,
           builder: (context, state) {
             List<File> files = [File('')];
-            if (state is BlocProfileStateLoadLocalImages) {
+            if (state is BlocMyPhotosStateLoadLocalPhotos) {
               if (state.appResult.state == ResultState.success) {
                 files.addAll(state.appResult.result as List<File>);
               }
@@ -76,7 +75,14 @@ class _ProfileAddMorePhotos extends State<ProfileAddMorePhotos> {
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) => index == 0
                     ? _buildTakePhotoWidget()
-                    : PhotoItem(file: files[index], selected: false));
+                    : PhotoItem(
+                        file: files[index],
+                        selected: false,
+                        enable: true,
+                        onClick: (filePath, selected) => selected
+                            ? _blocMyPhotosScreen.addPhotoToMyPhotos(filePath)
+                            : _blocMyPhotosScreen.remove(filePath),
+                      ));
           },
         ),
       )),

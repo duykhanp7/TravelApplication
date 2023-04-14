@@ -1,6 +1,6 @@
 {
-    "name": "travel_booking_tour",
-    "short_name": "travel_booking_tour",
+    "name": "Travel Booking",
+    "short_name": "Travel Booking",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

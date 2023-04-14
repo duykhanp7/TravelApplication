@@ -182,4 +182,6 @@ class AppIcons {
       '$parentPathIcons$childPathSetting/ic_usage.svg';
   static const String icArrowNext =
       '$parentPathIcons$childPathSetting/ic_arrow_next.svg';
+  static const String icMoreTransparent =
+      '$parentPathIcons/ic_more_transparent.svg';
 }
