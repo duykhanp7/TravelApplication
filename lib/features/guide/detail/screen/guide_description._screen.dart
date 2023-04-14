@@ -307,7 +307,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
 
   Widget _buildWidgetTourExperiences() {
     return Container(
-      margin: const EdgeInsets.only(top: 30, bottom: 50),
+      margin: const EdgeInsets.only(bottom: 50),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -329,7 +329,9 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
               ...List.generate(
                   tourGuideDetailJson.experiences?.length ?? 0,
                   (index) => MyExperienceItem(
-                      tourDetailJson: tourGuideDetailJson.experiences?[index]))
+                        myExperienceJson: tourGuideDetailJson.experiences?[index],
+                        edited: false,
+                      ))
             ],
           )
         ],

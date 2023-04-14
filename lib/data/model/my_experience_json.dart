@@ -10,13 +10,14 @@ part 'my_experience_json.g.dart';
 
 @freezed
 class MyExperienceJson with _$MyExperienceJson {
-  const factory MyExperienceJson({
-    String? destinationTitle,
-    String? destinationName,
-    String? dateStart,
-    String? countLikes,
-    List<String>? images,
-  }) = _MyExperienceJson;
+  const factory MyExperienceJson(
+      {String? id,
+      String? name,
+      String? destination,
+      String? createdAt,
+      bool? isFavorite,
+      int? likes,
+      List<String>? photos}) = _MyExperienceJson;
 
   factory MyExperienceJson.fromJson(Map<String, Object?> json) =>
       _$MyExperienceJsonFromJson(json);

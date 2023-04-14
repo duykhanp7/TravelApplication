@@ -1,15 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/icons.dart';
 
-import '../../../../data/model/tour_detail_json.dart';
+import '../../../../data/model/my_experience_json.dart';
 import '../../../../res/styles.dart';
 
 class MyExperienceItem extends StatefulWidget {
-  const MyExperienceItem({super.key, required this.tourDetailJson});
+  const MyExperienceItem(
+      {super.key, required this.myExperienceJson, required this.edited});
 
-  final TourDetailJson? tourDetailJson;
+  final MyExperienceJson? myExperienceJson;
+  final bool edited;
 
   @override
   State<StatefulWidget> createState() {
@@ -38,41 +42,7 @@ class _MyExperienceItem extends State<MyExperienceItem> {
                   color: AppColors.white,
                   child: Column(
                     children: [
-                      Row(
-                        children: [
-                          Flexible(
-                              flex: 1,
-                              child: Image.asset(
-                                widget.tourDetailJson?.images?[0] ?? '',
-                                filterQuality: FilterQuality.high,
-                                fit: BoxFit.cover,
-                                height: 202,
-                              )),
-                          const SizedBox(width: 2),
-                          Flexible(
-                            flex: 1,
-                            child: ListView(
-                              scrollDirection: Axis.vertical,
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              semanticChildCount: 2,
-                              children: [
-                                Image.asset(
-                                    widget.tourDetailJson?.images?[1] ?? '',
-                                    filterQuality: FilterQuality.high,
-                                    fit: BoxFit.cover,
-                                    height: 100),
-                                const SizedBox(height: 2),
-                                Image.asset(
-                                    widget.tourDetailJson?.images?[2] ?? '',
-                                    filterQuality: FilterQuality.high,
-                                    fit: BoxFit.cover,
-                                    height: 100),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                      _buildImages(),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(16, 10, 16, 20),
                         child: Column(
@@ -81,8 +51,7 @@ class _MyExperienceItem extends State<MyExperienceItem> {
                           children: [
                             Container(
                               alignment: Alignment.centerLeft,
-                              child: Text(
-                                  widget.tourDetailJson?.description ?? '',
+                              child: Text(widget.myExperienceJson?.name ?? '',
                                   textAlign: TextAlign.start,
                                   style: AppStyles.titleMedium.copyWith(
                                       color: AppColors.black,
@@ -99,7 +68,7 @@ class _MyExperienceItem extends State<MyExperienceItem> {
                                   width: 6,
                                 ),
                                 Text(
-                                  widget.tourDetailJson?.destination ?? '',
+                                  widget.myExperienceJson?.destination ?? '',
                                   style: AppStyles.titleSmall.copyWith(
                                       fontWeight: FontWeight.w400,
                                       fontSize: 12,
@@ -142,7 +111,7 @@ class _MyExperienceItem extends State<MyExperienceItem> {
                 children: [
                   Expanded(
                     child: Text(
-                      widget.tourDetailJson?.departureDate ?? '',
+                      widget.myExperienceJson?.createdAt ?? '',
                       textAlign: TextAlign.start,
                       style: AppStyles.titleSmall.copyWith(
                           fontWeight: FontWeight.w400,
@@ -182,7 +151,7 @@ class _MyExperienceItem extends State<MyExperienceItem> {
                             )
                           ],
                         ),
-                        Text('${widget.tourDetailJson?.likes ?? 0} likes',
+                        Text('${widget.myExperienceJson?.likes ?? 0} likes',
                             style: AppStyles.titleSmall.copyWith(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12,
@@ -191,9 +160,123 @@ class _MyExperienceItem extends State<MyExperienceItem> {
                     ),
                   )
                 ],
-              ))
+              )),
+          Visibility(
+              visible: widget.edited,
+              child: Positioned(
+                  right: 16,
+                  bottom: 80,
+                  child: Material(
+                    color: AppColors.transparent,
+                    child: InkWell(
+                      splashColor: AppColors.black.withOpacity(0.1),
+                      highlightColor: AppColors.black.withOpacity(0.1),
+                      onTap: () {},
+                      child: Container(
+                        color: AppColors.transparent,
+                        width: 20,
+                        height: 20,
+                        child: SvgPicture.asset(
+                          AppIcons.icMoreTransparent,
+                        ),
+                      ),
+                    ),
+                  )))
         ],
       ),
     );
+  }
+
+  Widget _buildImages() {
+    if (widget.myExperienceJson?.photos?.isNotEmpty ?? false) {
+      int imageLength = widget.myExperienceJson!.photos!.length;
+      if (imageLength == 1) {
+        return Image.file(
+          File(widget.myExperienceJson?.photos?[0] ?? ''),
+          filterQuality: FilterQuality.high,
+          fit: BoxFit.cover,
+          width: double.infinity,
+          height: 202,
+        );
+      } else if (imageLength == 2) {
+        return Row(
+          children: [
+            Flexible(
+                flex: 1,
+                child: Image.file(
+                    File(widget.myExperienceJson?.photos?[0] ?? ''),
+                    filterQuality: FilterQuality.high,
+                    fit: BoxFit.cover,
+                    height: 202,
+                    width: double.infinity)),
+            const SizedBox(width: 2),
+            Flexible(
+                flex: 1,
+                child: Image.file(
+                    File(widget.myExperienceJson?.photos?[1] ?? ''),
+                    filterQuality: FilterQuality.high,
+                    fit: BoxFit.cover,
+                    height: 202,
+                    width: double.infinity))
+          ],
+        );
+      }
+      return Row(
+        children: [
+          Flexible(
+              flex: 1,
+              child: Image.file(File(widget.myExperienceJson?.photos?[0] ?? ''),
+                  filterQuality: FilterQuality.high,
+                  fit: BoxFit.cover,
+                  height: 202,
+                  width: double.infinity)),
+          const SizedBox(width: 2),
+          Flexible(
+            flex: 1,
+            child: ListView(
+              scrollDirection: Axis.vertical,
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              semanticChildCount: 2,
+              children: [
+                Image.file(File(widget.myExperienceJson?.photos?[1] ?? ''),
+                    filterQuality: FilterQuality.high,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: 100),
+                const SizedBox(height: 2),
+                imageLength == 3
+                    ? Image.file(
+                        File(widget.myExperienceJson?.photos?[2] ?? ''),
+                        filterQuality: FilterQuality.high,
+                        fit: BoxFit.cover,
+                        height: 100)
+                    : Stack(
+                        children: [
+                          Image.file(
+                              File(widget.myExperienceJson?.photos?[2] ?? ''),
+                              filterQuality: FilterQuality.high,
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                              height: 100),
+                          Container(
+                            alignment: Alignment.center,
+                            color: AppColors.black.withOpacity(0.6),
+                            height: 100,
+                            child: Text(
+                              '+${imageLength - 3}',
+                              style: AppStyles.titleMedium
+                                  .copyWith(color: AppColors.white),
+                            ),
+                          )
+                        ],
+                      ),
+              ],
+            ),
+          )
+        ],
+      );
+    }
+    return Container();
   }
 }
