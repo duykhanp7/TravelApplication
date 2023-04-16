@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/features/setting/model/setting_menu_item.dart';
+import 'package:travel_booking_tour/res/app_switch.dart';
 import 'package:travel_booking_tour/res/button.dart';
 import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/router/path.dart';
@@ -96,10 +97,12 @@ class _SettingScreen extends State<SettingScreen> {
                               height: 26,
                               child: FittedBox(
                                 fit: BoxFit.cover,
-                                child: Switch(
-                                  value: true,
-                                  activeColor: AppColors.primary,
-                                  onChanged: (value) {},
+                                child: AppSwitch(
+                                  state: true,
+                                  onClick: (value) {
+                                    debugPrint(
+                                        'App Switch State Change : $value');
+                                  },
                                 ),
                               ),
                             )

@@ -54,7 +54,7 @@ abstract class NetworkException with _$NetworkException implements Exception {
         dev.log(result.toString());
         return converter(result);
       }
-      return (response.data as Map)['user'] as T;
+      return response.data as T;
     }
     return {} as T;
   }
