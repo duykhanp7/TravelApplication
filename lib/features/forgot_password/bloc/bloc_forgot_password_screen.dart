@@ -1,6 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/widgets.dart';
+import 'package:travel_booking_tour/base/result.dart';
+import 'package:travel_booking_tour/common/enum/enums.dart';
+import 'package:travel_booking_tour/features/auth/repository/auth_repository.dart';
 import 'package:travel_booking_tour/features/forgot_password/bloc/bloc_forgot_password_event.dart';
 import 'package:travel_booking_tour/features/forgot_password/bloc/bloc_forgot_password_state.dart';
 
@@ -13,15 +16,30 @@ class BlocForgotPasswordScreen
     on<BlocForgotPasswordEvent>(mapStateToEvent, transformer: restartable());
   }
   final GlobalKey<FormState> forgotPasswordGlobalKey = GlobalKey<FormState>();
+  final AuthRepository _authRepository = AuthRepository();
+  String email = '';
 
-  void mapStateToEvent(
-      BlocForgotPasswordEvent event, Emitter<BlocForgotPasswordState> emit) {
+  void mapStateToEvent(BlocForgotPasswordEvent event,
+      Emitter<BlocForgotPasswordState> emit) async {
     if (event is BlocForgotPasswordEventSendEmailClick) {
       if (forgotPasswordGlobalKey.currentState?.validate() ?? false) {
-        Routes.navigateTo(AppPath.checkEmail, {});
+        emit(BlocForgotPasswordStateResult(
+            appResult: AppResult(state: ResultState.loading)));
+        Map<String, dynamic>? respone =
+            await _authRepository.sendEmailResetPassword(email);
+        if (respone != null) {
+          bool ok = respone['ok'];
+          if (ok) {
+            Routes.navigateTo(AppPath.checkEmail, {});
+          }
+        }
+        emit(BlocForgotPasswordStateResult(
+            appResult: AppResult(state: ResultState.success)));
       } else {}
     } else if (event is BlocForgotPasswordEventSignInClick) {
       Routes.backTo();
+    } else if (event is BlocForgotPasswordEventChangeEmail) {
+      email = event.email;
     }
   }
 }

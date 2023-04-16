@@ -46,7 +46,6 @@ class BlocSignInScreen extends Bloc<BlocSignInEvent, BlocSignInState> {
           UserJson? userJson = await _authRepository.signIn(data);
           if (userJson != null) {
             String json = jsonEncode(userJson);
-            debugPrint('User Json is $json}');
             _appStorage.saveData(AppConstant.user, json);
             _appStorage.saveData(AppConstant.password, password ?? '');
             emit(BlocSignInStateValidate(

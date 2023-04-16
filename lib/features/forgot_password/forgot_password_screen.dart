@@ -63,6 +63,9 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
                               obsecureText: false,
                               labelText: localization.email,
                               textInputType: TextInputType.emailAddress,
+                              onChange: (value) => _blocForgotPasswordScreen
+                                  .add(BlocForgotPasswordEventChangeEmail(
+                                      email: value)),
                               validator: AppValidator.validateTextFieldEmail,
                             )
                           ],
@@ -97,10 +100,8 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
                                       color: AppColors.primary),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      BlocProvider.of<BlocForgotPasswordScreen>(
-                                              context)
-                                          .add(
-                                              BlocForgotPasswordEventSignInClick());
+                                      _blocForgotPasswordScreen.add(
+                                          BlocForgotPasswordEventSignInClick());
                                     })
                             ])),
                       )

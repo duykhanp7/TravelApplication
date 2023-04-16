@@ -17,3 +17,10 @@ class BlocForgotPasswordEventSignInClick extends BlocForgotPasswordEvent {
   @override
   List<Object?> get props => [];
 }
+
+class BlocForgotPasswordEventChangeEmail extends BlocForgotPasswordEvent {
+  BlocForgotPasswordEventChangeEmail({required this.email});
+  final String email;
+  @override
+  List<Object?> get props => [email];
+}
