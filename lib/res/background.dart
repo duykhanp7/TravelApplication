@@ -30,6 +30,7 @@ class AppBackground extends StatelessWidget {
   Widget _buildBackground() {
     return Container(
       height: 150,
+      color: AppColors.primary,
       padding: const EdgeInsets.only(top: 10, left: 20),
       child: Stack(
         children: [

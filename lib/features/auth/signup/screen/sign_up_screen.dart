@@ -45,6 +45,7 @@ class _SignUpScreen extends State<SignUpScreen> {
       body: SafeArea(
           child: GestureDetector(
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Container(alignment: Alignment.center, child: _buildbody()),
         ),
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel_booking_tour/common/app_constant.dart';
+import 'package:travel_booking_tour/data/local/app_storage.dart';
 import 'package:travel_booking_tour/features/explore/screen/explore_screen.dart';
 import 'package:travel_booking_tour/features/my_trip/screen/my_trips_screen.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_main_event.dart';
@@ -153,25 +154,6 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
           ),
         ));
   }
-
-  // PreferredSize? _buildBottom(int index) {
-  //   return PreferredSize(
-  //       preferredSize: const Size(double.infinity, 0),
-  //       child: Container(
-  //         color: AppColors.transparent,
-  //         alignment: Alignment.bottomCenter,
-  //         height: 100,
-  //         child: index == 0
-  //             ? _buildBottomTabExplore()
-  //             : index == 1
-  //                 ? _buildBottomTabMyTrip()
-  //                 : index == 2
-  //                     ? _buildBottomTabMessage()
-  //                     : index == 4
-  //                         ? _buildBottomTabPersonal()
-  //                         : Container(),
-  //       ));
-  // }
 
   Widget _buildBottomTabMessage() {
     return Container(
@@ -342,7 +324,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                                         AppColors.white.withOpacity(0.3),
                                     splashColor:
                                         AppColors.white.withOpacity(0.3),
-                                    onTap: () {},
+                                    onTap: () async {},
                                   )),
                             )
                           ],
@@ -374,7 +356,15 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                         AppIcons.camera,
                       ),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      SystemChrome.setSystemUIOverlayStyle(
+                          AppSystem.systemStyle);
+                      AppStorage appStorage = AppStorage();
+                      appStorage.delete(AppConstant.user);
+                      appStorage.delete(AppConstant.password);
+                      appStorage.delete(AppConstant.token);
+                      Routes.navigateToAndRemoveUntil(AppPath.signInScreen, {});
+                    },
                   )),
             )),
         Positioned(

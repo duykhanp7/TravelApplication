@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,7 +15,6 @@ import '../../../../data/model/user.dart';
 import '../../../../data/network/network_exception.dart';
 import '../../../../router/routes.dart';
 import '../../repository/auth_repository.dart';
-// import '../../signup/repositories/auth_repository.dart';
 
 class BlocSignInScreen extends Bloc<BlocSignInEvent, BlocSignInState> {
   String? email;

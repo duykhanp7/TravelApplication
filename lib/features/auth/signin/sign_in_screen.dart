@@ -10,7 +10,6 @@ import 'package:travel_booking_tour/res/background.dart';
 import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
-import '../../../common/app_constant.dart';
 import '../../../common/enum/enums.dart';
 import '../../../l10n/generated/l10n.dart';
 import '../../../res/app_dialog.dart';
@@ -35,35 +34,24 @@ class _SignInScreen extends State<SignInScreen> {
   @override
   void initState() {
     _blocSignInScreen = BlocProvider.of<BlocSignInScreen>(context);
-    SystemChrome.setSystemUIOverlayStyle(AppSystem.systemStyle);
-
     fToast = FToast();
     fToast.init(context);
-
     super.initState();
+    SystemChrome.setSystemUIOverlayStyle(AppSystem.systemStyle);
   }
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('_SignInScreen Rebuild');
+
     localization = SLocalization.of(context);
 
-    SystemChrome.setSystemUIOverlayStyle(AppSystem.systemStyle);
-
-    Map<String, dynamic>? argument =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-
-    if (argument != null) {
-      Uri? uri = argument[AppConstant.data] as Uri?;
-      if (uri != null) {
-        fToast.showToast(child: Text('Uri getting is : ${uri.toString()}'));
-      }
-    }
-
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.primary,
       body: SafeArea(
           child: GestureDetector(
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: BlocListener<BlocSignInScreen, BlocSignInState>(
             listenWhen: (previous, current) =>
                 current is BlocSignInStateValidate,
@@ -124,7 +112,7 @@ class _SignInScreen extends State<SignInScreen> {
                 return PrimaryActiveButton(
                   text: localization.sign_in,
                   isLoading: isLoading,
-                  onTap: () {
+                  onTap: () async {
                     _blocSignInScreen.add(BlocSignInEventSignInClick());
                   },
                   allCaps: true,

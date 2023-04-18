@@ -229,6 +229,7 @@ class _TourDetailScreen extends State<TourDetailScreen> {
           }
         },
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Container(
             color: AppColors.white,
             child: _buildbody(),

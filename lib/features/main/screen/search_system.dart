@@ -132,6 +132,7 @@ class _SearchSystem extends State<SearchSystem> {
                 .copyWith(fontSize: 17, fontWeight: FontWeight.w500),
           ),
           body: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Container(
               padding: const EdgeInsets.only(
                   left: 32, right: 32, top: 20, bottom: 36),
