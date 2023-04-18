@@ -56,6 +56,7 @@ class _EditTripInformationScreen extends State<EditTripInformationScreen> {
       body: SafeArea(
           child: GestureDetector(
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: _buildBody(),
         ),
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),

@@ -7,12 +7,18 @@ import 'package:travel_booking_tour/features/empty/empty.dart';
 import 'package:travel_booking_tour/features/splash/splash_screen.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/router/routes.dart';
-
 import 'l10n/generated/l10n.dart';
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
 
+  @override
+  State<StatefulWidget> createState() {
+    return _MainApp();
+  }
+}
+
+class _MainApp extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -33,9 +39,12 @@ class MainApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          onUnknownRoute: (settings) => MaterialPageRoute(
-            builder: (context) => const EmptyPage(),
-          ),
+          onUnknownRoute: (settings) {
+            debugPrint('onUnknownRouteonUnknownRoute ${settings.name}');
+            return MaterialPageRoute(
+              builder: (context) => const EmptyPage(),
+            );
+          },
           supportedLocales: const <Locale>[Locale('vi'), Locale('en')],
           locale: const Locale('en'),
         ));

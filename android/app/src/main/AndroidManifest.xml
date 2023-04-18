@@ -42,8 +42,8 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="travel" android:host="travelbookingtour.page.link" />
-                <data android:scheme="travel" />
+                <data android:scheme="https" android:host="travelbookingtour.page.link" />
+                <data android:scheme="http" />
             </intent-filter>
         </activity>
 

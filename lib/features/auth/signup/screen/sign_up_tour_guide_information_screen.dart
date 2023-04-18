@@ -60,6 +60,7 @@ class _SignUpTourGuideInformationScreen
         backgroundColor: AppColors.primary,
         body: SafeArea(
             child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           scrollDirection: Axis.vertical,
           child: GestureDetector(

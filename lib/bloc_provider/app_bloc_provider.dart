@@ -1,7 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travel_booking_tour/features/auth/change_password/bloc/bloc_change_password_screen.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_tour_guide_information_screen.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_screen.dart';
-import 'package:travel_booking_tour/features/forgot_password/bloc/bloc_forgot_password_screen.dart';
+import 'package:travel_booking_tour/features/auth/forgot_password/bloc/bloc_forgot_password_screen.dart';
 import 'package:travel_booking_tour/features/guide/detail/bloc/bloc_detail_guide_screen.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_main_screen.dart';
 import 'package:travel_booking_tour/features/auth/signin/bloc/bloc_sign_in_screen.dart';
@@ -65,5 +66,7 @@ class AppBlocProvider {
     BlocProvider<BlocMyPhotosScreen>(create: (context) => BlocMyPhotosScreen()),
     BlocProvider<BlocMyJourneysScreen>(
         create: (context) => BlocMyJourneysScreen()),
+    BlocProvider<BlocChangePasswordScreen>(
+        create: (context) => BlocChangePasswordScreen())
   ];
 }
