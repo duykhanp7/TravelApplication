@@ -39,9 +39,9 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
     localization = SLocalization.of(context);
     return BlocListener<BlocForgotPasswordScreen, BlocForgotPasswordState>(
         listenWhen: (previous, current) =>
-            current is BlocForgotPasswordStateResult,
+            current is BlocChangePasswordStateSendEmailResult,
         listener: (context, state) {
-          if (state is BlocForgotPasswordStateResult) {
+          if (state is BlocChangePasswordStateSendEmailResult) {
             if (state.appResult.state == ResultState.fail) {
               showDialog(
                 context: context,
@@ -108,12 +108,12 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
                                         BlocBuilder<BlocForgotPasswordScreen,
                                             BlocForgotPasswordState>(
                                           buildWhen: (previous, current) => current
-                                              is BlocForgotPasswordStateResult,
+                                              is BlocChangePasswordStateSendEmailResult,
                                           builder: (context, state) {
                                             bool loading = false;
 
                                             if (state
-                                                is BlocForgotPasswordStateResult) {
+                                                is BlocChangePasswordStateSendEmailResult) {
                                               if (state.appResult.state ==
                                                   ResultState.loading) {
                                                 loading = true;

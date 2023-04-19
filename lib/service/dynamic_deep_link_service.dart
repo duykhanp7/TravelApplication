@@ -1,9 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:travel_booking_tour/common/enum/enums.dart';
 import 'package:travel_booking_tour/data/local/app_storage.dart';
 import 'package:uni_links/uni_links.dart';
@@ -16,7 +12,7 @@ bool _initialURILinkHandled = false;
 
 class DynamicDeepLinkService {
   static Uri? _initialURI;
-  static Uri? _currentURI;
+  // static Uri? _currentURI;
 
   static Future<void> initialDeepLink() async {
     await _initURIHandler();
@@ -42,7 +38,7 @@ class DynamicDeepLinkService {
       } on PlatformException {
         // Platform messages may fail, so we use a try/catch PlatformException.
         // Handle exception by warning the user their action did not succeed
-      } on FormatException catch (err) {
+      } on FormatException {
         // if (!mounted) {
         //   return;
         // }
@@ -57,14 +53,14 @@ class DynamicDeepLinkService {
       // It will handle app links while the app is already started - be it in
       // the foreground or in the background.
       uriLinkStream.listen((Uri? uri) {
-        _currentURI = uri;
+        // _currentURI = uri;
       }, onError: (Object err) {}).onData((data) {
         if (data != null) {
           AppStorage appStorage = AppStorage();
           String uri = data.toString();
           appStorage.saveData(AppConstant.deeplink, uri.split('=')[1]);
           Routes.navigateToAndRemoveUntil(AppPath.settingChangePassword,
-              {AppConstant.data: Password.reset});
+              {AppConstant.data: PasswordMode.reset});
         }
       });
     }

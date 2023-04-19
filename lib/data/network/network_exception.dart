@@ -58,32 +58,11 @@ abstract class NetworkException with _$NetworkException implements Exception {
         appStorage.saveData(AppConstant.token, token);
       }
       if (result != null) {
-        logPrint(response.toString(), type: 1);
         return converter(result);
       }
       return response.data as T;
     }
     return {} as T;
-  }
-
-  /// [type] color log only supported in VS Code
-  /// - 0 request
-  /// - 1 reponse
-  /// - 2 error
-  static void logPrint(String message, {int type = 0}) {
-    switch (type) {
-      case 0:
-        dev.log('\x1B[33m$message', name: 'BaseConnect');
-        break;
-      case 1:
-        dev.log('\x1B[32m$message', name: 'BaseConnect');
-        break;
-      case 2:
-        dev.log('\x1B[31m$message', name: 'BaseConnect');
-        break;
-      default:
-        dev.log(message, name: 'BaseConnect');
-    }
   }
 
   static NetworkException getDioException(error) {

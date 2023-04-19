@@ -16,9 +16,9 @@ class BlocChangePasswordStateTokenResetPasswordInvalid
   List<Object?> get props => [time];
 }
 
-class BlocChangePasswordStateSendEmailResult extends BlocChangePasswordState {
-  BlocChangePasswordStateSendEmailResult({required this.appResult});
+class BlocChangePasswordStateResult extends BlocChangePasswordState {
+  BlocChangePasswordStateResult({required this.appResult});
   final AppResult appResult;
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [appResult];
 }

@@ -171,7 +171,7 @@ class _EditingProfile extends State<EditingProfile> {
           alignment: Alignment.centerLeft,
           child: InkWell(
               onTap: () => Routes.navigateTo(AppPath.settingChangePassword,
-                  {AppConstant.data: Password.change}),
+                  {AppConstant.data: PasswordMode.change}),
               child: Text(
                 'Change password',
                 style: AppStyles.titleSmall.copyWith(color: AppColors.primary),

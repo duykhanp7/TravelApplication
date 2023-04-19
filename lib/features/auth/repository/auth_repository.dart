@@ -41,4 +41,16 @@ class AuthRepository {
         endPoint: '$_authPath/reset-password',
         converter: (data) => UserJson.fromJson(data),
       );
+
+  Future<UserJson?> changePassword(String currentPassword, String newPassword,
+          String passwordConfirmation) async =>
+      _apiService.postJson(
+        data: {
+          "currentPassword": currentPassword,
+          "password": newPassword,
+          "passwordConfirmation": passwordConfirmation
+        },
+        endPoint: '$_authPath/change-password',
+        converter: (data) => UserJson.fromJson(data),
+      );
 }

@@ -7,6 +7,7 @@ import 'package:travel_booking_tour/common/enum/enums.dart';
 import 'package:travel_booking_tour/features/auth/change_password/bloc/bloc_change_password_event.dart';
 import 'package:travel_booking_tour/features/auth/change_password/bloc/bloc_change_password_state.dart';
 import 'package:travel_booking_tour/res/app_appbar.dart';
+import 'package:travel_booking_tour/res/button.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
 import '../../../res/app_dialog.dart';
@@ -14,7 +15,6 @@ import '../../../res/colors.dart';
 import '../../../res/input_field.dart';
 import '../../../res/styles.dart';
 import '../../../res/system.dart';
-import '../../../res/validator.dart';
 import '../../../router/routes.dart';
 import 'bloc/bloc_change_password_screen.dart';
 
@@ -28,7 +28,7 @@ class ChangePasswordScreen extends StatefulWidget {
 }
 
 class _ChangePasswordScreen extends State<ChangePasswordScreen> {
-  Password mode = Password.change;
+  PasswordMode mode = PasswordMode.change;
   late FToast fToast;
   late BlocChangePasswordScreen _blocChangePasswordScreen;
 
@@ -45,48 +45,39 @@ class _ChangePasswordScreen extends State<ChangePasswordScreen> {
   @override
   Widget build(BuildContext context) {
     mode = (ModalRoute.of(context)?.settings.arguments as Map)[AppConstant.data]
-        as Password;
+        as PasswordMode;
 
-    return BlocListener<BlocChangePasswordScreen, BlocChangePasswordState>(
-      listenWhen: (previous, current) =>
-          current is BlocChangePasswordStateTokenResetPasswordInvalid,
-      listener: (context, state) {
-        showDialog(
-          context: context,
-          builder: (context) => AppDialog(
-            typeDialog: TypeDialog.info,
-            content: 'The reset password token is expired, try to resend email',
-            negativeTitle: 'Dismiss',
-            positiveTitle: 'OK',
-            positiveAction: () {
-              Routes.backTo();
-              Routes.navigateToAndRemoveUntil(AppPath.forgotPassword, {});
-            },
-          ),
-        );
+    _blocChangePasswordScreen.setModePassword(mode);
+
+    return WillPopScope(
+      onWillPop: () async {
+        _blocChangePasswordScreen.currentPasswordController.text = '';
+        return true;
       },
-      child: Scaffold(
-        appBar: AppbarApp(
-            title: 'Change Password',
-            suffixWidget: Container(
-              alignment: Alignment.center,
-              width: 42,
-              height: 20,
-              margin: const EdgeInsets.only(right: 16),
-              child: InkWell(
-                child: Text(
-                  'SAVE',
-                  style: AppStyles.titleMedium.copyWith(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.primary),
-                ),
-                onTap: () => _blocChangePasswordScreen
-                    .add(BlocChangePasswordEventClickButtonSave()),
-              ),
-            )),
-        backgroundColor: AppColors.white,
-        body: _buildBody(),
+      child: BlocListener<BlocChangePasswordScreen, BlocChangePasswordState>(
+        listenWhen: (previous, current) =>
+            current is BlocChangePasswordStateTokenResetPasswordInvalid,
+        listener: (context, state) {
+          showDialog(
+            context: context,
+            builder: (context) => AppDialog(
+              typeDialog: TypeDialog.info,
+              content:
+                  'The reset password token is expired, try to resend email',
+              negativeTitle: 'Dismiss',
+              positiveTitle: 'OK',
+              positiveAction: () {
+                Routes.backTo();
+                Routes.navigateToAndRemoveUntil(AppPath.forgotPassword, {});
+              },
+            ),
+          );
+        },
+        child: Scaffold(
+          appBar: const AppbarApp(title: 'Change Password'),
+          backgroundColor: AppColors.white,
+          body: _buildBody(),
+        ),
       ),
     );
   }
@@ -95,44 +86,83 @@ class _ChangePasswordScreen extends State<ChangePasswordScreen> {
     return SafeArea(
         child: Padding(
       padding: const EdgeInsets.fromLTRB(33, 41, 33, 41),
-      child: Column(
-        children: [
-          mode == Password.change
-              ? Container(
-                  alignment: Alignment.centerLeft,
-                  child: AppTextField(
-                      hintText: '*********',
-                      obsecureText: true,
-                      labelText: "Current Password",
-                      validator: AppValidator.validateTextFieldPasword,
-                      onChange: (value) {}),
-                )
-              : Container(),
-          mode == Password.change ? const SizedBox(height: 30) : Container(),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: AppTextField(
-                hintText: '*********',
-                obsecureText: true,
-                labelText: "New Password",
-                validator: AppValidator.validateTextFieldPasword,
-                onChange: (value) => _blocChangePasswordScreen.add(
-                    BlocChangePasswordEventChangeNewPassword(
-                        newPassword: value))),
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Form(
+          key: _blocChangePasswordScreen.formKeyChangePassword,
+          child: Column(
+            children: [
+              mode == PasswordMode.change
+                  ? Container(
+                      alignment: Alignment.centerLeft,
+                      child: AppTextField(
+                          hintText: '*********',
+                          textEditingController: _blocChangePasswordScreen
+                              .currentPasswordController,
+                          obsecureText: true,
+                          labelText: "Current Password",
+                          validator: _blocChangePasswordScreen
+                              .validateTextFieldCurrentPasword,
+                          onChange: (value) => _blocChangePasswordScreen.add(
+                              BlocChangePasswordEventChangeCurrentPassword(
+                                  currentPassword: value))),
+                    )
+                  : Container(),
+              mode == PasswordMode.change
+                  ? const SizedBox(height: 30)
+                  : Container(),
+              Container(
+                alignment: Alignment.centerLeft,
+                child: AppTextField(
+                    hintText: '*********',
+                    obsecureText: true,
+                    labelText: "New Password",
+                    validator:
+                        _blocChangePasswordScreen.validateTextFieldNewPasword,
+                    onChange: (value) => _blocChangePasswordScreen.add(
+                        BlocChangePasswordEventChangeNewPassword(
+                            newPassword: value))),
+              ),
+              const SizedBox(height: 30),
+              Container(
+                alignment: Alignment.centerLeft,
+                child: AppTextField(
+                    hintText: '*********',
+                    obsecureText: true,
+                    labelText: "Retype New Password",
+                    validator:
+                        _blocChangePasswordScreen.validateTextFieldRePasword,
+                    onChange: (value) => _blocChangePasswordScreen.add(
+                        BlocChangePasswordEventChangeRetypeNewPassword(
+                            retypePassword: value))),
+              ),
+              const SizedBox(height: 30),
+              BlocBuilder<BlocChangePasswordScreen, BlocChangePasswordState>(
+                builder: (context, state) {
+                  bool isLoading = false;
+                  if (state is BlocChangePasswordStateResult) {
+                    if (state.appResult.state == ResultState.loading) {
+                      isLoading = true;
+                    } else if (state.appResult.state == ResultState.success ||
+                        state.appResult.state == ResultState.fail) {
+                      isLoading = false;
+                    }
+                  }
+                  return PrimaryActiveButton(
+                    text: 'Save',
+                    allCaps: false,
+                    isLoading: isLoading,
+                    margin: EdgeInsets.zero,
+                    textStyle:
+                        AppStyles.titleMedium.copyWith(color: AppColors.white),
+                    onTap: () => _blocChangePasswordScreen
+                        .add(BlocChangePasswordEventClickButtonSave()),
+                  );
+                },
+              )
+            ],
           ),
-          const SizedBox(height: 30),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: AppTextField(
-                hintText: '*********',
-                obsecureText: true,
-                labelText: "Retype New Password",
-                validator: AppValidator.validateTextFieldPasword,
-                onChange: (value) => _blocChangePasswordScreen.add(
-                    BlocChangePasswordEventChangeRetypeNewPassword(
-                        retypePassword: value))),
-          ),
-        ],
+        ),
       ),
     ));
   }
