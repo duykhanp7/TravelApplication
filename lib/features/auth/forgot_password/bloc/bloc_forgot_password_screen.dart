@@ -25,23 +25,23 @@ class BlocForgotPasswordScreen
     if (event is BlocForgotPasswordEventSendEmailClick) {
       try {
         if (forgotPasswordGlobalKey.currentState?.validate() ?? false) {
-          emit(BlocForgotPasswordStateResult(
+          emit(BlocChangePasswordStateSendEmailResult(
               appResult: AppResult(state: ResultState.loading)));
           Map<String, dynamic>? respone =
               await _authRepository.sendEmailResetPassword(email);
           if (respone != null) {
             bool ok = respone['ok'];
             if (ok) {
-              emit(BlocForgotPasswordStateResult(
+              emit(BlocChangePasswordStateSendEmailResult(
                   appResult: AppResult(state: ResultState.success)));
               Routes.navigateTo(AppPath.checkEmail, {});
             }
           }
-          emit(BlocForgotPasswordStateResult(
+          emit(BlocChangePasswordStateSendEmailResult(
               appResult: AppResult(state: ResultState.success)));
         } else {}
       } on NetworkException catch (e) {
-        emit(BlocForgotPasswordStateResult(
+        emit(BlocChangePasswordStateSendEmailResult(
             appResult:
                 AppResult(state: ResultState.fail, result: e.getTextError)));
       }

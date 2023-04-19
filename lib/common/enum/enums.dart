@@ -39,4 +39,4 @@ enum Searching { itemTourGuides, itemsTours }
 
 enum EditTripInformationMode { createNewTrip, editTripInformation }
 
-enum Password { reset, change }
+enum PasswordMode { reset, change }

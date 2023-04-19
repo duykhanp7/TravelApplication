@@ -42,7 +42,7 @@ class BlocSplashScreen extends Bloc<BlocSplashEvent, BlocSplashState> {
         String? deepLink = await appStorage.getData(AppConstant.deeplink);
         if (deepLink != null) {
           Routes.navigateToAndRemoveUntil(AppPath.settingChangePassword,
-              {AppConstant.data: Password.reset});
+              {AppConstant.data: PasswordMode.reset});
         } else {
           Routes.navigateToAndRemoveUntil(AppPath.signInScreen, {});
         }

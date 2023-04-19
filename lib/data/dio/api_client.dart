@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:travel_booking_tour/data/dio/api_interface.dart';
+import 'package:travel_booking_tour/data/dio/dio_interceptor.dart';
 import 'package:travel_booking_tour/data/network/network_exception.dart';
 
 class ApiService implements ApiInterface {
@@ -17,6 +17,7 @@ class ApiService implements ApiInterface {
     // _baseOptions.contentType = 'application/json';
     // _baseOptions.headers = {'Content-Type': 'application/json'};
     // dio.options = _baseOptions;
+    dio.interceptors.add(DioInterceptor());
   }
 
   @override

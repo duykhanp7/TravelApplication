@@ -8,8 +8,8 @@ class BlocForgotPasswordStateInitial extends BlocForgotPasswordState {
   List<Object?> get props => [];
 }
 
-class BlocForgotPasswordStateResult extends BlocForgotPasswordState {
-  BlocForgotPasswordStateResult({required this.appResult});
+class BlocChangePasswordStateSendEmailResult extends BlocForgotPasswordState {
+  BlocChangePasswordStateSendEmailResult({required this.appResult});
   final AppResult appResult;
   @override
   List<Object?> get props => [appResult];
