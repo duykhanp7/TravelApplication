@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/features/guide/choose_guide/model/destination_json.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
-import '../bloc/bloc_edit_trip_information_event.dart';
 import '../bloc/bloc_edit_trip_information_screen.dart';
 import '../bloc/bloc_edit_trip_information_state.dart';
 
@@ -51,13 +50,13 @@ class _DestinationItem extends State<DestinationItem> {
                     splashColor: AppColors.white.withOpacity(0.2),
                     onTap: () {
                       if (check) {
-                        check = false;
-                        BlocProvider.of<BlocTripInformationScreen>(context)
-                            .add(BlocTripInformationEventUnCheckAttractions());
+                        setState(() {
+                          check = false;
+                        });
                       } else {
-                        check = true;
-                        BlocProvider.of<BlocTripInformationScreen>(context)
-                            .add(BlocTripInformationEventCheckAttractions());
+                        setState(() {
+                          check = true;
+                        });
                       }
                     },
                   ),

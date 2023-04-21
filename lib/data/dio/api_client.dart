@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:travel_booking_tour/data/dio/api_interface.dart';
 import 'package:travel_booking_tour/data/dio/dio_interceptor.dart';
 import 'package:travel_booking_tour/data/network/network_exception.dart';
@@ -32,6 +33,20 @@ class ApiService implements ApiInterface {
         data: FormData.fromMap(data),
         queryParameters: queryParams,
       );
+      return NetworkException.convertResponse(response, converter);
+    } catch (ex) {
+      throw NetworkException.getDioException(ex);
+    }
+  }
+
+  @override
+  Future<T> getJson<T>(
+      {required String endPoint,
+      Json? queryParams,
+      Converter<T>? converter}) async {
+    try {
+      debugPrint('Path Get Json ${_baseURL + endPoint}');
+      final response = await dio.get(_baseURL + endPoint);
       return NetworkException.convertResponse(response, converter);
     } catch (ex) {
       throw NetworkException.getDioException(ex);

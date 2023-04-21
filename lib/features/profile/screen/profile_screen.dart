@@ -33,6 +33,7 @@ class _ProfileScreen extends State<ProfileScreen> {
   @override
   void initState() {
     _blocProfileScreen = BlocProvider.of<BlocProfileScreen>(context);
+    _blocProfileScreen.add(BlocProfileEventInitial());
     _blocMyPhotosScreen = BlocProvider.of<BlocMyPhotosScreen>(context);
     _blocMyJourneysScreen = BlocProvider.of<BlocMyJourneysScreen>(context);
     _blocMyPhotosScreen.add(BlocMyPhotosEventInitial());

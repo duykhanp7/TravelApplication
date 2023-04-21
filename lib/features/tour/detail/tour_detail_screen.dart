@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -263,11 +264,16 @@ class _TourDetailScreen extends State<TourDetailScreen> {
       child: Stack(
         children: [
           PageView.builder(
-            itemBuilder: (context, index) => Image.asset(
-              images[index],
+            itemBuilder: (context, index) => CachedNetworkImage(
+              imageUrl: images[index],
               filterQuality: FilterQuality.high,
               fit: BoxFit.cover,
               height: 200,
+              fadeInCurve: Curves.linearToEaseOut,
+              fadeOutCurve: Curves.bounceInOut,
+              errorWidget: (context, url, error) =>
+                  SvgPicture.asset(AppIcons.icErrorImage),
+              placeholder: (context, url) => const AppLayoutShimmer(),
             ),
             controller: _pageController,
             onPageChanged: (value) => _blocTourDetailScreen

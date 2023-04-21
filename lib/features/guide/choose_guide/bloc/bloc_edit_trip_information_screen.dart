@@ -73,11 +73,13 @@ class BlocTripInformationScreen
           numberOfTravelers = textEditingControllerNumberOfTravelers.text;
         }
       }
-    } else if (event is BlocTripInformationEventCheckAttractions) {
-      emit(BlocTripInformationStateCheck(current: DateTime.now().microsecond));
-    } else if (event is BlocTripInformationEventUnCheckAttractions) {
-      emit(BlocTripInformationStateCheck(current: DateTime.now().microsecond));
-    } else if (event is BlocTripInformationEventChangeAddNewAttractions) {
+    }
+    // else if (event is BlocTripInformationEventCheckAttractions) {
+    //   emit(BlocTripInformationStateCheck(current: DateTime.now().microsecond));
+    // } else if (event is BlocTripInformationEventUnCheckAttractions) {
+    //   emit(BlocTripInformationStateCheck(current: DateTime.now().microsecond));
+    // }
+    else if (event is BlocTripInformationEventChangeAddNewAttractions) {
       Routes.navigateTo(AppPath.addNewPlaces, {});
     } else if (event is BlocTripInformationEventDone) {
     } else if (event is BlocTripInformationEventSearchDestination) {

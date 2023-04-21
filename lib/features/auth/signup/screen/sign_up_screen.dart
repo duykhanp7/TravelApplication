@@ -44,10 +44,11 @@ class _SignUpScreen extends State<SignUpScreen> {
       backgroundColor: AppColors.primary,
       body: SafeArea(
           child: GestureDetector(
-        child: SingleChildScrollView(
+        child: AppDeepBackground(
+            child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          child: Container(alignment: Alignment.center, child: _buildbody()),
-        ),
+          child: Container(alignment: Alignment.topCenter, child: _buildbody()),
+        )),
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
       )),
       resizeToAvoidBottomInset: true,

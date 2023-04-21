@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/res/res.dart';
@@ -49,12 +50,18 @@ class _JourneyItem extends State<JourneyItem> {
                             borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(15),
                                 topRight: Radius.circular(15)),
-                            child: Image.asset(
-                              widget.tourDetailJson.images?[0] ?? '',
+                            child: CachedNetworkImage(
+                              imageUrl: widget.tourDetailJson.images?[0] ?? '',
                               filterQuality: FilterQuality.high,
+                              fit: BoxFit.cover,
                               width: 235,
                               height: 135,
-                              fit: BoxFit.cover,
+                              fadeInCurve: Curves.linearToEaseOut,
+                              fadeOutCurve: Curves.bounceInOut,
+                              errorWidget: (context, url, error) =>
+                                  SvgPicture.asset(AppIcons.icErrorImage),
+                              placeholder: (context, url) =>
+                                  const AppLayoutShimmer(),
                             ),
                           ),
                         ),

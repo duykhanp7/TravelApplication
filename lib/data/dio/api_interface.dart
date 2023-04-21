@@ -16,11 +16,11 @@ abstract class ApiInterface {
   //   Converter<T>? converter,
   // });
 
-  // Future<T> getJson<T>({
-  //   required String endPoint,
-  //   Json? queryParams,
-  //   Converter<T>? converter,
-  // });
+  Future<T> getJson<T>({
+    required String endPoint,
+    Json? queryParams,
+    Converter<T>? converter,
+  });
 
   // Future<T> deleteJson<T>({
   //   required Json data,

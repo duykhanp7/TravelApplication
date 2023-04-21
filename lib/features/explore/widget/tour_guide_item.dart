@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/res/res.dart';
@@ -37,11 +38,19 @@ class _TourGuideItem extends State<TourGuideItem> {
                         ClipRRect(
                           borderRadius:
                               const BorderRadius.all(Radius.circular(12)),
-                          child: Image.asset(
-                            widget.tourGuideDetailJson.profileImageUrl ?? '',
-                            width: 220,
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                widget.tourGuideDetailJson.profileImageUrl ??
+                                    '',
                             filterQuality: FilterQuality.high,
                             fit: BoxFit.cover,
+                            width: 220,
+                            fadeInCurve: Curves.linearToEaseOut,
+                            fadeOutCurve: Curves.bounceInOut,
+                            errorWidget: (context, url, error) =>
+                                SvgPicture.asset(AppIcons.icErrorImage),
+                            placeholder: (context, url) =>
+                                const AppLayoutShimmer(),
                           ),
                         ),
                         Positioned(

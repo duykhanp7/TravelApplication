@@ -104,46 +104,44 @@ class AppBackground extends StatelessWidget {
     );
   }
 
-  Positioned _buildBody(BuildContext context) {
-    return Positioned(
-      child: Container(
-        alignment: Alignment.topCenter,
-        child: Column(
-          children: [
-            Container(
-              alignment: Alignment.center,
-              height: 140,
-              child: ClipPath(
-                clipper: CustomClipPath(),
-                child: Container(
-                  color: AppColors.white,
-                ),
+  Widget _buildBody(BuildContext context) {
+    return Container(
+      alignment: Alignment.topCenter,
+      child: Column(
+        children: [
+          Container(
+            alignment: Alignment.center,
+            height: 140,
+            child: ClipPath(
+              clipper: CustomClipPath(),
+              child: Container(
+                color: AppColors.white,
               ),
             ),
-            Container(
-              color: AppColors.white,
-              padding:
-                  headerPadding ?? const EdgeInsets.only(top: 10, bottom: 50),
-              child: Column(
-                children: [
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    padding: const EdgeInsets.only(left: 32),
-                    child: Text(
-                      header,
-                      style: headerStyle ??
-                          AppStyles.titleLarge.copyWith(
-                              fontSize: 34,
-                              fontWeight: FontWeight.w100,
-                              fontStyle: FontStyle.italic),
-                    ),
+          ),
+          Container(
+            color: AppColors.white,
+            padding:
+                headerPadding ?? const EdgeInsets.only(top: 10, bottom: 240),
+            child: Column(
+              children: [
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.only(left: 32),
+                  child: Text(
+                    header,
+                    style: headerStyle ??
+                        AppStyles.titleLarge.copyWith(
+                            fontSize: 34,
+                            fontWeight: FontWeight.w100,
+                            fontStyle: FontStyle.italic),
                   ),
-                  children
-                ],
-              ),
-            )
-          ],
-        ),
+                ),
+                children
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

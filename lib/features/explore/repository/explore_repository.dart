@@ -1,7 +1,5 @@
 import 'package:travel_booking_tour/base/base_repository.dart';
 import 'package:travel_booking_tour/data/model/my_experience_json.dart';
-import 'package:travel_booking_tour/res/images.dart';
-
 import '../../../data/model/review_json.dart';
 import '../../../data/model/schedule_json.dart';
 import '../../../data/model/schedule_point_json.dart';
@@ -16,9 +14,9 @@ class ExploreRepository implements BaseRepository {
           destination: 'Da Nang - Ba Na - Hoi An',
           departureDate: 'Thurday 30, 2022',
           images: [
-            AppImages.cungVanHoaThieuNhi,
-            AppImages.daNangBanaHoiAn,
-            AppImages.cungVanHoaThieuNhi
+            'https://i.imgur.com/dkvXnVp.png',
+            'https://i.imgur.com/dkvXnVp.png',
+            'https://i.imgur.com/oYG6Q0F.png'
           ],
           likes: 1333,
           price: 450.00,
@@ -97,9 +95,9 @@ class ExploreRepository implements BaseRepository {
           destination: 'Da Nang - Ba Na - Hoi An',
           departureDate: 'Jan 30, 2022',
           images: [
-            AppImages.cungVanHoaThieuNhi,
-            AppImages.daNangBanaHoiAn,
-            AppImages.cungVanHoaThieuNhi
+            'https://i.imgur.com/dkvXnVp.png',
+            'https://i.imgur.com/dkvXnVp.png',
+            'https://i.imgur.com/oYG6Q0F.png'
           ],
           likes: 1247,
           price: 450.00,
@@ -178,9 +176,9 @@ class ExploreRepository implements BaseRepository {
           destination: 'Da Nang - Ba Na - Hoi An',
           departureDate: 'Jan 30, 2022',
           images: [
-            AppImages.cungVanHoaThieuNhi,
-            AppImages.daNangBanaHoiAn,
-            AppImages.cungVanHoaThieuNhi
+            'https://i.imgur.com/dkvXnVp.png',
+            'https://i.imgur.com/dkvXnVp.png',
+            'https://i.imgur.com/oYG6Q0F.png'
           ],
           likes: 1247,
           price: 450.00,
@@ -259,9 +257,9 @@ class ExploreRepository implements BaseRepository {
           destination: 'Da Nang - Ba Na - Hoi An',
           departureDate: 'Jan 30, 2022',
           images: [
-            AppImages.cungVanHoaThieuNhi,
-            AppImages.daNangBanaHoiAn,
-            AppImages.cungVanHoaThieuNhi
+            'https://i.imgur.com/dkvXnVp.png',
+            'https://i.imgur.com/dkvXnVp.png',
+            'https://i.imgur.com/oYG6Q0F.png'
           ],
           likes: 1247,
           price: 450.00,
@@ -340,9 +338,9 @@ class ExploreRepository implements BaseRepository {
           destination: 'Da Nang - Ba Na - Hoi An',
           departureDate: 'Jan 30, 2022',
           images: [
-            AppImages.cungVanHoaThieuNhi,
-            AppImages.daNangBanaHoiAn,
-            AppImages.cungVanHoaThieuNhi
+            'https://i.imgur.com/dkvXnVp.png',
+            'https://i.imgur.com/dkvXnVp.png',
+            'https://i.imgur.com/oYG6Q0F.png'
           ],
           likes: 1247,
           price: 450.00,
@@ -436,8 +434,8 @@ class ExploreRepository implements BaseRepository {
         id: 0,
         name: 'Tuan Tran',
         address: 'Da Nang, Viet Nam',
-        coverImageUrl: AppImages.tuanTran,
-        profileImageUrl: AppImages.tuanTran,
+        coverImageUrl: 'https://i.imgur.com/mL5BwvK.png',
+        profileImageUrl: 'https://i.imgur.com/JmvKHiC.png',
         rating: 2,
         languages: ['Vietnamese', 'Chinese', 'Korean'],
         prices: {
@@ -458,11 +456,9 @@ class ExploreRepository implements BaseRepository {
             likes: 1234,
             isFavorite: false,
             photos: [
-              AppImages.myex2,
-              AppImages.myex1,
-              AppImages.myex3,
-              AppImages.myex3,
-              AppImages.myex3
+              'https://i.imgur.com/zuSApjx.png',
+              'https://i.imgur.com/gi30u3G.png',
+              'https://i.imgur.com/jvSDzia.png'
             ],
           ),
           MyExperienceJson(
@@ -472,7 +468,11 @@ class ExploreRepository implements BaseRepository {
             name: 'Food tour in Da Nang',
             likes: 234,
             isFavorite: false,
-            photos: [AppImages.myex2, AppImages.myex1, AppImages.myex3],
+            photos: [
+              'https://i.imgur.com/zuSApjx.png',
+              'https://i.imgur.com/gi30u3G.png',
+              'https://i.imgur.com/jvSDzia.png'
+            ],
           )
         ],
         reviews: [
@@ -481,7 +481,7 @@ class ExploreRepository implements BaseRepository {
               content:
                   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
               createdAt: '09-3-2023',
-              ratersImage: AppImages.emmy,
+              ratersImage: 'https://i.imgur.com/F5cnoAg.png',
               ratersName: 'Pena John',
               rating: 2),
           ReviewJson(
@@ -489,7 +489,7 @@ class ExploreRepository implements BaseRepository {
               content:
                   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
               createdAt: '09-3-2023',
-              ratersImage: AppImages.emmy,
+              ratersImage: 'https://i.imgur.com/F5cnoAg.png',
               ratersName: 'Pena John',
               rating: 3),
           ReviewJson(
@@ -497,7 +497,7 @@ class ExploreRepository implements BaseRepository {
               content:
                   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
               createdAt: '09-3-2023',
-              ratersImage: AppImages.emmy,
+              ratersImage: 'https://i.imgur.com/F5cnoAg.png',
               ratersName: 'Pena John',
               rating: 5)
         ]),
@@ -509,8 +509,8 @@ class ExploreRepository implements BaseRepository {
         languages: ['Vietnamese', 'Korean'],
         videoIntroductionUrl:
             'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
-        coverImageUrl: AppImages.emmy,
-        profileImageUrl: AppImages.emmy,
+        coverImageUrl: 'https://i.imgur.com/mL5BwvK.png',
+        profileImageUrl: 'https://i.imgur.com/F5cnoAg.png',
         prices: {
           '1 - 3 Travelers': '\$10/ hour',
           '4 - 6 Travelers': '\$14/ hour',
@@ -526,7 +526,11 @@ class ExploreRepository implements BaseRepository {
             name: '2 Hour Bicycle Tour exploring Hoi An',
             likes: 5555,
             isFavorite: false,
-            photos: [AppImages.myex2, AppImages.myex1, AppImages.myex3],
+            photos: [
+              'https://i.imgur.com/zuSApjx.png',
+              'https://i.imgur.com/gi30u3G.png',
+              'https://i.imgur.com/jvSDzia.png'
+            ],
           ),
           MyExperienceJson(
             id: '8',
@@ -535,7 +539,11 @@ class ExploreRepository implements BaseRepository {
             name: 'Food tour in Da Nang',
             likes: 6666,
             isFavorite: false,
-            photos: [AppImages.myex2, AppImages.myex1, AppImages.myex3],
+            photos: [
+              'https://i.imgur.com/zuSApjx.png',
+              'https://i.imgur.com/gi30u3G.png',
+              'https://i.imgur.com/jvSDzia.png'
+            ],
           )
         ],
         reviews: [
@@ -544,7 +552,7 @@ class ExploreRepository implements BaseRepository {
               content:
                   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
               createdAt: '09-3-2023',
-              ratersImage: AppImages.tuanTran,
+              ratersImage: 'https://i.imgur.com/F5cnoAg.png',
               ratersName: 'Pena John',
               rating: 2),
           ReviewJson(
@@ -552,7 +560,7 @@ class ExploreRepository implements BaseRepository {
               content:
                   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
               createdAt: '09-3-2023',
-              ratersImage: AppImages.tuanTran,
+              ratersImage: 'https://i.imgur.com/F5cnoAg.png',
               ratersName: 'Pena John',
               rating: 3),
           ReviewJson(
@@ -560,19 +568,19 @@ class ExploreRepository implements BaseRepository {
               content:
                   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
               createdAt: '09-3-2023',
-              ratersImage: AppImages.tuanTran,
+              ratersImage: 'https://i.imgur.com/F5cnoAg.png',
               ratersName: 'Pena John',
               rating: 5)
         ]),
     TourGuideDetailJson(
         id: 2,
-        name: 'Tuan Tran',
+        name: 'Thuy Hong',
         rating: 2,
         videoIntroductionUrl:
             'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
         address: 'Da Nang, Viet Nam',
-        coverImageUrl: AppImages.tuanTran,
-        profileImageUrl: AppImages.tuanTran,
+        coverImageUrl: 'https://i.imgur.com/mL5BwvK.png',
+        profileImageUrl: 'https://i.imgur.com/9wdFZIP.png',
         languages: ['Vietnamese', 'Spanish', 'Korean'],
         prices: {
           '1 - 3 Travelers': '\$10/ hour',
@@ -589,7 +597,11 @@ class ExploreRepository implements BaseRepository {
             name: '2 Hour Bicycle Tour exploring Hoi An',
             likes: 1234,
             isFavorite: false,
-            photos: [AppImages.myex2, AppImages.myex1, AppImages.myex3],
+            photos: [
+              'https://i.imgur.com/zuSApjx.png',
+              'https://i.imgur.com/gi30u3G.png',
+              'https://i.imgur.com/jvSDzia.png'
+            ],
           ),
           MyExperienceJson(
             id: '10',
@@ -598,7 +610,11 @@ class ExploreRepository implements BaseRepository {
             name: 'Food tour in Da Nang',
             likes: 234,
             isFavorite: false,
-            photos: [AppImages.myex2, AppImages.myex1, AppImages.myex3],
+            photos: [
+              'https://i.imgur.com/zuSApjx.png',
+              'https://i.imgur.com/gi30u3G.png',
+              'https://i.imgur.com/jvSDzia.png'
+            ],
           )
         ],
         reviews: [
@@ -607,7 +623,7 @@ class ExploreRepository implements BaseRepository {
               content:
                   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
               createdAt: '09-3-2023',
-              ratersImage: AppImages.emmy,
+              ratersImage: 'https://i.imgur.com/F5cnoAg.png',
               ratersName: 'Pena John',
               rating: 2),
           ReviewJson(
@@ -615,7 +631,7 @@ class ExploreRepository implements BaseRepository {
               content:
                   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
               createdAt: '09-3-2023',
-              ratersImage: AppImages.emmy,
+              ratersImage: 'https://i.imgur.com/F5cnoAg.png',
               ratersName: 'Pena John',
               rating: 3),
           ReviewJson(
@@ -623,25 +639,25 @@ class ExploreRepository implements BaseRepository {
               content:
                   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
               createdAt: '09-3-2023',
-              ratersImage: AppImages.emmy,
+              ratersImage: 'https://i.imgur.com/F5cnoAg.png',
               ratersName: 'Pena John',
               rating: 5)
         ]),
     TourGuideDetailJson(
         id: 3,
-        name: 'Emmy',
+        name: 'Khai Ho',
         rating: 2,
         languages: ['Vietnamese', 'Korean'],
         videoIntroductionUrl:
             'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
         address: 'Ho Chi Minh, Viet Nam',
-        profileImageUrl: AppImages.emmy,
+        profileImageUrl: 'https://i.imgur.com/XSvBrJl.png',
         prices: {
           '1 - 3 Travelers': '\$10/ hour',
           '4 - 6 Travelers': '\$14/ hour',
           '7 - 9 Travelers': '\$17/ hour'
         },
-        coverImageUrl: AppImages.emmy,
+        coverImageUrl: 'https://i.imgur.com/mL5BwvK.png',
         description:
             'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
         experiences: [
@@ -652,7 +668,11 @@ class ExploreRepository implements BaseRepository {
             name: '2 Hour Bicycle Tour exploring Hoi An',
             likes: 5555,
             isFavorite: false,
-            photos: [AppImages.myex2, AppImages.myex1, AppImages.myex3],
+            photos: [
+              'https://i.imgur.com/zuSApjx.png',
+              'https://i.imgur.com/gi30u3G.png',
+              'https://i.imgur.com/jvSDzia.png'
+            ],
           ),
           MyExperienceJson(
             id: '12',
@@ -661,7 +681,11 @@ class ExploreRepository implements BaseRepository {
             name: 'Food tour in Da Nang',
             likes: 6666,
             isFavorite: false,
-            photos: [AppImages.myex2, AppImages.myex1, AppImages.myex3],
+            photos: [
+              'https://i.imgur.com/zuSApjx.png',
+              'https://i.imgur.com/gi30u3G.png',
+              'https://i.imgur.com/jvSDzia.png'
+            ],
           )
         ],
         reviews: [
@@ -670,7 +694,7 @@ class ExploreRepository implements BaseRepository {
               content:
                   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
               createdAt: '09-3-2023',
-              ratersImage: AppImages.tuanTran,
+              ratersImage: 'https://i.imgur.com/F5cnoAg.png',
               ratersName: 'Pena John',
               rating: 2),
           ReviewJson(
@@ -678,7 +702,7 @@ class ExploreRepository implements BaseRepository {
               content:
                   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
               createdAt: '09-3-2023',
-              ratersImage: AppImages.tuanTran,
+              ratersImage: 'https://i.imgur.com/F5cnoAg.png',
               ratersName: 'Pena John',
               rating: 3),
           ReviewJson(
@@ -686,7 +710,7 @@ class ExploreRepository implements BaseRepository {
               content:
                   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
               createdAt: '09-3-2023',
-              ratersImage: AppImages.tuanTran,
+              ratersImage: 'https://i.imgur.com/F5cnoAg.png',
               ratersName: 'Pena John',
               rating: 5)
         ])
