@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +14,7 @@ import 'package:travel_booking_tour/features/message/chat_screen.dart';
 import 'package:travel_booking_tour/features/notification/notification_screen.dart';
 import 'package:travel_booking_tour/features/profile/screen/profile_screen.dart';
 import 'package:travel_booking_tour/res/app_appbar.dart';
+import 'package:travel_booking_tour/res/app_layout_shimmer.dart';
 import 'package:travel_booking_tour/res/app_search.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
@@ -581,10 +583,14 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
         children: [
           Container(
             alignment: Alignment.topCenter,
-            child: Image.asset(
-              AppImages.bgHeaderXplore,
+            child: CachedNetworkImage(
+              imageUrl: 'https://i.imgur.com/UQyGT1Q.png',
+              filterQuality: FilterQuality.high,
               fit: BoxFit.cover,
               height: 170,
+              fadeInCurve: Curves.linearToEaseOut,
+              fadeOutCurve: Curves.bounceInOut,
+              placeholder: (context, url) => const AppLayoutShimmer(),
             ),
           ),
           Positioned(

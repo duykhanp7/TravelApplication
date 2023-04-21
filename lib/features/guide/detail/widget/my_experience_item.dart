@@ -1,11 +1,11 @@
-import 'dart:io';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/icons.dart';
 
 import '../../../../data/model/my_experience_json.dart';
+import '../../../../res/app_layout_shimmer.dart';
 import '../../../../res/styles.dart';
 
 class MyExperienceItem extends StatefulWidget {
@@ -191,33 +191,47 @@ class _MyExperienceItem extends State<MyExperienceItem> {
     if (widget.myExperienceJson?.photos?.isNotEmpty ?? false) {
       int imageLength = widget.myExperienceJson!.photos!.length;
       if (imageLength == 1) {
-        return Image.file(
-          File(widget.myExperienceJson?.photos?[0] ?? ''),
-          filterQuality: FilterQuality.high,
-          fit: BoxFit.cover,
-          width: double.infinity,
-          height: 202,
-        );
+        return CachedNetworkImage(
+            imageUrl: widget.myExperienceJson?.photos?[0] ?? '',
+            filterQuality: FilterQuality.high,
+            fit: BoxFit.cover,
+            height: 202,
+            width: double.infinity,
+            fadeInCurve: Curves.linearToEaseOut,
+            fadeOutCurve: Curves.bounceInOut,
+            errorWidget: (context, url, error) =>
+                SvgPicture.asset(AppIcons.icErrorImage),
+            placeholder: (context, url) => const AppLayoutShimmer());
       } else if (imageLength == 2) {
         return Row(
           children: [
             Flexible(
                 flex: 1,
-                child: Image.file(
-                    File(widget.myExperienceJson?.photos?[0] ?? ''),
+                child: CachedNetworkImage(
+                    imageUrl: widget.myExperienceJson?.photos?[0] ?? '',
                     filterQuality: FilterQuality.high,
                     fit: BoxFit.cover,
                     height: 202,
-                    width: double.infinity)),
+                    width: double.infinity,
+                    fadeInCurve: Curves.linearToEaseOut,
+                    fadeOutCurve: Curves.bounceInOut,
+                    errorWidget: (context, url, error) =>
+                        SvgPicture.asset(AppIcons.icErrorImage),
+                    placeholder: (context, url) => const AppLayoutShimmer())),
             const SizedBox(width: 2),
             Flexible(
                 flex: 1,
-                child: Image.file(
-                    File(widget.myExperienceJson?.photos?[1] ?? ''),
+                child: CachedNetworkImage(
+                    imageUrl: widget.myExperienceJson?.photos?[1] ?? '',
                     filterQuality: FilterQuality.high,
                     fit: BoxFit.cover,
                     height: 202,
-                    width: double.infinity))
+                    width: double.infinity,
+                    fadeInCurve: Curves.linearToEaseOut,
+                    fadeOutCurve: Curves.bounceInOut,
+                    errorWidget: (context, url, error) =>
+                        SvgPicture.asset(AppIcons.icErrorImage),
+                    placeholder: (context, url) => const AppLayoutShimmer()))
           ],
         );
       }
@@ -225,11 +239,17 @@ class _MyExperienceItem extends State<MyExperienceItem> {
         children: [
           Flexible(
               flex: 1,
-              child: Image.file(File(widget.myExperienceJson?.photos?[0] ?? ''),
+              child: CachedNetworkImage(
+                  imageUrl: widget.myExperienceJson?.photos?[0] ?? '',
                   filterQuality: FilterQuality.high,
                   fit: BoxFit.cover,
                   height: 202,
-                  width: double.infinity)),
+                  width: double.infinity,
+                  fadeInCurve: Curves.linearToEaseOut,
+                  fadeOutCurve: Curves.bounceInOut,
+                  errorWidget: (context, url, error) =>
+                      SvgPicture.asset(AppIcons.icErrorImage),
+                  placeholder: (context, url) => const AppLayoutShimmer())),
           const SizedBox(width: 2),
           Flexible(
             flex: 1,
@@ -239,26 +259,45 @@ class _MyExperienceItem extends State<MyExperienceItem> {
               shrinkWrap: true,
               semanticChildCount: 2,
               children: [
-                Image.file(File(widget.myExperienceJson?.photos?[1] ?? ''),
+                CachedNetworkImage(
+                    imageUrl: widget.myExperienceJson?.photos?[1] ?? '',
                     filterQuality: FilterQuality.high,
                     fit: BoxFit.cover,
+                    height: 100,
                     width: double.infinity,
-                    height: 100),
+                    fadeInCurve: Curves.linearToEaseOut,
+                    fadeOutCurve: Curves.bounceInOut,
+                    errorWidget: (context, url, error) =>
+                        SvgPicture.asset(AppIcons.icErrorImage),
+                    placeholder: (context, url) => const AppLayoutShimmer()),
                 const SizedBox(height: 2),
                 imageLength == 3
-                    ? Image.file(
-                        File(widget.myExperienceJson?.photos?[2] ?? ''),
+                    ? CachedNetworkImage(
+                        imageUrl: widget.myExperienceJson?.photos?[2] ?? '',
                         filterQuality: FilterQuality.high,
                         fit: BoxFit.cover,
-                        height: 100)
+                        height: 100,
+                        width: double.infinity,
+                        fadeInCurve: Curves.linearToEaseOut,
+                        fadeOutCurve: Curves.bounceInOut,
+                        errorWidget: (context, url, error) =>
+                            SvgPicture.asset(AppIcons.icErrorImage),
+                        placeholder: (context, url) => const AppLayoutShimmer())
                     : Stack(
                         children: [
-                          Image.file(
-                              File(widget.myExperienceJson?.photos?[2] ?? ''),
+                          CachedNetworkImage(
+                              imageUrl:
+                                  widget.myExperienceJson?.photos?[2] ?? '',
                               filterQuality: FilterQuality.high,
                               fit: BoxFit.cover,
+                              height: 100,
                               width: double.infinity,
-                              height: 100),
+                              fadeInCurve: Curves.linearToEaseOut,
+                              fadeOutCurve: Curves.bounceInOut,
+                              errorWidget: (context, url, error) =>
+                                  SvgPicture.asset(AppIcons.icErrorImage),
+                              placeholder: (context, url) =>
+                                  const AppLayoutShimmer()),
                           Container(
                             alignment: Alignment.center,
                             color: AppColors.black.withOpacity(0.6),

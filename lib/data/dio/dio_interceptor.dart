@@ -14,7 +14,8 @@ class DioInterceptor extends Interceptor {
       options.headers['Authorization'] = 'Bearer $token';
     }
     options.headers['Content-Type'] = 'application/json';
-    logPrint(options.headers.toString(), type: 0);
+    logPrint(options.baseUrl.toString(), type: 0);
+    logPrint(options.path, type: 0);
     super.onRequest(options, handler);
   }
 

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -22,6 +23,7 @@ class _TopExperienceItem extends State<TopExperienceItem> {
 
   @override
   void initState() {
+    debugPrint('initState');
     _blocExploreScreen = BlocProvider.of<BlocExploreScreen>(context);
     super.initState();
   }
@@ -44,12 +46,18 @@ class _TopExperienceItem extends State<TopExperienceItem> {
                         ClipRRect(
                           borderRadius:
                               const BorderRadius.all(Radius.circular(12)),
-                          child: Image.asset(
-                            widget.tourDetailJson.images?[0] ?? '',
-                            width: 206,
-                            height: 260,
+                          child: CachedNetworkImage(
+                            imageUrl: widget.tourDetailJson.images?[0] ?? '',
                             filterQuality: FilterQuality.high,
                             fit: BoxFit.cover,
+                            width: 206,
+                            height: 260,
+                            fadeInCurve: Curves.linearToEaseOut,
+                            fadeOutCurve: Curves.bounceInOut,
+                            errorWidget: (context, url, error) =>
+                                SvgPicture.asset(AppIcons.icErrorImage),
+                            placeholder: (context, url) =>
+                                const AppLayoutShimmer(),
                           ),
                         ),
                         FutureBuilder(
@@ -79,9 +87,20 @@ class _TopExperienceItem extends State<TopExperienceItem> {
                                         child: ClipRRect(
                                           borderRadius: const BorderRadius.all(
                                               Radius.circular(35)),
-                                          child: Image.asset(
-                                            snapshot.data?.profileImageUrl ??
+                                          child: CachedNetworkImage(
+                                            imageUrl: snapshot
+                                                    .data?.profileImageUrl ??
                                                 '',
+                                            filterQuality: FilterQuality.high,
+                                            fit: BoxFit.cover,
+                                            fadeInCurve: Curves.linearToEaseOut,
+                                            fadeOutCurve: Curves.bounceInOut,
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    SvgPicture.asset(
+                                                        AppIcons.icErrorImage),
+                                            placeholder: (context, url) =>
+                                                const AppLayoutShimmer(),
                                           ),
                                         ),
                                       ),

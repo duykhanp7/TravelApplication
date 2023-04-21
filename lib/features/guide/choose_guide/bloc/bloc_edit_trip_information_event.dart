@@ -67,17 +67,17 @@ class BlocTripInformationEventSubtractNumberOfTravelers
   List<Object?> get props => [];
 }
 
-class BlocTripInformationEventCheckAttractions
-    extends BlocTripInformationEvent {
-  @override
-  List<Object?> get props => [];
-}
+// class BlocTripInformationEventCheckAttractions
+//     extends BlocTripInformationEvent {
+//   @override
+//   List<Object?> get props => [];
+// }
 
-class BlocTripInformationEventUnCheckAttractions
-    extends BlocTripInformationEvent {
-  @override
-  List<Object?> get props => [];
-}
+// class BlocTripInformationEventUnCheckAttractions
+//     extends BlocTripInformationEvent {
+//   @override
+//   List<Object?> get props => [];
+// }
 
 class BlocTripInformationEventSearchDestination
     extends BlocTripInformationEvent {

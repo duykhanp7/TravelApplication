@@ -42,15 +42,14 @@ class _SignInScreen extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('_SignInScreen Rebuild');
-
     localization = SLocalization.of(context);
 
     return Scaffold(
-      backgroundColor: AppColors.primary,
+      backgroundColor: AppColors.white,
       body: SafeArea(
           child: GestureDetector(
-        child: SingleChildScrollView(
+        child: AppDeepBackground(
+            child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: BlocListener<BlocSignInScreen, BlocSignInState>(
             listenWhen: (previous, current) =>
@@ -72,13 +71,13 @@ class _SignInScreen extends State<SignInScreen> {
               }
             },
             child: Container(
-              color: AppColors.primary,
-              alignment: Alignment.center,
+              color: AppColors.white,
+              alignment: Alignment.topCenter,
               child: AppBackground(
                   header: localization.sign_in, children: _buildBody()),
             ),
           ),
-        ),
+        )),
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
       )),
     );
@@ -86,7 +85,6 @@ class _SignInScreen extends State<SignInScreen> {
 
   Widget _buildBody() {
     return Container(
-      color: AppColors.white,
       alignment: Alignment.center,
       padding: const EdgeInsets.only(top: 30),
       child: Column(

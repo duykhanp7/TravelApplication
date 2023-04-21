@@ -63,7 +63,8 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
             body: SafeArea(
                 child: Container(
                     alignment: Alignment.topCenter,
-                    child: SingleChildScrollView(
+                    child: AppDeepBackground(
+                        child: SingleChildScrollView(
                       physics: const BouncingScrollPhysics(),
                       child: AppBackground(
                           header: localization.forgot_password,
@@ -175,7 +176,7 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
                                                             })
                                                 ])))
                                       ])))),
-                    )))));
+                    ))))));
   }
 
   Widget _buildTitle() {

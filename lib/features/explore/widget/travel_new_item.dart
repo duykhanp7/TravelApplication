@@ -1,7 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../data/model/tour_detail_json.dart';
+import '../../../res/app_layout_shimmer.dart';
 import '../../../res/colors.dart';
+import '../../../res/icons.dart';
 import '../../../res/styles.dart';
 
 class TravelNewItem extends StatefulWidget {
@@ -52,12 +56,17 @@ class _TravelNewItem extends State<TravelNewItem> {
                 ),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(
-                    widget.tourDetailJson.images?[0] ?? '',
+                  child: CachedNetworkImage(
+                    imageUrl: widget.tourDetailJson.images?[0] ?? '',
                     filterQuality: FilterQuality.high,
-                    width: MediaQuery.of(context).size.width,
                     fit: BoxFit.cover,
+                    width: double.infinity,
                     height: 150,
+                    fadeInCurve: Curves.linearToEaseOut,
+                    fadeOutCurve: Curves.bounceInOut,
+                    errorWidget: (context, url, error) =>
+                        SvgPicture.asset(AppIcons.icErrorImage),
+                    placeholder: (context, url) => const AppLayoutShimmer(),
                   ),
                 )
               ],

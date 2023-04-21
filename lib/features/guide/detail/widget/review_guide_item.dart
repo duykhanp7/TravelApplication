@@ -1,8 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/vertical_star_widget.dart';
 
 import '../../../../data/model/review_json.dart';
+import '../../../../res/app_layout_shimmer.dart';
+import '../../../../res/icons.dart';
 import '../../../../res/styles.dart';
 
 class ReviewGuideItem extends StatefulWidget {
@@ -29,10 +33,17 @@ class _ReviewGuideItem extends State<ReviewGuideItem> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(25),
-                child: Image.asset(
-                  widget.reviewJson?.ratersImage ?? '',
-                  width: 50,
+                child: CachedNetworkImage(
+                  imageUrl: widget.reviewJson?.ratersImage ?? '',
+                  filterQuality: FilterQuality.high,
+                  fit: BoxFit.cover,
                   height: 50,
+                  width: 50,
+                  fadeInCurve: Curves.linearToEaseOut,
+                  fadeOutCurve: Curves.bounceInOut,
+                  errorWidget: (context, url, error) =>
+                      SvgPicture.asset(AppIcons.icErrorImage),
+                  placeholder: (context, url) => const AppLayoutShimmer(),
                 ),
               ),
               const SizedBox(

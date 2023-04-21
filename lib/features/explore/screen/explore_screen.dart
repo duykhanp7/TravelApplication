@@ -42,8 +42,13 @@ class _ExploreScreen extends State<ExploreScreen> {
     _blocExploreScreen = BlocProvider.of<BlocExploreScreen>(context);
 
     return Scaffold(
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+      body: RefreshIndicator(
+        color: AppColors.primary,
+        onRefresh: () async {
+          debugPrint('RefreshIndicatorRefreshIndicator');
+          await Future.delayed(const Duration(seconds: 5), () {});
+          return;
+        },
         child: Container(
           alignment: Alignment.topCenter,
           child: _buildbody(context),

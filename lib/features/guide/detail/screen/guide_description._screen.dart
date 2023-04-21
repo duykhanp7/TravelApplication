@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,7 +67,6 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
   }
 
   Widget _buildHeader(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
     return Container(
       alignment: Alignment.center,
       height: 200,
@@ -74,11 +74,16 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
       child: Stack(children: [
         Container(
           alignment: Alignment.topCenter,
-          child: Image.asset(
-            tourGuideDetailJson.coverImageUrl ?? AppImages.winterPicture,
+          child: CachedNetworkImage(
+            imageUrl: tourGuideDetailJson.coverImageUrl ?? '',
+            filterQuality: FilterQuality.high,
             fit: BoxFit.cover,
-            width: width,
             height: 170,
+            fadeInCurve: Curves.linearToEaseOut,
+            fadeOutCurve: Curves.bounceInOut,
+            errorWidget: (context, url, error) =>
+                SvgPicture.asset(AppIcons.icErrorImage),
+            placeholder: (context, url) => const AppLayoutShimmer(),
           ),
         ),
         Positioned(
@@ -134,8 +139,17 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                     alignment: Alignment.center,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(40),
-                      child: Image.asset(
-                          tourGuideDetailJson.profileImageUrl ?? ''),
+                      child: CachedNetworkImage(
+                        imageUrl: tourGuideDetailJson.profileImageUrl ?? '',
+                        filterQuality: FilterQuality.high,
+                        fit: BoxFit.cover,
+                        height: 170,
+                        fadeInCurve: Curves.linearToEaseOut,
+                        fadeOutCurve: Curves.bounceInOut,
+                        errorWidget: (context, url, error) =>
+                            SvgPicture.asset(AppIcons.icErrorImage),
+                        placeholder: (context, url) => const AppLayoutShimmer(),
+                      ),
                     ),
                   )
                 ],
@@ -329,7 +343,8 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
               ...List.generate(
                   tourGuideDetailJson.experiences?.length ?? 0,
                   (index) => MyExperienceItem(
-                        myExperienceJson: tourGuideDetailJson.experiences?[index],
+                        myExperienceJson:
+                            tourGuideDetailJson.experiences?[index],
                         edited: false,
                       ))
             ],
