@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:travel_booking_tour/base/result.dart';
+import 'package:travel_booking_tour/data/network/network_exception.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_event.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_state.dart';
 import 'package:travel_booking_tour/features/explore/repository/explore_repository.dart';
@@ -22,35 +24,45 @@ class BlocExploreScreen extends Bloc<BlocExploreEvent, BlocExploreState> {
   void mapStateToEvent(
       BlocExploreEvent event, Emitter<BlocExploreState> emit) async {
     if (event is BlocExploreEventInitial) {
-      List<TourDetailJson> topJourneyJsons = [];
-      List<TourGuideDetailJson> bestGuideJsons = [];
-      List<TourDetailJson> topExperienceJsons = [];
-      List<TourDetailJson> featuresTourJsons = [];
-      List<TourDetailJson> travelNewJsons = [];
-      await Future.forEach(event.objects!, (element) async {
-        if (element == TypeDestination.featureTourJson) {
-          featuresTourJsons = await _exploreRepository.getListTopJourney();
-        } else if (element == TypeDestination.bestGuideJson) {
-          bestGuideJsons = await _exploreRepository.getListTourGuide();
-        } else if (element == TypeDestination.topExperienceJson) {
-          topExperienceJsons = await _exploreRepository.getListTopJourney();
-        } else if (element == TypeDestination.topJourneyJson) {
-          topJourneyJsons = await _exploreRepository.getListTopJourney();
-        } else if (element == TypeDestination.travelNewJson) {
-          travelNewJsons = await _exploreRepository.getListTopJourney();
-        } else {}
-      });
+      try {
+        emit(BlocExploreStateLoadData(
+            appResult: AppResult(state: ResultState.loading)));
 
-      Map<TypeDestination, List<dynamic>> mapData = {
-        TypeDestination.featureTourJson: featuresTourJsons,
-        TypeDestination.bestGuideJson: bestGuideJsons,
-        TypeDestination.topExperienceJson: topExperienceJsons,
-        TypeDestination.topJourneyJson: topJourneyJsons,
-        TypeDestination.travelNewJson: travelNewJsons,
-      };
+        List<TourDetailJson> topJourneyJsons = [];
+        List<TourGuideDetailJson> bestGuideJsons = [];
+        List<TourDetailJson> topExperienceJsons = [];
+        List<TourDetailJson> featuresTourJsons = [];
+        List<TourDetailJson> travelNewJsons = [];
 
-      emit(BlocExploreStateLoadData(
-          appResult: AppResult(state: ResultState.success, result: mapData)));
+        await Future.forEach(event.objects!, (element) async {
+          if (element == TypeDestination.featureTourJson) {
+            featuresTourJsons = await _exploreRepository.getListTopJourney();
+          } else if (element == TypeDestination.bestGuideJson) {
+            bestGuideJsons = await _exploreRepository.getListTourGuide();
+          } else if (element == TypeDestination.topExperienceJson) {
+            topExperienceJsons = await _exploreRepository.getListTopJourney();
+          } else if (element == TypeDestination.topJourneyJson) {
+            topJourneyJsons = await _exploreRepository.getListTopJourney();
+          } else if (element == TypeDestination.travelNewJson) {
+            travelNewJsons = await _exploreRepository.getListTopJourney();
+          } else {}
+        });
+
+        Map<TypeDestination, List<dynamic>> mapData = {
+          TypeDestination.featureTourJson: featuresTourJsons,
+          TypeDestination.bestGuideJson: bestGuideJsons,
+          TypeDestination.topExperienceJson: topExperienceJsons,
+          TypeDestination.topJourneyJson: topJourneyJsons,
+          TypeDestination.travelNewJson: travelNewJsons,
+        };
+
+        emit(BlocExploreStateLoadData(
+            appResult: AppResult(state: ResultState.success, result: mapData)));
+      } on NetworkException catch (e) {
+        emit(BlocExploreStateLoadData(
+            appResult: AppResult(state: ResultState.fail)));
+        debugPrint('NetworkException : ${e.getTextError}');
+      }
     } else if (event is BlocExploreEventOnTourClick) {
       Routes.navigateTo(
           AppPath.tourDetail, {AppConstant.data: event.tourDetailJson});

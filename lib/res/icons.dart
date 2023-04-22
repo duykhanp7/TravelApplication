@@ -185,4 +185,11 @@ class AppIcons {
   static const String icMoreTransparent =
       '$parentPathIcons/ic_more_transparent.svg';
   static const String icErrorImage = '$parentPathIcons/error_image.svg';
+  static const String icLoadImageNull =
+      '$parentPathIcons/ic_load_image_null.svg';
+  static const String icEmptyPage = '$parentPathIcons/ic_empty_page.svg';
+  static const String icErrorPage = '$parentPathIcons/ic_error_page.svg';
+  static const String icImageNull = '$parentPathIcons/ic_load_image_null.svg';
+  static const String icVisibilityOn = '$parentPathIcons/visibility_on.svg';
+  static const String icVisibilityOff = '$parentPathIcons/visibility_off.svg';
 }

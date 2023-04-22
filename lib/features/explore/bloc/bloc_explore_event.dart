@@ -8,11 +8,9 @@ abstract class BlocExploreEvent extends Equatable {}
 
 class BlocExploreEventInitial extends BlocExploreEvent {
   final List<TypeDestination>? objects;
-
   BlocExploreEventInitial({required this.objects});
-
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [objects];
 }
 
 class BlocExploreEventReloadData extends BlocExploreEvent {

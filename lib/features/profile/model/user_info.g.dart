@@ -18,12 +18,9 @@ _$_UserInfoJson _$$_UserInfoJsonFromJson(Map<String, dynamic> json) =>
       provider: json['provider'] as String?,
       confirmed: json['confirmed'] as bool?,
       blocked: json['blocked'] as bool?,
-      createdAt: json['createdAt'] == null
-          ? null
-          : DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
-          ? null
-          : DateTime.parse(json['updatedAt'] as String),
+      createdAt: json['createdAt'] as String?,
+      updatedAt: json['updatedAt'] as String?,
+      type: json['type'] as String?,
     );
 
 Map<String, dynamic> _$$_UserInfoJsonToJson(_$_UserInfoJson instance) =>
@@ -38,6 +35,7 @@ Map<String, dynamic> _$$_UserInfoJsonToJson(_$_UserInfoJson instance) =>
       'provider': instance.provider,
       'confirmed': instance.confirmed,
       'blocked': instance.blocked,
-      'createdAt': instance.createdAt?.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'createdAt': instance.createdAt,
+      'updatedAt': instance.updatedAt,
+      'type': instance.type,
     };

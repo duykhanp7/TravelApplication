@@ -12,7 +12,6 @@ import 'package:travel_booking_tour/features/my_trip/bloc/bloc_my_trips_screen.d
 import 'package:travel_booking_tour/features/payment/bloc/bloc_payment_screen.dart';
 import 'package:travel_booking_tour/features/profile/bloc/my_journeys/bloc_my_journeys_screen.dart';
 import 'package:travel_booking_tour/features/profile/bloc/my_photos/bloc_my_photos_screen.dart';
-import 'package:travel_booking_tour/features/setting/bloc/bloc_setting_screen.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/bloc/bloc_terms_and_conditions_screen.dart';
 import 'package:travel_booking_tour/features/tour/detail/bloc/bloc_tour_detail_screen.dart';
 
@@ -20,6 +19,8 @@ import '../features/explore/bloc/bloc_see_more_screen.dart';
 import '../features/guide/choose_guide/bloc/bloc_edit_trip_information_screen.dart';
 import '../features/onboarding/bloc/bloc_onboarding_screen.dart';
 import '../features/profile/bloc/profile/bloc_profile_screen.dart';
+import '../features/profile/bloc/edit_profile/bloc_edit_profile_screen.dart';
+import '../features/setting/bloc/setting/bloc_setting_screen.dart';
 import '../features/splash/bloc/bloc_splash_event.dart';
 import '../features/splash/bloc/bloc_splash_screen.dart';
 
@@ -67,6 +68,8 @@ class AppBlocProvider {
     BlocProvider<BlocMyJourneysScreen>(
         create: (context) => BlocMyJourneysScreen()),
     BlocProvider<BlocChangePasswordScreen>(
-        create: (context) => BlocChangePasswordScreen())
+        create: (context) => BlocChangePasswordScreen()),
+    BlocProvider<BlocEditProfileScreen>(
+        create: (context) => BlocEditProfileScreen())
   ];
 }

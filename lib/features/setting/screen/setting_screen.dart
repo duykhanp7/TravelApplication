@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:travel_booking_tour/common/enum/enums.dart';
+import 'package:travel_booking_tour/features/profile/bloc/profile/bloc_profile_screen.dart';
+import 'package:travel_booking_tour/features/profile/bloc/profile/bloc_profile_state.dart';
+import 'package:travel_booking_tour/features/profile/model/user_info.dart';
 import 'package:travel_booking_tour/features/setting/model/setting_menu_item.dart';
 import 'package:travel_booking_tour/res/app_switch.dart';
 import 'package:travel_booking_tour/res/button.dart';
@@ -46,6 +51,7 @@ class _SettingScreen extends State<SettingScreen> {
           name: 'Usage',
           endIcon: AppIcons.icArrowNext),
     ];
+
     super.initState();
   }
 
@@ -99,10 +105,7 @@ class _SettingScreen extends State<SettingScreen> {
                                 fit: BoxFit.cover,
                                 child: AppSwitch(
                                   state: true,
-                                  onClick: (value) {
-                                    debugPrint(
-                                        'App Switch State Change : $value');
-                                  },
+                                  onClick: (value) {},
                                 ),
                               ),
                             )
@@ -139,19 +142,43 @@ class _SettingScreen extends State<SettingScreen> {
                 child: Image.asset(AppImages.emmy)),
           ),
           const SizedBox(width: 16),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Yoo Jin',
-                  style: AppStyles.headlineLarge.copyWith(
-                      fontWeight: FontWeight.w100,
-                      fontStyle: FontStyle.italic,
-                      color: AppColors.white)),
-              const SizedBox(height: 2),
-              Text('Traveler',
-                  style: AppStyles.titleSmall.copyWith(color: AppColors.white)),
-            ],
+          BlocBuilder<BlocProfileScreen, BlocProfileState>(
+            buildWhen: (previous, current) =>
+                current is BlocProfileStateLoadUserInforResult,
+            builder: (context, state) {
+              UserInfoJson? userInfoJson;
+              if (state is BlocProfileStateLoadUserInforResult) {
+                if (state.appResult.state == ResultState.success) {
+                  userInfoJson = state.appResult.result as UserInfoJson?;
+                }
+              }
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 150,
+                    child: Text(
+                        '${userInfoJson?.lastName ?? ''} ${userInfoJson?.firstName ?? ''}',
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
+                        style: AppStyles.headlineLarge.copyWith(
+                            fontWeight: FontWeight.w100,
+                            fontStyle: FontStyle.italic,
+                            color: AppColors.white)),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                      userInfoJson == null
+                          ? ''
+                          : userInfoJson.type == 'traverler'
+                              ? 'Traverler'
+                              : 'Guide',
+                      style: AppStyles.titleSmall
+                          .copyWith(color: AppColors.white)),
+                ],
+              );
+            },
           ),
           const Spacer(),
           PrimaryInactiveButton(

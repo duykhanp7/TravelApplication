@@ -23,7 +23,6 @@ class _TopExperienceItem extends State<TopExperienceItem> {
 
   @override
   void initState() {
-    debugPrint('initState');
     _blocExploreScreen = BlocProvider.of<BlocExploreScreen>(context);
     super.initState();
   }

@@ -30,8 +30,9 @@ mixin _$UserInfoJson {
   String? get provider => throw _privateConstructorUsedError;
   bool? get confirmed => throw _privateConstructorUsedError;
   bool? get blocked => throw _privateConstructorUsedError;
-  DateTime? get createdAt => throw _privateConstructorUsedError;
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  String? get createdAt => throw _privateConstructorUsedError;
+  String? get updatedAt => throw _privateConstructorUsedError;
+  String? get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -56,8 +57,9 @@ abstract class $UserInfoJsonCopyWith<$Res> {
       String? provider,
       bool? confirmed,
       bool? blocked,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      String? createdAt,
+      String? updatedAt,
+      String? type});
 }
 
 /// @nodoc
@@ -85,6 +87,7 @@ class _$UserInfoJsonCopyWithImpl<$Res, $Val extends UserInfoJson>
     Object? blocked = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? type = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -130,11 +133,15 @@ class _$UserInfoJsonCopyWithImpl<$Res, $Val extends UserInfoJson>
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -158,8 +165,9 @@ abstract class _$$_UserInfoJsonCopyWith<$Res>
       String? provider,
       bool? confirmed,
       bool? blocked,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      String? createdAt,
+      String? updatedAt,
+      String? type});
 }
 
 /// @nodoc
@@ -185,6 +193,7 @@ class __$$_UserInfoJsonCopyWithImpl<$Res>
     Object? blocked = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? type = freezed,
   }) {
     return _then(_$_UserInfoJson(
       id: freezed == id
@@ -230,11 +239,15 @@ class __$$_UserInfoJsonCopyWithImpl<$Res>
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -254,7 +267,8 @@ class _$_UserInfoJson with DiagnosticableTreeMixin implements _UserInfoJson {
       this.confirmed,
       this.blocked,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.type});
 
   factory _$_UserInfoJson.fromJson(Map<String, dynamic> json) =>
       _$$_UserInfoJsonFromJson(json);
@@ -280,13 +294,15 @@ class _$_UserInfoJson with DiagnosticableTreeMixin implements _UserInfoJson {
   @override
   final bool? blocked;
   @override
-  final DateTime? createdAt;
+  final String? createdAt;
   @override
-  final DateTime? updatedAt;
+  final String? updatedAt;
+  @override
+  final String? type;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserInfoJson(id: $id, username: $username, firstName: $firstName, lastName: $lastName, avatar: $avatar, cover: $cover, email: $email, provider: $provider, confirmed: $confirmed, blocked: $blocked, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserInfoJson(id: $id, username: $username, firstName: $firstName, lastName: $lastName, avatar: $avatar, cover: $cover, email: $email, provider: $provider, confirmed: $confirmed, blocked: $blocked, createdAt: $createdAt, updatedAt: $updatedAt, type: $type)';
   }
 
   @override
@@ -305,7 +321,8 @@ class _$_UserInfoJson with DiagnosticableTreeMixin implements _UserInfoJson {
       ..add(DiagnosticsProperty('confirmed', confirmed))
       ..add(DiagnosticsProperty('blocked', blocked))
       ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('updatedAt', updatedAt));
+      ..add(DiagnosticsProperty('updatedAt', updatedAt))
+      ..add(DiagnosticsProperty('type', type));
   }
 
   @override
@@ -331,7 +348,8 @@ class _$_UserInfoJson with DiagnosticableTreeMixin implements _UserInfoJson {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
@@ -349,7 +367,8 @@ class _$_UserInfoJson with DiagnosticableTreeMixin implements _UserInfoJson {
       confirmed,
       blocked,
       createdAt,
-      updatedAt);
+      updatedAt,
+      type);
 
   @JsonKey(ignore: true)
   @override
@@ -377,8 +396,9 @@ abstract class _UserInfoJson implements UserInfoJson {
       final String? provider,
       final bool? confirmed,
       final bool? blocked,
-      final DateTime? createdAt,
-      final DateTime? updatedAt}) = _$_UserInfoJson;
+      final String? createdAt,
+      final String? updatedAt,
+      final String? type}) = _$_UserInfoJson;
 
   factory _UserInfoJson.fromJson(Map<String, dynamic> json) =
       _$_UserInfoJson.fromJson;
@@ -404,9 +424,11 @@ abstract class _UserInfoJson implements UserInfoJson {
   @override
   bool? get blocked;
   @override
-  DateTime? get createdAt;
+  String? get createdAt;
   @override
-  DateTime? get updatedAt;
+  String? get updatedAt;
+  @override
+  String? get type;
   @override
   @JsonKey(ignore: true)
   _$$_UserInfoJsonCopyWith<_$_UserInfoJson> get copyWith =>
