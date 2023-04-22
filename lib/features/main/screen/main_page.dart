@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel_booking_tour/common/app_constant.dart';
+import 'package:travel_booking_tour/common/enum/enums.dart';
 import 'package:travel_booking_tour/data/local/app_storage.dart';
 import 'package:travel_booking_tour/features/explore/screen/explore_screen.dart';
 import 'package:travel_booking_tour/features/my_trip/screen/my_trips_screen.dart';
@@ -12,6 +13,9 @@ import 'package:travel_booking_tour/features/main/bloc/bloc_main_screen.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_main_state.dart';
 import 'package:travel_booking_tour/features/message/chat_screen.dart';
 import 'package:travel_booking_tour/features/notification/notification_screen.dart';
+import 'package:travel_booking_tour/features/profile/bloc/profile/bloc_profile_screen.dart';
+import 'package:travel_booking_tour/features/profile/bloc/profile/bloc_profile_state.dart';
+import 'package:travel_booking_tour/features/profile/model/user_info.dart';
 import 'package:travel_booking_tour/features/profile/screen/profile_screen.dart';
 import 'package:travel_booking_tour/res/app_appbar.dart';
 import 'package:travel_booking_tour/res/app_layout_shimmer.dart';
@@ -54,6 +58,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
   late List<ScrollController> _scrollController;
   late BlocMainScreen _blocMainScreen;
   late BlocMyTripScreen _blocMyTripScreen;
+  late BlocProfileScreen _blocProfileScreen;
   double heightAppBar = 170;
 
   @override
@@ -92,6 +97,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
 
     _blocMainScreen = BlocProvider.of<BlocMainScreen>(context);
     _blocMyTripScreen = BlocProvider.of<BlocMyTripScreen>(context);
+    _blocProfileScreen = BlocProvider.of<BlocProfileScreen>(context);
 
     super.initState();
   }
@@ -372,21 +378,44 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
         Positioned(
             right: 16,
             bottom: 20,
-            child: Text(
-              'Yoo Jin',
-              style: AppStyles.headlineLarge.copyWith(
-                  fontWeight: FontWeight.w100,
-                  fontStyle: FontStyle.italic,
-                  color: AppColors.black),
-            )),
+            child: BlocBuilder<BlocProfileScreen, BlocProfileState>(
+                buildWhen: (previous, current) =>
+                    current is BlocProfileStateLoadUserInforResult,
+                builder: (context, state) {
+                  UserInfoJson? userInfoJson;
+                  if (state is BlocProfileStateLoadUserInforResult) {
+                    if (state.appResult.state == ResultState.success) {
+                      userInfoJson = state.appResult.result as UserInfoJson?;
+                    }
+                  }
+                  return Text(
+                    '${userInfoJson?.lastName ?? ''} ${userInfoJson?.firstName ?? ''}',
+                    style: AppStyles.headlineLarge.copyWith(
+                        fontWeight: FontWeight.w100,
+                        fontStyle: FontStyle.italic,
+                        color: AppColors.black),
+                  );
+                })),
         Positioned(
             right: 16,
             bottom: 0,
-            child: Text(
-              'yoojin@gmail.com',
-              style: AppStyles.titleMedium.copyWith(
-                  fontWeight: FontWeight.w400, color: AppColors.textHintColor),
-            ))
+            child: BlocBuilder<BlocProfileScreen, BlocProfileState>(
+                buildWhen: (previous, current) =>
+                    current is BlocProfileStateLoadUserInforResult,
+                builder: (context, state) {
+                  UserInfoJson? userInfoJson;
+                  if (state is BlocProfileStateLoadUserInforResult) {
+                    if (state.appResult.state == ResultState.success) {
+                      userInfoJson = state.appResult.result as UserInfoJson?;
+                    }
+                  }
+                  return Text(
+                    userInfoJson?.email ?? '',
+                    style: AppStyles.titleMedium.copyWith(
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.textHintColor),
+                  );
+                }))
       ],
     );
   }
@@ -558,8 +587,11 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                                         AppIcons.setting,
                                       ),
                                     ),
-                                    onTap: () =>
-                                        Routes.navigateTo(AppPath.settings, {}),
+                                    onTap: () => Routes.navigateTo(
+                                        AppPath.settings, {
+                                      AppConstant.data:
+                                          _blocProfileScreen.userInfoJson
+                                    }),
                                   )),
                             )),
                       ],

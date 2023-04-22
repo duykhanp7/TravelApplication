@@ -8,4 +8,5 @@ class AppConstant {
   static const String tripInformationMode = 'tripInformationMode';
   static const String deeplink = 'deeplink';
   static const String token = 'token';
+  static const String info = 'info';
 }

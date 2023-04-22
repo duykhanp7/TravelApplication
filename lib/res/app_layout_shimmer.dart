@@ -3,10 +3,11 @@ import 'package:travel_booking_tour/res/colors.dart';
 import 'dart:math' as math show sin, pi;
 
 class AppLayoutShimmer extends StatelessWidget {
-  const AppLayoutShimmer({super.key, this.width, this.height});
+  const AppLayoutShimmer({super.key, this.width, this.height, this.background});
 
   final double? width;
   final double? height;
+  final Color? background;
 
   @override
   Widget build(BuildContext context) {

@@ -17,6 +17,7 @@ _$_UserJson _$$_UserJsonFromJson(Map<String, dynamic> json) => _$_UserJson(
       updatedAt: json['updatedAt'] as String?,
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
+      type: json['type'] as String?,
     );
 
 Map<String, dynamic> _$$_UserJsonToJson(_$_UserJson instance) =>
@@ -31,4 +32,5 @@ Map<String, dynamic> _$$_UserJsonToJson(_$_UserJson instance) =>
       'updatedAt': instance.updatedAt,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
+      'type': instance.type,
     };

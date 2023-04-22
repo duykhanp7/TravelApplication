@@ -11,6 +11,7 @@ import 'package:travel_booking_tour/features/explore/widget/top_experience_item.
 import 'package:travel_booking_tour/features/explore/widget/tour_guide_item.dart';
 import 'package:travel_booking_tour/features/explore/widget/travel_new_item.dart';
 import 'package:travel_booking_tour/l10n/generated/l10n.dart';
+import 'package:travel_booking_tour/res/app_error_page.dart';
 import 'package:travel_booking_tour/res/app_layout_shimmer.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/system.dart';
@@ -46,7 +47,13 @@ class _ExploreScreen extends State<ExploreScreen> {
         color: AppColors.primary,
         onRefresh: () async {
           debugPrint('RefreshIndicatorRefreshIndicator');
-          await Future.delayed(const Duration(seconds: 5), () {});
+          _blocExploreScreen.add(BlocExploreEventInitial(objects: const [
+            TypeDestination.bestGuideJson,
+            TypeDestination.featureTourJson,
+            TypeDestination.topExperienceJson,
+            TypeDestination.topJourneyJson,
+            TypeDestination.travelNewJson
+          ]));
           return;
         },
         child: Container(
@@ -76,30 +83,37 @@ class _ExploreScreen extends State<ExploreScreen> {
       buildWhen: (previous, current) => current is BlocExploreStateLoadData,
       builder: (context, exploreState) {
         if (exploreState is BlocExploreStateLoadData) {
-          return Container(
-            color: AppColors.white,
-            padding: const EdgeInsets.only(left: 16, right: 16),
-            child: SingleChildScrollView(
-              controller: widget.scrollController,
-              physics: const BouncingScrollPhysics(),
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
-                  _buildTopJourneyWidget((exploreState.appResult.result
-                      as Map)[TypeDestination.topJourneyJson]),
-                  const SizedBox(height: 30),
-                  _buildBestGuide((exploreState.appResult.result
-                      as Map)[TypeDestination.bestGuideJson]),
-                  _buildTopExperiences((exploreState.appResult.result
-                      as Map)[TypeDestination.topExperienceJson]),
-                  _buildFeaturedTours((exploreState.appResult.result
-                      as Map)[TypeDestination.featureTourJson]),
-                  _buildTravelNews((exploreState.appResult.result
-                      as Map)[TypeDestination.travelNewJson]),
-                ],
+          if (exploreState.appResult.state == ResultState.loading) {
+            return Container(
+                color: AppColors.white, child: const AppLayoutShimmer());
+          } else if (exploreState.appResult.state == ResultState.fail) {
+            return const AppErrorPage();
+          } else if (exploreState.appResult.state == ResultState.success) {
+            return Container(
+              color: AppColors.white,
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: SingleChildScrollView(
+                controller: widget.scrollController,
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 20),
+                    _buildTopJourneyWidget((exploreState.appResult.result
+                        as Map)[TypeDestination.topJourneyJson]),
+                    const SizedBox(height: 30),
+                    _buildBestGuide((exploreState.appResult.result
+                        as Map)[TypeDestination.bestGuideJson]),
+                    _buildTopExperiences((exploreState.appResult.result
+                        as Map)[TypeDestination.topExperienceJson]),
+                    _buildFeaturedTours((exploreState.appResult.result
+                        as Map)[TypeDestination.featureTourJson]),
+                    _buildTravelNews((exploreState.appResult.result
+                        as Map)[TypeDestination.travelNewJson]),
+                  ],
+                ),
               ),
-            ),
-          );
+            );
+          }
         }
         return const AppLayoutShimmer();
       },

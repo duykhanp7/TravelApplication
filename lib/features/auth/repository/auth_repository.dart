@@ -1,9 +1,14 @@
+import 'dart:convert';
+
+import 'package:travel_booking_tour/common/app_constant.dart';
 import 'package:travel_booking_tour/data/dio/api_client.dart';
+import 'package:travel_booking_tour/data/local/app_storage.dart';
 
 import '../../../data/model/user.dart';
 
 class AuthRepository {
   final ApiService _apiService = ApiService();
+  final AppStorage _appStorage = AppStorage();
   final String _authPath = '/api/auth';
   final String _signUpPath = '/api/auth/local/register';
   final String _signInPath = '/api/auth/local';
@@ -53,4 +58,7 @@ class AuthRepository {
         endPoint: '$_authPath/change-password',
         converter: (data) => UserJson.fromJson(data),
       );
+
+  Future<UserJson?> get user async => UserJson.fromJson(
+      jsonDecode(await _appStorage.getData(AppConstant.user) ?? ''));
 }

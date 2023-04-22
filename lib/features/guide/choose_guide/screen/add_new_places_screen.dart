@@ -112,6 +112,7 @@ class _AddNewPlacesScreen extends State<AddNewPlacesScreen> {
                         (index) => DestinationItem(
                               check: true,
                               destinationJson: destinations[index],
+                              onClick: (value, check) {},
                             )),
                   ),
                 );

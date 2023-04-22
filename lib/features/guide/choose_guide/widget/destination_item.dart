@@ -9,9 +9,13 @@ import '../bloc/bloc_edit_trip_information_state.dart';
 
 class DestinationItem extends StatefulWidget {
   const DestinationItem(
-      {super.key, required this.check, required this.destinationJson});
+      {super.key,
+      required this.check,
+      required this.destinationJson,
+      required this.onClick});
   final bool check;
   final DestinationJson destinationJson;
+  final void Function(DestinationJson, bool) onClick;
 
   @override
   State<StatefulWidget> createState() {
@@ -52,10 +56,12 @@ class _DestinationItem extends State<DestinationItem> {
                       if (check) {
                         setState(() {
                           check = false;
+                          widget.onClick(widget.destinationJson, check);
                         });
                       } else {
                         setState(() {
                           check = true;
+                          widget.onClick(widget.destinationJson, check);
                         });
                       }
                     },

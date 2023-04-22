@@ -45,7 +45,8 @@ class BlocSignupScreen extends Bloc<BlocSignUpEvent, BlocSignUpState> {
               "password": password,
               "firstName": firstName,
               "lastName": lastName,
-              "country": country
+              "country": country,
+              "type": "traverler"
             };
             final UserJson? user = await _authRepository.signUp(data);
             if (user != null) {
