@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
 class AppTextField extends StatefulWidget {
@@ -67,6 +68,14 @@ class AppTextField extends StatefulWidget {
 }
 
 class _AppTextField extends State<AppTextField> {
+  bool visibility = false;
+
+  @override
+  void initState() {
+    visibility = widget.obsecureText ?? false;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -108,9 +117,9 @@ class _AppTextField extends State<AppTextField> {
                     prefixIconConstraints:
                         const BoxConstraints(minHeight: 25, minWidth: 25),
                     prefixIcon: widget.prefixIcon,
-                    suffixIcon: widget.suffixIcon,
+                    suffixIcon: _buildSuffixIcon(),
                     suffixIconConstraints:
-                        const BoxConstraints(minHeight: 25, minWidth: 25),
+                        const BoxConstraints(minHeight: 25, minWidth: 35),
                     hintText: widget.hintText,
                     hintStyle: widget.hintTextStyle ??
                         AppStyles.titleMedium.copyWith(
@@ -135,7 +144,7 @@ class _AppTextField extends State<AppTextField> {
                         borderSide: BorderSide(
                             width: 2,
                             color: AppColors.underLineTextFieldColor))),
-            obscureText: widget.obsecureText ?? false,
+            obscureText: visibility,
             onChanged: widget.onChange ?? (value) {},
             validator: widget.validator,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -151,5 +160,27 @@ class _AppTextField extends State<AppTextField> {
         ],
       ),
     );
+  }
+
+  Widget? _buildSuffixIcon() {
+    if (widget.obsecureText != null && widget.obsecureText!) {
+      return Padding(
+        padding: const EdgeInsets.only(right: 10.0),
+        child: InkWell(
+          child: SvgPicture.asset(
+            visibility ? AppIcons.icVisibilityOn : AppIcons.icVisibilityOff,
+            width: 15,
+            height: 15,
+            color: AppColors.textHintColor,
+          ),
+          onTap: () {
+            setState(() {
+              visibility = !visibility;
+            });
+          },
+        ),
+      );
+    }
+    return widget.suffixIcon;
   }
 }

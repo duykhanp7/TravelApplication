@@ -24,6 +24,9 @@ class BlocSignInScreen extends Bloc<BlocSignInEvent, BlocSignInState> {
   final AppStorage _appStorage = AppStorage();
   String errorText = 'This email has not been signed up, try sign up';
   final GlobalKey<FormState> signInGlobalKey = GlobalKey<FormState>();
+  final TextEditingController emailEditingController = TextEditingController();
+  final TextEditingController passwordEditingController =
+      TextEditingController();
 
   BlocSignInScreen() : super(BlocSignInStateInitial()) {
     on<BlocSignInEvent>(mapStateToEvent, transformer: restartable());
@@ -48,6 +51,8 @@ class BlocSignInScreen extends Bloc<BlocSignInEvent, BlocSignInState> {
             _appStorage.saveData(AppConstant.password, password ?? '');
             emit(BlocSignInStateValidate(
                 appResult: AppResult(state: ResultState.success)));
+            emailEditingController.text = '';
+            passwordEditingController.text = '';
           }
         } on NetworkException catch (ex) {
           debugPrint('Expcetion Sign In ${ex.toString()}');
@@ -70,6 +75,9 @@ class BlocSignInScreen extends Bloc<BlocSignInEvent, BlocSignInState> {
             appResult: AppResult(state: ResultState.fail)));
       }
     } else if (event is BlocSignInEventSignUpClick) {
+      emailEditingController.text = '';
+      passwordEditingController.text = '';
+      signInGlobalKey.currentState?.reset();
       Routes.navigateTo(AppPath.signUpScreen, {});
     } else if (event is BlocSignInEventForgotPassword) {
       Routes.navigateTo(AppPath.forgotPassword, {});
@@ -91,6 +99,20 @@ class BlocSignInScreen extends Bloc<BlocSignInEvent, BlocSignInState> {
       final bool emailValid = AppValidator.isValidEmailFormat(value);
       if (!emailValid) {
         return 'Email is invalid';
+      }
+    }
+    return null;
+  }
+
+  String? validateTextFieldPaswordLogIn(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your password';
+    } else {
+      final bool paswordValid = RegExp(
+              r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+          .hasMatch(value);
+      if (!paswordValid) {
+        return 'Password should have at least 8 characters\nMust have : number, upper, lower characters, special characters';
       }
     }
     return null;

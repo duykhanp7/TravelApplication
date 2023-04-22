@@ -20,7 +20,8 @@ class UserJson with _$UserJson {
       String? createdAt,
       String? updatedAt,
       String? firstName,
-      String? lastName}) = _UserJson;
+      String? lastName,
+      String? type}) = _UserJson;
 
   factory UserJson.fromJson(Map<String, Object?> json) =>
       _$UserJsonFromJson(json);

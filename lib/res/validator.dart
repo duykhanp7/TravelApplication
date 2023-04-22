@@ -90,20 +90,6 @@ class AppValidator {
     return null;
   }
 
-  static String? validateTextFieldPaswordLogIn(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your password';
-    } else {
-      final bool paswordValid = RegExp(
-              r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
-          .hasMatch(value);
-      if (!paswordValid) {
-        return 'Password should have at least 8 characters\nMust have : number, upper, lower characters, special characters';
-      }
-    }
-    return null;
-  }
-
   static String? validateTextFieldConfirmPasword(
       String? value, String password) {
     if (value == null || value.isEmpty) {

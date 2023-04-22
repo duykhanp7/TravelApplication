@@ -52,7 +52,7 @@ class _ProfileScreen extends State<ProfileScreen> {
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.only(left: 16, right: 24),
+                padding: const EdgeInsets.only(left: 16, right: 24, top: 28),
                 child: Row(
                   children: [
                     Text(

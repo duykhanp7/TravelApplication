@@ -13,7 +13,7 @@ import 'package:travel_booking_tour/features/profile/screen/my_photos_screen.dar
 import 'package:travel_booking_tour/features/profile/screen/profile_add_more_journeys.dart';
 import 'package:travel_booking_tour/features/profile/screen/profile_add_more_photos.dart';
 import 'package:travel_booking_tour/features/auth/change_password/change_password_screen.dart';
-import 'package:travel_booking_tour/features/setting/screen/editing_profile_screen.dart';
+import 'package:travel_booking_tour/features/profile/screen/editing_profile_screen.dart';
 import 'package:travel_booking_tour/features/setting/screen/setting_screen.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/terms_and_conditions_screen.dart';
 import 'package:travel_booking_tour/features/tour/detail/tour_detail_screen.dart';

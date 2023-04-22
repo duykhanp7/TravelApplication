@@ -406,6 +406,7 @@ class _EditTripInformationScreen extends State<EditTripInformationScreen> {
                                 : DestinationItem(
                                     check: false,
                                     destinationJson: items[index],
+                                    onClick: (value, check) {},
                                   )),
                       ));
                 } else {

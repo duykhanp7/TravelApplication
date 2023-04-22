@@ -10,20 +10,20 @@ part 'user_info.g.dart';
 
 @freezed
 class UserInfoJson with _$UserInfoJson {
-  const factory UserInfoJson({
-    int? id,
-    String? username,
-    String? firstName,
-    String? lastName,
-    String? avatar,
-    String? cover,
-    String? email,
-    String? provider,
-    bool? confirmed,
-    bool? blocked,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  }) = _UserInfoJson;
+  const factory UserInfoJson(
+      {int? id,
+      String? username,
+      String? firstName,
+      String? lastName,
+      String? avatar,
+      String? cover,
+      String? email,
+      String? provider,
+      bool? confirmed,
+      bool? blocked,
+      String? createdAt,
+      String? updatedAt,
+      String? type}) = _UserInfoJson;
 
   factory UserInfoJson.fromJson(Map<String, Object?> json) =>
       _$UserInfoJsonFromJson(json);

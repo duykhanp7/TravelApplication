@@ -60,7 +60,7 @@ abstract class NetworkException with _$NetworkException implements Exception {
       if (result != null) {
         return converter(result);
       }
-      return response.data as T;
+      return converter(response.data);
     }
     return {} as T;
   }

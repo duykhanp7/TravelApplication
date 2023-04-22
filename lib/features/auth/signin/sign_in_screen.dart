@@ -219,6 +219,7 @@ class _SignInScreen extends State<SignInScreen> {
             AppTextField(
               hintText: localization.email,
               obsecureText: false,
+              textEditingController: _blocSignInScreen.emailEditingController,
               labelText: localization.email,
               textInputType: TextInputType.emailAddress,
               validator: _blocSignInScreen.validateTextFieldEmail,
@@ -231,8 +232,10 @@ class _SignInScreen extends State<SignInScreen> {
             AppTextField(
               hintText: localization.password,
               obsecureText: true,
+              textEditingController:
+                  _blocSignInScreen.passwordEditingController,
               labelText: localization.password,
-              validator: AppValidator.validateTextFieldPaswordLogIn,
+              validator: _blocSignInScreen.validateTextFieldPaswordLogIn,
               onChange: (value) => _blocSignInScreen
                   .add(BlocSignInEventChangePassword(password: value)),
             ),

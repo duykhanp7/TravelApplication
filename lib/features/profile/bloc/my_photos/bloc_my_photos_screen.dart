@@ -2,10 +2,13 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:travel_booking_tour/data/network/network_exception.dart';
 import 'package:travel_booking_tour/features/profile/bloc/my_photos/bloc_my_photos_event.dart';
 import 'package:travel_booking_tour/features/profile/bloc/my_photos/bloc_my_photos_state.dart';
+import 'package:travel_booking_tour/features/profile/model/photo_json.dart';
 import 'package:travel_booking_tour/features/profile/repository/profile_repository.dart';
 
 import '../../../../base/result.dart';
@@ -44,11 +47,18 @@ class BlocMyPhotosScreen extends Bloc<BlocMyPhotosEvent, BlocMyPhotosState> {
     } else if (event is BlocMyPhotosEventClickButtonTakePhoto) {
     } else if (event is BlocMyPhotosEventClickButtonSelectPhotosDone) {
       if (newPhotos.isNotEmpty) {
-        myPhotos.addAll(newPhotos);
-        emit(BlocMyPhotosStateAddNewPhotos(
-            appResult:
-                AppResult(state: ResultState.success, result: myPhotos)));
-        newPhotos.clear();
+        try {
+          PhotoJson? photo =
+              await _profileRepository.postPhoto(File(newPhotos[0]));
+          debugPrint('PhotoJsonPhotoJson respone : ${photo.toJson()}');
+          // myPhotos.addAll(newPhotos);
+          // emit(BlocMyPhotosStateAddNewPhotos(
+          //     appResult:
+          //         AppResult(state: ResultState.success, result: myPhotos)));
+          // newPhotos.clear();
+        } on NetworkException catch (e) {
+          debugPrint(e.getTextError);
+        }
       }
       Routes.backTo();
     } else if (event is BlocMyPhotosEventRequestPermission) {
