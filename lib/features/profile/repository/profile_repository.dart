@@ -12,26 +12,27 @@ import 'package:travel_booking_tour/features/profile/model/user_info.dart';
 class ProfileRepository extends BaseRepository {
   final ApiService _apiService = ApiService();
   final AppStorage _appStorage = AppStorage();
-  final String userInfoEndPoint = '/api/users/me';
+  final String userInfoEndPoint = '/api/users/';
   final String photoEndPoint = '/api/images';
   final String updateInfoEndPoint = '/api/users';
-
-  Future<List<String>> getMyPhotos() async {
-    return [''];
-  }
 
   Future<List<MyExperienceJson>> getMyJourneys() async {
     return [];
   }
 
-  Future<UserInfoJson?> getUserInfo() async => _apiService.getJson(
-      endPoint: userInfoEndPoint,
+  Future<UserInfoJson?> getUserInfo(String? id) async => _apiService.getJson(
+      endPoint: '$userInfoEndPoint$id',
+      queryParams: {'populate': '*'},
       converter: (data) => UserInfoJson.fromJson(data));
 
   Future<PhotoJson> postPhoto(File file) async => _apiService.postFile(
       file: file,
       endPoint: photoEndPoint,
       converter: (data) => PhotoJson.fromJson(data));
+
+  Future<void> deletePhoto(String id) async => _apiService.deleteJson(
+        endPoint: '$photoEndPoint/$id',
+      );
 
   Future<UserInfoJson?> updateUserInfo(UserInfoJson? userInfoJson) async =>
       _apiService.putJson(

@@ -192,4 +192,6 @@ class AppIcons {
   static const String icImageNull = '$parentPathIcons/ic_load_image_null.svg';
   static const String icVisibilityOn = '$parentPathIcons/visibility_on.svg';
   static const String icVisibilityOff = '$parentPathIcons/visibility_off.svg';
+  static const String icDelete = '$parentPathIcons/ic_delete.svg';
+  static const String icUser = '$parentPathIcons/ic_user.svg';
 }

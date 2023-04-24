@@ -40,3 +40,5 @@ enum Searching { itemTourGuides, itemsTours }
 enum EditTripInformationMode { createNewTrip, editTripInformation }
 
 enum PasswordMode { reset, change }
+
+enum MyPhotosMode { watch, delete }

@@ -242,15 +242,66 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                   children: [
                     Container(
                       color: AppColors.transparent,
+                      height: 80,
+                      width: 80,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(40),
-                        child: Image.asset(
-                          AppImages.imageProfile,
-                          filterQuality: FilterQuality.high,
-                          fit: BoxFit.contain,
-                          height: 80,
-                          width: 80,
-                        ),
+                        child: BlocBuilder<BlocProfileScreen, BlocProfileState>(
+                            buildWhen: (previous, current) =>
+                                current is BlocProfileStateLoadUserInforResult,
+                            builder: (context, state) {
+                              UserInfoJson? userInfoJson;
+                              if (state
+                                  is BlocProfileStateLoadUserInforResult) {
+                                if (state.appResult.state ==
+                                    ResultState.loading) {
+                                  return const AppLayoutShimmer(
+                                    height: 80,
+                                    visibilityLoading: false,
+                                    width: 80,
+                                    background: AppColors.textHintColor,
+                                  );
+                                } else if (state.appResult.state ==
+                                    ResultState.fail) {
+                                  return SvgPicture.asset(
+                                    AppIcons.icUser,
+                                    height: 80,
+                                    width: 80,
+                                  );
+                                } else {
+                                  userInfoJson =
+                                      state.appResult.result as UserInfoJson?;
+                                }
+                              }
+
+                              if (userInfoJson != null &&
+                                  userInfoJson.avatar != null) {
+                                return CachedNetworkImage(
+                                  imageUrl: userInfoJson.avatar?.url ?? '',
+                                  filterQuality: FilterQuality.high,
+                                  fit: BoxFit.cover,
+                                  height: 80,
+                                  width: 80,
+                                  fadeInCurve: Curves.linearToEaseOut,
+                                  fadeOutCurve: Curves.bounceInOut,
+                                  errorWidget: (context, url, error) =>
+                                      SvgPicture.asset(AppIcons.icUser),
+                                  placeholder: (context, url) =>
+                                      AppLayoutShimmer(
+                                    visibilityLoading: false,
+                                    background: AppColors.textHintColor
+                                        .withOpacity(0.2),
+                                    height: 80,
+                                    width: 80,
+                                  ),
+                                );
+                              }
+                              return SvgPicture.asset(
+                                AppIcons.icUser,
+                                height: 80,
+                                width: 80,
+                              );
+                            }),
                       ),
                     ),
                     SizedBox(
@@ -377,27 +428,6 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
             )),
         Positioned(
             right: 16,
-            bottom: 20,
-            child: BlocBuilder<BlocProfileScreen, BlocProfileState>(
-                buildWhen: (previous, current) =>
-                    current is BlocProfileStateLoadUserInforResult,
-                builder: (context, state) {
-                  UserInfoJson? userInfoJson;
-                  if (state is BlocProfileStateLoadUserInforResult) {
-                    if (state.appResult.state == ResultState.success) {
-                      userInfoJson = state.appResult.result as UserInfoJson?;
-                    }
-                  }
-                  return Text(
-                    '${userInfoJson?.lastName ?? ''} ${userInfoJson?.firstName ?? ''}',
-                    style: AppStyles.headlineLarge.copyWith(
-                        fontWeight: FontWeight.w100,
-                        fontStyle: FontStyle.italic,
-                        color: AppColors.black),
-                  );
-                })),
-        Positioned(
-            right: 16,
             bottom: 0,
             child: BlocBuilder<BlocProfileScreen, BlocProfileState>(
                 buildWhen: (previous, current) =>
@@ -407,15 +437,37 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                   if (state is BlocProfileStateLoadUserInforResult) {
                     if (state.appResult.state == ResultState.success) {
                       userInfoJson = state.appResult.result as UserInfoJson?;
+                    } else if (state.appResult.state == ResultState.loading) {
+                      return SizedBox(
+                        width: 150,
+                        height: 45,
+                        child: AppLayoutShimmer(
+                          background: AppColors.textHintColor.withOpacity(0.2),
+                          borderRadius: 5,
+                          visibilityLoading: false,
+                        ),
+                      );
                     }
                   }
-                  return Text(
-                    userInfoJson?.email ?? '',
-                    style: AppStyles.titleMedium.copyWith(
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.textHintColor),
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        '${userInfoJson?.lastName ?? ''} ${userInfoJson?.firstName ?? ''}',
+                        style: AppStyles.headlineLarge.copyWith(
+                            fontWeight: FontWeight.w100,
+                            fontStyle: FontStyle.italic,
+                            color: AppColors.black),
+                      ),
+                      Text(
+                        userInfoJson?.email ?? '',
+                        style: AppStyles.titleMedium.copyWith(
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.textHintColor),
+                      )
+                    ],
                   );
-                }))
+                })),
       ],
     );
   }
@@ -555,14 +607,65 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                 SizedBox(
                     width: width,
                     child: Stack(
+                      alignment: Alignment.center,
                       children: [
                         SizedBox(
                           width: width,
-                          child: Image.asset(
-                            AppImages.defaultBg,
-                            filterQuality: FilterQuality.high,
-                            fit: BoxFit.cover,
-                            height: 156,
+                          child:
+                              BlocBuilder<BlocProfileScreen, BlocProfileState>(
+                            builder: (context, state) {
+                              UserInfoJson? userInfoJson;
+                              if (state
+                                  is BlocProfileStateLoadUserInforResult) {
+                                if (state.appResult.state ==
+                                    ResultState.loading) {
+                                  return SizedBox(
+                                    height: 156,
+                                    child: AppLayoutShimmer(
+                                        visibilityLoading: false,
+                                        background:
+                                            AppColors.black.withOpacity(0.2)),
+                                  );
+                                } else if (state.appResult.state ==
+                                    ResultState.fail) {
+                                  return Image.asset(
+                                    AppImages.defaultBg,
+                                    filterQuality: FilterQuality.high,
+                                    fit: BoxFit.cover,
+                                    height: 156,
+                                  );
+                                } else {
+                                  userInfoJson =
+                                      state.appResult.result as UserInfoJson?;
+                                }
+                              }
+
+                              if (userInfoJson != null &&
+                                  userInfoJson.cover != null) {
+                                return CachedNetworkImage(
+                                  imageUrl: userInfoJson.cover?.url ?? '',
+                                  filterQuality: FilterQuality.high,
+                                  fit: BoxFit.cover,
+                                  height: 156,
+                                  fadeInCurve: Curves.linearToEaseOut,
+                                  fadeOutCurve: Curves.bounceInOut,
+                                  errorWidget: (context, url, error) =>
+                                      SvgPicture.asset(AppIcons.icUser),
+                                  placeholder: (context, url) =>
+                                      AppLayoutShimmer(
+                                          height: 156,
+                                          visibilityLoading: false,
+                                          background:
+                                              AppColors.black.withOpacity(0.2)),
+                                );
+                              }
+                              return Image.asset(
+                                AppImages.defaultBg,
+                                filterQuality: FilterQuality.high,
+                                fit: BoxFit.cover,
+                                height: 156,
+                              );
+                            },
                           ),
                         ),
                         Positioned(

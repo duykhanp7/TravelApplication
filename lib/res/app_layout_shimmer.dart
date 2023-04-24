@@ -3,24 +3,49 @@ import 'package:travel_booking_tour/res/colors.dart';
 import 'dart:math' as math show sin, pi;
 
 class AppLayoutShimmer extends StatelessWidget {
-  const AppLayoutShimmer({super.key, this.width, this.height, this.background});
+  const AppLayoutShimmer(
+      {super.key,
+      this.width,
+      this.height,
+      this.background,
+      this.title,
+      this.loadingColor,
+      this.visibilityLoading,
+      this.borderRadius});
 
   final double? width;
   final double? height;
   final Color? background;
+  final Widget? title;
+  final Color? loadingColor;
+  final bool? visibilityLoading;
+  final double? borderRadius;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
         alignment: Alignment.center,
-        child: SizedBox(
-          width: width ?? 50,
-          height: height ?? 50,
-          child: SpinKitFadingCircle(
-            color: AppColors.primary.withOpacity(0.5),
-            size: 40,
-          ),
+        decoration: BoxDecoration(
+            color: background,
+            borderRadius: BorderRadius.circular(borderRadius ?? 0)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Visibility(
+                visible: visibilityLoading ?? true,
+                child: SizedBox(
+                  width: width ?? 50,
+                  height: height ?? 50,
+                  child: SpinKitFadingCircle(
+                    color: loadingColor ?? AppColors.primary.withOpacity(0.5),
+                    size: 40,
+                  ),
+                )),
+            title == null ? Container() : const SizedBox(height: 10),
+            title ?? Container()
+          ],
         ),
       ),
     );

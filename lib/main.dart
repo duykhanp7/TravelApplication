@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_booking_tour/app_main.dart';
+import 'package:travel_booking_tour/router/routes.dart';
 import 'package:travel_booking_tour/service/dynamic_deep_link_service.dart';
 import 'package:travel_booking_tour/res/system.dart';
 
@@ -15,6 +16,7 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(AppSystem.systemStyle);
 
   await DynamicDeepLinkService.initialDeepLink();
+  await Routes.initializedCamera();
 
   runApp(const MainApp());
 }

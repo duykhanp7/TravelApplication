@@ -90,4 +90,19 @@ class ApiService implements ApiInterface {
       throw NetworkException.getDioException(ex);
     }
   }
+
+  @override
+  Future<T> deleteJson<T>(
+      {Json? data,
+      required String endPoint,
+      Json? queryParams,
+      Converter<T>? converter}) async {
+    try {
+      final response = await dio.delete(_baseURL + endPoint,
+          data: data, queryParameters: queryParams);
+      return NetworkException.convertResponse(response, converter);
+    } on Exception catch (ex) {
+      throw NetworkException.getDioException(ex);
+    }
+  }
 }

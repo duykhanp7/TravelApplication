@@ -24,8 +24,8 @@ mixin _$UserInfoJson {
   String? get username => throw _privateConstructorUsedError;
   String? get firstName => throw _privateConstructorUsedError;
   String? get lastName => throw _privateConstructorUsedError;
-  String? get avatar => throw _privateConstructorUsedError;
-  String? get cover => throw _privateConstructorUsedError;
+  PhotoJson? get avatar => throw _privateConstructorUsedError;
+  PhotoJson? get cover => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get provider => throw _privateConstructorUsedError;
   bool? get confirmed => throw _privateConstructorUsedError;
@@ -33,6 +33,7 @@ mixin _$UserInfoJson {
   String? get createdAt => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
+  List<PhotoJson>? get images => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,15 +52,19 @@ abstract class $UserInfoJsonCopyWith<$Res> {
       String? username,
       String? firstName,
       String? lastName,
-      String? avatar,
-      String? cover,
+      PhotoJson? avatar,
+      PhotoJson? cover,
       String? email,
       String? provider,
       bool? confirmed,
       bool? blocked,
       String? createdAt,
       String? updatedAt,
-      String? type});
+      String? type,
+      List<PhotoJson>? images});
+
+  $PhotoJsonCopyWith<$Res>? get avatar;
+  $PhotoJsonCopyWith<$Res>? get cover;
 }
 
 /// @nodoc
@@ -88,6 +93,7 @@ class _$UserInfoJsonCopyWithImpl<$Res, $Val extends UserInfoJson>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? type = freezed,
+    Object? images = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -109,11 +115,11 @@ class _$UserInfoJsonCopyWithImpl<$Res, $Val extends UserInfoJson>
       avatar: freezed == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as PhotoJson?,
       cover: freezed == cover
           ? _value.cover
           : cover // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as PhotoJson?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -142,7 +148,35 @@ class _$UserInfoJsonCopyWithImpl<$Res, $Val extends UserInfoJson>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
+      images: freezed == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<PhotoJson>?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PhotoJsonCopyWith<$Res>? get avatar {
+    if (_value.avatar == null) {
+      return null;
+    }
+
+    return $PhotoJsonCopyWith<$Res>(_value.avatar!, (value) {
+      return _then(_value.copyWith(avatar: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PhotoJsonCopyWith<$Res>? get cover {
+    if (_value.cover == null) {
+      return null;
+    }
+
+    return $PhotoJsonCopyWith<$Res>(_value.cover!, (value) {
+      return _then(_value.copyWith(cover: value) as $Val);
+    });
   }
 }
 
@@ -159,15 +193,21 @@ abstract class _$$_UserInfoJsonCopyWith<$Res>
       String? username,
       String? firstName,
       String? lastName,
-      String? avatar,
-      String? cover,
+      PhotoJson? avatar,
+      PhotoJson? cover,
       String? email,
       String? provider,
       bool? confirmed,
       bool? blocked,
       String? createdAt,
       String? updatedAt,
-      String? type});
+      String? type,
+      List<PhotoJson>? images});
+
+  @override
+  $PhotoJsonCopyWith<$Res>? get avatar;
+  @override
+  $PhotoJsonCopyWith<$Res>? get cover;
 }
 
 /// @nodoc
@@ -194,6 +234,7 @@ class __$$_UserInfoJsonCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? type = freezed,
+    Object? images = freezed,
   }) {
     return _then(_$_UserInfoJson(
       id: freezed == id
@@ -215,11 +256,11 @@ class __$$_UserInfoJsonCopyWithImpl<$Res>
       avatar: freezed == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as PhotoJson?,
       cover: freezed == cover
           ? _value.cover
           : cover // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as PhotoJson?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -248,13 +289,17 @@ class __$$_UserInfoJsonCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
+      images: freezed == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<PhotoJson>?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserInfoJson with DiagnosticableTreeMixin implements _UserInfoJson {
+class _$_UserInfoJson extends _UserInfoJson with DiagnosticableTreeMixin {
   const _$_UserInfoJson(
       {this.id,
       this.username,
@@ -268,7 +313,10 @@ class _$_UserInfoJson with DiagnosticableTreeMixin implements _UserInfoJson {
       this.blocked,
       this.createdAt,
       this.updatedAt,
-      this.type});
+      this.type,
+      final List<PhotoJson>? images})
+      : _images = images,
+        super._();
 
   factory _$_UserInfoJson.fromJson(Map<String, dynamic> json) =>
       _$$_UserInfoJsonFromJson(json);
@@ -282,9 +330,9 @@ class _$_UserInfoJson with DiagnosticableTreeMixin implements _UserInfoJson {
   @override
   final String? lastName;
   @override
-  final String? avatar;
+  final PhotoJson? avatar;
   @override
-  final String? cover;
+  final PhotoJson? cover;
   @override
   final String? email;
   @override
@@ -299,10 +347,19 @@ class _$_UserInfoJson with DiagnosticableTreeMixin implements _UserInfoJson {
   final String? updatedAt;
   @override
   final String? type;
+  final List<PhotoJson>? _images;
+  @override
+  List<PhotoJson>? get images {
+    final value = _images;
+    if (value == null) return null;
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserInfoJson(id: $id, username: $username, firstName: $firstName, lastName: $lastName, avatar: $avatar, cover: $cover, email: $email, provider: $provider, confirmed: $confirmed, blocked: $blocked, createdAt: $createdAt, updatedAt: $updatedAt, type: $type)';
+    return 'UserInfoJson(id: $id, username: $username, firstName: $firstName, lastName: $lastName, avatar: $avatar, cover: $cover, email: $email, provider: $provider, confirmed: $confirmed, blocked: $blocked, createdAt: $createdAt, updatedAt: $updatedAt, type: $type, images: $images)';
   }
 
   @override
@@ -322,7 +379,8 @@ class _$_UserInfoJson with DiagnosticableTreeMixin implements _UserInfoJson {
       ..add(DiagnosticsProperty('blocked', blocked))
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('updatedAt', updatedAt))
-      ..add(DiagnosticsProperty('type', type));
+      ..add(DiagnosticsProperty('type', type))
+      ..add(DiagnosticsProperty('images', images));
   }
 
   @override
@@ -349,7 +407,8 @@ class _$_UserInfoJson with DiagnosticableTreeMixin implements _UserInfoJson {
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            (identical(other.type, type) || other.type == type));
+            (identical(other.type, type) || other.type == type) &&
+            const DeepCollectionEquality().equals(other._images, _images));
   }
 
   @JsonKey(ignore: true)
@@ -368,7 +427,8 @@ class _$_UserInfoJson with DiagnosticableTreeMixin implements _UserInfoJson {
       blocked,
       createdAt,
       updatedAt,
-      type);
+      type,
+      const DeepCollectionEquality().hash(_images));
 
   @JsonKey(ignore: true)
   @override
@@ -384,21 +444,23 @@ class _$_UserInfoJson with DiagnosticableTreeMixin implements _UserInfoJson {
   }
 }
 
-abstract class _UserInfoJson implements UserInfoJson {
+abstract class _UserInfoJson extends UserInfoJson {
   const factory _UserInfoJson(
       {final int? id,
       final String? username,
       final String? firstName,
       final String? lastName,
-      final String? avatar,
-      final String? cover,
+      final PhotoJson? avatar,
+      final PhotoJson? cover,
       final String? email,
       final String? provider,
       final bool? confirmed,
       final bool? blocked,
       final String? createdAt,
       final String? updatedAt,
-      final String? type}) = _$_UserInfoJson;
+      final String? type,
+      final List<PhotoJson>? images}) = _$_UserInfoJson;
+  const _UserInfoJson._() : super._();
 
   factory _UserInfoJson.fromJson(Map<String, dynamic> json) =
       _$_UserInfoJson.fromJson;
@@ -412,9 +474,9 @@ abstract class _UserInfoJson implements UserInfoJson {
   @override
   String? get lastName;
   @override
-  String? get avatar;
+  PhotoJson? get avatar;
   @override
-  String? get cover;
+  PhotoJson? get cover;
   @override
   String? get email;
   @override
@@ -429,6 +491,8 @@ abstract class _UserInfoJson implements UserInfoJson {
   String? get updatedAt;
   @override
   String? get type;
+  @override
+  List<PhotoJson>? get images;
   @override
   @JsonKey(ignore: true)
   _$$_UserInfoJsonCopyWith<_$_UserInfoJson> get copyWith =>
