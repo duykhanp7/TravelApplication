@@ -31,12 +31,12 @@ abstract class ApiInterface {
     Converter<T>? converter,
   });
 
-  // Future<T> deleteJson<T>({
-  //   required Json data,
-  //   required String endPoint,
-  //   Json? queryParams,
-  //   Converter<T>? converter,
-  // });
+  Future<T> deleteJson<T>({
+    required Json data,
+    required String endPoint,
+    Json? queryParams,
+    Converter<T>? converter,
+  });
 
   // Future<T> putRaw<T>({
   //   required String endpoint,

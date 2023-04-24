@@ -93,7 +93,7 @@ class Routes {
           ?.pushReplacementNamed(namePage, arguments: arguments);
 
   static Future<XFile?> navigateToCamera() async {
-    await initializedCamera();
+    //await initializedCamera();
     return await navigator.currentState?.push(MaterialPageRoute(
         builder: (context) =>
             AppCamera(cameras: cameras, cameraOrRecorder: cameraType)));

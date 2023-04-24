@@ -12,8 +12,12 @@ _$_UserInfoJson _$$_UserInfoJsonFromJson(Map<String, dynamic> json) =>
       username: json['username'] as String?,
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
-      avatar: json['avatar'] as String?,
-      cover: json['cover'] as String?,
+      avatar: json['avatar'] == null
+          ? null
+          : PhotoJson.fromJson(json['avatar'] as Map<String, dynamic>),
+      cover: json['cover'] == null
+          ? null
+          : PhotoJson.fromJson(json['cover'] as Map<String, dynamic>),
       email: json['email'] as String?,
       provider: json['provider'] as String?,
       confirmed: json['confirmed'] as bool?,
@@ -21,6 +25,9 @@ _$_UserInfoJson _$$_UserInfoJsonFromJson(Map<String, dynamic> json) =>
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
       type: json['type'] as String?,
+      images: (json['images'] as List<dynamic>?)
+          ?.map((e) => PhotoJson.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_UserInfoJsonToJson(_$_UserInfoJson instance) =>
@@ -38,4 +45,5 @@ Map<String, dynamic> _$$_UserInfoJsonToJson(_$_UserInfoJson instance) =>
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
       'type': instance.type,
+      'images': instance.images,
     };

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:travel_booking_tour/common/app_constant.dart';
 import 'package:travel_booking_tour/data/local/app_storage.dart';
 import 'dart:developer' as dev;
@@ -11,11 +12,12 @@ class DioInterceptor extends Interceptor {
       RequestOptions options, RequestInterceptorHandler handler) async {
     final String? token = await _appStorage.getData(AppConstant.token);
     if (token != null && token.isNotEmpty) {
+      debugPrint('Token : $token');
       options.headers['Authorization'] = 'Bearer $token';
     }
     options.headers['Content-Type'] = 'application/json';
-    logPrint(options.baseUrl.toString(), type: 0);
-    logPrint(options.path, type: 0);
+    logPrint(options.path.toString(), type: 0);
+    logPrint(options.queryParameters.toString(), type: 0);
     super.onRequest(options, handler);
   }
 

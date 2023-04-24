@@ -1,17 +1,18 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:travel_booking_tour/common/enum/enums.dart';
 import 'package:travel_booking_tour/features/profile/bloc/my_journeys/bloc_my_journeys_event.dart';
 import 'package:travel_booking_tour/features/profile/bloc/my_photos/bloc_my_photos_event.dart';
+import 'package:travel_booking_tour/features/profile/bloc/profile/bloc_profile_state.dart';
+import 'package:travel_booking_tour/features/profile/model/photo_json.dart';
+import 'package:travel_booking_tour/features/profile/model/user_info.dart';
 import 'package:travel_booking_tour/features/profile/widget/photo_item.dart';
 import 'package:travel_booking_tour/res/res.dart';
 import '../../guide/detail/widget/my_experience_item.dart';
 import '../bloc/my_journeys/bloc_my_journeys_screen.dart';
 import '../bloc/my_journeys/bloc_my_journeys_state.dart';
 import '../bloc/my_photos/bloc_my_photos_screen.dart';
-import '../bloc/my_photos/bloc_my_photos_state.dart';
 import '../bloc/profile/bloc_profile_event.dart';
 import '../bloc/profile/bloc_profile_screen.dart';
 
@@ -72,13 +73,25 @@ class _ProfileScreen extends State<ProfileScreen> {
                 ),
               ),
               const SizedBox(height: 17),
-              BlocBuilder<BlocMyPhotosScreen, BlocMyPhotosState>(
+              BlocBuilder<BlocProfileScreen, BlocProfileState>(
                   buildWhen: (previous, current) =>
-                      current is BlocMyPhotosStateAddNewPhotos,
+                      current is BlocProfileStateLoadUserInforResult,
                   builder: (context, state) {
-                    List<String> photos = [..._blocMyPhotosScreen.myPhotos];
-                    photos.removeWhere((element) => element.isEmpty);
-
+                    List<PhotoJson> photos = [];
+                    if (state is BlocProfileStateLoadUserInforResult) {
+                      if (state.appResult.state == ResultState.success) {
+                        photos =
+                            (state.appResult.result as UserInfoJson).images!;
+                      } else if (state.appResult.state == ResultState.loading) {
+                        return SizedBox(
+                          height: 300,
+                          child: AppLayoutShimmer(
+                            background:
+                                AppColors.textHintColor.withOpacity(0.2),
+                          ),
+                        );
+                      }
+                    }
                     return Column(children: [
                       SizedBox(
                         height: photos.isNotEmpty ? 123 : 0,
@@ -93,8 +106,11 @@ class _ProfileScreen extends State<ProfileScreen> {
                             itemCount: photos.length >= 4 ? 3 : photos.length,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) => PhotoItem(
-                                file: File(photos[index]),
+                                url: photos[index].url ??
+                                    photos[index].uploadUrl ??
+                                    '',
                                 selected: false,
+                                isHttps: true,
                                 enable: false,
                                 onClick: (p0, p1) {})),
                       ),
@@ -105,9 +121,10 @@ class _ProfileScreen extends State<ProfileScreen> {
                               height: 186,
                               alignment: Alignment.center,
                               child: PhotoItem(
-                                file: File(photos[3]),
+                                url: photos[3].url ?? photos[3].uploadUrl ?? '',
                                 selected: false,
                                 onClick: (p0, p1) {},
+                                isHttps: true,
                                 enable: false,
                               ),
                             )

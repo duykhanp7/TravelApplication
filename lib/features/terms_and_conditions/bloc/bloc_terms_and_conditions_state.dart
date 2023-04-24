@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../base/result.dart';
+import '../../../data/model/result.dart';
 
 abstract class BlocTermsAndConditionsState extends Equatable {}
 

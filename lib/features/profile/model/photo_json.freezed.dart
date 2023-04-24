@@ -21,11 +21,16 @@ PhotoJson _$PhotoJsonFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PhotoJson {
   int? get id => throw _privateConstructorUsedError;
-  String? get createdAt => throw _privateConstructorUsedError;
-  String? get updatedAt => throw _privateConstructorUsedError;
-  String? get publishedAt => throw _privateConstructorUsedError;
   String? get token => throw _privateConstructorUsedError;
   String? get uploadUrl => throw _privateConstructorUsedError;
+  String? get url => throw _privateConstructorUsedError;
+  bool? get selected => throw _privateConstructorUsedError;
+  @ConvertStringToDateTime()
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  @ConvertStringToDateTime()
+  DateTime? get publishedAt => throw _privateConstructorUsedError;
+  @ConvertStringToDateTime()
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,11 +45,13 @@ abstract class $PhotoJsonCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      String? createdAt,
-      String? updatedAt,
-      String? publishedAt,
       String? token,
-      String? uploadUrl});
+      String? uploadUrl,
+      String? url,
+      bool? selected,
+      @ConvertStringToDateTime() DateTime? createdAt,
+      @ConvertStringToDateTime() DateTime? publishedAt,
+      @ConvertStringToDateTime() DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -61,29 +68,19 @@ class _$PhotoJsonCopyWithImpl<$Res, $Val extends PhotoJson>
   @override
   $Res call({
     Object? id = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-    Object? publishedAt = freezed,
     Object? token = freezed,
     Object? uploadUrl = freezed,
+    Object? url = freezed,
+    Object? selected = freezed,
+    Object? createdAt = freezed,
+    Object? publishedAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      publishedAt: freezed == publishedAt
-          ? _value.publishedAt
-          : publishedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
       token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -92,6 +89,26 @@ class _$PhotoJsonCopyWithImpl<$Res, $Val extends PhotoJson>
           ? _value.uploadUrl
           : uploadUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      url: freezed == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String?,
+      selected: freezed == selected
+          ? _value.selected
+          : selected // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      publishedAt: freezed == publishedAt
+          ? _value.publishedAt
+          : publishedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -105,11 +122,13 @@ abstract class _$$_PhotoJsonCopyWith<$Res> implements $PhotoJsonCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      String? createdAt,
-      String? updatedAt,
-      String? publishedAt,
       String? token,
-      String? uploadUrl});
+      String? uploadUrl,
+      String? url,
+      bool? selected,
+      @ConvertStringToDateTime() DateTime? createdAt,
+      @ConvertStringToDateTime() DateTime? publishedAt,
+      @ConvertStringToDateTime() DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -124,29 +143,19 @@ class __$$_PhotoJsonCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-    Object? publishedAt = freezed,
     Object? token = freezed,
     Object? uploadUrl = freezed,
+    Object? url = freezed,
+    Object? selected = freezed,
+    Object? createdAt = freezed,
+    Object? publishedAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_$_PhotoJson(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      publishedAt: freezed == publishedAt
-          ? _value.publishedAt
-          : publishedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
       token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -155,20 +164,43 @@ class __$$_PhotoJsonCopyWithImpl<$Res>
           ? _value.uploadUrl
           : uploadUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      url: freezed == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String?,
+      selected: freezed == selected
+          ? _value.selected
+          : selected // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      publishedAt: freezed == publishedAt
+          ? _value.publishedAt
+          : publishedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_PhotoJson with DiagnosticableTreeMixin implements _PhotoJson {
+class _$_PhotoJson extends _PhotoJson {
   const _$_PhotoJson(
       {this.id,
-      this.createdAt,
-      this.updatedAt,
-      this.publishedAt,
       this.token,
-      this.uploadUrl});
+      this.uploadUrl,
+      this.url,
+      this.selected,
+      @ConvertStringToDateTime() this.createdAt,
+      @ConvertStringToDateTime() this.publishedAt,
+      @ConvertStringToDateTime() this.updatedAt})
+      : super._();
 
   factory _$_PhotoJson.fromJson(Map<String, dynamic> json) =>
       _$$_PhotoJsonFromJson(json);
@@ -176,32 +208,26 @@ class _$_PhotoJson with DiagnosticableTreeMixin implements _PhotoJson {
   @override
   final int? id;
   @override
-  final String? createdAt;
-  @override
-  final String? updatedAt;
-  @override
-  final String? publishedAt;
-  @override
   final String? token;
   @override
   final String? uploadUrl;
+  @override
+  final String? url;
+  @override
+  final bool? selected;
+  @override
+  @ConvertStringToDateTime()
+  final DateTime? createdAt;
+  @override
+  @ConvertStringToDateTime()
+  final DateTime? publishedAt;
+  @override
+  @ConvertStringToDateTime()
+  final DateTime? updatedAt;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PhotoJson(id: $id, createdAt: $createdAt, updatedAt: $updatedAt, publishedAt: $publishedAt, token: $token, uploadUrl: $uploadUrl)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'PhotoJson'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('updatedAt', updatedAt))
-      ..add(DiagnosticsProperty('publishedAt', publishedAt))
-      ..add(DiagnosticsProperty('token', token))
-      ..add(DiagnosticsProperty('uploadUrl', uploadUrl));
+  String toString() {
+    return 'PhotoJson(id: $id, token: $token, uploadUrl: $uploadUrl, url: $url, selected: $selected, createdAt: $createdAt, publishedAt: $publishedAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -210,21 +236,24 @@ class _$_PhotoJson with DiagnosticableTreeMixin implements _PhotoJson {
         (other.runtimeType == runtimeType &&
             other is _$_PhotoJson &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt) &&
-            (identical(other.publishedAt, publishedAt) ||
-                other.publishedAt == publishedAt) &&
             (identical(other.token, token) || other.token == token) &&
             (identical(other.uploadUrl, uploadUrl) ||
-                other.uploadUrl == uploadUrl));
+                other.uploadUrl == uploadUrl) &&
+            (identical(other.url, url) || other.url == url) &&
+            (identical(other.selected, selected) ||
+                other.selected == selected) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.publishedAt, publishedAt) ||
+                other.publishedAt == publishedAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, createdAt, updatedAt, publishedAt, token, uploadUrl);
+  int get hashCode => Object.hash(runtimeType, id, token, uploadUrl, url,
+      selected, createdAt, publishedAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -240,14 +269,17 @@ class _$_PhotoJson with DiagnosticableTreeMixin implements _PhotoJson {
   }
 }
 
-abstract class _PhotoJson implements PhotoJson {
+abstract class _PhotoJson extends PhotoJson {
   const factory _PhotoJson(
       {final int? id,
-      final String? createdAt,
-      final String? updatedAt,
-      final String? publishedAt,
       final String? token,
-      final String? uploadUrl}) = _$_PhotoJson;
+      final String? uploadUrl,
+      final String? url,
+      final bool? selected,
+      @ConvertStringToDateTime() final DateTime? createdAt,
+      @ConvertStringToDateTime() final DateTime? publishedAt,
+      @ConvertStringToDateTime() final DateTime? updatedAt}) = _$_PhotoJson;
+  const _PhotoJson._() : super._();
 
   factory _PhotoJson.fromJson(Map<String, dynamic> json) =
       _$_PhotoJson.fromJson;
@@ -255,15 +287,22 @@ abstract class _PhotoJson implements PhotoJson {
   @override
   int? get id;
   @override
-  String? get createdAt;
-  @override
-  String? get updatedAt;
-  @override
-  String? get publishedAt;
-  @override
   String? get token;
   @override
   String? get uploadUrl;
+  @override
+  String? get url;
+  @override
+  bool? get selected;
+  @override
+  @ConvertStringToDateTime()
+  DateTime? get createdAt;
+  @override
+  @ConvertStringToDateTime()
+  DateTime? get publishedAt;
+  @override
+  @ConvertStringToDateTime()
+  DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$_PhotoJsonCopyWith<_$_PhotoJson> get copyWith =>

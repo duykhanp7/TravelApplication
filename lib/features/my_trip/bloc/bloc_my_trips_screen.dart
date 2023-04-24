@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/material.dart';
-import 'package:travel_booking_tour/base/result.dart';
+import 'package:travel_booking_tour/data/model/result.dart';
 import 'package:travel_booking_tour/features/my_trip/bloc/bloc_my_trips_event.dart';
 import 'package:travel_booking_tour/features/my_trip/bloc/bloc_my_trips_state.dart';
 import 'package:travel_booking_tour/features/my_trip/repository/my_trip_repository.dart';

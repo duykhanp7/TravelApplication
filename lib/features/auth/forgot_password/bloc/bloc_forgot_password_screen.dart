@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/widgets.dart';
-import 'package:travel_booking_tour/base/result.dart';
+import 'package:travel_booking_tour/data/model/result.dart';
 import 'package:travel_booking_tour/common/enum/enums.dart';
 import 'package:travel_booking_tour/data/network/network_exception.dart';
 import 'package:travel_booking_tour/features/auth/repository/auth_repository.dart';

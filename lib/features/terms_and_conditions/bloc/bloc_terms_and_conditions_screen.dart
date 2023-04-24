@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:travel_booking_tour/base/result.dart';
+import 'package:travel_booking_tour/data/model/result.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/bloc/bloc_terms_and_conditions_event.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/bloc/bloc_terms_and_conditions_state.dart';
 import 'package:travel_booking_tour/features/terms_and_conditions/repository/terms_and_conditions_repository.dart';

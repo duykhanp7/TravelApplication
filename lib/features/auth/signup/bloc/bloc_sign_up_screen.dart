@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:travel_booking_tour/base/result.dart';
+import 'package:travel_booking_tour/data/model/result.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_event.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_state.dart';
 import 'package:travel_booking_tour/router/path.dart';

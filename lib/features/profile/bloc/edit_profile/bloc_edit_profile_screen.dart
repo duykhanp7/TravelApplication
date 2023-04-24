@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travel_booking_tour/base/result.dart';
+import 'package:travel_booking_tour/data/model/result.dart';
 import 'package:travel_booking_tour/data/local/app_storage.dart';
 import 'package:travel_booking_tour/data/network/network_exception.dart';
 import 'package:travel_booking_tour/features/profile/bloc/edit_profile/bloc_edit_profile_event.dart';

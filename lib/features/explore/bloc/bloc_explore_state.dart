@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:travel_booking_tour/base/result.dart';
+import 'package:travel_booking_tour/data/model/result.dart';
 
 abstract class BlocExploreState extends Equatable {}
 

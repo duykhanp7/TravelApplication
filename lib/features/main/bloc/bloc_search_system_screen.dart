@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:travel_booking_tour/base/result.dart';
+import 'package:travel_booking_tour/data/model/result.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_search_system_event.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_search_system_state.dart';
 import 'package:travel_booking_tour/features/main/repository/search_system_repository.dart';
