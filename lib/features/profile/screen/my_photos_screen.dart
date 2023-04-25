@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/common/app_constant.dart';
 import 'package:travel_booking_tour/common/enum/enums.dart';
+import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/profile/bloc/my_photos/bloc_my_photos_event.dart';
 import 'package:travel_booking_tour/features/profile/bloc/my_photos/bloc_my_photos_screen.dart';
 import 'package:travel_booking_tour/features/profile/bloc/my_photos/bloc_my_photos_state.dart';
@@ -42,6 +43,9 @@ class _MyPhotosScreen extends State<MyPhotosScreen> {
             as UserInfoJson?;
     if (userInfoJson != null) {
       _blocMyPhotosScreen.myPhotos = [...userInfoJson.images ?? []];
+      _blocMyPhotosScreen.myPhotos.sort(
+        (a, b) => b.createdAt!.compareTo(a.createdAt!),
+      );
     }
 
     return WillPopScope(
@@ -55,6 +59,7 @@ class _MyPhotosScreen extends State<MyPhotosScreen> {
       child: Scaffold(
         appBar: AppbarApp(
           title: 'My Photos',
+          centerTitle: false,
           prefixWidget: BlocBuilder<BlocMyPhotosScreen, BlocMyPhotosState>(
             buildWhen: (previous, current) =>
                 current is BlocMyPhotosStateChangeMode,
@@ -90,13 +95,26 @@ class _MyPhotosScreen extends State<MyPhotosScreen> {
               return mode == MyPhotosMode.delete
                   ? Padding(
                       padding: const EdgeInsets.only(right: 10),
-                      child: AppInkWell(
-                        voidCallBack: () => _blocMyPhotosScreen
-                            .add(BlocMyPhotosEventDeleteImage()),
-                        icon: AppIcons.icDelete,
-                        iconSize: const Size(28, 28),
-                        background: AppColors.transparent,
-                        iconTint: AppColors.black,
+                      child: Row(
+                        children: [
+                          AppInkWell(
+                            voidCallBack: () => _blocMyPhotosScreen
+                                .add(BlocMyPhotosEventCheckListPhotos()),
+                            icon: AppIcons.icCheckList,
+                            iconSize: const Size(23, 23),
+                            background: AppColors.transparent,
+                            iconTint: AppColors.black,
+                          ),
+                          const SizedBox(width: 5),
+                          AppInkWell(
+                            voidCallBack: () => _blocMyPhotosScreen
+                                .add(BlocMyPhotosEventDeleteImage()),
+                            icon: AppIcons.icDelete,
+                            iconSize: const Size(23, 23),
+                            background: AppColors.transparent,
+                            iconTint: AppColors.black,
+                          )
+                        ],
                       ),
                     )
                   : Container();
@@ -151,7 +169,8 @@ class _MyPhotosScreen extends State<MyPhotosScreen> {
             child: BlocBuilder<BlocMyPhotosScreen, BlocMyPhotosState>(
                 buildWhen: (previous, current) =>
                     current is BlocMyPhotosStateAddNewPhotos ||
-                    current is BlocMyPhotosStateChangeMode,
+                    current is BlocMyPhotosStateChangeMode ||
+                    current is BlocMyPhotosStateCheckListPhotos,
                 builder: (context, state) {
                   if (state is BlocMyPhotosStateAddNewPhotos) {
                     if (state.appResult.state == ResultState.success) {
@@ -161,7 +180,10 @@ class _MyPhotosScreen extends State<MyPhotosScreen> {
                   }
 
                   if (_blocMyPhotosScreen.myPhotosMode == MyPhotosMode.delete) {
-                    _blocMyPhotosScreen.myPhotos.removeAt(0);
+                    final PhotoJson first = _blocMyPhotosScreen.myPhotos.first;
+                    if (first.id == -1) {
+                      _blocMyPhotosScreen.myPhotos.removeAt(0);
+                    }
                   } else {
                     int index = _blocMyPhotosScreen.myPhotos
                         .indexWhere((element) => element.id == -1);
@@ -202,23 +224,23 @@ class _MyPhotosScreen extends State<MyPhotosScreen> {
         url: photoJson.uploadUrl ?? photoJson.url ?? '',
         selected: photoJson.selected ?? false,
         isHttps: true,
+        visibilityRadioButton:
+            _blocMyPhotosScreen.myPhotosMode == MyPhotosMode.delete,
         enable: _blocMyPhotosScreen.myPhotosMode == MyPhotosMode.delete,
-        onLongClick: () {
+        onLongClick: (filePath, value) {
           if (_blocMyPhotosScreen.myPhotosMode != MyPhotosMode.delete) {
             _blocMyPhotosScreen
                 .add(BlocMyPhotosEventChangeMode(mode: MyPhotosMode.delete));
+          } else {
+            _blocMyPhotosScreen.action(value, photoJson);
           }
         },
         onClick: (p0, value) {
-          debugPrint('Dateee : ${photoJson.createdAt.toString()}');
           photoJson = photoJson.copyWith(selected: value);
-          _blocMyPhotosScreen.updateItem(value, photoJson);
-          if (value) {
-            _blocMyPhotosScreen.addToDeletePhoto(photoJson);
-          } else {
-            _blocMyPhotosScreen.removeOutOfDeletePhoto(photoJson);
-          }
-        });
+          _blocMyPhotosScreen.action(value, photoJson);
+        },
+        onClickWhenDisable: (url) async =>
+            await context.showPhotoFullScreen(photoJson));
   }
 
   Widget _buildWidgetButtonAddPhotos() {

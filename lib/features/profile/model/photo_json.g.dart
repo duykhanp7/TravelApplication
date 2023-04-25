@@ -10,6 +10,7 @@ _$_PhotoJson _$$_PhotoJsonFromJson(Map<String, dynamic> json) => _$_PhotoJson(
       id: json['id'] as int?,
       token: json['token'] as String?,
       uploadUrl: json['uploadUrl'] as String?,
+      name: json['name'] as String?,
       url: json['url'] as String?,
       selected: json['selected'] as bool?,
       createdAt: _$JsonConverterFromJson<String, DateTime>(
@@ -25,6 +26,7 @@ Map<String, dynamic> _$$_PhotoJsonToJson(_$_PhotoJson instance) =>
       'id': instance.id,
       'token': instance.token,
       'uploadUrl': instance.uploadUrl,
+      'name': instance.name,
       'url': instance.url,
       'selected': instance.selected,
       'createdAt': _$JsonConverterToJson<String, DateTime>(

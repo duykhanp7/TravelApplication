@@ -20,6 +20,7 @@ SettingMenuItem _$SettingMenuItemFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SettingMenuItem {
+  MenuItemID get id => throw _privateConstructorUsedError;
   String? get leadingIcon => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get endIcon => throw _privateConstructorUsedError;
@@ -36,7 +37,8 @@ abstract class $SettingMenuItemCopyWith<$Res> {
           SettingMenuItem value, $Res Function(SettingMenuItem) then) =
       _$SettingMenuItemCopyWithImpl<$Res, SettingMenuItem>;
   @useResult
-  $Res call({String? leadingIcon, String? name, String? endIcon});
+  $Res call(
+      {MenuItemID id, String? leadingIcon, String? name, String? endIcon});
 }
 
 /// @nodoc
@@ -52,11 +54,16 @@ class _$SettingMenuItemCopyWithImpl<$Res, $Val extends SettingMenuItem>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? leadingIcon = freezed,
     Object? name = freezed,
     Object? endIcon = freezed,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as MenuItemID,
       leadingIcon: freezed == leadingIcon
           ? _value.leadingIcon
           : leadingIcon // ignore: cast_nullable_to_non_nullable
@@ -81,7 +88,8 @@ abstract class _$$_SettingMenuItemCopyWith<$Res>
       __$$_SettingMenuItemCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? leadingIcon, String? name, String? endIcon});
+  $Res call(
+      {MenuItemID id, String? leadingIcon, String? name, String? endIcon});
 }
 
 /// @nodoc
@@ -95,11 +103,16 @@ class __$$_SettingMenuItemCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? leadingIcon = freezed,
     Object? name = freezed,
     Object? endIcon = freezed,
   }) {
     return _then(_$_SettingMenuItem(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as MenuItemID,
       leadingIcon: freezed == leadingIcon
           ? _value.leadingIcon
           : leadingIcon // ignore: cast_nullable_to_non_nullable
@@ -119,11 +132,14 @@ class __$$_SettingMenuItemCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_SettingMenuItem implements _SettingMenuItem {
-  const _$_SettingMenuItem({this.leadingIcon, this.name, this.endIcon});
+  const _$_SettingMenuItem(
+      {required this.id, this.leadingIcon, this.name, this.endIcon});
 
   factory _$_SettingMenuItem.fromJson(Map<String, dynamic> json) =>
       _$$_SettingMenuItemFromJson(json);
 
+  @override
+  final MenuItemID id;
   @override
   final String? leadingIcon;
   @override
@@ -133,7 +149,7 @@ class _$_SettingMenuItem implements _SettingMenuItem {
 
   @override
   String toString() {
-    return 'SettingMenuItem(leadingIcon: $leadingIcon, name: $name, endIcon: $endIcon)';
+    return 'SettingMenuItem(id: $id, leadingIcon: $leadingIcon, name: $name, endIcon: $endIcon)';
   }
 
   @override
@@ -141,6 +157,7 @@ class _$_SettingMenuItem implements _SettingMenuItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SettingMenuItem &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.leadingIcon, leadingIcon) ||
                 other.leadingIcon == leadingIcon) &&
             (identical(other.name, name) || other.name == name) &&
@@ -149,7 +166,7 @@ class _$_SettingMenuItem implements _SettingMenuItem {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, leadingIcon, name, endIcon);
+  int get hashCode => Object.hash(runtimeType, id, leadingIcon, name, endIcon);
 
   @JsonKey(ignore: true)
   @override
@@ -167,13 +184,16 @@ class _$_SettingMenuItem implements _SettingMenuItem {
 
 abstract class _SettingMenuItem implements SettingMenuItem {
   const factory _SettingMenuItem(
-      {final String? leadingIcon,
+      {required final MenuItemID id,
+      final String? leadingIcon,
       final String? name,
       final String? endIcon}) = _$_SettingMenuItem;
 
   factory _SettingMenuItem.fromJson(Map<String, dynamic> json) =
       _$_SettingMenuItem.fromJson;
 
+  @override
+  MenuItemID get id;
   @override
   String? get leadingIcon;
   @override

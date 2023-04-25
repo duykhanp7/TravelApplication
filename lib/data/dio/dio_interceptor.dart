@@ -14,6 +14,7 @@ class DioInterceptor extends Interceptor {
     if (token != null && token.isNotEmpty) {
       debugPrint('Token : $token');
       options.headers['Authorization'] = 'Bearer $token';
+      options.headers['token'] = token;
     }
     options.headers['Content-Type'] = 'application/json';
     logPrint(options.path.toString(), type: 0);

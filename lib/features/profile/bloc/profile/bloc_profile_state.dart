@@ -14,3 +14,17 @@ class BlocProfileStateLoadUserInforResult extends BlocProfileState {
   @override
   List<Object?> get props => [appResult];
 }
+
+class BlocProfileStateUpdateAvatar extends BlocProfileState {
+  BlocProfileStateUpdateAvatar({required this.appResult});
+  final AppResult appResult;
+  @override
+  List<Object?> get props => [appResult];
+}
+
+class BlocProfileStateUpdateCover extends BlocProfileState {
+  BlocProfileStateUpdateCover({required this.appResult});
+  final AppResult appResult;
+  @override
+  List<Object?> get props => [appResult];
+}

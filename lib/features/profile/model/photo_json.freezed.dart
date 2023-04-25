@@ -23,6 +23,7 @@ mixin _$PhotoJson {
   int? get id => throw _privateConstructorUsedError;
   String? get token => throw _privateConstructorUsedError;
   String? get uploadUrl => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
   bool? get selected => throw _privateConstructorUsedError;
   @ConvertStringToDateTime()
@@ -47,6 +48,7 @@ abstract class $PhotoJsonCopyWith<$Res> {
       {int? id,
       String? token,
       String? uploadUrl,
+      String? name,
       String? url,
       bool? selected,
       @ConvertStringToDateTime() DateTime? createdAt,
@@ -70,6 +72,7 @@ class _$PhotoJsonCopyWithImpl<$Res, $Val extends PhotoJson>
     Object? id = freezed,
     Object? token = freezed,
     Object? uploadUrl = freezed,
+    Object? name = freezed,
     Object? url = freezed,
     Object? selected = freezed,
     Object? createdAt = freezed,
@@ -88,6 +91,10 @@ class _$PhotoJsonCopyWithImpl<$Res, $Val extends PhotoJson>
       uploadUrl: freezed == uploadUrl
           ? _value.uploadUrl
           : uploadUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
       url: freezed == url
           ? _value.url
@@ -124,6 +131,7 @@ abstract class _$$_PhotoJsonCopyWith<$Res> implements $PhotoJsonCopyWith<$Res> {
       {int? id,
       String? token,
       String? uploadUrl,
+      String? name,
       String? url,
       bool? selected,
       @ConvertStringToDateTime() DateTime? createdAt,
@@ -145,6 +153,7 @@ class __$$_PhotoJsonCopyWithImpl<$Res>
     Object? id = freezed,
     Object? token = freezed,
     Object? uploadUrl = freezed,
+    Object? name = freezed,
     Object? url = freezed,
     Object? selected = freezed,
     Object? createdAt = freezed,
@@ -163,6 +172,10 @@ class __$$_PhotoJsonCopyWithImpl<$Res>
       uploadUrl: freezed == uploadUrl
           ? _value.uploadUrl
           : uploadUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
       url: freezed == url
           ? _value.url
@@ -195,6 +208,7 @@ class _$_PhotoJson extends _PhotoJson {
       {this.id,
       this.token,
       this.uploadUrl,
+      this.name,
       this.url,
       this.selected,
       @ConvertStringToDateTime() this.createdAt,
@@ -212,6 +226,8 @@ class _$_PhotoJson extends _PhotoJson {
   @override
   final String? uploadUrl;
   @override
+  final String? name;
+  @override
   final String? url;
   @override
   final bool? selected;
@@ -227,7 +243,7 @@ class _$_PhotoJson extends _PhotoJson {
 
   @override
   String toString() {
-    return 'PhotoJson(id: $id, token: $token, uploadUrl: $uploadUrl, url: $url, selected: $selected, createdAt: $createdAt, publishedAt: $publishedAt, updatedAt: $updatedAt)';
+    return 'PhotoJson(id: $id, token: $token, uploadUrl: $uploadUrl, name: $name, url: $url, selected: $selected, createdAt: $createdAt, publishedAt: $publishedAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -239,6 +255,7 @@ class _$_PhotoJson extends _PhotoJson {
             (identical(other.token, token) || other.token == token) &&
             (identical(other.uploadUrl, uploadUrl) ||
                 other.uploadUrl == uploadUrl) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.selected, selected) ||
                 other.selected == selected) &&
@@ -252,7 +269,7 @@ class _$_PhotoJson extends _PhotoJson {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, token, uploadUrl, url,
+  int get hashCode => Object.hash(runtimeType, id, token, uploadUrl, name, url,
       selected, createdAt, publishedAt, updatedAt);
 
   @JsonKey(ignore: true)
@@ -274,6 +291,7 @@ abstract class _PhotoJson extends PhotoJson {
       {final int? id,
       final String? token,
       final String? uploadUrl,
+      final String? name,
       final String? url,
       final bool? selected,
       @ConvertStringToDateTime() final DateTime? createdAt,
@@ -290,6 +308,8 @@ abstract class _PhotoJson extends PhotoJson {
   String? get token;
   @override
   String? get uploadUrl;
+  @override
+  String? get name;
   @override
   String? get url;
   @override

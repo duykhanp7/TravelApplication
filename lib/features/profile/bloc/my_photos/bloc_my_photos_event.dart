@@ -45,3 +45,15 @@ class BlocMyPhotosEventDeleteImage extends BlocMyPhotosEvent {
   @override
   List<Object?> get props => [];
 }
+
+class BlocMyPhotosEventCheckListPhotos extends BlocMyPhotosEvent {
+  BlocMyPhotosEventCheckListPhotos();
+  @override
+  List<Object?> get props => [];
+}
+
+class BlocMyPhotosEventCheckListPhotosLocal extends BlocMyPhotosEvent {
+  BlocMyPhotosEventCheckListPhotosLocal();
+  @override
+  List<Object?> get props => [];
+}

@@ -30,7 +30,8 @@ mixin _$UserJson {
   String? get updatedAt => throw _privateConstructorUsedError;
   String? get firstName => throw _privateConstructorUsedError;
   String? get lastName => throw _privateConstructorUsedError;
-  String? get type => throw _privateConstructorUsedError;
+  @ConvertStringToUserType()
+  UserType? get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,7 +55,7 @@ abstract class $UserJsonCopyWith<$Res> {
       String? updatedAt,
       String? firstName,
       String? lastName,
-      String? type});
+      @ConvertStringToUserType() UserType? type});
 }
 
 /// @nodoc
@@ -126,7 +127,7 @@ class _$UserJsonCopyWithImpl<$Res, $Val extends UserJson>
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as UserType?,
     ) as $Val);
   }
 }
@@ -149,7 +150,7 @@ abstract class _$$_UserJsonCopyWith<$Res> implements $UserJsonCopyWith<$Res> {
       String? updatedAt,
       String? firstName,
       String? lastName,
-      String? type});
+      @ConvertStringToUserType() UserType? type});
 }
 
 /// @nodoc
@@ -219,7 +220,7 @@ class __$$_UserJsonCopyWithImpl<$Res>
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as UserType?,
     ));
   }
 }
@@ -238,7 +239,7 @@ class _$_UserJson with DiagnosticableTreeMixin implements _UserJson {
       this.updatedAt,
       this.firstName,
       this.lastName,
-      this.type});
+      @ConvertStringToUserType() this.type});
 
   factory _$_UserJson.fromJson(Map<String, dynamic> json) =>
       _$$_UserJsonFromJson(json);
@@ -264,7 +265,8 @@ class _$_UserJson with DiagnosticableTreeMixin implements _UserJson {
   @override
   final String? lastName;
   @override
-  final String? type;
+  @ConvertStringToUserType()
+  final UserType? type;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -345,7 +347,7 @@ abstract class _UserJson implements UserJson {
       final String? updatedAt,
       final String? firstName,
       final String? lastName,
-      final String? type}) = _$_UserJson;
+      @ConvertStringToUserType() final UserType? type}) = _$_UserJson;
 
   factory _UserJson.fromJson(Map<String, dynamic> json) = _$_UserJson.fromJson;
 
@@ -370,7 +372,8 @@ abstract class _UserJson implements UserJson {
   @override
   String? get lastName;
   @override
-  String? get type;
+  @ConvertStringToUserType()
+  UserType? get type;
   @override
   @JsonKey(ignore: true)
   _$$_UserJsonCopyWith<_$_UserJson> get copyWith =>

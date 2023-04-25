@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/cupertino.dart';
@@ -66,6 +66,50 @@ class BlocProfileScreen extends Bloc<BlocProfileEvent, BlocProfileState> {
       Routes.navigateTo(AppPath.myPhotos, {AppConstant.data: userInfoJson});
     } else if (event is BlocProfileEventShowMyJourneys) {
       Routes.navigateTo(AppPath.myJourneys, {});
+    } else if (event is BlocProfileEventUpdateAvatar) {
+      try {
+        emit(BlocProfileStateUpdateAvatar(
+            appResult: AppResult(state: ResultState.loading)));
+        Map<dynamic, dynamic>? url = await _profileRepository.updateAvatar(
+            File(event.avatar.path), userInfoJson?.type);
+        if (url != null) {
+          final String? data = url['url'];
+          if (data != null) {
+            userInfoJson = userInfoJson?.copyWith(
+                avatar: userInfoJson?.avatar?.copyWith(url: data));
+            emit(BlocProfileStateUpdateAvatar(
+                appResult:
+                    AppResult(state: ResultState.success, result: data)));
+          }
+        }
+      } on NetworkException catch (ex) {
+        emit(BlocProfileStateUpdateAvatar(
+            appResult: AppResult(state: ResultState.fail)));
+        debugPrint(
+            'Exception BlocProfileEventUpdateAvatar : ${ex.getTextError}');
+      }
+    } else if (event is BlocProfileEventUpdateCover) {
+      try {
+        emit(BlocProfileStateUpdateCover(
+            appResult: AppResult(state: ResultState.loading)));
+        Map<dynamic, dynamic>? url = await _profileRepository.updateCover(
+            File(event.cover.path), userInfoJson?.type);
+        if (url != null) {
+          final String? data = url['url'];
+          if (data != null) {
+            userInfoJson = userInfoJson?.copyWith(
+                cover: userInfoJson?.cover?.copyWith(url: data));
+            emit(BlocProfileStateUpdateCover(
+                appResult:
+                    AppResult(state: ResultState.success, result: data)));
+          }
+        }
+      } on NetworkException catch (ex) {
+        emit(BlocProfileStateUpdateCover(
+            appResult: AppResult(state: ResultState.fail)));
+        debugPrint(
+            'Exception BlocProfileEventUpdateAvatar : ${ex.getTextError}');
+      }
     }
   }
 }

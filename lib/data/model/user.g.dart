@@ -17,7 +17,8 @@ _$_UserJson _$$_UserJsonFromJson(Map<String, dynamic> json) => _$_UserJson(
       updatedAt: json['updatedAt'] as String?,
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
-      type: json['type'] as String?,
+      type: _$JsonConverterFromJson<String, UserType>(
+          json['type'], const ConvertStringToUserType().fromJson),
     );
 
 Map<String, dynamic> _$$_UserJsonToJson(_$_UserJson instance) =>
@@ -32,5 +33,18 @@ Map<String, dynamic> _$$_UserJsonToJson(_$_UserJson instance) =>
       'updatedAt': instance.updatedAt,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
-      'type': instance.type,
+      'type': _$JsonConverterToJson<String, UserType>(
+          instance.type, const ConvertStringToUserType().toJson),
     };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) =>
+    value == null ? null : toJson(value);

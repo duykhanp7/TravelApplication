@@ -14,6 +14,7 @@ class AppbarApp extends StatefulWidget with PreferredSizeWidget {
     this.bottom,
     this.height,
     this.voidCallBack,
+    this.centerTitle,
   });
 
   final String? title;
@@ -25,6 +26,7 @@ class AppbarApp extends StatefulWidget with PreferredSizeWidget {
   final Color? background;
   final double? height;
   final VoidCallback? voidCallBack;
+  final bool? centerTitle;
 
   @override
   State<StatefulWidget> createState() {
@@ -40,7 +42,7 @@ class _AppbarApp extends State<AppbarApp> {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: widget.background ?? AppColors.white,
-      centerTitle: true,
+      centerTitle: widget.centerTitle ?? true,
       title: Text(widget.title ?? ''),
       elevation: 0,
       flexibleSpace: widget.flexibleSpace,

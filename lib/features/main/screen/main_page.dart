@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:travel_booking_tour/common/app_constant.dart';
 import 'package:travel_booking_tour/common/enum/enums.dart';
-import 'package:travel_booking_tour/data/local/app_storage.dart';
+import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/explore/screen/explore_screen.dart';
 import 'package:travel_booking_tour/features/my_trip/screen/my_trips_screen.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_main_event.dart';
@@ -13,6 +14,7 @@ import 'package:travel_booking_tour/features/main/bloc/bloc_main_screen.dart';
 import 'package:travel_booking_tour/features/main/bloc/bloc_main_state.dart';
 import 'package:travel_booking_tour/features/message/chat_screen.dart';
 import 'package:travel_booking_tour/features/notification/notification_screen.dart';
+import 'package:travel_booking_tour/features/profile/bloc/profile/bloc_profile_event.dart';
 import 'package:travel_booking_tour/features/profile/bloc/profile/bloc_profile_screen.dart';
 import 'package:travel_booking_tour/features/profile/bloc/profile/bloc_profile_state.dart';
 import 'package:travel_booking_tour/features/profile/model/user_info.dart';
@@ -248,9 +250,10 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                         borderRadius: BorderRadius.circular(40),
                         child: BlocBuilder<BlocProfileScreen, BlocProfileState>(
                             buildWhen: (previous, current) =>
-                                current is BlocProfileStateLoadUserInforResult,
+                                current
+                                    is BlocProfileStateLoadUserInforResult ||
+                                current is BlocProfileStateUpdateAvatar,
                             builder: (context, state) {
-                              UserInfoJson? userInfoJson;
                               if (state
                                   is BlocProfileStateLoadUserInforResult) {
                                 if (state.appResult.state ==
@@ -268,16 +271,34 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                                     height: 80,
                                     width: 80,
                                   );
-                                } else {
-                                  userInfoJson =
-                                      state.appResult.result as UserInfoJson?;
+                                }
+                              } else if (state
+                                  is BlocProfileStateUpdateAvatar) {
+                                if (state.appResult.state ==
+                                    ResultState.loading) {
+                                  return const AppLayoutShimmer(
+                                    height: 80,
+                                    visibilityLoading: true,
+                                    width: 80,
+                                    background: AppColors.textHintColor,
+                                  );
+                                } else if (state.appResult.state ==
+                                    ResultState.fail) {
+                                  return SvgPicture.asset(
+                                    AppIcons.icUser,
+                                    height: 80,
+                                    width: 80,
+                                  );
                                 }
                               }
 
-                              if (userInfoJson != null &&
-                                  userInfoJson.avatar != null) {
+                              if (_blocProfileScreen.userInfoJson != null &&
+                                  _blocProfileScreen.userInfoJson?.avatar !=
+                                      null) {
                                 return CachedNetworkImage(
-                                  imageUrl: userInfoJson.avatar?.url ?? '',
+                                  imageUrl: _blocProfileScreen
+                                          .userInfoJson?.avatar?.url ??
+                                      '',
                                   filterQuality: FilterQuality.high,
                                   fit: BoxFit.cover,
                                   height: 80,
@@ -367,6 +388,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                                       width: 14,
                                       height: 11,
                                     ),
+                                    onTap: () async {},
                                   )),
                             ),
                             Container(
@@ -383,7 +405,21 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                                         AppColors.white.withOpacity(0.3),
                                     splashColor:
                                         AppColors.white.withOpacity(0.3),
-                                    onTap: () async {},
+                                    onTap: () async {
+                                      try {
+                                        XFile? avatarFile = await context
+                                            .showCameraAndTakePhotos();
+
+                                        if (avatarFile != null) {
+                                          _blocProfileScreen.add(
+                                              BlocProfileEventUpdateAvatar(
+                                                  avatar: avatarFile));
+                                        }
+                                      } on Exception catch (ex) {
+                                        debugPrint(
+                                            'Exception : ${ex.toString()}');
+                                      }
+                                    },
                                   )),
                             )
                           ],
@@ -415,14 +451,17 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                         AppIcons.camera,
                       ),
                     ),
-                    onTap: () {
-                      SystemChrome.setSystemUIOverlayStyle(
-                          AppSystem.systemStyle);
-                      AppStorage appStorage = AppStorage();
-                      appStorage.delete(AppConstant.user);
-                      appStorage.delete(AppConstant.password);
-                      appStorage.delete(AppConstant.token);
-                      Routes.navigateToAndRemoveUntil(AppPath.signInScreen, {});
+                    onTap: () async {
+                      try {
+                        final XFile? coverFile =
+                            await context.showCameraAndTakePhotos();
+                        if (coverFile != null) {
+                          _blocProfileScreen.add(
+                              BlocProfileEventUpdateCover(cover: coverFile));
+                        }
+                      } on Exception catch (ex) {
+                        debugPrint('Exception : ${ex.toString()}');
+                      }
                     },
                   )),
             )),
@@ -613,8 +652,11 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                           width: width,
                           child:
                               BlocBuilder<BlocProfileScreen, BlocProfileState>(
+                            buildWhen: (previous, current) =>
+                                current
+                                    is BlocProfileStateLoadUserInforResult ||
+                                current is BlocProfileStateUpdateCover,
                             builder: (context, state) {
-                              UserInfoJson? userInfoJson;
                               if (state
                                   is BlocProfileStateLoadUserInforResult) {
                                 if (state.appResult.state ==
@@ -634,16 +676,35 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                                     fit: BoxFit.cover,
                                     height: 156,
                                   );
-                                } else {
-                                  userInfoJson =
-                                      state.appResult.result as UserInfoJson?;
+                                }
+                              } else if (state is BlocProfileStateUpdateCover) {
+                                if (state.appResult.state ==
+                                    ResultState.loading) {
+                                  return SizedBox(
+                                    height: 156,
+                                    child: AppLayoutShimmer(
+                                        visibilityLoading: true,
+                                        background:
+                                            AppColors.black.withOpacity(0.2)),
+                                  );
+                                } else if (state.appResult.state ==
+                                    ResultState.fail) {
+                                  return Image.asset(
+                                    AppImages.defaultBg,
+                                    filterQuality: FilterQuality.high,
+                                    fit: BoxFit.cover,
+                                    height: 156,
+                                  );
                                 }
                               }
 
-                              if (userInfoJson != null &&
-                                  userInfoJson.cover != null) {
+                              if (_blocProfileScreen.userInfoJson != null &&
+                                  _blocProfileScreen.userInfoJson?.cover !=
+                                      null) {
                                 return CachedNetworkImage(
-                                  imageUrl: userInfoJson.cover?.url ?? '',
+                                  imageUrl: _blocProfileScreen
+                                          .userInfoJson?.cover?.url ??
+                                      '',
                                   filterQuality: FilterQuality.high,
                                   fit: BoxFit.cover,
                                   height: 156,
