@@ -24,7 +24,8 @@ _$_UserInfoJson _$$_UserInfoJsonFromJson(Map<String, dynamic> json) =>
       blocked: json['blocked'] as bool?,
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
-      type: json['type'] as String?,
+      type: _$JsonConverterFromJson<String, UserType>(
+          json['type'], const ConvertStringToUserType().fromJson),
       images: (json['images'] as List<dynamic>?)
           ?.map((e) => PhotoJson.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -44,6 +45,19 @@ Map<String, dynamic> _$$_UserInfoJsonToJson(_$_UserInfoJson instance) =>
       'blocked': instance.blocked,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
-      'type': instance.type,
+      'type': _$JsonConverterToJson<String, UserType>(
+          instance.type, const ConvertStringToUserType().toJson),
       'images': instance.images,
     };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) =>
+    value == null ? null : toJson(value);

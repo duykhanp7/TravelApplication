@@ -42,3 +42,16 @@ enum EditTripInformationMode { createNewTrip, editTripInformation }
 enum PasswordMode { reset, change }
 
 enum MyPhotosMode { watch, delete }
+
+enum UserType { traverler, guide }
+
+enum MenuItemID {
+  notification,
+  languages,
+  payment,
+  privacyAndPolicies,
+  feedback,
+  usage,
+  guide,
+  logout
+}

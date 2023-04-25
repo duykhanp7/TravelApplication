@@ -23,10 +23,10 @@ class BlocMyPhotosScreen extends Bloc<BlocMyPhotosEvent, BlocMyPhotosState> {
   }
 
   List<PhotoJson> myPhotos = [];
-  final List<String> newPhotos = [];
+  List<String> newPhotos = [];
   final List<PhotoJson> newPhotosJson = [];
-  final List<PhotoJson> deletePhotos = [];
-  List<PhotoJson> localFilePhotos = [const PhotoJson()];
+  List<PhotoJson> deletePhotos = [];
+  List<PhotoJson> localFilePhotos = [const PhotoJson(id: -1)];
   final ProfileRepository _profileRepository = ProfileRepository();
   MyPhotosMode myPhotosMode = MyPhotosMode.watch;
   final ScrollController scrollController = ScrollController();
@@ -41,7 +41,7 @@ class BlocMyPhotosScreen extends Bloc<BlocMyPhotosEvent, BlocMyPhotosState> {
         emit(BlocMyPhotosStateLoadLocalPhotos(
             appResult: AppResult(state: ResultState.loading)));
         List<File> files = await getFiles();
-        final List<PhotoJson> temp = [const PhotoJson()];
+        final List<PhotoJson> temp = [const PhotoJson(id: -1)];
         int i = 0;
         await Future.forEach(files,
             (element) => temp.add(PhotoJson(id: i++, url: element.path)));
@@ -57,10 +57,12 @@ class BlocMyPhotosScreen extends Bloc<BlocMyPhotosEvent, BlocMyPhotosState> {
     } else if (event is BlocMyPhotosEventClickButtonTakePhoto) {
     } else if (event is BlocMyPhotosEventClickButtonSelectPhotosDone) {
       if (newPhotos.isNotEmpty) {
+        newPhotos = newPhotos.toSet().toList();
         emit(BlocMyPhotosStateAddNewPhotos(
             appResult: AppResult(state: ResultState.loading)));
         try {
           await Future.forEach(newPhotos, (element) async {
+            debugPrint('File Selected : $element');
             PhotoJson? photo =
                 await _profileRepository.postPhoto(File(element));
             newPhotosJson.add(photo);
@@ -109,7 +111,7 @@ class BlocMyPhotosScreen extends Bloc<BlocMyPhotosEvent, BlocMyPhotosState> {
           time: DateTime.now().millisecond));
     } else if (event is BlocMyPhotosEventChangeMode) {
       myPhotosMode = event.mode;
-
+      deletePhotos.clear();
       await Future.delayed(Duration.zero, () {
         for (int i = 0; i < myPhotos.length; i++) {
           myPhotos[i] = myPhotos[i].copyWith(selected: false);
@@ -121,20 +123,69 @@ class BlocMyPhotosScreen extends Bloc<BlocMyPhotosEvent, BlocMyPhotosState> {
       try {
         emit(BlocMyPhotosStateDeletePhotos(
             appResult: AppResult(state: ResultState.loading)));
+
+        deletePhotos = deletePhotos.toSet().toList();
+
         await Future.forEach(deletePhotos, (element) async {
           await _profileRepository.deletePhoto(element.id.toString());
-          myPhotos.remove(element);
+          myPhotos.removeWhere((e) => e.id == element.id);
         });
-        emit(BlocMyPhotosStateDeletePhotos(
-            appResult: AppResult(state: ResultState.success)));
-        emit(BlocMyPhotosStateAddNewPhotos(
-            appResult:
-                AppResult(state: ResultState.success, result: myPhotos)));
-        emit(BlocMyPhotosStateChangeMode(mode: MyPhotosMode.watch));
+        deletePhotos.clear();
+        final a = Future.delayed(Duration.zero, () {
+          myPhotosMode = MyPhotosMode.watch;
+          emit(BlocMyPhotosStateChangeMode(mode: MyPhotosMode.watch));
+        });
+        final b = Future.delayed(Duration.zero, () {
+          emit(BlocMyPhotosStateDeletePhotos(
+              appResult: AppResult(state: ResultState.success)));
+        });
+        final c = Future.delayed(Duration.zero, () {
+          emit(BlocMyPhotosStateAddNewPhotos(
+              appResult:
+                  AppResult(state: ResultState.success, result: myPhotos)));
+        });
+        await Future.wait([a, b, c]);
       } on NetworkException {
         emit(BlocMyPhotosStateDeletePhotos(
             appResult: AppResult(state: ResultState.fail)));
       }
+    } else if (event is BlocMyPhotosEventCheckListPhotos) {
+      await Future.delayed(Duration.zero, () {
+        bool isAllSelected =
+            myPhotos.every((element) => element.selected ?? false);
+        myPhotos.setAll(0,
+            myPhotos.map((e) => e.copyWith(selected: !isAllSelected)).toList());
+        !isAllSelected
+            ? deletePhotos
+                .addAll(myPhotos.where((element) => element.id != -1).toList())
+            : deletePhotos.clear();
+
+        deletePhotos = deletePhotos.toSet().toList();
+      });
+      emit(BlocMyPhotosStateCheckListPhotos(time: DateTime.now().millisecond));
+    } else if (event is BlocMyPhotosEventCheckListPhotosLocal) {
+      await Future.delayed(Duration.zero, () {
+        bool isAllSelected = [...localFilePhotos]
+            .where((element) => element.id != -1)
+            .toList()
+            .every((element) => element.selected ?? false);
+
+        localFilePhotos.setAll(
+            0,
+            localFilePhotos
+                .map((e) => e.copyWith(selected: !isAllSelected))
+                .toList());
+
+        !isAllSelected
+            ? newPhotos.addAll(
+                (localFilePhotos.where((element) => element.id != -1).toList())
+                    .map((e) => e.url ?? ''))
+            : newPhotos.clear();
+
+        newPhotos = newPhotos.toSet().toList();
+      });
+      emit(BlocMyPhotosStateCheckListPhotosLocal(
+          time: DateTime.now().millisecond));
     }
   }
 
@@ -151,8 +202,20 @@ class BlocMyPhotosScreen extends Bloc<BlocMyPhotosEvent, BlocMyPhotosState> {
     deletePhotos.add(photoJson);
   }
 
+  void action(bool value, PhotoJson photo) {
+    if (value) {
+      addToDeletePhoto(photo);
+    } else {
+      removeOutOfDeletePhoto(photo);
+    }
+    updateItem(value, photo);
+  }
+
   void removeOutOfDeletePhoto(PhotoJson photoJson) {
-    deletePhotos.remove(photoJson);
+    deletePhotos.removeWhere(
+      (element) => element.id == photoJson.id,
+    );
+    debugPrint('Length After Deleted : ${deletePhotos.length}');
   }
 
   void changeMode(MyPhotosMode mode) {
@@ -175,7 +238,7 @@ class BlocMyPhotosScreen extends Bloc<BlocMyPhotosEvent, BlocMyPhotosState> {
     }
   }
 
-  void remove(String filePath) {
+  void removeOutOfNewPhotos(String filePath) {
     newPhotos.remove(filePath);
     int index =
         localFilePhotos.indexWhere((element) => element.url == filePath);
@@ -186,7 +249,7 @@ class BlocMyPhotosScreen extends Bloc<BlocMyPhotosEvent, BlocMyPhotosState> {
 
   Future<void> removeAllPhotoSeleted() async {
     await Future.forEach(
-        localFilePhotos, (element) => remove(element.url ?? ''));
+        localFilePhotos, (element) => removeOutOfNewPhotos(element.url ?? ''));
   }
 
   Future<List<File>> getFiles() async {

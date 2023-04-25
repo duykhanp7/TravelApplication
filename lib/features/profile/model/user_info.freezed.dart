@@ -32,7 +32,8 @@ mixin _$UserInfoJson {
   bool? get blocked => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
-  String? get type => throw _privateConstructorUsedError;
+  @ConvertStringToUserType()
+  UserType? get type => throw _privateConstructorUsedError;
   List<PhotoJson>? get images => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -60,7 +61,7 @@ abstract class $UserInfoJsonCopyWith<$Res> {
       bool? blocked,
       String? createdAt,
       String? updatedAt,
-      String? type,
+      @ConvertStringToUserType() UserType? type,
       List<PhotoJson>? images});
 
   $PhotoJsonCopyWith<$Res>? get avatar;
@@ -147,7 +148,7 @@ class _$UserInfoJsonCopyWithImpl<$Res, $Val extends UserInfoJson>
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as UserType?,
       images: freezed == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
@@ -201,7 +202,7 @@ abstract class _$$_UserInfoJsonCopyWith<$Res>
       bool? blocked,
       String? createdAt,
       String? updatedAt,
-      String? type,
+      @ConvertStringToUserType() UserType? type,
       List<PhotoJson>? images});
 
   @override
@@ -288,7 +289,7 @@ class __$$_UserInfoJsonCopyWithImpl<$Res>
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as UserType?,
       images: freezed == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
@@ -313,7 +314,7 @@ class _$_UserInfoJson extends _UserInfoJson with DiagnosticableTreeMixin {
       this.blocked,
       this.createdAt,
       this.updatedAt,
-      this.type,
+      @ConvertStringToUserType() this.type,
       final List<PhotoJson>? images})
       : _images = images,
         super._();
@@ -346,7 +347,8 @@ class _$_UserInfoJson extends _UserInfoJson with DiagnosticableTreeMixin {
   @override
   final String? updatedAt;
   @override
-  final String? type;
+  @ConvertStringToUserType()
+  final UserType? type;
   final List<PhotoJson>? _images;
   @override
   List<PhotoJson>? get images {
@@ -458,7 +460,7 @@ abstract class _UserInfoJson extends UserInfoJson {
       final bool? blocked,
       final String? createdAt,
       final String? updatedAt,
-      final String? type,
+      @ConvertStringToUserType() final UserType? type,
       final List<PhotoJson>? images}) = _$_UserInfoJson;
   const _UserInfoJson._() : super._();
 
@@ -490,7 +492,8 @@ abstract class _UserInfoJson extends UserInfoJson {
   @override
   String? get updatedAt;
   @override
-  String? get type;
+  @ConvertStringToUserType()
+  UserType? get type;
   @override
   List<PhotoJson>? get images;
   @override

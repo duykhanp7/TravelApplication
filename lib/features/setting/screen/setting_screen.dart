@@ -5,13 +5,13 @@ import 'package:travel_booking_tour/common/enum/enums.dart';
 import 'package:travel_booking_tour/features/profile/bloc/profile/bloc_profile_screen.dart';
 import 'package:travel_booking_tour/features/profile/bloc/profile/bloc_profile_state.dart';
 import 'package:travel_booking_tour/features/profile/model/user_info.dart';
-import 'package:travel_booking_tour/features/setting/model/setting_menu_item.dart';
 import 'package:travel_booking_tour/res/app_switch.dart';
 import 'package:travel_booking_tour/res/button.dart';
 import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/router/path.dart';
 
 import '../../../router/routes.dart';
+import '../bloc/setting/bloc_setting_screen.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -23,34 +23,11 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreen extends State<SettingScreen> {
-  late List<SettingMenuItem> menus;
+  late BlocSettingScreen _blocSettingScreen;
 
   @override
   void initState() {
-    menus = const [
-      SettingMenuItem(
-          leadingIcon: AppIcons.icNotificationSetting, name: 'Notifications'),
-      SettingMenuItem(
-          leadingIcon: AppIcons.icLanguage,
-          name: 'Languages',
-          endIcon: AppIcons.icArrowNext),
-      SettingMenuItem(
-          leadingIcon: AppIcons.icPayment,
-          name: 'Payment',
-          endIcon: AppIcons.icArrowNext),
-      SettingMenuItem(
-          leadingIcon: AppIcons.icPolicy,
-          name: 'Privacy & Policies',
-          endIcon: AppIcons.icArrowNext),
-      SettingMenuItem(
-          leadingIcon: AppIcons.icFeedBack,
-          name: 'Feedback',
-          endIcon: AppIcons.icArrowNext),
-      SettingMenuItem(
-          leadingIcon: AppIcons.icUsage,
-          name: 'Usage',
-          endIcon: AppIcons.icArrowNext),
-    ];
+    _blocSettingScreen = BlocProvider.of<BlocSettingScreen>(context);
 
     super.initState();
   }
@@ -91,13 +68,14 @@ class _SettingScreen extends State<SettingScreen> {
                   height: 55,
                   child: Row(
                     children: [
-                      SvgPicture.asset(menus[index].leadingIcon!),
+                      SvgPicture.asset(
+                          _blocSettingScreen.menus[index].leadingIcon!),
                       const SizedBox(width: 18),
-                      Text(menus[index].name!,
+                      Text(_blocSettingScreen.menus[index].name!,
                           style: AppStyles.titleMedium
                               .copyWith(fontWeight: FontWeight.w400)),
                       const Spacer(),
-                      menus[index].endIcon == null
+                      _blocSettingScreen.menus[index].endIcon == null
                           ? SizedBox(
                               width: 50,
                               height: 26,
@@ -109,11 +87,13 @@ class _SettingScreen extends State<SettingScreen> {
                                 ),
                               ),
                             )
-                          : SvgPicture.asset(menus[index].endIcon!)
+                          : SvgPicture.asset(
+                              _blocSettingScreen.menus[index].endIcon!)
                     ],
                   ),
                 ),
-                onTap: () {},
+                onTap: () => _blocSettingScreen
+                    .mapItemMenuAction(_blocSettingScreen.menus[index].id),
               ),
             ),
         scrollDirection: Axis.vertical,
@@ -122,7 +102,7 @@ class _SettingScreen extends State<SettingScreen> {
               height: 1,
               color: AppColors.textHintColor,
             ),
-        itemCount: menus.length);
+        itemCount: _blocSettingScreen.menus.length);
   }
 
   Widget _buildHeaderSettings() {
@@ -171,7 +151,7 @@ class _SettingScreen extends State<SettingScreen> {
                   Text(
                       userInfoJson == null
                           ? ''
-                          : userInfoJson.type == 'traverler'
+                          : userInfoJson.type == UserType.traverler
                               ? 'Traverler'
                               : 'Guide',
                       style: AppStyles.titleSmall
@@ -182,10 +162,10 @@ class _SettingScreen extends State<SettingScreen> {
           ),
           const Spacer(),
           PrimaryInactiveButton(
-            text: 'Edit Profile',
-            allCaps: true,
+            text: 'Edit',
+            allCaps: false,
             margin: EdgeInsets.zero,
-            width: 110,
+            width: 90,
             borderRadius: BorderRadius.circular(6),
             color: AppColors.primary,
             borderColor: AppColors.white,

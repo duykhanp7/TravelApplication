@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:travel_booking_tour/common/enum/enums.dart';
+import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/profile/bloc/my_photos/bloc_my_photos_event.dart';
 import 'package:travel_booking_tour/features/profile/bloc/my_photos/bloc_my_photos_screen.dart';
 import 'package:travel_booking_tour/features/profile/bloc/my_photos/bloc_my_photos_state.dart';
@@ -11,6 +12,7 @@ import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/router/routes.dart';
 
 import '../../../res/app_dialog.dart';
+import '../../../res/app_inkwell.dart';
 
 class ProfileAddMorePhotos extends StatefulWidget {
   const ProfileAddMorePhotos({super.key});
@@ -72,7 +74,7 @@ class _ProfileAddMorePhotos extends State<ProfileAddMorePhotos> {
                       await _blocMyPhotosScreen.requestCameraPermission();
                   if (requestState) {
                     Routes.backTo();
-                    showCameraAndTakePhoto();
+                    await showCameraAndTakePhoto();
                   }
                 },
               ),
@@ -82,25 +84,39 @@ class _ProfileAddMorePhotos extends State<ProfileAddMorePhotos> {
         child: Scaffold(
           appBar: AppbarApp(
             title: 'Add Photos',
+            centerTitle: false,
             voidCallBack: () async {
               await _blocMyPhotosScreen.removeAllPhotoSeleted();
               Routes.backTo();
             },
-            suffixWidget: Container(
-              alignment: Alignment.center,
-              height: 20,
-              margin: const EdgeInsets.only(right: 16),
-              child: InkWell(
-                child: Text(
-                  'DONE',
-                  style: AppStyles.titleMedium.copyWith(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.primary),
+            suffixWidget: Row(
+              children: [
+                AppInkWell(
+                  voidCallBack: () => _blocMyPhotosScreen
+                      .add(BlocMyPhotosEventCheckListPhotosLocal()),
+                  icon: AppIcons.icCheckList,
+                  iconSize: const Size(23, 23),
+                  background: AppColors.transparent,
+                  iconTint: AppColors.black,
                 ),
-                onTap: () => _blocMyPhotosScreen
-                    .add(BlocMyPhotosEventClickButtonSelectPhotosDone()),
-              ),
+                const SizedBox(width: 10),
+                Container(
+                  alignment: Alignment.center,
+                  height: 20,
+                  margin: const EdgeInsets.only(right: 16),
+                  child: InkWell(
+                    child: Text(
+                      'DONE',
+                      style: AppStyles.titleMedium.copyWith(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.primary),
+                    ),
+                    onTap: () => _blocMyPhotosScreen
+                        .add(BlocMyPhotosEventClickButtonSelectPhotosDone()),
+                  ),
+                ),
+              ],
             ),
           ),
           backgroundColor: AppColors.white,
@@ -109,7 +125,8 @@ class _ProfileAddMorePhotos extends State<ProfileAddMorePhotos> {
             padding: const EdgeInsets.fromLTRB(0, 24, 0, 24),
             child: BlocBuilder<BlocMyPhotosScreen, BlocMyPhotosState>(
               buildWhen: (previous, current) =>
-                  current is BlocMyPhotosStateLoadLocalPhotos,
+                  current is BlocMyPhotosStateLoadLocalPhotos ||
+                  current is BlocMyPhotosStateCheckListPhotosLocal,
               builder: (context, state) {
                 return GridView.builder(
                     gridDelegate:
@@ -124,9 +141,11 @@ class _ProfileAddMorePhotos extends State<ProfileAddMorePhotos> {
                     itemBuilder: (context, index) => index == 0
                         ? _buildTakePhotoWidget()
                         : PhotoItem(
+                            key: UniqueKey(),
                             url: _blocMyPhotosScreen
                                     .localFilePhotos[index].url ??
                                 '',
+                            visibilityRadioButton: true,
                             selected: _blocMyPhotosScreen
                                     .localFilePhotos[index].selected ??
                                 false,
@@ -134,7 +153,13 @@ class _ProfileAddMorePhotos extends State<ProfileAddMorePhotos> {
                             onClick: (filePath, selected) => selected
                                 ? _blocMyPhotosScreen
                                     .addPhotoToMyPhotos(filePath)
-                                : _blocMyPhotosScreen.remove(filePath),
+                                : _blocMyPhotosScreen
+                                    .removeOutOfNewPhotos(filePath),
+                            onLongClick: (filePath, selected) => selected
+                                ? _blocMyPhotosScreen
+                                    .addPhotoToMyPhotos(filePath)
+                                : _blocMyPhotosScreen
+                                    .removeOutOfNewPhotos(filePath),
                           ));
               },
             ),
@@ -171,7 +196,7 @@ class _ProfileAddMorePhotos extends State<ProfileAddMorePhotos> {
               final state =
                   await _blocMyPhotosScreen.isCameraPermissionGranted();
               if (state) {
-                showCameraAndTakePhoto();
+                await showCameraAndTakePhoto();
               } else {
                 _blocMyPhotosScreen
                     .add(BlocMyPhotosEventRequestCameraPermission());
@@ -187,22 +212,10 @@ class _ProfileAddMorePhotos extends State<ProfileAddMorePhotos> {
   }
 
   Future<void> showCameraAndTakePhoto() async {
-    try {
-      final XFile? photo = await showModalBottomSheet(
-        context: context,
-        enableDrag: false,
-        isDismissible: false,
-        isScrollControlled: true,
-        builder: (context) => AppCamera(
-            cameras: Routes.cameras, cameraOrRecorder: CameraOrRecorder.camera),
-      );
-
-      if (photo != null) {
-        _blocMyPhotosScreen.newPhotos.add(photo.path);
-        _blocMyPhotosScreen.add(BlocMyPhotosEventClickButtonSelectPhotosDone());
-      } else {}
-    } on Exception catch (ex) {
-      debugPrint('showCameraAndTakePhoto Exception : ${ex.toString()}');
-    }
+    XFile? photo = await context.showCameraAndTakePhotos();
+    if (photo != null) {
+      _blocMyPhotosScreen.newPhotos.add(photo.path);
+      _blocMyPhotosScreen.add(BlocMyPhotosEventClickButtonSelectPhotosDone());
+    } else {}
   }
 }

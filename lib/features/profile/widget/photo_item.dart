@@ -14,16 +14,20 @@ class PhotoItem extends StatefulWidget {
       required this.url,
       required this.selected,
       this.enable,
-      required this.onClick,
+      this.onClick,
       this.isHttps,
-      this.onLongClick});
+      this.onLongClick,
+      this.visibilityRadioButton,
+      this.onClickWhenDisable});
 
   final String url;
   final bool selected;
   final bool? enable;
   final bool? isHttps;
-  final Function(String, bool) onClick;
-  final Function()? onLongClick;
+  final Function(String, bool)? onClick;
+  final Function(String)? onClickWhenDisable;
+  final Function(String, bool)? onLongClick;
+  final bool? visibilityRadioButton;
 
   @override
   State<StatefulWidget> createState() {
@@ -73,15 +77,8 @@ class _PhotoItem extends State<PhotoItem> {
             child: InkWell(
               splashColor: AppColors.black.withOpacity(0.2),
               highlightColor: AppColors.black.withOpacity(0.2),
-              onTap: () {
-                if (widget.enable ?? false) {
-                  setState(() {
-                    selected = !selected;
-                    widget.onClick(widget.url, selected);
-                  });
-                }
-              },
-              onLongPress: widget.onLongClick,
+              onTap: () => actionClick(),
+              onLongPress: () => actionLongClick(),
               child: Container(
                 color: AppColors.transparent,
                 width: double.infinity,
@@ -90,17 +87,51 @@ class _PhotoItem extends State<PhotoItem> {
             ),
           ),
           Visibility(
-              visible: widget.enable ?? false,
+              visible: widget.visibilityRadioButton ?? false,
               child: Positioned(
                   top: 10,
                   right: 10,
                   child: selected
-                      ? SvgPicture.asset(AppIcons.icCheckWhite,
-                          width: 26, height: 26)
-                      : SvgPicture.asset(AppIcons.icUnCheckWhite,
-                          width: 26, height: 26)))
+                      ? InkWell(
+                          child: SvgPicture.asset(AppIcons.icCheckWhite,
+                              width: 26, height: 26),
+                          onTap: () => actionClick(),
+                          onLongPress: () => actionLongClick(),
+                        )
+                      : InkWell(
+                          child: SvgPicture.asset(AppIcons.icUnCheckWhite,
+                              width: 26, height: 26),
+                          onTap: () => actionClick(),
+                          onLongPress: () => actionLongClick(),
+                        )))
         ],
       ),
     );
+  }
+
+  void actionClick() {
+    if (widget.enable ?? false) {
+      if (widget.onClick != null) {
+        debugPrint('On actionClick');
+        setState(() {
+          selected = !selected;
+          widget.onClick!(widget.url, selected);
+        });
+      }
+    } else {
+      if (widget.onClickWhenDisable != null) {
+        widget.onClickWhenDisable!(widget.url);
+      }
+    }
+  }
+
+  void actionLongClick() {
+    if (widget.onLongClick != null) {
+      debugPrint('On actionLongClick');
+      setState(() {
+        selected = !selected;
+        widget.onLongClick!(widget.url, selected);
+      });
+    }
   }
 }

@@ -77,11 +77,14 @@ class _ProfileScreen extends State<ProfileScreen> {
                   buildWhen: (previous, current) =>
                       current is BlocProfileStateLoadUserInforResult,
                   builder: (context, state) {
-                    List<PhotoJson> photos = [];
+                    List<PhotoJson> photos = [
+                      ..._blocProfileScreen.userInfoJson?.images ?? []
+                    ];
                     if (state is BlocProfileStateLoadUserInforResult) {
                       if (state.appResult.state == ResultState.success) {
                         photos =
-                            (state.appResult.result as UserInfoJson).images!;
+                            (state.appResult.result as UserInfoJson).images ??
+                                [];
                       } else if (state.appResult.state == ResultState.loading) {
                         return SizedBox(
                           height: 300,
@@ -112,7 +115,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                                 selected: false,
                                 isHttps: true,
                                 enable: false,
-                                onClick: (p0, p1) {})),
+                                visibilityRadioButton: false)),
                       ),
                       const SizedBox(height: 3),
                       photos.length >= 4
@@ -123,7 +126,6 @@ class _ProfileScreen extends State<ProfileScreen> {
                               child: PhotoItem(
                                 url: photos[3].url ?? photos[3].uploadUrl ?? '',
                                 selected: false,
-                                onClick: (p0, p1) {},
                                 isHttps: true,
                                 enable: false,
                               ),

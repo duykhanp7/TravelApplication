@@ -51,3 +51,17 @@ class BlocMyPhotosStateDeletePhotos extends BlocMyPhotosState {
   @override
   List<Object?> get props => [appResult];
 }
+
+class BlocMyPhotosStateCheckListPhotos extends BlocMyPhotosState {
+  BlocMyPhotosStateCheckListPhotos({required this.time});
+  final int time;
+  @override
+  List<Object?> get props => [time];
+}
+
+class BlocMyPhotosStateCheckListPhotosLocal extends BlocMyPhotosState {
+  BlocMyPhotosStateCheckListPhotosLocal({required this.time});
+  final int time;
+  @override
+  List<Object?> get props => [time];
+}

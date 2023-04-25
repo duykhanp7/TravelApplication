@@ -14,6 +14,7 @@ class PhotoJson with _$PhotoJson {
     int? id,
     String? token,
     String? uploadUrl,
+    String? name,
     String? url,
     bool? selected,
     @ConvertStringToDateTime() DateTime? createdAt,
