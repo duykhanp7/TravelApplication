@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:travel_booking_tour/data/model/result.dart';
 import 'package:travel_booking_tour/common/app_constant.dart';
 import 'package:travel_booking_tour/common/enum/enums.dart';
@@ -25,12 +24,14 @@ class BlocProfileScreen extends Bloc<BlocProfileEvent, BlocProfileState> {
   final ProfileRepository _profileRepository = ProfileRepository();
   UserInfoJson? userInfoJson;
   final AppStorage _appStorage = AppStorage();
-
+  bool isLoading = false;
+  bool isActionRefresh = false;
   Future<void> mapStateToEvent(
       BlocProfileEvent event, Emitter<BlocProfileState> emit) async {
     if (event is BlocProfileEventInitial) {
+      isLoading = true;
       try {
-        if (userInfoJson == null) {
+        if (userInfoJson == null || isActionRefresh) {
           emit(BlocProfileStateLoadUserInforResult(
               appResult: AppResult(state: ResultState.loading)));
         }
@@ -39,6 +40,8 @@ class BlocProfileScreen extends Bloc<BlocProfileEvent, BlocProfileState> {
         final UserInfoJson? temp =
             await _profileRepository.getUserInfo(userInfo.id.toString());
         if (temp != null) {
+          isLoading = false;
+          isActionRefresh = false;
           userInfoJson = temp;
           _appStorage.saveData(AppConstant.info, jsonEncode(userInfoJson));
 
@@ -52,15 +55,15 @@ class BlocProfileScreen extends Bloc<BlocProfileEvent, BlocProfileState> {
 
             userInfoJson = userInfoJson?.copyWith(images: items);
           }
-
           emit(BlocProfileStateLoadUserInforResult(
               appResult:
                   AppResult(state: ResultState.success, result: userInfoJson)));
         }
-      } on NetworkException catch (e) {
+      } on NetworkException {
+        isLoading = false;
+        isActionRefresh = false;
         emit(BlocProfileStateLoadUserInforResult(
             appResult: AppResult(state: ResultState.fail)));
-        debugPrint('Exception : ${e.getTextError} ${e.statusCode}');
       }
     } else if (event is BlocProfileEventShowMoreMyPhotos) {
       Routes.navigateTo(AppPath.myPhotos, {AppConstant.data: userInfoJson});
@@ -82,11 +85,9 @@ class BlocProfileScreen extends Bloc<BlocProfileEvent, BlocProfileState> {
                     AppResult(state: ResultState.success, result: data)));
           }
         }
-      } on NetworkException catch (ex) {
+      } on NetworkException {
         emit(BlocProfileStateUpdateAvatar(
             appResult: AppResult(state: ResultState.fail)));
-        debugPrint(
-            'Exception BlocProfileEventUpdateAvatar : ${ex.getTextError}');
       }
     } else if (event is BlocProfileEventUpdateCover) {
       try {
@@ -104,11 +105,9 @@ class BlocProfileScreen extends Bloc<BlocProfileEvent, BlocProfileState> {
                     AppResult(state: ResultState.success, result: data)));
           }
         }
-      } on NetworkException catch (ex) {
+      } on NetworkException {
         emit(BlocProfileStateUpdateCover(
             appResult: AppResult(state: ResultState.fail)));
-        debugPrint(
-            'Exception BlocProfileEventUpdateAvatar : ${ex.getTextError}');
       }
     }
   }

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:travel_booking_tour/data/model/result.dart';
 
 abstract class BlocTourDetailState extends Equatable {}
 
@@ -23,21 +24,10 @@ class BlocTourDetailStateChangeIndexSchedule extends BlocTourDetailState {
 }
 
 class BlocTourDetailStateLoading extends BlocTourDetailState {
-  BlocTourDetailStateLoading();
+  BlocTourDetailStateLoading({required this.appResult});
+  final AppResult appResult;
   @override
-  List<Object?> get props => [];
-}
-
-class BlocTourDetailStateLoadingFail extends BlocTourDetailState {
-  BlocTourDetailStateLoadingFail();
-  @override
-  List<Object?> get props => [];
-}
-
-class BlocTourDetailStateLoadingSuccess extends BlocTourDetailState {
-  BlocTourDetailStateLoadingSuccess();
-  @override
-  List<Object?> get props => [];
+  List<Object?> get props => [appResult];
 }
 
 class BlocTourDetailStateShowBottomSheetShare extends BlocTourDetailState {
@@ -48,16 +38,9 @@ class BlocTourDetailStateShowBottomSheetShare extends BlocTourDetailState {
   List<Object?> get props => [current];
 }
 
-class BlocTourDetailStateShareSuccesss extends BlocTourDetailState {
-  BlocTourDetailStateShareSuccesss();
-
+class BlocTourDetailStateBookThisTourResult extends BlocTourDetailState {
+  BlocTourDetailStateBookThisTourResult({required this.appResult});
+  final AppResult appResult;
   @override
-  List<Object?> get props => [];
-}
-
-class BlocTourDetailStateShareFail extends BlocTourDetailState {
-  BlocTourDetailStateShareFail();
-
-  @override
-  List<Object?> get props => [];
+  List<Object?> get props => [appResult];
 }

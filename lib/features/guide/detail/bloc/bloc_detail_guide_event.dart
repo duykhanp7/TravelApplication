@@ -12,13 +12,6 @@ class BlocDetailGuideEventBack extends BlocDetailGuideEvent {
   List<Object?> get props => [];
 }
 
-class BlocDetailGuideEventLoadVideo extends BlocDetailGuideEvent {
-  BlocDetailGuideEventLoadVideo({required this.videoUrl});
-  final String videoUrl;
-  @override
-  List<Object?> get props => [videoUrl];
-}
-
 class BlocDetailGuideEventClose extends BlocDetailGuideEvent {
   @override
   List<Object?> get props => [];
@@ -29,9 +22,4 @@ class BlocDetailGuideEventChooseThisGuide extends BlocDetailGuideEvent {
   final int current;
   @override
   List<Object?> get props => [current];
-}
-
-class BlocDetailGuideEventRegisterFail extends BlocDetailGuideEvent {
-  @override
-  List<Object?> get props => [];
 }

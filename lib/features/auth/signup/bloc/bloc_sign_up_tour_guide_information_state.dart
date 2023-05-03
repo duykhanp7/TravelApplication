@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:travel_booking_tour/data/model/result.dart';
 import 'package:video_viewer/domain/entities/video_source.dart';
 
 abstract class BlocSignUpTourGuideInformationState extends Equatable {}
@@ -26,58 +26,31 @@ class BlocSignUpTourGuideInformationStateChangeStep
   List<Object?> get props => [step];
 }
 
-class BlocSignUpTourGuideInformationStatePickProfileImageSuccess
+class BlocSignUpTourGuideInformationStatePickProfileImage
     extends BlocSignUpTourGuideInformationState {
-  BlocSignUpTourGuideInformationStatePickProfileImageSuccess(
-      {required this.file});
-  final XFile file;
+  BlocSignUpTourGuideInformationStatePickProfileImage(
+      {required this.appResult});
+  final AppResult appResult;
   @override
-  List<Object?> get props => [file];
+  List<Object?> get props => [appResult];
 }
 
-class BlocSignUpTourGuideInformationStatePickProfileImageFail
+class BlocSignUpTourGuideInformationStatePickGuideLicenseImage
     extends BlocSignUpTourGuideInformationState {
-  BlocSignUpTourGuideInformationStatePickProfileImageFail(
-      {required this.previousImagePicked});
-  final XFile? previousImagePicked;
+  BlocSignUpTourGuideInformationStatePickGuideLicenseImage(
+      {required this.appResult});
+  final AppResult appResult;
   @override
-  List<Object?> get props => [previousImagePicked];
+  List<Object?> get props => [appResult];
 }
 
-class BlocSignUpTourGuideInformationStatePickGuideLicenseImageSuccess
+class BlocSignUpTourGuideInformationStatePickIdentityCardImage
     extends BlocSignUpTourGuideInformationState {
-  BlocSignUpTourGuideInformationStatePickGuideLicenseImageSuccess(
-      {required this.file});
-  final XFile file;
+  BlocSignUpTourGuideInformationStatePickIdentityCardImage(
+      {required this.appResult});
+  final AppResult appResult;
   @override
-  List<Object?> get props => [file];
-}
-
-class BlocSignUpTourGuideInformationStatePickGuideLicenseImageFail
-    extends BlocSignUpTourGuideInformationState {
-  BlocSignUpTourGuideInformationStatePickGuideLicenseImageFail(
-      {required this.previousImagePicked});
-  final XFile? previousImagePicked;
-  @override
-  List<Object?> get props => [previousImagePicked];
-}
-
-class BlocSignUpTourGuideInformationStatePickIdentityCardImageSuccess
-    extends BlocSignUpTourGuideInformationState {
-  BlocSignUpTourGuideInformationStatePickIdentityCardImageSuccess(
-      {required this.file});
-  final XFile file;
-  @override
-  List<Object?> get props => [file];
-}
-
-class BlocSignUpTourGuideInformationStatePickIdentityCardImageFail
-    extends BlocSignUpTourGuideInformationState {
-  BlocSignUpTourGuideInformationStatePickIdentityCardImageFail(
-      {required this.previousImagePicked});
-  final XFile? previousImagePicked;
-  @override
-  List<Object?> get props => [previousImagePicked];
+  List<Object?> get props => [appResult];
 }
 
 class BlocSignUpTourGuideInformationStatePickVideoDone

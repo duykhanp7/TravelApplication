@@ -13,6 +13,7 @@ class AuthRepository {
   final String _signUpPath = '/api/auth/local/register';
   final String _signInPath = '/api/auth/local';
   final String _sendEmailResetPassword = '/api/auth/forgot-password';
+  final String _guideInfo = '/api/guides';
 
   Future<UserJson?> signUp(Map<String, dynamic> data) async =>
       _apiService.postJson(
@@ -57,6 +58,13 @@ class AuthRepository {
         },
         endPoint: '$_authPath/change-password',
         converter: (data) => UserJson.fromJson(data),
+      );
+
+  Future<dynamic> addInformationGuide(Map<String, dynamic> data) async =>
+      _apiService.postJson(
+        data: data,
+        endPoint: _guideInfo,
+        converter: (data) => data,
       );
 
   Future<UserJson?> get user async => UserJson.fromJson(

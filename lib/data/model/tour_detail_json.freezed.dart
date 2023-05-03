@@ -30,6 +30,7 @@ mixin _$TourDetailJson {
   int? get reviews => throw _privateConstructorUsedError;
   int? get likes => throw _privateConstructorUsedError;
   bool? get isFavorite => throw _privateConstructorUsedError;
+  bool? get isBookMarked => throw _privateConstructorUsedError;
   TourProviderJson? get provider => throw _privateConstructorUsedError;
   String? get duration => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
@@ -61,6 +62,7 @@ abstract class $TourDetailJsonCopyWith<$Res> {
       int? reviews,
       int? likes,
       bool? isFavorite,
+      bool? isBookMarked,
       TourProviderJson? provider,
       String? duration,
       String? description,
@@ -95,6 +97,7 @@ class _$TourDetailJsonCopyWithImpl<$Res, $Val extends TourDetailJson>
     Object? reviews = freezed,
     Object? likes = freezed,
     Object? isFavorite = freezed,
+    Object? isBookMarked = freezed,
     Object? provider = freezed,
     Object? duration = freezed,
     Object? description = freezed,
@@ -143,6 +146,10 @@ class _$TourDetailJsonCopyWithImpl<$Res, $Val extends TourDetailJson>
       isFavorite: freezed == isFavorite
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isBookMarked: freezed == isBookMarked
+          ? _value.isBookMarked
+          : isBookMarked // ignore: cast_nullable_to_non_nullable
               as bool?,
       provider: freezed == provider
           ? _value.provider
@@ -207,6 +214,7 @@ abstract class _$$_TourDetailJsonCopyWith<$Res>
       int? reviews,
       int? likes,
       bool? isFavorite,
+      bool? isBookMarked,
       TourProviderJson? provider,
       String? duration,
       String? description,
@@ -240,6 +248,7 @@ class __$$_TourDetailJsonCopyWithImpl<$Res>
     Object? reviews = freezed,
     Object? likes = freezed,
     Object? isFavorite = freezed,
+    Object? isBookMarked = freezed,
     Object? provider = freezed,
     Object? duration = freezed,
     Object? description = freezed,
@@ -289,6 +298,10 @@ class __$$_TourDetailJsonCopyWithImpl<$Res>
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isBookMarked: freezed == isBookMarked
+          ? _value.isBookMarked
+          : isBookMarked // ignore: cast_nullable_to_non_nullable
+              as bool?,
       provider: freezed == provider
           ? _value.provider
           : provider // ignore: cast_nullable_to_non_nullable
@@ -337,6 +350,7 @@ class _$_TourDetailJson
       this.reviews,
       this.likes,
       this.isFavorite,
+      this.isBookMarked,
       this.provider,
       this.duration,
       this.description,
@@ -380,6 +394,8 @@ class _$_TourDetailJson
   @override
   final bool? isFavorite;
   @override
+  final bool? isBookMarked;
+  @override
   final TourProviderJson? provider;
   @override
   final String? duration;
@@ -411,7 +427,7 @@ class _$_TourDetailJson
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TourDetailJson(id: $id, tourGuideId: $tourGuideId, destination: $destination, images: $images, price: $price, saleOff: $saleOff, rating: $rating, reviews: $reviews, likes: $likes, isFavorite: $isFavorite, provider: $provider, duration: $duration, description: $description, departureDate: $departureDate, departurePlace: $departurePlace, schedule: $schedule, prices: $prices)';
+    return 'TourDetailJson(id: $id, tourGuideId: $tourGuideId, destination: $destination, images: $images, price: $price, saleOff: $saleOff, rating: $rating, reviews: $reviews, likes: $likes, isFavorite: $isFavorite, isBookMarked: $isBookMarked, provider: $provider, duration: $duration, description: $description, departureDate: $departureDate, departurePlace: $departurePlace, schedule: $schedule, prices: $prices)';
   }
 
   @override
@@ -429,6 +445,7 @@ class _$_TourDetailJson
       ..add(DiagnosticsProperty('reviews', reviews))
       ..add(DiagnosticsProperty('likes', likes))
       ..add(DiagnosticsProperty('isFavorite', isFavorite))
+      ..add(DiagnosticsProperty('isBookMarked', isBookMarked))
       ..add(DiagnosticsProperty('provider', provider))
       ..add(DiagnosticsProperty('duration', duration))
       ..add(DiagnosticsProperty('description', description))
@@ -456,6 +473,8 @@ class _$_TourDetailJson
             (identical(other.likes, likes) || other.likes == likes) &&
             (identical(other.isFavorite, isFavorite) ||
                 other.isFavorite == isFavorite) &&
+            (identical(other.isBookMarked, isBookMarked) ||
+                other.isBookMarked == isBookMarked) &&
             (identical(other.provider, provider) ||
                 other.provider == provider) &&
             (identical(other.duration, duration) ||
@@ -484,6 +503,7 @@ class _$_TourDetailJson
       reviews,
       likes,
       isFavorite,
+      isBookMarked,
       provider,
       duration,
       description,
@@ -518,6 +538,7 @@ abstract class _TourDetailJson implements TourDetailJson {
       final int? reviews,
       final int? likes,
       final bool? isFavorite,
+      final bool? isBookMarked,
       final TourProviderJson? provider,
       final String? duration,
       final String? description,
@@ -549,6 +570,8 @@ abstract class _TourDetailJson implements TourDetailJson {
   int? get likes;
   @override
   bool? get isFavorite;
+  @override
+  bool? get isBookMarked;
   @override
   TourProviderJson? get provider;
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travel_booking_tour/data/model/news_json.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_event.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_screen.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_state.dart';
@@ -333,7 +334,7 @@ class _ExploreScreen extends State<ExploreScreen> {
     );
   }
 
-  Widget _buildTravelNews(List<TourDetailJson> items) {
+  Widget _buildTravelNews(List<NewsJson> items) {
     return Container(
       padding: const EdgeInsets.only(top: 20),
       alignment: Alignment.center,
@@ -382,10 +383,10 @@ class _ExploreScreen extends State<ExploreScreen> {
             children: List.generate(
                 items.length,
                 (index) => TravelNewItem(
-                    tourDetailJson: items[index],
+                    newsJson: items[index],
                     callback: () {
-                      _blocExploreScreen.add(BlocExploreEventOnTourClick(
-                          tourDetailJson: items[index]));
+                      // _blocExploreScreen.add(BlocExploreEventOnTourClick(
+                      //     tourDetailJson: items[index]));
                     })),
           ),
           const SizedBox(height: 20)

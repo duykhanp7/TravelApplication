@@ -29,3 +29,9 @@ class BlocTourDetailEventShowBottomSheetShare extends BlocTourDetailEvent {
   @override
   List<Object?> get props => [];
 }
+
+class BlocTourDetailEventClickButtonBookThisTour extends BlocTourDetailEvent {
+  BlocTourDetailEventClickButtonBookThisTour();
+  @override
+  List<Object?> get props => [];
+}

@@ -1,12 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:travel_booking_tour/res/res.dart';
 
 import '../../../data/model/tour_detail_json.dart';
-import '../../../res/app_layout_shimmer.dart';
-import '../../../res/colors.dart';
-import '../../../res/icons.dart';
-import '../../../res/styles.dart';
+
 import '../../../res/vertical_star_widget.dart';
 
 class FeaturedTourItem extends StatefulWidget {
@@ -199,77 +197,25 @@ class _FeaturedTourItem extends State<FeaturedTourItem> {
             Positioned(
                 right: 12,
                 top: 12,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      width: 13,
-                      height: 20,
-                      color: AppColors.transparent,
-                      child: SvgPicture.asset(AppIcons.bookMarkNone),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      color: AppColors.transparent,
-                      child: Material(
-                        borderRadius: BorderRadius.circular(15),
-                        color: AppColors.transparent,
-                        child: InkWell(
-                          splashColor: AppColors.white.withOpacity(0.2),
-                          highlightColor: AppColors.white.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(15),
-                          child: Container(
-                            width: 30,
-                            height: 30,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15)),
-                          ),
-                          onTap: () {},
-                        ),
-                      ),
-                    )
-                  ],
+                child: AppButtonBookmark(
+                  size: const Size(30, 30),
+                  iconSize: const Size(20, 20),
+                  isBookmark: widget.tourDetailJson.isBookMarked ?? false,
+                  onClick: (value) {},
                 )),
             Positioned(
                 right: 12,
                 top: 80,
                 bottom: 0,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      child: SvgPicture.asset(
-                          widget.tourDetailJson.isFavorite == null
-                              ? AppIcons.favoriteNone
-                              : widget.tourDetailJson.isFavorite!
-                                  ? AppIcons.favoriteFill
-                                  : AppIcons.favoriteNone),
-                    ),
-                    Container(
-                      width: 40,
-                      height: 40,
-                      alignment: Alignment.center,
-                      child: Material(
-                          color: AppColors.transparent,
-                          borderRadius: BorderRadius.circular(20),
-                          child: InkWell(
-                            splashColor:
-                                AppColors.textSkipColor.withOpacity(0.1),
-                            highlightColor:
-                                AppColors.textSkipColor.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(20),
-                            child: Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20)),
-                            ),
-                            onTap: () {},
-                          )),
-                    )
-                  ],
+                child: AppButtonFavorite(
+                  iconTint: AppColors.primary,
+                  background: AppColors.transparent,
+                  size: const Size(40, 40),
+                  iconSize: const Size(25, 25),
+                  isFavorite: widget.tourDetailJson.isFavorite ?? false,
+                  onClick: (value) {},
+                  iconActive: AppIcons.favoriteFill,
+                  iconInActive: AppIcons.favoriteNone,
                 )),
           ],
         ),

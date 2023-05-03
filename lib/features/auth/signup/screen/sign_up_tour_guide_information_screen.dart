@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_tour_guide_information_event.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_tour_guide_information_screen.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_tour_guide_information_state.dart';
@@ -43,10 +44,18 @@ class _SignUpTourGuideInformationScreen
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(AppSystem.systemStyle);
+
+    Map<String, dynamic>? data =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+
+    if (data != null) {
+      _blocSignUpTourGuideInformationScreen.setDataAccount(data);
+    }
+
     return WillPopScope(
       onWillPop: () async {
         if (_blocSignUpTourGuideInformationScreen.currentIndexStep == 0) {
-          _blocSignUpTourGuideInformationScreen.clearDatas();
+          //_blocSignUpTourGuideInformationScreen.clearDatas();
           _blocSignUpTourGuideInformationScreen
               .add(BlocSignUpTourGuideInformationEventClose());
           return true;
@@ -59,92 +68,94 @@ class _SignUpTourGuideInformationScreen
       child: Scaffold(
         backgroundColor: AppColors.primary,
         body: SafeArea(
-            child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          scrollDirection: Axis.vertical,
-          child: GestureDetector(
-            onTap: () {},
-            child: BlocListener<BlocSignUpTourGuideInformationScreen,
-                BlocSignUpTourGuideInformationState>(
-              listenWhen: (previous, current) =>
-                  current is BlocSignUpTourGuideInformationStatePickWrongFormat,
-              listener: (context, state) {
-                showDialog(
-                  context: context,
-                  builder: (context) => AppDialog(
-                    content: 'Only support these file formats: .jpg, .png',
-                    typeDialog: TypeDialog.warning,
-                    positiveAction: () => Navigator.of(context).pop(),
-                  ),
-                );
-              },
-              child: Form(
-                key: _blocSignUpTourGuideInformationScreen
-                    .signUpTourGuideInformationGlobalKey,
-                child: AppBackground(
-                    header:
-                        'Please finish your profile so that\nTravelers can find you easily!',
-                    headerStyle: AppStyles.titleMedium.copyWith(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.normal),
-                    headerPadding: const EdgeInsets.only(top: 0, bottom: 30),
-                    top: Container(
-                      margin: const EdgeInsets.only(top: 32, left: 8),
-                      child: Text(
-                        'Welcome, Tuan',
-                        style: AppStyles.titleMedium.copyWith(
-                            fontSize: 34,
-                            fontStyle: FontStyle.italic,
-                            fontWeight: FontWeight.w100,
-                            color: AppColors.white),
-                      ),
+            child: AppDeepBackground(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            scrollDirection: Axis.vertical,
+            child: GestureDetector(
+              onTap: () {},
+              child: BlocListener<BlocSignUpTourGuideInformationScreen,
+                  BlocSignUpTourGuideInformationState>(
+                listenWhen: (previous, current) => current
+                    is BlocSignUpTourGuideInformationStatePickWrongFormat,
+                listener: (context, state) {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AppDialog(
+                      content: 'Only support these file formats: .jpg, .png',
+                      typeDialog: TypeDialog.warning,
+                      positiveAction: () => Navigator.of(context).pop(),
                     ),
-                    children: Container(
-                      color: AppColors.white,
-                      child: Column(
-                        children: [
-                          BlocBuilder<BlocSignUpTourGuideInformationScreen,
-                              BlocSignUpTourGuideInformationState>(
-                            buildWhen: (previous, current) => current
-                                is BlocSignUpTourGuideInformationStateChangeStep,
-                            builder: (context, state) => Container(
-                              height: 50,
-                              alignment: Alignment.center,
-                              margin: const EdgeInsets.only(top: 20),
-                              child: TimelineWidget(
-                                  padding: const EdgeInsets.only(
-                                      left: 15, right: 30),
-                                  currentStep:
-                                      _blocSignUpTourGuideInformationScreen
-                                          .currentIndexStep,
-                                  titles: const [
-                                    'Background Info',
-                                    'Fee & Time'
-                                  ]),
-                            ),
-                          ),
-                          const SizedBox(height: 30),
-                          BlocBuilder<BlocSignUpTourGuideInformationScreen,
-                              BlocSignUpTourGuideInformationState>(
-                            buildWhen: (previous, current) => current
-                                is BlocSignUpTourGuideInformationStateChangeStep,
-                            builder: (context, state) {
-                              if (state
-                                  is BlocSignUpTourGuideInformationStateChangeStep) {
-                                if (state.step == 0) {
-                                  return _buildStep1();
-                                } else if (state.step == 1) {
-                                  return _buildStep2(context);
-                                }
-                              }
-                              return _buildStep1();
-                            },
-                          )
-                        ],
+                  );
+                },
+                child: Form(
+                  key: _blocSignUpTourGuideInformationScreen
+                      .signUpTourGuideInformationGlobalKey,
+                  child: AppBackground(
+                      header:
+                          'Please finish your profile so that\nTravelers can find you easily!',
+                      headerStyle: AppStyles.titleMedium.copyWith(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.normal),
+                      headerPadding: const EdgeInsets.only(top: 0, bottom: 30),
+                      top: Container(
+                        margin: const EdgeInsets.only(top: 32, left: 8),
+                        child: Text(
+                          'Welcome, Tuan',
+                          style: AppStyles.titleMedium.copyWith(
+                              fontSize: 34,
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.w100,
+                              color: AppColors.white),
+                        ),
                       ),
-                    )),
+                      children: Container(
+                        color: AppColors.white,
+                        child: Column(
+                          children: [
+                            BlocBuilder<BlocSignUpTourGuideInformationScreen,
+                                BlocSignUpTourGuideInformationState>(
+                              buildWhen: (previous, current) => current
+                                  is BlocSignUpTourGuideInformationStateChangeStep,
+                              builder: (context, state) => Container(
+                                height: 50,
+                                alignment: Alignment.center,
+                                margin: const EdgeInsets.only(top: 20),
+                                child: TimelineWidget(
+                                    padding: const EdgeInsets.only(
+                                        left: 15, right: 30),
+                                    currentStep:
+                                        _blocSignUpTourGuideInformationScreen
+                                            .currentIndexStep,
+                                    titles: const [
+                                      'Background Info',
+                                      'Fee & Time'
+                                    ]),
+                              ),
+                            ),
+                            const SizedBox(height: 30),
+                            BlocBuilder<BlocSignUpTourGuideInformationScreen,
+                                BlocSignUpTourGuideInformationState>(
+                              buildWhen: (previous, current) => current
+                                  is BlocSignUpTourGuideInformationStateChangeStep,
+                              builder: (context, state) {
+                                if (state
+                                    is BlocSignUpTourGuideInformationStateChangeStep) {
+                                  if (state.step == 0) {
+                                    return _buildStep1();
+                                  } else if (state.step == 1) {
+                                    return _buildStep2(context);
+                                  }
+                                }
+                                return _buildStep1();
+                              },
+                            )
+                          ],
+                        ),
+                      )),
+                ),
               ),
             ),
           ),
@@ -164,21 +175,24 @@ class _SignUpTourGuideInformationScreen
                 children: [
                   BlocBuilder<BlocSignUpTourGuideInformationScreen,
                       BlocSignUpTourGuideInformationState>(
-                    buildWhen: (previous, current) =>
-                        current
-                            is BlocSignUpTourGuideInformationStatePickProfileImageSuccess ||
-                        current
-                            is BlocSignUpTourGuideInformationStatePickProfileImageFail,
+                    buildWhen: (previous, current) => current
+                        is BlocSignUpTourGuideInformationStatePickProfileImage,
                     builder: (context, state) {
                       String filePath = _blocSignUpTourGuideInformationScreen
                               .imageProfile?.path ??
                           '';
+                      bool isError = false;
                       if (state
-                          is BlocSignUpTourGuideInformationStatePickProfileImageSuccess) {
-                        filePath = state.file.path;
-                      } else if (state
-                          is BlocSignUpTourGuideInformationStatePickProfileImageFail) {
-                        filePath = state.previousImagePicked?.path ?? '';
+                          is BlocSignUpTourGuideInformationStatePickProfileImage) {
+                        if (state.appResult.state == ResultState.success) {
+                          filePath = (state.appResult.result as XFile).path;
+                        } else if (state.appResult.state == ResultState.fail) {
+                          if (state.appResult.result != null) {
+                            filePath = (state.appResult.result as XFile).path;
+                          }
+                        } else if (state.appResult.state == ResultState.error) {
+                          isError = true;
+                        }
                       }
 
                       return Stack(
@@ -197,7 +211,9 @@ class _SignUpTourGuideInformationScreen
                                 border: Border.all(
                                     color: filePath.trim().isNotEmpty
                                         ? AppColors.transparent
-                                        : AppColors.primary,
+                                        : isError
+                                            ? Colors.red
+                                            : AppColors.primary,
                                     width: filePath.trim().isNotEmpty ? 0 : 1)),
                             child: filePath.trim().isNotEmpty
                                 ? ClipRRect(
@@ -210,7 +226,12 @@ class _SignUpTourGuideInformationScreen
                                       fit: BoxFit.cover,
                                     ),
                                   )
-                                : SvgPicture.asset(AppIcons.icPersonal),
+                                : SvgPicture.asset(
+                                    AppIcons.icPersonal,
+                                    color: isError
+                                        ? Colors.red
+                                        : AppColors.primary,
+                                  ),
                           ),
                           Visibility(
                               visible: filePath.trim().isNotEmpty,
@@ -747,114 +768,7 @@ class _SignUpTourGuideInformationScreen
             style: AppStyles.titleMedium.copyWith(fontWeight: FontWeight.w500),
           ),
           const SizedBox(height: 16),
-          Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-                color: AppColors.transparent,
-                borderRadius: BorderRadius.circular(4)),
-            child: Material(
-              color: AppColors.transparent,
-              borderRadius: BorderRadius.circular(4),
-              child: InkWell(
-                borderRadius: BorderRadius.circular(4),
-                onTap: () => _blocSignUpTourGuideInformationScreen.add(
-                    BlocSignUpTourGuideInformationEventPickGuideLicenseImage()),
-                child: BlocBuilder<BlocSignUpTourGuideInformationScreen,
-                    BlocSignUpTourGuideInformationState>(
-                  buildWhen: (previous, current) =>
-                      current
-                          is BlocSignUpTourGuideInformationStatePickGuideLicenseImageSuccess ||
-                      current
-                          is BlocSignUpTourGuideInformationStatePickGuideLicenseImageFail,
-                  builder: (context, state) {
-                    String filePath = _blocSignUpTourGuideInformationScreen
-                            .imageGuideLicense?.path ??
-                        '';
-                    if (state
-                        is BlocSignUpTourGuideInformationStatePickGuideLicenseImageSuccess) {
-                      filePath = state.file.path;
-                    } else if (state
-                        is BlocSignUpTourGuideInformationStatePickGuideLicenseImageFail) {
-                      filePath = state.previousImagePicked?.path ?? '';
-                    }
-                    if (filePath.trim().isNotEmpty) {
-                      return AspectRatio(
-                        aspectRatio: 3 / 1.5,
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.file(
-                                  File(filePath),
-                                  filterQuality: FilterQuality.high,
-                                  fit: BoxFit.cover,
-                                )),
-                            Positioned(
-                                top: 0,
-                                right: 0,
-                                child: Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    SizedBox(
-                                      width: 12,
-                                      height: 12,
-                                      child: SvgPicture.asset(
-                                        AppIcons.icClose,
-                                        color: AppColors.white,
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 30,
-                                      height: 25,
-                                      decoration: BoxDecoration(
-                                          color:
-                                              AppColors.black.withOpacity(0.4),
-                                          borderRadius: const BorderRadius.only(
-                                              topRight: Radius.circular(12.5),
-                                              bottomLeft: Radius.circular(12))),
-                                      child: InkWell(
-                                        onTap: () =>
-                                            _blocSignUpTourGuideInformationScreen
-                                                .add(
-                                                    BlocSignUpTourGuideInformationEventRemoveGuideLicenseImage()),
-                                      ),
-                                    )
-                                  ],
-                                ))
-                          ],
-                        ),
-                      );
-                    }
-                    return DottedBorder(
-                        color: AppColors.primary,
-                        dashPattern: const [4, 2],
-                        radius: const Radius.circular(4),
-                        borderType: BorderType.rRect,
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 50,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(AppIcons.cameraFill),
-                              const SizedBox(width: 8),
-                              Text(
-                                'Upload Photo',
-                                style: AppStyles.titleMedium.copyWith(
-                                    color: AppColors.primary,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14),
-                              )
-                            ],
-                          ),
-                        ));
-                  },
-                ),
-              ),
-            ),
-          ),
+          _buildWidgetChooseGuideLicense(),
           const SizedBox(height: 24),
           Text(
             'Identify Card',
@@ -862,114 +776,7 @@ class _SignUpTourGuideInformationScreen
             style: AppStyles.titleMedium.copyWith(fontWeight: FontWeight.w500),
           ),
           const SizedBox(height: 16),
-          Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-                color: AppColors.transparent,
-                borderRadius: BorderRadius.circular(4)),
-            child: Material(
-              color: AppColors.transparent,
-              borderRadius: BorderRadius.circular(4),
-              child: InkWell(
-                borderRadius: BorderRadius.circular(4),
-                onTap: () => _blocSignUpTourGuideInformationScreen.add(
-                    BlocSignUpTourGuideInformationEventPickIdentityCardImage()),
-                child: BlocBuilder<BlocSignUpTourGuideInformationScreen,
-                    BlocSignUpTourGuideInformationState>(
-                  buildWhen: (previous, current) =>
-                      current
-                          is BlocSignUpTourGuideInformationStatePickIdentityCardImageSuccess ||
-                      current
-                          is BlocSignUpTourGuideInformationStatePickIdentityCardImageFail,
-                  builder: (context, state) {
-                    String filePath = _blocSignUpTourGuideInformationScreen
-                            .imageIdentityCard?.path ??
-                        '';
-                    if (state
-                        is BlocSignUpTourGuideInformationStatePickIdentityCardImageSuccess) {
-                      filePath = state.file.path;
-                    } else if (state
-                        is BlocSignUpTourGuideInformationStatePickIdentityCardImageFail) {
-                      filePath = state.previousImagePicked?.path ?? '';
-                    }
-                    if (filePath.trim().isNotEmpty) {
-                      return AspectRatio(
-                        aspectRatio: 3 / 1.5,
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.file(
-                                  File(filePath),
-                                  filterQuality: FilterQuality.high,
-                                  fit: BoxFit.cover,
-                                )),
-                            Positioned(
-                                top: 0,
-                                right: 0,
-                                child: Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    SizedBox(
-                                      width: 12,
-                                      height: 12,
-                                      child: SvgPicture.asset(
-                                        AppIcons.icClose,
-                                        color: AppColors.white,
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 30,
-                                      height: 25,
-                                      decoration: BoxDecoration(
-                                          color:
-                                              AppColors.black.withOpacity(0.4),
-                                          borderRadius: const BorderRadius.only(
-                                              topRight: Radius.circular(12.5),
-                                              bottomLeft: Radius.circular(12))),
-                                      child: InkWell(
-                                        onTap: () =>
-                                            _blocSignUpTourGuideInformationScreen
-                                                .add(
-                                                    BlocSignUpTourGuideInformationEventRemoveIdentityCardImage()),
-                                      ),
-                                    )
-                                  ],
-                                ))
-                          ],
-                        ),
-                      );
-                    }
-                    return DottedBorder(
-                        color: AppColors.primary,
-                        dashPattern: const [4, 2],
-                        radius: const Radius.circular(4),
-                        borderType: BorderType.rRect,
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 50,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(AppIcons.cameraFill),
-                              const SizedBox(width: 8),
-                              Text(
-                                'Upload Photo',
-                                style: AppStyles.titleMedium.copyWith(
-                                    color: AppColors.primary,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14),
-                              )
-                            ],
-                          ),
-                        ));
-                  },
-                ),
-              ),
-            ),
-          ),
+          _buildWidgetChooseIdentityCard(),
           const SizedBox(height: 24),
           AppTextField(
               hintText: 'Languages you can use to guide',
@@ -1036,12 +843,14 @@ class _SignUpTourGuideInformationScreen
               Map<String, VideoSource>? source =
                   _blocSignUpTourGuideInformationScreen.getSourceVideo(
                       _blocSignUpTourGuideInformationScreen.videoIntroduction);
+              bool isError = false;
               if (state is BlocSignUpTourGuideInformationStatePickVideoDone ||
                   source != null) {
                 if (state is BlocSignUpTourGuideInformationStatePickVideoDone) {
                   source = state.source;
                 }
                 if (source != null) {
+                  isError = false;
                   return Stack(
                     children: [
                       AppVideo(
@@ -1082,47 +891,67 @@ class _SignUpTourGuideInformationScreen
                           ))
                     ],
                   );
+                } else {
+                  isError = true;
                 }
               }
-              return Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    color: AppColors.transparent,
-                    borderRadius: BorderRadius.circular(4)),
-                child: Material(
-                  color: AppColors.transparent,
-                  borderRadius: BorderRadius.circular(4),
-                  child: InkWell(
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: AppColors.transparent,
+                        borderRadius: BorderRadius.circular(4)),
+                    child: Material(
+                      color: AppColors.transparent,
                       borderRadius: BorderRadius.circular(4),
-                      onTap: () => _blocSignUpTourGuideInformationScreen.add(
-                          BlocSignUpTourGuideInformationEventPickVideoIntroduction()),
-                      child: DottedBorder(
-                          color: AppColors.primary,
-                          radius: const Radius.circular(4),
-                          borderType: BorderType.rRect,
-                          dashPattern: const [4, 2],
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 50,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(AppIcons.cameraFill),
-                                const SizedBox(
-                                  width: 8,
+                      child: InkWell(
+                          borderRadius: BorderRadius.circular(4),
+                          onTap: () => _blocSignUpTourGuideInformationScreen.add(
+                              BlocSignUpTourGuideInformationEventPickVideoIntroduction()),
+                          child: DottedBorder(
+                              color: AppColors.primary,
+                              radius: const Radius.circular(4),
+                              borderType: BorderType.rRect,
+                              dashPattern: const [4, 2],
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 50,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(AppIcons.cameraFill),
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(
+                                      'Upload Video',
+                                      style: AppStyles.titleMedium.copyWith(
+                                          color: AppColors.primary,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14),
+                                    )
+                                  ],
                                 ),
-                                Text(
-                                  'Upload Video',
-                                  style: AppStyles.titleMedium.copyWith(
-                                      color: AppColors.primary,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 14),
-                                )
-                              ],
-                            ),
-                          ))),
-                ),
+                              ))),
+                    ),
+                  ),
+                  Visibility(
+                      visible: isError,
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 10),
+                          Text('(*) Please choose your introduction',
+                              style: AppStyles.titleSmall.copyWith(
+                                  color: AppColors.error,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400)),
+                        ],
+                      ))
+                ],
               );
             },
           ),
@@ -1136,6 +965,300 @@ class _SignUpTourGuideInformationScreen
           )
         ],
       ),
+    );
+  }
+
+  BlocBuilder<BlocSignUpTourGuideInformationScreen,
+      BlocSignUpTourGuideInformationState> _buildWidgetChooseIdentityCard() {
+    return BlocBuilder<BlocSignUpTourGuideInformationScreen,
+        BlocSignUpTourGuideInformationState>(
+      buildWhen: (previous, current) =>
+          current is BlocSignUpTourGuideInformationStatePickIdentityCardImage,
+      builder: (context, state) {
+        bool isError = false;
+
+        if (state is BlocSignUpTourGuideInformationStatePickIdentityCardImage) {
+          if (state.appResult.state == ResultState.error) {
+            isError = true;
+          }
+        }
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  color: AppColors.transparent,
+                  borderRadius: BorderRadius.circular(4)),
+              child: Material(
+                color: AppColors.transparent,
+                borderRadius: BorderRadius.circular(4),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(4),
+                  onTap: () => _blocSignUpTourGuideInformationScreen.add(
+                      BlocSignUpTourGuideInformationEventPickIdentityCardImage()),
+                  child: BlocBuilder<BlocSignUpTourGuideInformationScreen,
+                      BlocSignUpTourGuideInformationState>(
+                    buildWhen: (previous, current) => current
+                        is BlocSignUpTourGuideInformationStatePickIdentityCardImage,
+                    builder: (context, state) {
+                      String filePath = _blocSignUpTourGuideInformationScreen
+                              .imageIdentityCard?.path ??
+                          '';
+                      if (state
+                          is BlocSignUpTourGuideInformationStatePickIdentityCardImage) {
+                        if (state.appResult.state == ResultState.success) {
+                          filePath = (state.appResult.result as XFile).path;
+                        } else if (state.appResult.state == ResultState.fail) {
+                          if (state.appResult.result != null) {
+                            filePath = (state.appResult.result as XFile).path;
+                          }
+                        }
+                      }
+                      if (filePath.trim().isNotEmpty) {
+                        return AspectRatio(
+                          aspectRatio: 3 / 1.5,
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.file(
+                                    File(filePath),
+                                    filterQuality: FilterQuality.high,
+                                    fit: BoxFit.cover,
+                                  )),
+                              Positioned(
+                                  top: 0,
+                                  right: 0,
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: 12,
+                                        height: 12,
+                                        child: SvgPicture.asset(
+                                          AppIcons.icClose,
+                                          color: AppColors.white,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 30,
+                                        height: 25,
+                                        decoration: BoxDecoration(
+                                            color: AppColors.black
+                                                .withOpacity(0.4),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                                    topRight:
+                                                        Radius.circular(12.5),
+                                                    bottomLeft:
+                                                        Radius.circular(12))),
+                                        child: InkWell(
+                                          onTap: () =>
+                                              _blocSignUpTourGuideInformationScreen
+                                                  .add(
+                                                      BlocSignUpTourGuideInformationEventRemoveIdentityCardImage()),
+                                        ),
+                                      )
+                                    ],
+                                  ))
+                            ],
+                          ),
+                        );
+                      }
+                      return DottedBorder(
+                          color: AppColors.primary,
+                          dashPattern: const [4, 2],
+                          radius: const Radius.circular(4),
+                          borderType: BorderType.rRect,
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 50,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(AppIcons.cameraFill),
+                                const SizedBox(width: 8),
+                                Text(
+                                  'Upload Photo',
+                                  style: AppStyles.titleMedium.copyWith(
+                                      color: AppColors.primary,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14),
+                                )
+                              ],
+                            ),
+                          ));
+                    },
+                  ),
+                ),
+              ),
+            ),
+            Visibility(
+                visible: isError,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 10),
+                    Text('(*) Please choose your identity card',
+                        style: AppStyles.titleSmall.copyWith(
+                            color: AppColors.error,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400)),
+                  ],
+                ))
+          ],
+        );
+      },
+    );
+  }
+
+  BlocBuilder<StateStreamable<Object?>, Object?>
+      _buildWidgetChooseGuideLicense() {
+    return BlocBuilder<BlocSignUpTourGuideInformationScreen,
+        BlocSignUpTourGuideInformationState>(
+      buildWhen: (previous, current) =>
+          current is BlocSignUpTourGuideInformationStatePickGuideLicenseImage,
+      builder: (context, state) {
+        bool isError = false;
+
+        if (state is BlocSignUpTourGuideInformationStatePickGuideLicenseImage) {
+          if (state.appResult.state == ResultState.error) {
+            isError = true;
+          }
+        }
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  color: AppColors.transparent,
+                  borderRadius: BorderRadius.circular(4)),
+              child: Material(
+                color: AppColors.transparent,
+                borderRadius: BorderRadius.circular(4),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(4),
+                  onTap: () => _blocSignUpTourGuideInformationScreen.add(
+                      BlocSignUpTourGuideInformationEventPickGuideLicenseImage()),
+                  child: BlocBuilder<BlocSignUpTourGuideInformationScreen,
+                      BlocSignUpTourGuideInformationState>(
+                    buildWhen: (previous, current) => current
+                        is BlocSignUpTourGuideInformationStatePickGuideLicenseImage,
+                    builder: (context, state) {
+                      String filePath = _blocSignUpTourGuideInformationScreen
+                              .imageGuideLicense?.path ??
+                          '';
+                      if (state
+                          is BlocSignUpTourGuideInformationStatePickGuideLicenseImage) {
+                        if (state.appResult.state == ResultState.success) {
+                          filePath = (state.appResult.result as XFile).path;
+                        } else if (state.appResult.state == ResultState.fail) {
+                          if (state.appResult.result != null) {
+                            filePath = (state.appResult.result as XFile).path;
+                          }
+                        }
+                      }
+                      if (filePath.trim().isNotEmpty) {
+                        return AspectRatio(
+                          aspectRatio: 3 / 1.5,
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.file(
+                                    File(filePath),
+                                    filterQuality: FilterQuality.high,
+                                    fit: BoxFit.cover,
+                                  )),
+                              Positioned(
+                                  top: 0,
+                                  right: 0,
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: 12,
+                                        height: 12,
+                                        child: SvgPicture.asset(
+                                          AppIcons.icClose,
+                                          color: AppColors.white,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 30,
+                                        height: 25,
+                                        decoration: BoxDecoration(
+                                            color: AppColors.black
+                                                .withOpacity(0.4),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                                    topRight:
+                                                        Radius.circular(12.5),
+                                                    bottomLeft:
+                                                        Radius.circular(12))),
+                                        child: InkWell(
+                                          onTap: () =>
+                                              _blocSignUpTourGuideInformationScreen
+                                                  .add(
+                                                      BlocSignUpTourGuideInformationEventRemoveGuideLicenseImage()),
+                                        ),
+                                      )
+                                    ],
+                                  ))
+                            ],
+                          ),
+                        );
+                      }
+                      return DottedBorder(
+                          color: AppColors.primary,
+                          dashPattern: const [4, 2],
+                          radius: const Radius.circular(4),
+                          borderType: BorderType.rRect,
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 50,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(AppIcons.cameraFill),
+                                const SizedBox(width: 8),
+                                Text(
+                                  'Upload Photo',
+                                  style: AppStyles.titleMedium.copyWith(
+                                      color: AppColors.primary,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14),
+                                )
+                              ],
+                            ),
+                          ));
+                    },
+                  ),
+                ),
+              ),
+            ),
+            Visibility(
+                visible: isError,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 10),
+                    Text('(*) Please choose your guide license',
+                        style: AppStyles.titleSmall.copyWith(
+                            color: AppColors.error,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400)),
+                  ],
+                ))
+          ],
+        );
+      },
     );
   }
 }

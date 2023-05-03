@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:travel_booking_tour/data/model/result.dart';
 
+import '../../../../common/enum/enums.dart';
+
 abstract class BlocSignUpState extends Equatable {}
 
 class BlocSignUpStateInitial extends BlocSignUpState {
@@ -17,7 +19,7 @@ class BlocSignUpStateValidate extends BlocSignUpState {
 
 class BlocSignUpStateChangeTypeAccount extends BlocSignUpState {
   BlocSignUpStateChangeTypeAccount({required this.typeAccount});
-  final int? typeAccount;
+  final UserType? typeAccount;
   @override
   List<Object?> get props => [typeAccount];
 }

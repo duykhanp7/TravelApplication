@@ -25,89 +25,62 @@ class _SplashScreen extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<BlocSplashScreen, BlocSplashState>(
-        builder: (context, state) => SafeArea(
-            child: Container(
-          color: AppColors.primary,
-          child: Column(
-            children: [
-              Flexible(
-                flex: 4,
-                child: _buildTopHeader(),
-              ),
-              Flexible(
-                flex: 3,
-                child: _buildWidgetFellow(),
-              ),
-              Flexible(
-                flex: 3,
-                child: _buildBottomHeader(context),
-              ),
-            ],
-          ),
-        )),
+      body: SafeArea(
+        child: BlocBuilder<BlocSplashScreen, BlocSplashState>(
+          builder: (context, state) => SafeArea(
+              child: Container(
+            color: AppColors.primary,
+            child: Stack(
+              children: [
+                Positioned(left: 0, right: 0, top: 0, child: _buildTopHeader()),
+                Positioned(
+                    left: 0,
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: _buildWidgetFellow()),
+                Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: _buildBottomHeader(context))
+              ],
+            ),
+          )),
+        ),
       ),
     );
   }
 
   Widget _buildWidgetFellow() {
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        const Text(
+          'Fellow\n4U',
+          textAlign: TextAlign.right,
+          style: TextStyle(
+              color: AppColors.white,
+              fontSize: 45,
+              height: 1,
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w400),
+        ),
+        Stack(
+          alignment: Alignment.center,
           children: [
-            Container(
-              padding: const EdgeInsets.only(right: 3),
-              child: Wrap(
-                direction: Axis.vertical,
-                spacing: -15,
-                alignment: WrapAlignment.end,
-                runAlignment: WrapAlignment.end,
-                crossAxisAlignment: WrapCrossAlignment.end,
-                children: [
-                  const Text(
-                    'Fellow',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: AppColors.white,
-                        fontSize: 40,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w400),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
-                      Text(
-                        '4U',
-                        textAlign: TextAlign.end,
-                        style: TextStyle(
-                            color: AppColors.white,
-                            fontFamily: 'Roboto',
-                            fontSize: 45,
-                            fontWeight: FontWeight.w400),
-                      )
-                    ],
-                  )
-                ],
-              ),
+            SizedBox(
+              width: 70,
+              height: 70,
+              child: SvgPicture.asset(AppIcons.appLogo),
             ),
-            Stack(
-              alignment: Alignment.center,
+            Row(
               children: [
-                SizedBox(
-                  width: 60,
-                  height: 60,
-                  child: SvgPicture.asset(AppIcons.appLogo),
+                SvgPicture.asset(AppIcons.point),
+                const SizedBox(
+                  width: 5,
                 ),
-                Row(
-                  children: [
-                    SvgPicture.asset(AppIcons.point),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    SvgPicture.asset(AppIcons.point)
-                  ],
-                )
+                SvgPicture.asset(AppIcons.point)
               ],
             )
           ],
@@ -174,55 +147,53 @@ class _SplashScreen extends State<SplashScreen> {
   }
 
   Widget _buildBottomHeader(BuildContext context) {
-    return Container(
-      alignment: Alignment.bottomCenter,
-      child: Stack(
-        children: [
-          Container(
-            alignment: Alignment.bottomRight,
-            padding: const EdgeInsets.only(bottom: 40),
-            child: SvgPicture.asset(
-              AppIcons.leaf3,
-            ),
+    return Stack(
+      children: [
+        Container(
+          alignment: Alignment.bottomRight,
+          child: SvgPicture.asset(
+            AppIcons.leaf3,
           ),
-          Container(
-            alignment: Alignment.bottomCenter,
+        ),
+        Positioned(
+            left: 0,
+            bottom: 0,
+            right: 0,
             child: SvgPicture.asset(
               AppIcons.bottomWave,
-              fit: BoxFit.fitWidth,
-            ),
+              height: 140,
+              fit: BoxFit.cover,
+            )),
+        Container(
+          alignment: Alignment.bottomCenter,
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.only(bottom: 10, left: 5),
+                alignment: Alignment.bottomCenter,
+                child: SvgPicture.asset(
+                  AppIcons.leaf1,
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.only(left: 0, bottom: 10),
+                alignment: Alignment.bottomCenter,
+                child: SvgPicture.asset(
+                  AppIcons.leaf2,
+                ),
+              ),
+              const Spacer(),
+              Container(
+                padding: const EdgeInsets.only(
+                    left: 0, bottom: 10, right: 100, top: 30),
+                child: SvgPicture.asset(
+                  AppIcons.hatIcon,
+                ),
+              ),
+            ],
           ),
-          Container(
-            alignment: Alignment.bottomCenter,
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(bottom: 10, left: 5),
-                  alignment: Alignment.bottomCenter,
-                  child: SvgPicture.asset(
-                    AppIcons.leaf1,
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.only(left: 0, bottom: 10),
-                  alignment: Alignment.bottomCenter,
-                  child: SvgPicture.asset(
-                    AppIcons.leaf2,
-                  ),
-                ),
-                const Spacer(),
-                Container(
-                  padding: const EdgeInsets.only(
-                      left: 0, bottom: 10, right: 100, top: 30),
-                  child: SvgPicture.asset(
-                    AppIcons.hatIcon,
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 }

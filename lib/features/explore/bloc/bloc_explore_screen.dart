@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:travel_booking_tour/data/model/news_json.dart';
 import 'package:travel_booking_tour/data/model/result.dart';
 import 'package:travel_booking_tour/data/network/network_exception.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_event.dart';
@@ -21,18 +22,24 @@ class BlocExploreScreen extends Bloc<BlocExploreEvent, BlocExploreState> {
     on<BlocExploreEvent>(mapStateToEvent, transformer: restartable());
   }
 
+  List<TourDetailJson> topJourneyJsons = [];
+  List<TourGuideDetailJson> bestGuideJsons = [];
+  List<TourDetailJson> topExperienceJsons = [];
+  List<TourDetailJson> featuresTourJsons = [];
+  List<NewsJson> travelNewJsons = [];
+
   void mapStateToEvent(
       BlocExploreEvent event, Emitter<BlocExploreState> emit) async {
     if (event is BlocExploreEventInitial) {
       try {
-        emit(BlocExploreStateLoadData(
-            appResult: AppResult(state: ResultState.loading)));
-
-        List<TourDetailJson> topJourneyJsons = [];
-        List<TourGuideDetailJson> bestGuideJsons = [];
-        List<TourDetailJson> topExperienceJsons = [];
-        List<TourDetailJson> featuresTourJsons = [];
-        List<TourDetailJson> travelNewJsons = [];
+        if (topExperienceJsons.isEmpty ||
+            bestGuideJsons.isEmpty ||
+            topExperienceJsons.isEmpty ||
+            featuresTourJsons.isEmpty ||
+            travelNewJsons.isEmpty) {
+          emit(BlocExploreStateLoadData(
+              appResult: AppResult(state: ResultState.loading)));
+        }
 
         await Future.forEach(event.objects!, (element) async {
           if (element == TypeDestination.featureTourJson) {
@@ -44,7 +51,7 @@ class BlocExploreScreen extends Bloc<BlocExploreEvent, BlocExploreState> {
           } else if (element == TypeDestination.topJourneyJson) {
             topJourneyJsons = await _exploreRepository.getListTopJourney();
           } else if (element == TypeDestination.travelNewJson) {
-            travelNewJsons = await _exploreRepository.getListTopJourney();
+            travelNewJsons = await _exploreRepository.getListNews();
           } else {}
         });
 

@@ -1,11 +1,14 @@
 import 'package:camera/camera.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:photo_view/photo_view.dart';
 import 'package:travel_booking_tour/features/profile/model/photo_json.dart';
-import 'package:travel_booking_tour/res/app_layout_shimmer.dart';
 import 'package:travel_booking_tour/res/app_photo_view.dart';
 
 import '../../res/app_camera.dart';
+import '../../res/button.dart';
+import '../../res/colors.dart';
+import '../../res/icons.dart';
+import '../../res/styles.dart';
 import '../../router/routes.dart';
 import '../enum/enums.dart';
 
@@ -45,5 +48,125 @@ extension ContextExtension on BuildContext {
     } on Exception catch (ex) {
       debugPrint('Exception showPhotoFullScreen : ${ex.toString()}');
     }
+  }
+
+  Future<void> showBottomSheetShare() async {
+    await showCupertinoModalPopup(
+      context: this,
+      barrierDismissible: true,
+      builder: (context) => CupertinoActionSheet(
+        actions: [
+          Container(
+            color: AppColors.white,
+            alignment: Alignment.center,
+            padding: const EdgeInsets.fromLTRB(16, 14, 16, 0),
+            child: Column(
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  child: Material(
+                    child: Text(
+                      'Share on',
+                      style: AppStyles.titleMedium.copyWith(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.black),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 23),
+                Container(
+                  alignment: Alignment.center,
+                  height: 100,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    children: [
+                      Material(
+                        child: SocialButton(
+                          width: 60,
+                          height: 60,
+                          radius: 14,
+                          title: 'Facebook',
+                          icon: AppIcons.icFacebookFrame,
+                          background: AppColors.facebookBgColor,
+                          splash: AppColors.white.withOpacity(0.2),
+                          voidCallback: () {},
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Material(
+                        child: SocialButton(
+                          width: 60,
+                          height: 60,
+                          radius: 14,
+                          title: 'Google',
+                          icon: AppIcons.icGoogleFrame,
+                          background: AppColors.googleBgColor,
+                          splash: AppColors.white.withOpacity(0.2),
+                          voidCallback: () {},
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Material(
+                        child: SocialButton(
+                          width: 60,
+                          height: 60,
+                          radius: 14,
+                          title: 'Kakao Talk',
+                          icon: AppIcons.icTalkFrame,
+                          background: AppColors.talkBgColor,
+                          splash: AppColors.white.withOpacity(0.2),
+                          voidCallback: () {},
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Material(
+                        child: SocialButton(
+                          width: 60,
+                          height: 60,
+                          radius: 14,
+                          title: 'Whatsapp',
+                          icon: AppIcons.icWhatAppFrame,
+                          background: AppColors.whatAppBgColor,
+                          splash: AppColors.white.withOpacity(0.2),
+                          voidCallback: () {},
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Material(
+                        child: SocialButton(
+                          width: 60,
+                          height: 60,
+                          radius: 14,
+                          title: 'Twitter',
+                          icon: AppIcons.icTwitterFrame,
+                          background: AppColors.twitterBgColor,
+                          splash: AppColors.white.withOpacity(0.2),
+                          voidCallback: () {},
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
+        cancelButton: CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(
+              'Cancel',
+              style: AppStyles.titleMedium.copyWith(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w100,
+                  fontStyle: FontStyle.italic,
+                  color: AppColors.primary),
+            )),
+      ),
+    );
   }
 }

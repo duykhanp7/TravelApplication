@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../../common/enum/enums.dart';
+
 abstract class BlocSignUpEvent extends Equatable {}
 
 class BlocSignUpEventInitial extends BlocSignUpEvent {
@@ -20,7 +22,7 @@ class BlocSignUpEventSignInClick extends BlocSignUpEvent {
 
 class BlocSignUpEventChangeTypeAccount extends BlocSignUpEvent {
   BlocSignUpEventChangeTypeAccount({required this.typeAccount});
-  final int typeAccount;
+  final UserType typeAccount;
   @override
   List<Object?> get props => [typeAccount];
 }

@@ -28,11 +28,11 @@ class _SignUpScreen extends State<SignUpScreen> {
   int selectedRadioIndex = 0;
 
   late SLocalization localization;
-  late BlocSignupScreen _blocSignInScreen;
+  late BlocSignupScreen _blocSignupScreen;
 
   @override
   void initState() {
-    _blocSignInScreen = BlocProvider.of<BlocSignupScreen>(context);
+    _blocSignupScreen = BlocProvider.of<BlocSignupScreen>(context);
     super.initState();
   }
 
@@ -101,7 +101,7 @@ class _SignUpScreen extends State<SignUpScreen> {
     return Container(
       alignment: Alignment.center,
       child: Form(
-        key: _blocSignInScreen.signUpGlobalKey,
+        key: _blocSignupScreen.signUpGlobalKey,
         child: Column(
           children: [
             Container(
@@ -118,7 +118,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                           obsecureText: false,
                           labelText: localization.first_name,
                           validator: AppValidator.validateTextFieldFirstName,
-                          onChange: (value) => _blocSignInScreen.add(
+                          onChange: (value) => _blocSignupScreen.add(
                               BlocSignUpEventChangeFirstName(firstName: value)),
                         ),
                       ),
@@ -133,24 +133,37 @@ class _SignUpScreen extends State<SignUpScreen> {
                             obsecureText: false,
                             labelText: localization.last_name,
                             validator: AppValidator.validateTextFieldLastName,
-                            onChange: (value) => _blocSignInScreen.add(
+                            onChange: (value) => _blocSignupScreen.add(
                                 BlocSignUpEventChangeLastName(
                                     lastName: value))),
                       )
                     ],
                   ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: AppTextField(
-                        hintText: localization.country,
-                        obsecureText: false,
-                        labelText: localization.country,
-                        validator: AppValidator.validateTextFieldCountry,
-                        onChange: (value) => _blocSignInScreen
-                            .add(BlocSignUpEventChangeCountry(country: value))),
+                  BlocBuilder<BlocSignupScreen, BlocSignUpState>(
+                    buildWhen: (previous, current) =>
+                        current is BlocSignUpStateChangeTypeAccount,
+                    builder: (context, state) {
+                      if (_blocSignupScreen.typeAccount == UserType.traverler) {
+                        return Column(
+                          children: [
+                            const SizedBox(height: 24),
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              child: AppTextField(
+                                  hintText: localization.country,
+                                  obsecureText: false,
+                                  labelText: localization.country,
+                                  validator:
+                                      AppValidator.validateTextFieldCountry,
+                                  onChange: (value) => _blocSignupScreen.add(
+                                      BlocSignUpEventChangeCountry(
+                                          country: value))),
+                            ),
+                          ],
+                        );
+                      }
+                      return Container();
+                    },
                   ),
                   const SizedBox(
                     height: 24,
@@ -162,8 +175,8 @@ class _SignUpScreen extends State<SignUpScreen> {
                         obsecureText: false,
                         textInputType: TextInputType.emailAddress,
                         labelText: localization.email,
-                        validator: _blocSignInScreen.validateTextFieldEmail,
-                        onChange: (value) => _blocSignInScreen
+                        validator: _blocSignupScreen.validateTextFieldEmail,
+                        onChange: (value) => _blocSignupScreen
                             .add(BlocSignUpEventChangeEmail(email: value))),
                   ),
                   const SizedBox(
@@ -176,7 +189,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                         obsecureText: true,
                         labelText: localization.password,
                         validator: AppValidator.validateTextFieldPasword,
-                        onChange: (value) => _blocSignInScreen.add(
+                        onChange: (value) => _blocSignupScreen.add(
                             BlocSignUpEventChangePassword(password: value))),
                   ),
                   const SizedBox(
@@ -190,8 +203,8 @@ class _SignUpScreen extends State<SignUpScreen> {
                         labelText: localization.confirm_password,
                         validator: (value) =>
                             AppValidator.validateTextFieldConfirmPasword(
-                                value, _blocSignInScreen.password ?? ''),
-                        onChange: (value) => _blocSignInScreen.add(
+                                value, _blocSignupScreen.password ?? ''),
+                        onChange: (value) => _blocSignupScreen.add(
                             BlocSignUpEventChangeConfirmPassword(
                                 confirmPassword: value))),
                   ),
@@ -216,7 +229,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                               ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  _blocSignInScreen.add(
+                                  _blocSignupScreen.add(
                                       BlocSignUpEventTermAndConditionsClick());
                                 })
                         ])),
@@ -238,7 +251,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                     text: localization.sign_up,
                     isLoading: isLoading,
                     onTap: () {
-                      _blocSignInScreen.add(BlocSignUpEventValidate());
+                      _blocSignupScreen.add(BlocSignUpEventValidate());
                     },
                     allCaps: true,
                     margin: const EdgeInsets.only(left: 33, right: 33),
@@ -266,7 +279,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                             color: AppColors.primary),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            _blocSignInScreen.add(BlocSignUpEventSignInClick());
+                            _blocSignupScreen.add(BlocSignUpEventSignInClick());
                           })
                   ])),
             )
@@ -286,11 +299,11 @@ class _SignUpScreen extends State<SignUpScreen> {
         child: Row(
           children: [
             AppRadioButton(
-              id: 0,
+              id: UserType.traverler,
               text: localization.traveler,
-              selectedId: _blocSignInScreen.typeAccount,
+              selectedId: _blocSignupScreen.typeAccount,
               onTap: (value) {
-                _blocSignInScreen
+                _blocSignupScreen
                     .add(BlocSignUpEventChangeTypeAccount(typeAccount: value));
               },
             ),
@@ -298,11 +311,11 @@ class _SignUpScreen extends State<SignUpScreen> {
               width: 56,
             ),
             AppRadioButton(
-              id: 1,
+              id: UserType.guide,
               text: localization.tour_guide,
-              selectedId: _blocSignInScreen.typeAccount,
+              selectedId: _blocSignupScreen.typeAccount,
               onTap: (value) {
-                _blocSignInScreen
+                _blocSignupScreen
                     .add(BlocSignUpEventChangeTypeAccount(typeAccount: value));
               },
             )

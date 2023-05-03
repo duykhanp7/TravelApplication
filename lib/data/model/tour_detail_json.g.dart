@@ -19,6 +19,7 @@ _$_TourDetailJson _$$_TourDetailJsonFromJson(Map<String, dynamic> json) =>
       reviews: json['reviews'] as int?,
       likes: json['likes'] as int?,
       isFavorite: json['isFavorite'] as bool?,
+      isBookMarked: json['isBookMarked'] as bool?,
       provider: json['provider'] == null
           ? null
           : TourProviderJson.fromJson(json['provider'] as Map<String, dynamic>),
@@ -46,6 +47,7 @@ Map<String, dynamic> _$$_TourDetailJsonToJson(_$_TourDetailJson instance) =>
       'reviews': instance.reviews,
       'likes': instance.likes,
       'isFavorite': instance.isFavorite,
+      'isBookMarked': instance.isBookMarked,
       'provider': instance.provider,
       'duration': instance.duration,
       'description': instance.description,

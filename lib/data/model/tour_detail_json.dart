@@ -23,6 +23,7 @@ class TourDetailJson with _$TourDetailJson {
       int? reviews,
       int? likes,
       bool? isFavorite,
+      bool? isBookMarked,
       TourProviderJson? provider,
       String? duration,
       String? description,
