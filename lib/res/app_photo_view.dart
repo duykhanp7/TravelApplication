@@ -1,16 +1,11 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:travel_booking_tour/features/profile/model/photo_json.dart';
-import 'package:travel_booking_tour/res/app_appbar.dart';
 import 'package:travel_booking_tour/res/app_inkwell.dart';
-import 'package:travel_booking_tour/res/colors.dart';
-import 'package:travel_booking_tour/res/icons.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
 import '../router/routes.dart';
-import 'app_layout_shimmer.dart';
 
 class AppPhotoView extends StatefulWidget {
   const AppPhotoView({super.key, required this.photoJson});

@@ -44,135 +44,154 @@ class _ProfileScreen extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        physics: const BouncingScrollPhysics(),
-        child: Container(
-          color: AppColors.white,
-          child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.only(left: 16, right: 24, top: 28),
-                child: Row(
-                  children: [
-                    Text(
-                      'My Photos',
-                      style: AppStyles.titleLarge.copyWith(
-                          fontSize: 24,
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.w100),
+    return LayoutBuilder(
+      builder: (context, constraint) => RefreshIndicator(
+        onRefresh: () async {
+          if (!_blocProfileScreen.isLoading) {
+            _blocProfileScreen.isActionRefresh = true;
+            _blocProfileScreen.add(BlocProfileEventInitial());
+          }
+          return;
+        },
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: constraint.maxHeight),
+            child: Container(
+              color: AppColors.white,
+              child: Column(
+                children: [
+                  Container(
+                    padding:
+                        const EdgeInsets.only(left: 16, right: 24, top: 28),
+                    child: Row(
+                      children: [
+                        Text(
+                          'My Photos',
+                          style: AppStyles.titleLarge.copyWith(
+                              fontSize: 24,
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.w100),
+                        ),
+                        const Spacer(),
+                        InkWell(
+                          child: SvgPicture.asset(AppIcons.icMoreNext),
+                          onTap: () => _blocProfileScreen
+                              .add(BlocProfileEventShowMoreMyPhotos()),
+                        )
+                      ],
                     ),
-                    const Spacer(),
-                    InkWell(
-                      child: SvgPicture.asset(AppIcons.icMoreNext),
-                      onTap: () => _blocProfileScreen
-                          .add(BlocProfileEventShowMoreMyPhotos()),
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(height: 17),
-              BlocBuilder<BlocProfileScreen, BlocProfileState>(
-                  buildWhen: (previous, current) =>
-                      current is BlocProfileStateLoadUserInforResult,
-                  builder: (context, state) {
-                    List<PhotoJson> photos = [
-                      ..._blocProfileScreen.userInfoJson?.images ?? []
-                    ];
-                    if (state is BlocProfileStateLoadUserInforResult) {
-                      if (state.appResult.state == ResultState.success) {
-                        photos =
-                            (state.appResult.result as UserInfoJson).images ??
+                  ),
+                  const SizedBox(height: 17),
+                  BlocBuilder<BlocProfileScreen, BlocProfileState>(
+                      buildWhen: (previous, current) =>
+                          current is BlocProfileStateLoadUserInforResult,
+                      builder: (context, state) {
+                        List<PhotoJson> photos = [
+                          ..._blocProfileScreen.userInfoJson?.images ?? []
+                        ];
+                        if (state is BlocProfileStateLoadUserInforResult) {
+                          if (state.appResult.state == ResultState.success) {
+                            photos = (state.appResult.result as UserInfoJson)
+                                    .images ??
                                 [];
-                      } else if (state.appResult.state == ResultState.loading) {
-                        return SizedBox(
-                          height: 300,
-                          child: AppLayoutShimmer(
-                            background:
-                                AppColors.textHintColor.withOpacity(0.2),
-                          ),
-                        );
-                      }
-                    }
-                    return Column(children: [
-                      SizedBox(
-                        height: photos.isNotEmpty ? 123 : 0,
-                        child: GridView.builder(
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    childAspectRatio: 1 / 1,
-                                    crossAxisCount: 3,
-                                    mainAxisSpacing: 3,
-                                    crossAxisSpacing: 3),
-                            shrinkWrap: false,
-                            itemCount: photos.length >= 4 ? 3 : photos.length,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) => PhotoItem(
-                                url: photos[index].url ??
-                                    photos[index].uploadUrl ??
-                                    '',
-                                selected: false,
-                                isHttps: true,
-                                enable: false,
-                                visibilityRadioButton: false)),
-                      ),
-                      const SizedBox(height: 3),
-                      photos.length >= 4
-                          ? Container(
-                              width: double.infinity,
-                              height: 186,
-                              alignment: Alignment.center,
-                              child: PhotoItem(
-                                url: photos[3].url ?? photos[3].uploadUrl ?? '',
-                                selected: false,
-                                isHttps: true,
-                                enable: false,
+                          } else if (state.appResult.state ==
+                              ResultState.loading) {
+                            return SizedBox(
+                              height: 300,
+                              child: AppLayoutShimmer(
+                                background:
+                                    AppColors.textHintColor.withOpacity(0.2),
                               ),
-                            )
-                          : Container(),
-                    ]);
-                  }),
-              Container(
-                padding: const EdgeInsets.only(left: 16, top: 24, right: 24),
-                child: Row(
-                  children: [
-                    Text(
-                      'My Journeys',
-                      style: AppStyles.titleLarge.copyWith(
-                          fontSize: 24,
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.w100),
+                            );
+                          }
+                        }
+                        return Column(children: [
+                          SizedBox(
+                            height: photos.isNotEmpty ? 123 : 0,
+                            child: GridView.builder(
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                        childAspectRatio: 1 / 1,
+                                        crossAxisCount: 3,
+                                        mainAxisSpacing: 3,
+                                        crossAxisSpacing: 3),
+                                shrinkWrap: false,
+                                itemCount:
+                                    photos.length >= 4 ? 3 : photos.length,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, index) => PhotoItem(
+                                    url: photos[index].url ??
+                                        photos[index].uploadUrl ??
+                                        '',
+                                    selected: false,
+                                    isHttps: true,
+                                    enable: false,
+                                    visibilityRadioButton: false)),
+                          ),
+                          const SizedBox(height: 3),
+                          photos.length >= 4
+                              ? Container(
+                                  width: double.infinity,
+                                  height: 186,
+                                  alignment: Alignment.center,
+                                  child: PhotoItem(
+                                    url: photos[3].url ??
+                                        photos[3].uploadUrl ??
+                                        '',
+                                    selected: false,
+                                    isHttps: true,
+                                    enable: false,
+                                  ),
+                                )
+                              : Container(),
+                        ]);
+                      }),
+                  Container(
+                    padding:
+                        const EdgeInsets.only(left: 16, top: 24, right: 24),
+                    child: Row(
+                      children: [
+                        Text(
+                          'My Journeys',
+                          style: AppStyles.titleLarge.copyWith(
+                              fontSize: 24,
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.w100),
+                        ),
+                        const Spacer(),
+                        InkWell(
+                          child: SvgPicture.asset(AppIcons.icMoreNext),
+                          onTap: () => _blocProfileScreen
+                              .add(BlocProfileEventShowMyJourneys()),
+                        )
+                      ],
                     ),
-                    const Spacer(),
-                    InkWell(
-                      child: SvgPicture.asset(AppIcons.icMoreNext),
-                      onTap: () => _blocProfileScreen
-                          .add(BlocProfileEventShowMyJourneys()),
-                    )
-                  ],
-                ),
+                  ),
+                  BlocBuilder<BlocMyJourneysScreen, BlocMyJourneysState>(
+                      buildWhen: (previous, current) =>
+                          current is BlocMyJourneysStateAddJourney,
+                      builder: (context, state) => ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            padding: const EdgeInsets.only(
+                                left: 16, right: 16, top: 17, bottom: 20),
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: _blocMyJourneysScreen
+                                        .listMyExperienceJson.length >=
+                                    2
+                                ? 2
+                                : _blocMyJourneysScreen
+                                    .listMyExperienceJson.length,
+                            itemBuilder: (context, index) => MyExperienceItem(
+                                myExperienceJson: _blocMyJourneysScreen
+                                    .listMyExperienceJson[index],
+                                edited: true),
+                          ))
+                ],
               ),
-              BlocBuilder<BlocMyJourneysScreen, BlocMyJourneysState>(
-                  buildWhen: (previous, current) =>
-                      current is BlocMyJourneysStateAddJourney,
-                  builder: (context, state) => ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        padding: const EdgeInsets.only(
-                            left: 16, right: 16, top: 17, bottom: 20),
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: _blocMyJourneysScreen
-                                    .listMyExperienceJson.length >=
-                                2
-                            ? 2
-                            : _blocMyJourneysScreen.listMyExperienceJson.length,
-                        itemBuilder: (context, index) => MyExperienceItem(
-                            myExperienceJson: _blocMyJourneysScreen
-                                .listMyExperienceJson[index],
-                            edited: true),
-                      ))
-            ],
+            ),
           ),
         ),
       ),

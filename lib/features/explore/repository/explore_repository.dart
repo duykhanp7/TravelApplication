@@ -1,5 +1,7 @@
 import 'package:travel_booking_tour/base/base_repository.dart';
+import 'package:travel_booking_tour/data/dio/api_client.dart';
 import 'package:travel_booking_tour/data/model/my_experience_json.dart';
+import 'package:travel_booking_tour/data/model/news_json.dart';
 import '../../../data/model/review_json.dart';
 import '../../../data/model/schedule_json.dart';
 import '../../../data/model/schedule_point_json.dart';
@@ -8,6 +10,20 @@ import '../../../data/model/tour_guide_detail_json.dart';
 import '../../../data/model/tour_provider_json.dart';
 
 class ExploreRepository implements BaseRepository {
+  final ApiService _apiService = ApiService();
+  final String apiEndPoint = '/api';
+
+  Future<List<NewsJson>> getListNews() async => _apiService.getJson(
+        endPoint: '$apiEndPoint/blogs',
+        converter: (data) {
+          dynamic result = data['data'];
+          if (result is Iterable) {
+            return result.map((e) => NewsJson.fromJson(e)).toList();
+          }
+          return [];
+        },
+      );
+
   Future<List<TourDetailJson>> getListTopJourney() async {
     return <TourDetailJson>[
       const TourDetailJson(
@@ -458,6 +474,7 @@ class ExploreRepository implements BaseRepository {
             photos: [
               'https://i.imgur.com/zuSApjx.png',
               'https://i.imgur.com/gi30u3G.png',
+              'https://i.imgur.com/jvSDzia.png',
               'https://i.imgur.com/jvSDzia.png'
             ],
           ),

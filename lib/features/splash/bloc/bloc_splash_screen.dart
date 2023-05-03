@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:travel_booking_tour/common/app_constant.dart';
 import 'package:travel_booking_tour/common/enum/enums.dart';
 import 'package:travel_booking_tour/data/local/app_storage.dart';
@@ -24,7 +23,6 @@ class BlocSplashScreen extends Bloc<BlocSplashEvent, BlocSplashState> {
   void mapStateToEvent(
       BlocSplashEvent event, Emitter<BlocSplashState> emit) async {
     if (event is BlocSplashEventInitial) {
-      debugPrint('BlocSplashEventInitialBlocSplashEventInitial');
       String? data = await _appStorage.getData(AppConstant.user);
       String? pass = await _appStorage.getData(AppConstant.password);
       if (data != null) {

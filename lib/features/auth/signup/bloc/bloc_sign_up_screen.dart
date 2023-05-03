@@ -13,7 +13,7 @@ import '../../../../data/network/network_exception.dart';
 import '../../repository/auth_repository.dart';
 
 class BlocSignupScreen extends Bloc<BlocSignUpEvent, BlocSignUpState> {
-  int typeAccount = 0;
+  UserType typeAccount = UserType.traverler;
   String? firstName;
   String? lastName;
   String? country;
@@ -35,19 +35,20 @@ class BlocSignupScreen extends Bloc<BlocSignUpEvent, BlocSignUpState> {
       emit(BlocSignUpStateValidate(
           appResult: AppResult(state: ResultState.loading)));
       if (signUpGlobalKey.currentState?.validate() ?? false) {
-        if (typeAccount == 0) {
+        Map<String, dynamic> data = {
+          "email": email,
+          "username": email,
+          "password": password,
+          "firstName": firstName,
+          "lastName": lastName,
+          "country": country,
+          "type": typeAccount.name
+        };
+        if (typeAccount == UserType.traverler) {
           try {
             debugPrint(
                 'Log Information : $email $password $firstName $lastName $country');
-            Map<String, dynamic> data = {
-              "email": email,
-              "username": email,
-              "password": password,
-              "firstName": firstName,
-              "lastName": lastName,
-              "country": country,
-              "type": "traverler"
-            };
+
             final UserJson? user = await _authRepository.signUp(data);
             if (user != null) {
               emit(BlocSignUpStateValidate(
@@ -68,10 +69,10 @@ class BlocSignupScreen extends Bloc<BlocSignUpEvent, BlocSignUpState> {
                   appResult: AppResult(state: ResultState.fail)));
             }
           }
-        } else if (typeAccount == 1) {
+        } else if (typeAccount == UserType.guide) {
           emit(BlocSignUpStateValidate(
               appResult: AppResult(state: ResultState.fail)));
-          Routes.navigateTo(AppPath.tourGuideAddProfile, {});
+          Routes.navigateTo(AppPath.tourGuideAddProfile, data);
         }
       } else {
         emit(BlocSignUpStateValidate(
@@ -79,6 +80,7 @@ class BlocSignupScreen extends Bloc<BlocSignUpEvent, BlocSignUpState> {
       }
     } else if (event is BlocSignUpEventChangeTypeAccount) {
       typeAccount = event.typeAccount;
+      debugPrint('Type name : $typeAccount');
       emit(BlocSignUpStateChangeTypeAccount(typeAccount: typeAccount));
     } else if (event is BlocSignUpEventChangeFirstName) {
       firstName = event.firstName;

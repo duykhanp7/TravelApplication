@@ -18,7 +18,6 @@ class DioInterceptor extends Interceptor {
     }
     options.headers['Content-Type'] = 'application/json';
     logPrint(options.path.toString(), type: 0);
-    logPrint(options.queryParameters.toString(), type: 0);
     super.onRequest(options, handler);
   }
 
@@ -31,6 +30,7 @@ class DioInterceptor extends Interceptor {
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
     logPrint(err.response.toString(), type: 2);
+    logPrint(err.requestOptions.data, type: 2);
     super.onError(err, handler);
   }
 

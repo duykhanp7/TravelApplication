@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:travel_booking_tour/features/empty/empty.dart';
 import 'package:travel_booking_tour/features/explore/screen/see_more_screen.dart';
 import 'package:travel_booking_tour/features/auth/forgot_password/screen/check_email_screen.dart';
-import 'package:travel_booking_tour/features/guide/detail/screen/guide_description._screen.dart';
+import 'package:travel_booking_tour/features/guide/detail/screen/guide_detail_screen.dart';
 import 'package:travel_booking_tour/features/main/screen/main_page.dart';
 import 'package:travel_booking_tour/features/main/screen/search_system.dart';
 import 'package:travel_booking_tour/features/my_trip/screen/trip_view_detail.dart';

@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
+import 'package:travel_booking_tour/data/model/news_json.dart';
 
-import '../../../data/model/tour_detail_json.dart';
 import '../../../res/app_layout_shimmer.dart';
 import '../../../res/colors.dart';
 import '../../../res/icons.dart';
@@ -10,10 +11,10 @@ import '../../../res/styles.dart';
 
 class TravelNewItem extends StatefulWidget {
   const TravelNewItem(
-      {super.key, required this.callback, required this.tourDetailJson});
+      {super.key, required this.callback, required this.newsJson});
 
   final VoidCallback callback;
-  final TourDetailJson tourDetailJson;
+  final NewsJson newsJson;
 
   @override
   State<StatefulWidget> createState() {
@@ -36,7 +37,7 @@ class _TravelNewItem extends State<TravelNewItem> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.tourDetailJson.destination ?? '',
+                  widget.newsJson.attributes?.title ?? '',
                   overflow: TextOverflow.ellipsis,
                   style: AppStyles.titleMedium
                       .copyWith(fontWeight: FontWeight.w500),
@@ -45,7 +46,8 @@ class _TravelNewItem extends State<TravelNewItem> {
                   height: 4,
                 ),
                 Text(
-                  widget.tourDetailJson.departureDate ?? '',
+                  DateFormat.yMMMd().format(
+                      widget.newsJson.attributes?.createdAt ?? DateTime.now()),
                   style: AppStyles.titleSmall.copyWith(
                       fontWeight: FontWeight.w400,
                       color: AppColors.textSkipColor),
@@ -57,7 +59,9 @@ class _TravelNewItem extends State<TravelNewItem> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: CachedNetworkImage(
-                    imageUrl: widget.tourDetailJson.images?[0] ?? '',
+                    imageUrl: widget.newsJson.attributes?.images?.data?[0]
+                            .attributes?.url ??
+                        'https://i.imgur.com/oYG6Q0F.png',
                     filterQuality: FilterQuality.high,
                     fit: BoxFit.cover,
                     width: double.infinity,

@@ -256,6 +256,7 @@ class _MyExperienceItem extends State<MyExperienceItem> {
             child: ListView(
               scrollDirection: Axis.vertical,
               physics: const NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.zero,
               shrinkWrap: true,
               semanticChildCount: 2,
               children: [

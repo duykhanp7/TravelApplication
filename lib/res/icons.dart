@@ -138,8 +138,7 @@ class AppIcons {
   static const String icShare = '$parentPathIcons/ic_share.svg';
   static const String icFavoriteWhiteNull =
       '$parentPathIcons/ic_favorite_white_null.svg';
-  static const String icBookMarkWhiteNull =
-      '$parentPathIcons/ic_book_mark_white_null.svg';
+
   static const String icSchedule = '$parentPathIcons/ic_schedule.svg';
   static const String icDollarCircle = '$parentPathIcons/ic_dollar_circle.svg';
 
@@ -196,4 +195,6 @@ class AppIcons {
   static const String icCheckList = '$parentPathIcons/ic_checklist.svg';
   static const String icUser = '$parentPathIcons/ic_user.svg';
   static const String icLogOut = '$parentPathIcons/ic_logout.svg';
+  static const String icBookmarked = '$parentPathIcons/icBookmarked.svg';
+  static const String icUnBookmarked = '$parentPathIcons/icUnBookmarked.svg';
 }

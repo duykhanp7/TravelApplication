@@ -2,9 +2,14 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:travel_booking_tour/data/model/result.dart';
+import 'package:travel_booking_tour/data/model/user.dart';
+import 'package:travel_booking_tour/data/network/network_exception.dart';
+import 'package:travel_booking_tour/features/auth/repository/auth_repository.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_tour_guide_information_event.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_tour_guide_information_state.dart';
 import "package:path/path.dart" as p;
@@ -62,6 +67,11 @@ class BlocSignUpTourGuideInformationScreen extends Bloc<
   final GlobalKey<FormState> signUpTourGuideInformationGlobalKey =
       GlobalKey<FormState>();
 
+  final AuthRepository _authRepository = AuthRepository();
+  //final ProfileRepository _profileRepository = ProfileRepository();
+
+  Map<String, dynamic>? dataAccount;
+
   BlocSignUpTourGuideInformationScreen()
       : super(BlocSignUpTourGuideInformationStateInitial()) {
     on<BlocSignUpTourGuideInformationEvent>(mapStateToEvent,
@@ -72,12 +82,58 @@ class BlocSignUpTourGuideInformationScreen extends Bloc<
       Emitter<BlocSignUpTourGuideInformationState> emit) async {
     emitter = emit;
     if (event is BlocSignUpTourGuideInformationEventChangeStep) {
-      currentIndexStep = event.step;
-      if (signUpTourGuideInformationGlobalKey.currentState != null) {
-        if (signUpTourGuideInformationGlobalKey.currentState!.validate()) {
-          emit(BlocSignUpTourGuideInformationStateChangeStep(
-              step: currentIndexStep));
+      try {
+        if (signUpTourGuideInformationGlobalKey.currentState != null) {
+          if (signUpTourGuideInformationGlobalKey.currentState?.validate() ??
+              false) {
+            currentIndexStep = event.step;
+            dataAccount?['country'] = country;
+            UserJson? guideUser =
+                await _authRepository.signUp(dataAccount ?? {});
+            if (guideUser != null) {
+              Map<String, dynamic> info = {
+                "user": guideUser.id,
+                "file":
+                    await MultipartFile.fromFile(videoIntroduction?.path ?? ''),
+                "languages": languages,
+                "city": city,
+                "address": address,
+                "phone": phoneNumber,
+                "introduction": introduction,
+                "card":
+                    await MultipartFile.fromFile(imageIdentityCard?.path ?? ''),
+                "license":
+                    await MultipartFile.fromFile(imageGuideLicense?.path ?? '')
+              };
+              // dynamic addAvatar = _profileRepository.updateAvatar(
+              //     File(imageProfile?.path ?? ''), UserType.guide);
+              // debugPrint('Update Avatar : $addAvatar');
+              dynamic data = await _authRepository.addInformationGuide(info);
+              debugPrint('addInformationGuideaddInformationGuide : $data');
+            }
+            // emit(BlocSignUpTourGuideInformationStateChangeStep(
+            //     step: currentIndexStep));
+          } else {
+            if (imageProfile == null) {
+              emit(BlocSignUpTourGuideInformationStatePickProfileImage(
+                  appResult: AppResult(state: ResultState.error)));
+            }
+            if (imageGuideLicense == null) {
+              emit(BlocSignUpTourGuideInformationStatePickGuideLicenseImage(
+                  appResult: AppResult(state: ResultState.error)));
+            }
+            if (imageIdentityCard == null) {
+              emit(BlocSignUpTourGuideInformationStatePickIdentityCardImage(
+                  appResult: AppResult(state: ResultState.error)));
+            }
+            if (videoIntroduction == null) {
+              emit(BlocSignUpTourGuideInformationStatePickVideoDone(
+                  source: null));
+            }
+          }
         }
+      } on NetworkException catch (ex) {
+        debugPrint('Sign Up Guide Information Excepytion : $ex');
       }
     } else if (event
         is BlocSignUpTourGuideInformationEventChangeIndexDateClick) {
@@ -150,17 +206,17 @@ class BlocSignUpTourGuideInformationScreen extends Bloc<
     } else if (event
         is BlocSignUpTourGuideInformationEventRemoveGuideLicenseImage) {
       imageGuideLicense = null;
-      emit(BlocSignUpTourGuideInformationStatePickGuideLicenseImageFail(
-          previousImagePicked: null));
+      emit(BlocSignUpTourGuideInformationStatePickGuideLicenseImage(
+          appResult: AppResult(state: ResultState.error, result: null)));
     } else if (event
         is BlocSignUpTourGuideInformationEventRemoveIdentityCardImage) {
       imageIdentityCard = null;
-      emit(BlocSignUpTourGuideInformationStatePickIdentityCardImageFail(
-          previousImagePicked: null));
+      emit(BlocSignUpTourGuideInformationStatePickIdentityCardImage(
+          appResult: AppResult(state: ResultState.error, result: null)));
     } else if (event is BlocSignUpTourGuideInformationEventRemoveProfileImage) {
       imageProfile = null;
-      emit(BlocSignUpTourGuideInformationStatePickProfileImageFail(
-          previousImagePicked: null));
+      emit(BlocSignUpTourGuideInformationStatePickProfileImage(
+          appResult: AppResult(state: ResultState.error)));
     } else if (event
         is BlocSignUpTourGuideInformationEventRemoveVideoIntroduction) {
       videoIntroduction = null;
@@ -183,6 +239,10 @@ class BlocSignUpTourGuideInformationScreen extends Bloc<
     } else if (event is BlocSignUpTourGuideInformationEventClose) {
       emit(BlocSignUpTourGuideInformationStateClose());
     }
+  }
+
+  void setDataAccount(Map<String, dynamic> temp) {
+    dataAccount = temp;
   }
 
   void clearDatas() {
@@ -208,6 +268,7 @@ class BlocSignUpTourGuideInformationScreen extends Bloc<
     imageGuideLicense = null;
     imageIdentityCard = null;
     videoIntroduction = null;
+    dataAccount = null;
   }
 
   Future<void> checkImage(Emitter<BlocSignUpTourGuideInformationState> emit,
@@ -218,18 +279,19 @@ class BlocSignUpTourGuideInformationScreen extends Bloc<
         if (extension == '.jpg' || extension == '.png') {
           if (typePickImage == TypePickImage.imageProfile) {
             imageProfile = xFile;
-            emit(BlocSignUpTourGuideInformationStatePickProfileImageSuccess(
-                file: xFile));
+            emit(BlocSignUpTourGuideInformationStatePickProfileImage(
+                appResult:
+                    AppResult(state: ResultState.success, result: xFile)));
           } else if (typePickImage == TypePickImage.imageGuideLicense) {
             imageGuideLicense = xFile;
-            emit(
-                BlocSignUpTourGuideInformationStatePickGuideLicenseImageSuccess(
-                    file: xFile));
+            emit(BlocSignUpTourGuideInformationStatePickGuideLicenseImage(
+                appResult:
+                    AppResult(state: ResultState.success, result: xFile)));
           } else if (typePickImage == TypePickImage.imageIdentityCard) {
             imageIdentityCard = xFile;
-            emit(
-                BlocSignUpTourGuideInformationStatePickIdentityCardImageSuccess(
-                    file: xFile));
+            emit(BlocSignUpTourGuideInformationStatePickIdentityCardImage(
+                appResult:
+                    AppResult(state: ResultState.loading, result: xFile)));
           }
         } else {
           emit(BlocSignUpTourGuideInformationStatePickWrongFormat(
@@ -238,14 +300,17 @@ class BlocSignUpTourGuideInformationScreen extends Bloc<
       }
     } catch (e) {
       if (typePickImage == TypePickImage.imageProfile) {
-        emit(BlocSignUpTourGuideInformationStatePickProfileImageFail(
-            previousImagePicked: imageProfile));
+        emit(BlocSignUpTourGuideInformationStatePickProfileImage(
+            appResult:
+                AppResult(state: ResultState.fail, result: imageProfile)));
       } else if (typePickImage == TypePickImage.imageGuideLicense) {
-        emit(BlocSignUpTourGuideInformationStatePickGuideLicenseImageFail(
-            previousImagePicked: imageGuideLicense));
+        emit(BlocSignUpTourGuideInformationStatePickGuideLicenseImage(
+            appResult:
+                AppResult(state: ResultState.fail, result: imageGuideLicense)));
       } else if (typePickImage == TypePickImage.imageIdentityCard) {
-        emit(BlocSignUpTourGuideInformationStatePickIdentityCardImageFail(
-            previousImagePicked: imageIdentityCard));
+        emit(BlocSignUpTourGuideInformationStatePickIdentityCardImage(
+            appResult:
+                AppResult(state: ResultState.fail, result: imageIdentityCard)));
       }
     }
   }

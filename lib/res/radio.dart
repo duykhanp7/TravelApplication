@@ -15,15 +15,15 @@ class AppRadioButton extends StatefulWidget {
       this.inActiveBoderColor,
       required this.onTap});
 
-  final int id;
-  final int selectedId;
+  final dynamic id;
+  final dynamic selectedId;
   final String text;
   final TextStyle? textStyle;
   final Color? activeColor;
   final Color? inActiveColor;
   final Color? activeBorderColor;
   final Color? inActiveBoderColor;
-  final Function(int) onTap;
+  final Function(dynamic) onTap;
 
   @override
   State<StatefulWidget> createState() {

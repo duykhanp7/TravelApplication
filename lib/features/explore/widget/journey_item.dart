@@ -191,42 +191,11 @@ class _JourneyItem extends State<JourneyItem> {
             Positioned(
                 right: 12,
                 top: 12,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      width: 13,
-                      height: 20,
-                      color: AppColors.transparent,
-                      child: SvgPicture.asset(
-                          widget.tourDetailJson.isFavorite == null
-                              ? AppIcons.bookMarkNone
-                              : widget.tourDetailJson.isFavorite!
-                                  ? AppIcons.bookMarkFill
-                                  : AppIcons.bookMarkNone),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      width: 40,
-                      height: 40,
-                      color: AppColors.transparent,
-                      child: Material(
-                        borderRadius: BorderRadius.circular(20),
-                        color: AppColors.transparent,
-                        child: InkWell(
-                          splashColor: AppColors.white.withOpacity(0.1),
-                          highlightColor: AppColors.white.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(20),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20)),
-                          ),
-                          onTap: () {},
-                        ),
-                      ),
-                    )
-                  ],
+                child: AppButtonBookmark(
+                  background: AppColors.transparent,
+                  iconSize: const Size(10, 20),
+                  isBookmark: widget.tourDetailJson.isBookMarked ?? false,
+                  onClick: (value) {},
                 )),
           ],
         ),

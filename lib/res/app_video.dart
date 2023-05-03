@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:travel_booking_tour/res/app_layout_shimmer.dart';
 import 'package:video_viewer/video_viewer.dart';
 
 import 'colors.dart';
@@ -26,11 +27,8 @@ class _AppVideo extends State<AppVideo> {
           borderRadius: BorderRadius.circular(10),
           child: VideoViewer(
               style: VideoViewerStyle(
-                loading: Container(
-                  alignment: Alignment.center,
-                  width: 50,
-                  height: 50,
-                  child: SvgPicture.asset(AppIcons.icPause),
+                loading: AppLayoutShimmer(
+                  background: AppColors.black.withOpacity(0.1),
                 ),
                 thumbnail: Container(
                   alignment: Alignment.center,
