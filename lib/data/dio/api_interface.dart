@@ -1,11 +1,20 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
+
 typedef Json = Map<String, dynamic>;
 typedef Converter<T> = T Function(dynamic data);
 
 abstract class ApiInterface {
   Future<T> postJson<T>({
     required Json data,
+    required String endPoint,
+    Json? queryParams,
+    Converter<T>? converter,
+  });
+
+  Future<T> postFormData<T>({
+    required FormData data,
     required String endPoint,
     Json? queryParams,
     Converter<T>? converter,

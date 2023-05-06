@@ -74,7 +74,7 @@ class BlocProfileScreen extends Bloc<BlocProfileEvent, BlocProfileState> {
         emit(BlocProfileStateUpdateAvatar(
             appResult: AppResult(state: ResultState.loading)));
         Map<dynamic, dynamic>? url = await _profileRepository.updateAvatar(
-            File(event.avatar.path), userInfoJson?.type);
+            File(event.avatar.path), userInfoJson?.type, userInfoJson?.id ?? 0);
         if (url != null) {
           final String? data = url['url'];
           if (data != null) {

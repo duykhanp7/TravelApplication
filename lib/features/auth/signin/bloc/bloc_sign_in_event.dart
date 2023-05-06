@@ -36,3 +36,15 @@ class BlocSignInEventChangePassword extends BlocSignInEvent {
   @override
   List<Object?> get props => [];
 }
+
+class BlocSignInEventLoginWithGoogle extends BlocSignInEvent {
+  BlocSignInEventLoginWithGoogle();
+  @override
+  List<Object?> get props => [];
+}
+
+class BlocSignInEventLoginWithFacebook extends BlocSignInEvent {
+  BlocSignInEventLoginWithFacebook();
+  @override
+  List<Object?> get props => [];
+}

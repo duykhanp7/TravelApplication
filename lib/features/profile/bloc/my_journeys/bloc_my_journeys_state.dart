@@ -15,6 +15,13 @@ class BlocMyJourneysStateAddJourney extends BlocMyJourneysState {
   List<Object?> get props => [appResult];
 }
 
+class BlocMyJourneysStateLoadJourneys extends BlocMyJourneysState {
+  BlocMyJourneysStateLoadJourneys({required this.appResult});
+  final AppResult appResult;
+  @override
+  List<Object?> get props => [appResult];
+}
+
 class BlocMyJourneysStateUploadFileOrNot extends BlocMyJourneysState {
   BlocMyJourneysStateUploadFileOrNot({required this.files});
   final List<String>? files;

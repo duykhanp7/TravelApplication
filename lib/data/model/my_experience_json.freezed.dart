@@ -20,13 +20,18 @@ MyExperienceJson _$MyExperienceJsonFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MyExperienceJson {
-  String? get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  String? get destination => throw _privateConstructorUsedError;
-  String? get createdAt => throw _privateConstructorUsedError;
+  String? get location => throw _privateConstructorUsedError;
+  @ConvertStringToDateTime()
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  @ConvertStringToDateTime()
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  @ConvertStringToDateTime()
+  DateTime? get publishedAt => throw _privateConstructorUsedError;
   bool? get isFavorite => throw _privateConstructorUsedError;
   int? get likes => throw _privateConstructorUsedError;
-  List<String>? get photos => throw _privateConstructorUsedError;
+  List<PhotoJson>? get multi => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,13 +46,15 @@ abstract class $MyExperienceJsonCopyWith<$Res> {
       _$MyExperienceJsonCopyWithImpl<$Res, MyExperienceJson>;
   @useResult
   $Res call(
-      {String? id,
+      {int? id,
       String? name,
-      String? destination,
-      String? createdAt,
+      String? location,
+      @ConvertStringToDateTime() DateTime? createdAt,
+      @ConvertStringToDateTime() DateTime? updatedAt,
+      @ConvertStringToDateTime() DateTime? publishedAt,
       bool? isFavorite,
       int? likes,
-      List<String>? photos});
+      List<PhotoJson>? multi});
 }
 
 /// @nodoc
@@ -65,29 +72,39 @@ class _$MyExperienceJsonCopyWithImpl<$Res, $Val extends MyExperienceJson>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? destination = freezed,
+    Object? location = freezed,
     Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? publishedAt = freezed,
     Object? isFavorite = freezed,
     Object? likes = freezed,
-    Object? photos = freezed,
+    Object? multi = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      destination: freezed == destination
-          ? _value.destination
-          : destination // ignore: cast_nullable_to_non_nullable
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
               as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      publishedAt: freezed == publishedAt
+          ? _value.publishedAt
+          : publishedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       isFavorite: freezed == isFavorite
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
@@ -96,10 +113,10 @@ class _$MyExperienceJsonCopyWithImpl<$Res, $Val extends MyExperienceJson>
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
               as int?,
-      photos: freezed == photos
-          ? _value.photos
-          : photos // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+      multi: freezed == multi
+          ? _value.multi
+          : multi // ignore: cast_nullable_to_non_nullable
+              as List<PhotoJson>?,
     ) as $Val);
   }
 }
@@ -113,13 +130,15 @@ abstract class _$$_MyExperienceJsonCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? id,
+      {int? id,
       String? name,
-      String? destination,
-      String? createdAt,
+      String? location,
+      @ConvertStringToDateTime() DateTime? createdAt,
+      @ConvertStringToDateTime() DateTime? updatedAt,
+      @ConvertStringToDateTime() DateTime? publishedAt,
       bool? isFavorite,
       int? likes,
-      List<String>? photos});
+      List<PhotoJson>? multi});
 }
 
 /// @nodoc
@@ -135,29 +154,39 @@ class __$$_MyExperienceJsonCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? destination = freezed,
+    Object? location = freezed,
     Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? publishedAt = freezed,
     Object? isFavorite = freezed,
     Object? likes = freezed,
-    Object? photos = freezed,
+    Object? multi = freezed,
   }) {
     return _then(_$_MyExperienceJson(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      destination: freezed == destination
-          ? _value.destination
-          : destination // ignore: cast_nullable_to_non_nullable
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
               as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      publishedAt: freezed == publishedAt
+          ? _value.publishedAt
+          : publishedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       isFavorite: freezed == isFavorite
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
@@ -166,10 +195,10 @@ class __$$_MyExperienceJsonCopyWithImpl<$Res>
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
               as int?,
-      photos: freezed == photos
-          ? _value._photos
-          : photos // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+      multi: freezed == multi
+          ? _value._multi
+          : multi // ignore: cast_nullable_to_non_nullable
+              as List<PhotoJson>?,
     ));
   }
 }
@@ -182,41 +211,50 @@ class _$_MyExperienceJson
   const _$_MyExperienceJson(
       {this.id,
       this.name,
-      this.destination,
-      this.createdAt,
+      this.location,
+      @ConvertStringToDateTime() this.createdAt,
+      @ConvertStringToDateTime() this.updatedAt,
+      @ConvertStringToDateTime() this.publishedAt,
       this.isFavorite,
       this.likes,
-      final List<String>? photos})
-      : _photos = photos;
+      final List<PhotoJson>? multi})
+      : _multi = multi;
 
   factory _$_MyExperienceJson.fromJson(Map<String, dynamic> json) =>
       _$$_MyExperienceJsonFromJson(json);
 
   @override
-  final String? id;
+  final int? id;
   @override
   final String? name;
   @override
-  final String? destination;
+  final String? location;
   @override
-  final String? createdAt;
+  @ConvertStringToDateTime()
+  final DateTime? createdAt;
+  @override
+  @ConvertStringToDateTime()
+  final DateTime? updatedAt;
+  @override
+  @ConvertStringToDateTime()
+  final DateTime? publishedAt;
   @override
   final bool? isFavorite;
   @override
   final int? likes;
-  final List<String>? _photos;
+  final List<PhotoJson>? _multi;
   @override
-  List<String>? get photos {
-    final value = _photos;
+  List<PhotoJson>? get multi {
+    final value = _multi;
     if (value == null) return null;
-    if (_photos is EqualUnmodifiableListView) return _photos;
+    if (_multi is EqualUnmodifiableListView) return _multi;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MyExperienceJson(id: $id, name: $name, destination: $destination, createdAt: $createdAt, isFavorite: $isFavorite, likes: $likes, photos: $photos)';
+    return 'MyExperienceJson(id: $id, name: $name, location: $location, createdAt: $createdAt, updatedAt: $updatedAt, publishedAt: $publishedAt, isFavorite: $isFavorite, likes: $likes, multi: $multi)';
   }
 
   @override
@@ -226,11 +264,13 @@ class _$_MyExperienceJson
       ..add(DiagnosticsProperty('type', 'MyExperienceJson'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('destination', destination))
+      ..add(DiagnosticsProperty('location', location))
       ..add(DiagnosticsProperty('createdAt', createdAt))
+      ..add(DiagnosticsProperty('updatedAt', updatedAt))
+      ..add(DiagnosticsProperty('publishedAt', publishedAt))
       ..add(DiagnosticsProperty('isFavorite', isFavorite))
       ..add(DiagnosticsProperty('likes', likes))
-      ..add(DiagnosticsProperty('photos', photos));
+      ..add(DiagnosticsProperty('multi', multi));
   }
 
   @override
@@ -240,20 +280,33 @@ class _$_MyExperienceJson
             other is _$_MyExperienceJson &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.destination, destination) ||
-                other.destination == destination) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.publishedAt, publishedAt) ||
+                other.publishedAt == publishedAt) &&
             (identical(other.isFavorite, isFavorite) ||
                 other.isFavorite == isFavorite) &&
             (identical(other.likes, likes) || other.likes == likes) &&
-            const DeepCollectionEquality().equals(other._photos, _photos));
+            const DeepCollectionEquality().equals(other._multi, _multi));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, destination, createdAt,
-      isFavorite, likes, const DeepCollectionEquality().hash(_photos));
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      location,
+      createdAt,
+      updatedAt,
+      publishedAt,
+      isFavorite,
+      likes,
+      const DeepCollectionEquality().hash(_multi));
 
   @JsonKey(ignore: true)
   @override
@@ -271,31 +324,40 @@ class _$_MyExperienceJson
 
 abstract class _MyExperienceJson implements MyExperienceJson {
   const factory _MyExperienceJson(
-      {final String? id,
+      {final int? id,
       final String? name,
-      final String? destination,
-      final String? createdAt,
+      final String? location,
+      @ConvertStringToDateTime() final DateTime? createdAt,
+      @ConvertStringToDateTime() final DateTime? updatedAt,
+      @ConvertStringToDateTime() final DateTime? publishedAt,
       final bool? isFavorite,
       final int? likes,
-      final List<String>? photos}) = _$_MyExperienceJson;
+      final List<PhotoJson>? multi}) = _$_MyExperienceJson;
 
   factory _MyExperienceJson.fromJson(Map<String, dynamic> json) =
       _$_MyExperienceJson.fromJson;
 
   @override
-  String? get id;
+  int? get id;
   @override
   String? get name;
   @override
-  String? get destination;
+  String? get location;
   @override
-  String? get createdAt;
+  @ConvertStringToDateTime()
+  DateTime? get createdAt;
+  @override
+  @ConvertStringToDateTime()
+  DateTime? get updatedAt;
+  @override
+  @ConvertStringToDateTime()
+  DateTime? get publishedAt;
   @override
   bool? get isFavorite;
   @override
   int? get likes;
   @override
-  List<String>? get photos;
+  List<PhotoJson>? get multi;
   @override
   @JsonKey(ignore: true)
   _$$_MyExperienceJsonCopyWith<_$_MyExperienceJson> get copyWith =>

@@ -64,6 +64,7 @@ class AppIcons {
       '$parentPathIcons$childPathSignIn/facebook.svg';
   static const String talk = '$parentPathIcons$childPathSignIn/talk.svg';
   static const String line = '$parentPathIcons$childPathSignIn/line.svg';
+  static const String google = '$parentPathIcons$childPathSignIn/google.svg';
 
   //Forgot password
   static const String email =

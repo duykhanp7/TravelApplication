@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:travel_booking_tour/common/enum/enums.dart';
+import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/guide/detail/widget/my_experience_item.dart';
 import 'package:travel_booking_tour/features/profile/bloc/my_journeys/bloc_my_journeys_event.dart';
 import 'package:travel_booking_tour/features/profile/bloc/my_journeys/bloc_my_journeys_screen.dart';
@@ -30,65 +32,93 @@ class _MyJourneysScreen extends State<MyJourneysScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const AppbarApp(
-          title: 'My Journeys',
-          prefixWidget: AppInkWell(
-            voidCallBack: Routes.backTo,
-            icon: AppIcons.icBack,
-            iconSize: Size(12, 20),
-            background: AppColors.transparent,
-            iconTint: AppColors.black,
-          )),
-      backgroundColor: AppColors.white,
-      body: SafeArea(
-          child: Container(
-        padding: const EdgeInsets.fromLTRB(16, 14, 16, 32),
-        child: Column(
-          children: [
-            PrimaryActiveButton(
-              text: 'Add Journey',
-              onTap: () => _blocMyJourneysScreen
-                  .add(BlocMyJourneysEventClickButtonAddJourney()),
-              borderRadius: BorderRadius.circular(8),
-              height: 40,
-              icon: Container(
-                  margin: const EdgeInsets.only(right: 5),
-                  child: SvgPicture.asset(AppIcons.icAddBlue,
-                      width: 20, height: 20)),
-              textStyle:
-                  AppStyles.titleSmall.copyWith(color: AppColors.primary),
-              margin: EdgeInsets.zero,
-              allCaps: false,
-              ripple: AppColors.black.withOpacity(0.1),
-              border: Border.all(width: 1, color: AppColors.primary),
-              color: AppColors.white,
+    return BlocListener<BlocMyJourneysScreen, BlocMyJourneysState>(
+        listenWhen: (previous, current) =>
+            current is BlocMyJourneysStateAddJourney,
+        listener: (context, state) async {
+          if (state is BlocMyJourneysStateAddJourney) {
+            if (state.appResult.state == ResultState.loading) {
+              await context.showLoadingBottomSheet();
+            } else if (state.appResult.state == ResultState.success ||
+                state.appResult.state == ResultState.fail) {
+              Routes.backTo();
+            }
+          }
+        },
+        child: Scaffold(
+          appBar: const AppbarApp(
+              title: 'My Journeys',
+              prefixWidget: AppInkWell(
+                voidCallBack: Routes.backTo,
+                icon: AppIcons.icBack,
+                iconSize: Size(12, 20),
+                background: AppColors.transparent,
+                iconTint: AppColors.black,
+              )),
+          backgroundColor: AppColors.white,
+          body: SafeArea(
+              child: Container(
+            padding: const EdgeInsets.fromLTRB(16, 14, 16, 32),
+            child: Column(
+              children: [
+                PrimaryActiveButton(
+                  text: 'Add Journey',
+                  onTap: () => _blocMyJourneysScreen
+                      .add(BlocMyJourneysEventClickButtonAddJourney()),
+                  borderRadius: BorderRadius.circular(8),
+                  height: 40,
+                  icon: Container(
+                      margin: const EdgeInsets.only(right: 5),
+                      child: SvgPicture.asset(AppIcons.icAddBlue,
+                          width: 20, height: 20)),
+                  textStyle:
+                      AppStyles.titleSmall.copyWith(color: AppColors.primary),
+                  margin: EdgeInsets.zero,
+                  allCaps: false,
+                  ripple: AppColors.black.withOpacity(0.1),
+                  border: Border.all(width: 1, color: AppColors.primary),
+                  color: AppColors.white,
+                ),
+                const SizedBox(height: 14),
+                Expanded(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    physics: const BouncingScrollPhysics(),
+                    child:
+                        BlocBuilder<BlocMyJourneysScreen, BlocMyJourneysState>(
+                            buildWhen: (previous, current) =>
+                                current is BlocMyJourneysStateLoadJourneys ||
+                                current is BlocMyJourneysStateAddJourney,
+                            builder: (context, state) {
+                              if (state is BlocMyJourneysStateLoadJourneys) {
+                                if (state.appResult.state ==
+                                    ResultState.loading) {
+                                  return const AppLayoutShimmer();
+                                } else if (state.appResult.state ==
+                                    ResultState.fail) {
+                                  return const AppEmptyPage();
+                                }
+                              }
+
+                              return ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                padding: EdgeInsets.zero,
+                                physics: const BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: _blocMyJourneysScreen
+                                    .listMyExperienceJson.length,
+                                itemBuilder: (context, index) =>
+                                    MyExperienceItem(
+                                        myExperienceJson: _blocMyJourneysScreen
+                                            .listMyExperienceJson[index],
+                                        edited: true),
+                              );
+                            }),
+                  ),
+                )
+              ],
             ),
-            const SizedBox(height: 14),
-            Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                physics: const BouncingScrollPhysics(),
-                child: BlocBuilder<BlocMyJourneysScreen, BlocMyJourneysState>(
-                    buildWhen: (previous, current) =>
-                        current is BlocMyJourneysStateAddJourney,
-                    builder: (context, state) => ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          padding: EdgeInsets.zero,
-                          physics: const BouncingScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount:
-                              _blocMyJourneysScreen.listMyExperienceJson.length,
-                          itemBuilder: (context, index) => MyExperienceItem(
-                              myExperienceJson: _blocMyJourneysScreen
-                                  .listMyExperienceJson[index],
-                              edited: true),
-                        )),
-              ),
-            )
-          ],
-        ),
-      )),
-    );
+          )),
+        ));
   }
 }

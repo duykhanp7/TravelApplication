@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:travel_booking_tour/common/extension/app_extensions.dart';
+import 'package:travel_booking_tour/res/app_button_favorite.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/icons.dart';
 
@@ -68,7 +70,7 @@ class _MyExperienceItem extends State<MyExperienceItem> {
                                   width: 6,
                                 ),
                                 Text(
-                                  widget.myExperienceJson?.destination ?? '',
+                                  widget.myExperienceJson?.location ?? '',
                                   style: AppStyles.titleSmall.copyWith(
                                       fontWeight: FontWeight.w400,
                                       fontSize: 12,
@@ -111,7 +113,7 @@ class _MyExperienceItem extends State<MyExperienceItem> {
                 children: [
                   Expanded(
                     child: Text(
-                      widget.myExperienceJson?.createdAt ?? '',
+                      widget.myExperienceJson?.createdAt?.toyMMMdFormat() ?? '',
                       textAlign: TextAlign.start,
                       style: AppStyles.titleSmall.copyWith(
                           fontWeight: FontWeight.w400,
@@ -123,34 +125,15 @@ class _MyExperienceItem extends State<MyExperienceItem> {
                     alignment: Alignment.centerRight,
                     child: Row(
                       children: [
-                        Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            SvgPicture.asset(
-                              AppIcons.favoriteNone,
-                              width: 20,
-                              height: 20,
-                            ),
-                            Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: Material(
-                                borderRadius: BorderRadius.circular(20),
-                                color: AppColors.transparent,
-                                child: InkWell(
-                                    borderRadius: BorderRadius.circular(20),
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                    ),
-                                    onTap: () {}
-                                    //On Tap Icon Favorite,
-                                    ),
-                              ),
-                            )
-                          ],
+                        AppButtonFavorite(
+                          isFavorite: false,
+                          background: AppColors.transparent,
+                          iconTint: AppColors.primary,
+                          size: const Size(30, 30),
+                          iconSize: const Size(20, 20),
+                          onClick: (value) {},
                         ),
+                        const SizedBox(width: 13),
                         Text('${widget.myExperienceJson?.likes ?? 0} likes',
                             style: AppStyles.titleSmall.copyWith(
                                 fontWeight: FontWeight.w400,
@@ -188,11 +171,11 @@ class _MyExperienceItem extends State<MyExperienceItem> {
   }
 
   Widget _buildImages() {
-    if (widget.myExperienceJson?.photos?.isNotEmpty ?? false) {
-      int imageLength = widget.myExperienceJson!.photos!.length;
+    if (widget.myExperienceJson?.multi?.isNotEmpty ?? false) {
+      int imageLength = widget.myExperienceJson!.multi!.length;
       if (imageLength == 1) {
         return CachedNetworkImage(
-            imageUrl: widget.myExperienceJson?.photos?[0] ?? '',
+            imageUrl: widget.myExperienceJson?.multi?[0].url ?? '',
             filterQuality: FilterQuality.high,
             fit: BoxFit.cover,
             height: 202,
@@ -208,7 +191,7 @@ class _MyExperienceItem extends State<MyExperienceItem> {
             Flexible(
                 flex: 1,
                 child: CachedNetworkImage(
-                    imageUrl: widget.myExperienceJson?.photos?[0] ?? '',
+                    imageUrl: widget.myExperienceJson?.multi?[0].url ?? '',
                     filterQuality: FilterQuality.high,
                     fit: BoxFit.cover,
                     height: 202,
@@ -222,7 +205,7 @@ class _MyExperienceItem extends State<MyExperienceItem> {
             Flexible(
                 flex: 1,
                 child: CachedNetworkImage(
-                    imageUrl: widget.myExperienceJson?.photos?[1] ?? '',
+                    imageUrl: widget.myExperienceJson?.multi?[1].url ?? '',
                     filterQuality: FilterQuality.high,
                     fit: BoxFit.cover,
                     height: 202,
@@ -240,7 +223,7 @@ class _MyExperienceItem extends State<MyExperienceItem> {
           Flexible(
               flex: 1,
               child: CachedNetworkImage(
-                  imageUrl: widget.myExperienceJson?.photos?[0] ?? '',
+                  imageUrl: widget.myExperienceJson?.multi?[0].url ?? '',
                   filterQuality: FilterQuality.high,
                   fit: BoxFit.cover,
                   height: 202,
@@ -261,7 +244,7 @@ class _MyExperienceItem extends State<MyExperienceItem> {
               semanticChildCount: 2,
               children: [
                 CachedNetworkImage(
-                    imageUrl: widget.myExperienceJson?.photos?[1] ?? '',
+                    imageUrl: widget.myExperienceJson?.multi?[1].url ?? '',
                     filterQuality: FilterQuality.high,
                     fit: BoxFit.cover,
                     height: 100,
@@ -274,7 +257,7 @@ class _MyExperienceItem extends State<MyExperienceItem> {
                 const SizedBox(height: 2),
                 imageLength == 3
                     ? CachedNetworkImage(
-                        imageUrl: widget.myExperienceJson?.photos?[2] ?? '',
+                        imageUrl: widget.myExperienceJson?.multi?[2].url ?? '',
                         filterQuality: FilterQuality.high,
                         fit: BoxFit.cover,
                         height: 100,
@@ -288,7 +271,7 @@ class _MyExperienceItem extends State<MyExperienceItem> {
                         children: [
                           CachedNetworkImage(
                               imageUrl:
-                                  widget.myExperienceJson?.photos?[2] ?? '',
+                                  widget.myExperienceJson?.multi?[2].url ?? '',
                               filterQuality: FilterQuality.high,
                               fit: BoxFit.cover,
                               height: 100,

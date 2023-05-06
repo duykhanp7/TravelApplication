@@ -5,6 +5,7 @@ import 'package:travel_booking_tour/features/profile/model/photo_json.dart';
 import 'package:travel_booking_tour/res/app_photo_view.dart';
 
 import '../../res/app_camera.dart';
+import '../../res/app_layout_shimmer.dart';
 import '../../res/button.dart';
 import '../../res/colors.dart';
 import '../../res/icons.dart';
@@ -168,5 +169,22 @@ extension ContextExtension on BuildContext {
             )),
       ),
     );
+  }
+
+  Future<void> showLoadingBottomSheet() async {
+    showModalBottomSheet(
+        context: this,
+        isScrollControlled: true,
+        isDismissible: false,
+        enableDrag: false,
+        backgroundColor: AppColors.transparent,
+        builder: (context) => AppLayoutShimmer(
+            loadingColor: AppColors.primary,
+            title: Text(
+              'Please wait a moment.....',
+              style: AppStyles.titleMedium.copyWith(
+                  fontWeight: FontWeight.w400, color: AppColors.white),
+            ),
+            background: AppColors.black.withOpacity(0.3)));
   }
 }

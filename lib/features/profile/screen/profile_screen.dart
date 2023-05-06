@@ -50,6 +50,7 @@ class _ProfileScreen extends State<ProfileScreen> {
           if (!_blocProfileScreen.isLoading) {
             _blocProfileScreen.isActionRefresh = true;
             _blocProfileScreen.add(BlocProfileEventInitial());
+            _blocMyJourneysScreen.add(BlocMyJourneysEventInitial());
           }
           return;
         },
@@ -163,32 +164,48 @@ class _ProfileScreen extends State<ProfileScreen> {
                         const Spacer(),
                         InkWell(
                           child: SvgPicture.asset(AppIcons.icMoreNext),
-                          onTap: () => _blocProfileScreen
-                              .add(BlocProfileEventShowMyJourneys()),
+                          onTap: () => {
+                            _blocProfileScreen
+                                .add(BlocProfileEventShowMyJourneys()),
+                          },
                         )
                       ],
                     ),
                   ),
                   BlocBuilder<BlocMyJourneysScreen, BlocMyJourneysState>(
                       buildWhen: (previous, current) =>
-                          current is BlocMyJourneysStateAddJourney,
-                      builder: (context, state) => ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            padding: const EdgeInsets.only(
-                                left: 16, right: 16, top: 17, bottom: 20),
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: _blocMyJourneysScreen
-                                        .listMyExperienceJson.length >=
-                                    2
-                                ? 2
-                                : _blocMyJourneysScreen
-                                    .listMyExperienceJson.length,
-                            itemBuilder: (context, index) => MyExperienceItem(
-                                myExperienceJson: _blocMyJourneysScreen
-                                    .listMyExperienceJson[index],
-                                edited: true),
-                          ))
+                          current is BlocMyJourneysStateAddJourney ||
+                          current is BlocMyJourneysStateLoadJourneys,
+                      builder: (context, state) {
+                        if (state is BlocMyJourneysStateLoadJourneys) {
+                          if (state.appResult.state == ResultState.loading) {
+                            return SizedBox(
+                              height: 300,
+                              child: AppLayoutShimmer(
+                                background:
+                                    AppColors.textHintColor.withOpacity(0.2),
+                              ),
+                            );
+                          }
+                        }
+                        return ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          padding: const EdgeInsets.only(
+                              left: 16, right: 16, top: 17, bottom: 20),
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: _blocMyJourneysScreen
+                                      .listMyExperienceJson.length >=
+                                  2
+                              ? 2
+                              : _blocMyJourneysScreen
+                                  .listMyExperienceJson.length,
+                          itemBuilder: (context, index) => MyExperienceItem(
+                              myExperienceJson: _blocMyJourneysScreen
+                                  .listMyExperienceJson[index],
+                              edited: true),
+                        );
+                      })
                 ],
               ),
             ),
