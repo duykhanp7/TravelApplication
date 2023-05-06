@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:travel_booking_tour/base/base_repository.dart';
 import 'package:travel_booking_tour/common/app_constant.dart';
 import 'package:travel_booking_tour/data/dio/api_client.dart';
 import 'package:travel_booking_tour/data/local/app_storage.dart';
 import 'package:travel_booking_tour/data/model/my_experience_json.dart';
+import 'package:travel_booking_tour/data/model/user.dart';
 import 'package:travel_booking_tour/features/profile/model/photo_json.dart';
 import 'package:travel_booking_tour/features/profile/model/user_info.dart';
 
@@ -23,6 +25,8 @@ class ProfileRepository extends BaseRepository {
   final String updateTraverlerCoverEndPoint = '/api/traveler/cover';
   final String updateGuideAvatarEndPoint = '/api/guide/avatar';
   final String updateGuideCoverEndPoint = '/api/guide/cover';
+
+  final String journeyEndPoint = '/api/journeys';
 
   Future<List<MyExperienceJson>> getMyJourneys() async {
     return [];
@@ -52,14 +56,16 @@ class ProfileRepository extends BaseRepository {
       jsonDecode(await _appStorage.getData(AppConstant.info) ?? ''));
 
   Future<Map<dynamic, dynamic>?> updateAvatar(
-          File file, UserType? type) async =>
+          File file, UserType? type, int? id) async =>
       type == UserType.traverler
           ? _apiService.postFile(
               file: file,
+              datas: {"id": id},
               endPoint: updateTraverlerAvatarEndPoint,
               converter: (data) => data)
           : _apiService.postFile(
               file: file,
+              datas: {"id": id},
               endPoint: updateGuideAvatarEndPoint,
               converter: (data) => data);
 
@@ -73,6 +79,16 @@ class ProfileRepository extends BaseRepository {
               file: file,
               endPoint: updateGuideCoverEndPoint,
               converter: (data) => data);
+
+  Future<UserJson?> get user async => UserJson.fromJson(
+      jsonDecode(await _appStorage.getData(AppConstant.user) ?? ''));
+
+  Future<MyExperienceJson?> postMyJourney(FormData data) async =>
+      _apiService.postFormData(
+        data: data,
+        endPoint: journeyEndPoint,
+        converter: (data) => MyExperienceJson.fromJson(data),
+      );
 
   @override
   void onInitialData() {}

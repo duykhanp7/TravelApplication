@@ -2,6 +2,7 @@ import 'package:travel_booking_tour/base/base_repository.dart';
 import 'package:travel_booking_tour/data/dio/api_client.dart';
 import 'package:travel_booking_tour/data/model/my_experience_json.dart';
 import 'package:travel_booking_tour/data/model/news_json.dart';
+import 'package:travel_booking_tour/features/profile/model/photo_json.dart';
 import '../../../data/model/review_json.dart';
 import '../../../data/model/schedule_json.dart';
 import '../../../data/model/schedule_point_json.dart';
@@ -445,7 +446,7 @@ class ExploreRepository implements BaseRepository {
     return tourGuides;
   }
 
-  List<TourGuideDetailJson> tourGuides = const [
+  List<TourGuideDetailJson> tourGuides = [
     TourGuideDetailJson(
         id: 0,
         name: 'Tuan Tran',
@@ -465,34 +466,35 @@ class ExploreRepository implements BaseRepository {
             'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
         experiences: [
           MyExperienceJson(
-            id: '5',
-            createdAt: 'Jan 25. 2023',
-            destination: 'Hoi An, Viet Nam',
+            id: 5,
+            createdAt: DateTime.now(),
+            location: 'Hoi An, Viet Nam',
             name: '2 Hour Bicycle Tour exploring Hoi An',
             likes: 1234,
             isFavorite: false,
-            photos: [
-              'https://i.imgur.com/zuSApjx.png',
-              'https://i.imgur.com/gi30u3G.png',
-              'https://i.imgur.com/jvSDzia.png',
-              'https://i.imgur.com/jvSDzia.png'
+            multi: const [
+              PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
+              PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
+              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
             ],
           ),
           MyExperienceJson(
-            id: '6',
-            createdAt: 'Jan 25. 2023',
-            destination: 'Hoi An, Viet Nam',
-            name: 'Food tour in Da Nang',
-            likes: 234,
+            id: 5,
+            createdAt: DateTime.now(),
+            location: 'Hoi An, Viet Nam',
+            name: '2 Hour Bicycle Tour exploring Hoi An',
+            likes: 1234,
             isFavorite: false,
-            photos: [
-              'https://i.imgur.com/zuSApjx.png',
-              'https://i.imgur.com/gi30u3G.png',
-              'https://i.imgur.com/jvSDzia.png'
+            multi: const [
+              PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
+              PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
+              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
             ],
           )
         ],
-        reviews: [
+        reviews: const [
           ReviewJson(
               id: 0,
               content:
@@ -537,33 +539,35 @@ class ExploreRepository implements BaseRepository {
             'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
         experiences: [
           MyExperienceJson(
-            id: '7',
-            createdAt: 'Jan 25. 2023',
-            destination: 'Hoi An, Viet Nam',
+            id: 5,
+            createdAt: DateTime.now(),
+            location: 'Hoi An, Viet Nam',
             name: '2 Hour Bicycle Tour exploring Hoi An',
-            likes: 5555,
+            likes: 1234,
             isFavorite: false,
-            photos: [
-              'https://i.imgur.com/zuSApjx.png',
-              'https://i.imgur.com/gi30u3G.png',
-              'https://i.imgur.com/jvSDzia.png'
+            multi: const [
+              PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
+              PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
+              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
             ],
           ),
           MyExperienceJson(
-            id: '8',
-            createdAt: 'Jan 25. 2023',
-            destination: 'Hoi An, Viet Nam',
-            name: 'Food tour in Da Nang',
-            likes: 6666,
+            id: 5,
+            createdAt: DateTime.now(),
+            location: 'Hoi An, Viet Nam',
+            name: '2 Hour Bicycle Tour exploring Hoi An',
+            likes: 1234,
             isFavorite: false,
-            photos: [
-              'https://i.imgur.com/zuSApjx.png',
-              'https://i.imgur.com/gi30u3G.png',
-              'https://i.imgur.com/jvSDzia.png'
+            multi: const [
+              PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
+              PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
+              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
             ],
           )
         ],
-        reviews: [
+        reviews: const [
           ReviewJson(
               id: 0,
               content:
@@ -608,33 +612,35 @@ class ExploreRepository implements BaseRepository {
             'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
         experiences: [
           MyExperienceJson(
-            id: '9',
-            createdAt: 'Jan 25. 2023',
-            destination: 'Hoi An, Viet Nam',
+            id: 5,
+            createdAt: DateTime.now(),
+            location: 'Hoi An, Viet Nam',
             name: '2 Hour Bicycle Tour exploring Hoi An',
             likes: 1234,
             isFavorite: false,
-            photos: [
-              'https://i.imgur.com/zuSApjx.png',
-              'https://i.imgur.com/gi30u3G.png',
-              'https://i.imgur.com/jvSDzia.png'
+            multi: const [
+              PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
+              PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
+              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
             ],
           ),
           MyExperienceJson(
-            id: '10',
-            createdAt: 'Jan 25. 2023',
-            destination: 'Hoi An, Viet Nam',
-            name: 'Food tour in Da Nang',
-            likes: 234,
+            id: 5,
+            createdAt: DateTime.now(),
+            location: 'Hoi An, Viet Nam',
+            name: '2 Hour Bicycle Tour exploring Hoi An',
+            likes: 1234,
             isFavorite: false,
-            photos: [
-              'https://i.imgur.com/zuSApjx.png',
-              'https://i.imgur.com/gi30u3G.png',
-              'https://i.imgur.com/jvSDzia.png'
+            multi: const [
+              PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
+              PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
+              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
             ],
           )
         ],
-        reviews: [
+        reviews: const [
           ReviewJson(
               id: 0,
               content:
@@ -679,33 +685,35 @@ class ExploreRepository implements BaseRepository {
             'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
         experiences: [
           MyExperienceJson(
-            id: '11',
-            createdAt: 'Jan 25. 2023',
-            destination: 'Hoi An, Viet Nam',
+            id: 5,
+            createdAt: DateTime.now(),
+            location: 'Hoi An, Viet Nam',
             name: '2 Hour Bicycle Tour exploring Hoi An',
-            likes: 5555,
+            likes: 1234,
             isFavorite: false,
-            photos: [
-              'https://i.imgur.com/zuSApjx.png',
-              'https://i.imgur.com/gi30u3G.png',
-              'https://i.imgur.com/jvSDzia.png'
+            multi: const [
+              PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
+              PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
+              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
             ],
           ),
           MyExperienceJson(
-            id: '12',
-            createdAt: 'Jan 25. 2023',
-            destination: 'Hoi An, Viet Nam',
-            name: 'Food tour in Da Nang',
-            likes: 6666,
+            id: 5,
+            createdAt: DateTime.now(),
+            location: 'Hoi An, Viet Nam',
+            name: '2 Hour Bicycle Tour exploring Hoi An',
+            likes: 1234,
             isFavorite: false,
-            photos: [
-              'https://i.imgur.com/zuSApjx.png',
-              'https://i.imgur.com/gi30u3G.png',
-              'https://i.imgur.com/jvSDzia.png'
+            multi: const [
+              PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
+              PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
+              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
             ],
           )
         ],
-        reviews: [
+        reviews: const [
           ReviewJson(
               id: 0,
               content:

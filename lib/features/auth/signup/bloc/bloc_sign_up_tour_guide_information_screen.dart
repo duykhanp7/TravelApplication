@@ -18,6 +18,7 @@ import 'package:video_viewer/video_viewer.dart';
 
 import '../../../../common/enum/enums.dart';
 import '../../../../data/model/time_from_to.dart';
+import '../../../profile/repository/profile_repository.dart';
 
 class BlocSignUpTourGuideInformationScreen extends Bloc<
     BlocSignUpTourGuideInformationEvent, BlocSignUpTourGuideInformationState> {
@@ -68,7 +69,7 @@ class BlocSignUpTourGuideInformationScreen extends Bloc<
       GlobalKey<FormState>();
 
   final AuthRepository _authRepository = AuthRepository();
-  //final ProfileRepository _profileRepository = ProfileRepository();
+  final ProfileRepository _profileRepository = ProfileRepository();
 
   Map<String, dynamic>? dataAccount;
 
@@ -105,9 +106,11 @@ class BlocSignUpTourGuideInformationScreen extends Bloc<
                 "license":
                     await MultipartFile.fromFile(imageGuideLicense?.path ?? '')
               };
-              // dynamic addAvatar = _profileRepository.updateAvatar(
-              //     File(imageProfile?.path ?? ''), UserType.guide);
-              // debugPrint('Update Avatar : $addAvatar');
+              dynamic addAvatar = _profileRepository.updateAvatar(
+                  File(imageProfile?.path ?? ''),
+                  UserType.guide,
+                  guideUser.id ?? 0);
+              debugPrint('Update Avatar : $addAvatar');
               dynamic data = await _authRepository.addInformationGuide(info);
               debugPrint('addInformationGuideaddInformationGuide : $data');
             }

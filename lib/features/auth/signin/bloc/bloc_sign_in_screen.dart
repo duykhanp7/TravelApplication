@@ -1,7 +1,10 @@
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:travel_booking_tour/common/app_logger.dart';
 import 'package:travel_booking_tour/data/model/result.dart';
 import 'package:travel_booking_tour/common/app_constant.dart';
 import 'package:travel_booking_tour/data/local/app_storage.dart';
@@ -87,7 +90,42 @@ class BlocSignInScreen extends Bloc<BlocSignInEvent, BlocSignInState> {
       errorText = 'This email has not been signed up, try sign up';
     } else if (event is BlocSignInEventChangePassword) {
       password = event.password;
+    } else if (event is BlocSignInEventLoginWithGoogle) {
+      try {
+        emit(BlocSignInStateLoginWithGoogle(
+            appResult: AppResult(state: ResultState.loading)));
+        if (FirebaseAuth.instance.currentUser == null) {
+          User? user = await signInWithGoogle();
+          if (user != null) {
+            debugPrint(
+                'User Google Account Info : ${user.email} ${user.displayName} ${user.phoneNumber}');
+            emit(BlocSignInStateLoginWithGoogle(
+                appResult:
+                    AppResult(state: ResultState.success, result: user)));
+          } else {
+            emit(BlocSignInStateLoginWithGoogle(
+                appResult: AppResult(state: ResultState.fail)));
+          }
+        }
+      } on NetworkException catch (e) {
+        emit(BlocSignInStateLoginWithGoogle(
+            appResult: AppResult(state: ResultState.fail)));
+
+        AppLogger.loggerOnNetworkException(e);
+      }
+    } else if (event is BlocSignInEventLoginWithFacebook) {}
+  }
+
+  Future<User?> signInWithGoogle() async {
+    final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
+    if (gUser != null) {
+      final GoogleSignInAuthentication gAuth = await gUser.authentication;
+      final credential = GoogleAuthProvider.credential(
+          accessToken: gAuth.accessToken, idToken: gAuth.idToken);
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      return FirebaseAuth.instance.currentUser;
     }
+    return null;
   }
 
   String? validateTextFieldEmail(String? value) {

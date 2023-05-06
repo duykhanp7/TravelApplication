@@ -80,7 +80,6 @@ class BlocSignupScreen extends Bloc<BlocSignUpEvent, BlocSignUpState> {
       }
     } else if (event is BlocSignUpEventChangeTypeAccount) {
       typeAccount = event.typeAccount;
-      debugPrint('Type name : $typeAccount');
       emit(BlocSignUpStateChangeTypeAccount(typeAccount: typeAccount));
     } else if (event is BlocSignUpEventChangeFirstName) {
       firstName = event.firstName;

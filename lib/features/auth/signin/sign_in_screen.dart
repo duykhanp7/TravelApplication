@@ -179,29 +179,31 @@ class _SignInScreen extends State<SignInScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SocialButton(
+            icon: AppIcons.google,
+            background: AppColors.black.withOpacity(0.1),
+            splash: AppColors.white.withOpacity(0.5),
+            voidCallback: () =>
+                _blocSignInScreen.add(BlocSignInEventLoginWithGoogle()),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          SocialButton(
             icon: AppIcons.facebook,
             background: AppColors.facebookBgColor,
             splash: const Color.fromARGB(255, 37, 105, 208),
-            voidCallback: () {},
+            voidCallback: () async =>
+                _blocSignInScreen.add(BlocSignInEventLoginWithFacebook()),
           ),
-          const SizedBox(
-            width: 20,
-          ),
-          SocialButton(
-            icon: AppIcons.talk,
-            background: AppColors.talkBgColor,
-            splash: const Color.fromARGB(255, 233, 211, 6),
-            voidCallback: () {},
-          ),
-          const SizedBox(
-            width: 20,
-          ),
-          SocialButton(
-            icon: AppIcons.line,
-            background: AppColors.lineBgColor,
-            splash: const Color.fromARGB(255, 50, 173, 2),
-            voidCallback: () {},
-          ),
+          // const SizedBox(
+          //   width: 20,
+          // ),
+          // SocialButton(
+          //   icon: AppIcons.line,
+          //   background: AppColors.lineBgColor,
+          //   splash: const Color.fromARGB(255, 50, 173, 2),
+          //   voidCallback: () {},
+          // ),
         ],
       ),
     );

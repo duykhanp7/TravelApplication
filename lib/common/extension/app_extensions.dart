@@ -8,4 +8,8 @@ extension AppDateTime on DateTime {
   String toFormatHHMMSS() {
     return DateFormat('hh-MM-yyyy').format(this);
   }
+
+  String toyMMMdFormat() {
+    return DateFormat.yMMMd().format(this);
+  }
 }

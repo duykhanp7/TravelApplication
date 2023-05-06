@@ -1,11 +1,16 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
+import 'package:travel_booking_tour/common/app_logger.dart';
 import 'package:travel_booking_tour/data/model/result.dart';
 import 'package:travel_booking_tour/common/enum/enums.dart';
 import 'package:travel_booking_tour/data/model/my_experience_json.dart';
+import 'package:travel_booking_tour/data/model/user.dart';
+import 'package:travel_booking_tour/data/network/network_exception.dart';
 import 'package:travel_booking_tour/features/profile/bloc/my_journeys/bloc_my_journeys_event.dart';
 import 'package:travel_booking_tour/features/profile/bloc/my_journeys/bloc_my_journeys_state.dart';
 import 'package:travel_booking_tour/features/profile/repository/profile_repository.dart';
@@ -27,37 +32,69 @@ class BlocMyJourneysScreen
   final TextEditingController locationOfJourneyEditingController =
       TextEditingController();
   final ProfileRepository _profileRepository = ProfileRepository();
+
   bool isPhotoLoaded = true;
   List<String>? files;
 
   void mapStateToEvent(
       BlocMyJourneysEvent event, Emitter<BlocMyJourneysState> emit) async {
     if (event is BlocMyJourneysEventInitial) {
-      listMyExperienceJson = await _profileRepository.getMyJourneys();
-      emit(BlocMyJourneysStateAddJourney(
-          appResult: AppResult(state: ResultState.success)));
+      try {
+        emit(BlocMyJourneysStateLoadJourneys(
+            appResult: AppResult(state: ResultState.loading)));
+        // listMyExperienceJson = await _profileRepository.getMyJourneys();
+        await Future.delayed(const Duration(seconds: 2), () {
+          emit(BlocMyJourneysStateLoadJourneys(
+              appResult: AppResult(state: ResultState.success)));
+        });
+      } on NetworkException catch (e) {
+        emit(BlocMyJourneysStateLoadJourneys(
+            appResult: AppResult(state: ResultState.fail)));
+        AppLogger.loggerOnNetworkException(e);
+      }
     } else if (event is BlocMyJourneysEventClickButtonAddJourney) {
       Routes.navigateTo(AppPath.myJourneysAddMore, {});
     } else if (event is BlocMyJourneysEventClickButtonDone) {
       bool? validate = formKey.currentState?.validate();
-      if (validate != null && validate && files != null) {
-        MyExperienceJson myJourneyJson = MyExperienceJson(
-            id: '0',
-            name: journeyNameEditingController.text.trim(),
-            destination: locationOfJourneyEditingController.text.trim(),
-            createdAt: DateFormat.yMMMd().format(DateTime.now()),
-            isFavorite: false,
-            likes: 0,
-            photos: files);
-        listMyExperienceJson.add(myJourneyJson);
+      if (validate != null && validate && files != null && files!.isNotEmpty) {
+        try {
+          emit(BlocMyJourneysStateAddJourney(
+              appResult: AppResult(state: ResultState.loading)));
+          UserJson? userJson = await _profileRepository.user;
+          FormData data = FormData();
 
-        emit(BlocMyJourneysStateAddJourney(
-            appResult:
-                AppResult(state: ResultState.success, result: myJourneyJson)));
-        journeyNameEditingController.text = '';
-        locationOfJourneyEditingController.text = '';
-        Routes.backTo();
-        files = null;
+          Map<String, dynamic> journeyInfo = {
+            'name': journeyNameEditingController.text,
+            'user': userJson?.id.toString(),
+            'location': locationOfJourneyEditingController.text
+          };
+
+          data.fields.add(MapEntry('data', jsonEncode(journeyInfo)));
+
+          await Future.forEach(
+              files ?? [],
+              (element) async => data.files.add(MapEntry(
+                  'files.multi', await MultipartFile.fromFile(element))));
+
+          MyExperienceJson? myExperienceJson =
+              await _profileRepository.postMyJourney(data);
+
+          if (myExperienceJson != null) {
+            listMyExperienceJson.add(myExperienceJson);
+            Routes.backTo();
+            files = null;
+            emit(BlocMyJourneysStateAddJourney(
+                appResult: AppResult(
+                    state: ResultState.success, result: myExperienceJson)));
+          } else {
+            emit(BlocMyJourneysStateAddJourney(
+                appResult: AppResult(state: ResultState.fail)));
+          }
+        } on NetworkException catch (e) {
+          emit(BlocMyJourneysStateAddJourney(
+              appResult: AppResult(state: ResultState.fail)));
+          AppLogger.loggerOnNetworkException(e);
+        }
       } else {
         if (files == null) {
           isPhotoLoaded = false;

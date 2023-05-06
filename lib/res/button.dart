@@ -226,7 +226,8 @@ class SocialButton extends StatelessWidget {
       this.width,
       this.height,
       this.radius,
-      this.title});
+      this.title,
+      this.iconSize});
 
   final String icon;
   final String? title;
@@ -236,6 +237,7 @@ class SocialButton extends StatelessWidget {
   final double? width;
   final double? height;
   final double? radius;
+  final Size? iconSize;
 
   @override
   Widget build(BuildContext context) {
@@ -257,7 +259,11 @@ class SocialButton extends StatelessWidget {
               onTap: voidCallback,
               child: Container(
                 alignment: Alignment.center,
-                child: SvgPicture.asset(icon),
+                child: SvgPicture.asset(
+                  icon,
+                  width: iconSize?.width ?? 20,
+                  height: iconSize?.height ?? 20,
+                ),
               ),
             ),
           ),

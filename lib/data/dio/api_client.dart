@@ -63,11 +63,13 @@ class ApiService implements ApiInterface {
       {required File file,
       required String endPoint,
       Json? queryParams,
+      Json? datas,
       Converter<T>? converter}) async {
     try {
       final token = await _appStorage.getData(AppConstant.token);
       final fileData = await MultipartFile.fromFile(file.path);
-      FormData data = FormData.fromMap({"token": token, "file": fileData});
+      FormData data =
+          FormData.fromMap({"token": token, "file": fileData, ...datas ?? {}});
       final response = await dio.post(_baseURL + endPoint,
           data: data, queryParameters: queryParams);
       return NetworkException.convertResponse(response, converter);
@@ -102,6 +104,24 @@ class ApiService implements ApiInterface {
           data: data, queryParameters: queryParams);
       return NetworkException.convertResponse(response, converter);
     } on Exception catch (ex) {
+      throw NetworkException.getDioException(ex);
+    }
+  }
+
+  @override
+  Future<T> postFormData<T>(
+      {required FormData data,
+      required String endPoint,
+      Json? queryParams,
+      Converter<T>? converter}) async {
+    try {
+      final response = await dio.post(
+        _baseURL + endPoint,
+        data: data,
+        queryParameters: queryParams,
+      );
+      return NetworkException.convertResponse(response, converter);
+    } catch (ex) {
       throw NetworkException.getDioException(ex);
     }
   }
