@@ -35,6 +35,7 @@ mixin _$UserInfoJson {
   @ConvertStringToUserType()
   UserType? get type => throw _privateConstructorUsedError;
   List<PhotoJson>? get images => throw _privateConstructorUsedError;
+  List<MyExperienceJson>? get journeys => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -62,7 +63,8 @@ abstract class $UserInfoJsonCopyWith<$Res> {
       String? createdAt,
       String? updatedAt,
       @ConvertStringToUserType() UserType? type,
-      List<PhotoJson>? images});
+      List<PhotoJson>? images,
+      List<MyExperienceJson>? journeys});
 
   $PhotoJsonCopyWith<$Res>? get avatar;
   $PhotoJsonCopyWith<$Res>? get cover;
@@ -95,6 +97,7 @@ class _$UserInfoJsonCopyWithImpl<$Res, $Val extends UserInfoJson>
     Object? updatedAt = freezed,
     Object? type = freezed,
     Object? images = freezed,
+    Object? journeys = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -153,6 +156,10 @@ class _$UserInfoJsonCopyWithImpl<$Res, $Val extends UserInfoJson>
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<PhotoJson>?,
+      journeys: freezed == journeys
+          ? _value.journeys
+          : journeys // ignore: cast_nullable_to_non_nullable
+              as List<MyExperienceJson>?,
     ) as $Val);
   }
 
@@ -203,7 +210,8 @@ abstract class _$$_UserInfoJsonCopyWith<$Res>
       String? createdAt,
       String? updatedAt,
       @ConvertStringToUserType() UserType? type,
-      List<PhotoJson>? images});
+      List<PhotoJson>? images,
+      List<MyExperienceJson>? journeys});
 
   @override
   $PhotoJsonCopyWith<$Res>? get avatar;
@@ -236,6 +244,7 @@ class __$$_UserInfoJsonCopyWithImpl<$Res>
     Object? updatedAt = freezed,
     Object? type = freezed,
     Object? images = freezed,
+    Object? journeys = freezed,
   }) {
     return _then(_$_UserInfoJson(
       id: freezed == id
@@ -294,6 +303,10 @@ class __$$_UserInfoJsonCopyWithImpl<$Res>
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
               as List<PhotoJson>?,
+      journeys: freezed == journeys
+          ? _value._journeys
+          : journeys // ignore: cast_nullable_to_non_nullable
+              as List<MyExperienceJson>?,
     ));
   }
 }
@@ -315,8 +328,10 @@ class _$_UserInfoJson extends _UserInfoJson with DiagnosticableTreeMixin {
       this.createdAt,
       this.updatedAt,
       @ConvertStringToUserType() this.type,
-      final List<PhotoJson>? images})
+      final List<PhotoJson>? images,
+      final List<MyExperienceJson>? journeys})
       : _images = images,
+        _journeys = journeys,
         super._();
 
   factory _$_UserInfoJson.fromJson(Map<String, dynamic> json) =>
@@ -359,9 +374,19 @@ class _$_UserInfoJson extends _UserInfoJson with DiagnosticableTreeMixin {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<MyExperienceJson>? _journeys;
+  @override
+  List<MyExperienceJson>? get journeys {
+    final value = _journeys;
+    if (value == null) return null;
+    if (_journeys is EqualUnmodifiableListView) return _journeys;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserInfoJson(id: $id, username: $username, firstName: $firstName, lastName: $lastName, avatar: $avatar, cover: $cover, email: $email, provider: $provider, confirmed: $confirmed, blocked: $blocked, createdAt: $createdAt, updatedAt: $updatedAt, type: $type, images: $images)';
+    return 'UserInfoJson(id: $id, username: $username, firstName: $firstName, lastName: $lastName, avatar: $avatar, cover: $cover, email: $email, provider: $provider, confirmed: $confirmed, blocked: $blocked, createdAt: $createdAt, updatedAt: $updatedAt, type: $type, images: $images, journeys: $journeys)';
   }
 
   @override
@@ -382,7 +407,8 @@ class _$_UserInfoJson extends _UserInfoJson with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('updatedAt', updatedAt))
       ..add(DiagnosticsProperty('type', type))
-      ..add(DiagnosticsProperty('images', images));
+      ..add(DiagnosticsProperty('images', images))
+      ..add(DiagnosticsProperty('journeys', journeys));
   }
 
   @override
@@ -410,7 +436,8 @@ class _$_UserInfoJson extends _UserInfoJson with DiagnosticableTreeMixin {
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.type, type) || other.type == type) &&
-            const DeepCollectionEquality().equals(other._images, _images));
+            const DeepCollectionEquality().equals(other._images, _images) &&
+            const DeepCollectionEquality().equals(other._journeys, _journeys));
   }
 
   @JsonKey(ignore: true)
@@ -430,7 +457,8 @@ class _$_UserInfoJson extends _UserInfoJson with DiagnosticableTreeMixin {
       createdAt,
       updatedAt,
       type,
-      const DeepCollectionEquality().hash(_images));
+      const DeepCollectionEquality().hash(_images),
+      const DeepCollectionEquality().hash(_journeys));
 
   @JsonKey(ignore: true)
   @override
@@ -461,7 +489,8 @@ abstract class _UserInfoJson extends UserInfoJson {
       final String? createdAt,
       final String? updatedAt,
       @ConvertStringToUserType() final UserType? type,
-      final List<PhotoJson>? images}) = _$_UserInfoJson;
+      final List<PhotoJson>? images,
+      final List<MyExperienceJson>? journeys}) = _$_UserInfoJson;
   const _UserInfoJson._() : super._();
 
   factory _UserInfoJson.fromJson(Map<String, dynamic> json) =
@@ -496,6 +525,8 @@ abstract class _UserInfoJson extends UserInfoJson {
   UserType? get type;
   @override
   List<PhotoJson>? get images;
+  @override
+  List<MyExperienceJson>? get journeys;
   @override
   @JsonKey(ignore: true)
   _$$_UserInfoJsonCopyWith<_$_UserInfoJson> get copyWith =>

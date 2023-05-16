@@ -153,3 +153,9 @@ class BlocSignUpTourGuideInformationEventClose
   @override
   List<Object?> get props => [];
 }
+
+class BlocSignUpTourGuideInformationEventFinishAddInfo
+    extends BlocSignUpTourGuideInformationEvent {
+  @override
+  List<Object?> get props => [];
+}

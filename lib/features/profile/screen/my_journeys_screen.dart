@@ -27,6 +27,7 @@ class _MyJourneysScreen extends State<MyJourneysScreen> {
   @override
   void initState() {
     _blocMyJourneysScreen = BlocProvider.of<BlocMyJourneysScreen>(context);
+    _blocMyJourneysScreen.add(BlocMyJourneysEventInitial());
     super.initState();
   }
 
@@ -84,36 +85,43 @@ class _MyJourneysScreen extends State<MyJourneysScreen> {
                   child: SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     physics: const BouncingScrollPhysics(),
-                    child:
-                        BlocBuilder<BlocMyJourneysScreen, BlocMyJourneysState>(
-                            buildWhen: (previous, current) =>
-                                current is BlocMyJourneysStateLoadJourneys ||
-                                current is BlocMyJourneysStateAddJourney,
-                            builder: (context, state) {
-                              if (state is BlocMyJourneysStateLoadJourneys) {
-                                if (state.appResult.state ==
-                                    ResultState.loading) {
-                                  return const AppLayoutShimmer();
-                                } else if (state.appResult.state ==
-                                    ResultState.fail) {
-                                  return const AppEmptyPage();
-                                }
-                              }
+                    child: BlocBuilder<BlocMyJourneysScreen,
+                            BlocMyJourneysState>(
+                        buildWhen: (previous, current) =>
+                            current is BlocMyJourneysStateLoadJourneys ||
+                            current is BlocMyJourneysStateAddJourney,
+                        builder: (context, state) {
+                          if (state is BlocMyJourneysStateLoadJourneys) {
+                            if (state.appResult.state == ResultState.loading) {
+                              return LayoutBuilder(
+                                  builder: (context, constraint) =>
+                                      ConstrainedBox(
+                                        constraints: BoxConstraints(
+                                            maxHeight: constraint.maxHeight),
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          child: const AppLayoutShimmer(),
+                                        ),
+                                      ));
+                            } else if (state.appResult.state ==
+                                ResultState.fail) {
+                              return const AppEmptyPage();
+                            }
+                          }
 
-                              return ListView.builder(
-                                scrollDirection: Axis.vertical,
-                                padding: EdgeInsets.zero,
-                                physics: const BouncingScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: _blocMyJourneysScreen
-                                    .listMyExperienceJson.length,
-                                itemBuilder: (context, index) =>
-                                    MyExperienceItem(
-                                        myExperienceJson: _blocMyJourneysScreen
-                                            .listMyExperienceJson[index],
-                                        edited: true),
-                              );
-                            }),
+                          return ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            padding: EdgeInsets.zero,
+                            physics: const BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: _blocMyJourneysScreen
+                                .listMyExperienceJson.length,
+                            itemBuilder: (context, index) => MyExperienceItem(
+                                myExperienceJson: _blocMyJourneysScreen
+                                    .listMyExperienceJson[index],
+                                edited: true),
+                          );
+                        }),
                   ),
                 )
               ],

@@ -13,7 +13,6 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:travel_booking_tour/res/app_dialog.dart';
 import 'package:travel_booking_tour/res/res.dart';
-import 'package:travel_booking_tour/router/routes.dart';
 import 'package:video_player/video_player.dart';
 
 import '../common/enum/enums.dart';
@@ -828,13 +827,10 @@ class _AppCameraState extends State<AppCamera>
       if (cameraController.value.hasError) {
         showDialog(
             context: context,
-            builder: (context) => AppDialog(
-                content:
-                    'Camera error ${cameraController.value.errorDescription}',
-                typeDialog: TypeDialog.error,
-                positiveAction: () {
-                  Routes.backTo();
-                }));
+            builder: (context) => DefaultDialog.warning(
+                  content: Text(cameraController.value.errorDescription ??
+                      'cameraController.value.errorDescription'),
+                ));
       }
     });
 
@@ -845,66 +841,50 @@ class _AppCameraState extends State<AppCamera>
         case 'CameraAccessDenied':
           showDialog(
               context: context,
-              builder: (context) => AppDialog(
-                  content: 'You have denied camera access.',
-                  typeDialog: TypeDialog.warning,
-                  positiveAction: () {
-                    Routes.backTo();
-                  }));
+              builder: (context) => const DefaultDialog.warning(
+                    content: Text('You have denied camera access.'),
+                  ));
           break;
         case 'CameraAccessDeniedWithoutPrompt':
           // iOS only
           showDialog(
               context: context,
-              builder: (context) => AppDialog(
-                  content: 'Please go to Settings app to enable camera access.',
-                  typeDialog: TypeDialog.warning,
-                  positiveAction: () {
-                    Routes.backTo();
-                  }));
+              builder: (context) => const DefaultDialog.warning(
+                    content: Text(
+                        'Please go to Settings app to enable camera access.'),
+                  ));
           break;
         case 'CameraAccessRestricted':
           // iOS only
           showDialog(
               context: context,
-              builder: (context) => AppDialog(
-                  content: 'Camera access is restricted.',
-                  typeDialog: TypeDialog.warning,
-                  positiveAction: () {
-                    Routes.backTo();
-                  }));
+              builder: (context) => const DefaultDialog.warning(
+                    content: Text('Camera access is restricted.'),
+                  ));
 
           break;
         case 'AudioAccessDenied':
           showDialog(
               context: context,
-              builder: (context) => AppDialog(
-                  content: 'You have denied audio access.',
-                  typeDialog: TypeDialog.warning,
-                  positiveAction: () {
-                    Routes.backTo();
-                  }));
+              builder: (context) => const DefaultDialog.warning(
+                    content: Text('You have denied audio access.'),
+                  ));
           break;
         case 'AudioAccessDeniedWithoutPrompt':
           // iOS only
           showDialog(
               context: context,
-              builder: (context) => AppDialog(
-                  content: 'Please go to Settings app to enable audio access.',
-                  typeDialog: TypeDialog.warning,
-                  positiveAction: () {
-                    Routes.backTo();
-                  }));
+              builder: (context) => const DefaultDialog.warning(
+                    content: Text(
+                        'Please go to Settings app to enable audio access.'),
+                  ));
           break;
         case 'AudioAccessRestricted':
           showDialog(
               context: context,
-              builder: (context) => AppDialog(
-                  content: 'Audio access is restricted.',
-                  typeDialog: TypeDialog.warning,
-                  positiveAction: () {
-                    Routes.backTo();
-                  }));
+              builder: (context) => const DefaultDialog.warning(
+                    content: Text('Audio access is restricted.'),
+                  ));
           break;
         default:
           _showCameraException(e);
@@ -1249,11 +1229,8 @@ class _AppCameraState extends State<AppCamera>
     _logError(e.code, e.description);
     showDialog(
         context: context,
-        builder: (context) => AppDialog(
-            content: 'Error: ${e.code}\n${e.description}',
-            typeDialog: TypeDialog.error,
-            positiveAction: () {
-              Routes.backTo();
-            }));
+        builder: (context) => DefaultDialog.warning(
+              content: Text('Error: ${e.code}\n${e.description}'),
+            ));
   }
 }

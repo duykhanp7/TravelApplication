@@ -63,20 +63,10 @@ class _ProfileAddMorePhotos extends State<ProfileAddMorePhotos> {
               is BlocMyPhotosStateShowDialogRequestCameraPermission) {
             showDialog(
               context: context,
-              builder: (context) => AppDialog(
-                typeDialog: TypeDialog.info,
-                content:
-                    '''You can't take photos if reject camera permission''',
-                negativeTitle: 'Dismiss',
-                positiveTitle: 'OK',
-                positiveAction: () async {
-                  bool requestState =
-                      await _blocMyPhotosScreen.requestCameraPermission();
-                  if (requestState) {
-                    Routes.backTo();
-                    await showCameraAndTakePhoto();
-                  }
-                },
+              builder: (context) => const DefaultDialog.warning(
+                content: Text(
+                    '''You can't take photos if reject camera permission'''),
+                actions: [],
               ),
             );
           }

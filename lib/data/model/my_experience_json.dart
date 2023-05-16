@@ -20,7 +20,6 @@ class MyExperienceJson with _$MyExperienceJson {
       @ConvertStringToDateTime() DateTime? updatedAt,
       @ConvertStringToDateTime() DateTime? publishedAt,
       bool? isFavorite,
-      int? likes,
       List<PhotoJson>? multi}) = _MyExperienceJson;
 
   factory MyExperienceJson.fromJson(Map<String, Object?> json) =>

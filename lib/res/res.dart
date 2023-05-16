@@ -18,3 +18,4 @@ export 'app_empty_page.dart';
 export 'app_error_page.dart';
 export 'app_button_favorite.dart';
 export 'app_button_bookmark.dart';
+export 'svg_icon.dart';

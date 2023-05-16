@@ -9,4 +9,5 @@ class AppConstant {
   static const String deeplink = 'deeplink';
   static const String token = 'token';
   static const String info = 'info';
+  static const String address = 'address';
 }

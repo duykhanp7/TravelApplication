@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:travel_booking_tour/data/model/news_json.dart';
 
 import '../../../common/enum/enums.dart';
 import '../../../data/model/tour_detail_json.dart';
@@ -37,4 +39,21 @@ class BlocExploreEventOnSeeMoreClick extends BlocExploreEvent {
   final SeeMoreType seeMoreType;
   @override
   List<Object?> get props => [seeMoreType];
+}
+
+class BlocExploreEventOnNewsClick extends BlocExploreEvent {
+  BlocExploreEventOnNewsClick(this.context, this.isShow,
+      {required this.newsJson});
+  final NewsJson newsJson;
+  final BuildContext context;
+  final bool isShow;
+  @override
+  List<Object?> get props => [newsJson, context];
+}
+
+class BlocExploreEventLoadDetailNews extends BlocExploreEvent {
+  BlocExploreEventLoadDetailNews({required this.newsJson});
+  final NewsJson newsJson;
+  @override
+  List<Object?> get props => [newsJson];
 }

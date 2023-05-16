@@ -12,6 +12,7 @@ import 'package:travel_booking_tour/features/profile/bloc/profile/bloc_profile_s
 import 'package:travel_booking_tour/features/profile/model/photo_json.dart';
 import 'package:travel_booking_tour/features/profile/model/user_info.dart';
 import 'package:travel_booking_tour/res/app_dialog.dart';
+import 'package:travel_booking_tour/res/button.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
 import '../../../res/app_inkwell.dart';
@@ -131,17 +132,19 @@ class _MyPhotosScreen extends State<MyPhotosScreen> {
               if (state is BlocMyPhotosStateShowDialogRequestPermission) {
                 showDialog(
                   context: context,
-                  builder: (context) => AppDialog(
-                    typeDialog: TypeDialog.info,
-                    content:
-                        'We need manage external storage to load your local photos',
-                    negativeTitle: 'Dismiss',
-                    positiveTitle: 'OK',
-                    positiveAction: () {
-                      _blocMyPhotosScreen
-                          .add(BlocMyPhotosEventRequestPermission());
-                      Routes.backTo();
-                    },
+                  builder: (context) => DefaultDialog.warning(
+                    content: const Text(
+                        'We need manage external storage to load your local photos'),
+                    actions: [
+                      PrimaryActiveButton(
+                        text: 'Open setting',
+                        onTap: () {
+                          _blocMyPhotosScreen
+                              .add(BlocMyPhotosEventRequestPermission());
+                          Routes.backTo();
+                        },
+                      )
+                    ],
                   ),
                 );
               } else if (state is BlocMyPhotosStateDeletePhotos) {

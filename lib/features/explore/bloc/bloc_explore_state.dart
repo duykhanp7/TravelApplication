@@ -10,9 +10,14 @@ class BlocExploreStateInitial extends BlocExploreState {
 
 class BlocExploreStateLoadData extends BlocExploreState {
   final AppResult appResult;
-
   BlocExploreStateLoadData({required this.appResult});
+  @override
+  List<Object?> get props => [appResult];
+}
 
+class BlocExploreStateLoadDetailNewsData extends BlocExploreState {
+  final AppResult appResult;
+  BlocExploreStateLoadDetailNewsData({required this.appResult});
   @override
   List<Object?> get props => [appResult];
 }

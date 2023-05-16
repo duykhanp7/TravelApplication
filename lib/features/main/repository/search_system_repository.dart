@@ -1,8 +1,6 @@
 import 'package:travel_booking_tour/features/main/model/type_filter_json.dart';
 
 import '../../../data/model/language_json.dart';
-import '../../../data/model/my_experience_json.dart';
-import '../../../data/model/review_json.dart';
 import '../../../data/model/schedule_json.dart';
 import '../../../data/model/schedule_point_json.dart';
 import '../../../data/model/tour_detail_json.dart';
@@ -10,7 +8,6 @@ import '../../../data/model/tour_guide_detail_json.dart';
 
 import '../../../data/model/tour_provider_json.dart';
 import '../../../res/images.dart';
-import '../../profile/model/photo_json.dart';
 
 class SearchSystemRepository {
   Future<List<TypeFilterJson>> getListTypeFilter() async {
@@ -31,303 +28,303 @@ class SearchSystemRepository {
   }
 
   Future<List<TourGuideDetailJson>> getTourGuides() async {
-    return tourGuides;
+    return [];
   }
 
-  List<TourGuideDetailJson> tourGuides = [
-    TourGuideDetailJson(
-        id: 0,
-        name: 'Tuan Tran',
-        address: 'Da Nang, Viet Nam',
-        coverImageUrl: AppImages.tuanTran,
-        profileImageUrl: AppImages.tuanTran,
-        rating: 2,
-        languages: ['Vietnamese', 'Chinese', 'Korean'],
-        prices: {
-          '1 - 3 Travelers': '\$10/ hour',
-          '4 - 6 Travelers': '\$14/ hour',
-          '7 - 9 Travelers': '\$17/ hour'
-        },
-        videoIntroductionUrl:
-            'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
-        description:
-            'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-        experiences: [
-          MyExperienceJson(
-            id: 5,
-            createdAt: DateTime.now(),
-            location: 'Hoi An, Viet Nam',
-            name: '2 Hour Bicycle Tour exploring Hoi An',
-            likes: 1234,
-            isFavorite: false,
-            multi: const [
-              PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
-              PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
-              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-            ],
-          ),
-          MyExperienceJson(
-            id: 5,
-            createdAt: DateTime.now(),
-            location: 'Hoi An, Viet Nam',
-            name: '2 Hour Bicycle Tour exploring Hoi An',
-            likes: 1234,
-            isFavorite: false,
-            multi: const [
-              PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
-              PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
-              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-            ],
-          )
-        ],
-        reviews: const [
-          ReviewJson(
-              id: 0,
-              content:
-                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-              createdAt: '09-3-2023',
-              ratersImage: AppImages.emmy,
-              ratersName: 'Pena John',
-              rating: 2),
-          ReviewJson(
-              id: 1,
-              content:
-                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-              createdAt: '09-3-2023',
-              ratersImage: AppImages.emmy,
-              ratersName: 'Pena John',
-              rating: 3),
-          ReviewJson(
-              id: 2,
-              content:
-                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-              createdAt: '09-3-2023',
-              ratersImage: AppImages.emmy,
-              ratersName: 'Pena John',
-              rating: 5)
-        ]),
-    TourGuideDetailJson(
-        id: 1,
-        name: 'Emmy',
-        rating: 2,
-        address: 'Ho Chi Minh, Viet Nam',
-        languages: ['Vietnamese', 'Korean'],
-        videoIntroductionUrl:
-            'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
-        coverImageUrl: AppImages.emmy,
-        profileImageUrl: AppImages.emmy,
-        prices: {
-          '1 - 3 Travelers': '\$10/ hour',
-          '4 - 6 Travelers': '\$14/ hour',
-          '7 - 9 Travelers': '\$17/ hour'
-        },
-        description:
-            'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-        experiences: [
-          MyExperienceJson(
-            id: 5,
-            createdAt: DateTime.now(),
-            location: 'Hoi An, Viet Nam',
-            name: '2 Hour Bicycle Tour exploring Hoi An',
-            likes: 1234,
-            isFavorite: false,
-            multi: const [
-              PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
-              PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
-              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-            ],
-          ),
-          MyExperienceJson(
-            id: 5,
-            createdAt: DateTime.now(),
-            location: 'Hoi An, Viet Nam',
-            name: '2 Hour Bicycle Tour exploring Hoi An',
-            likes: 1234,
-            isFavorite: false,
-            multi: const [
-              PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
-              PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
-              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-            ],
-          )
-        ],
-        reviews: const [
-          ReviewJson(
-              id: 0,
-              content:
-                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-              createdAt: '09-3-2023',
-              ratersImage: AppImages.tuanTran,
-              ratersName: 'Pena John',
-              rating: 2),
-          ReviewJson(
-              id: 1,
-              content:
-                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-              createdAt: '09-3-2023',
-              ratersImage: AppImages.tuanTran,
-              ratersName: 'Pena John',
-              rating: 3),
-          ReviewJson(
-              id: 2,
-              content:
-                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-              createdAt: '09-3-2023',
-              ratersImage: AppImages.tuanTran,
-              ratersName: 'Pena John',
-              rating: 5)
-        ]),
-    TourGuideDetailJson(
-        id: 2,
-        name: 'Tuan Tran',
-        rating: 2,
-        videoIntroductionUrl:
-            'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
-        address: 'Da Nang, Viet Nam',
-        coverImageUrl: AppImages.tuanTran,
-        profileImageUrl: AppImages.tuanTran,
-        languages: ['Vietnamese', 'Spanish', 'Korean'],
-        prices: {
-          '1 - 3 Travelers': '\$10/ hour',
-          '4 - 6 Travelers': '\$14/ hour',
-          '7 - 9 Travelers': '\$17/ hour'
-        },
-        description:
-            'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-        experiences: [
-          MyExperienceJson(
-            id: 5,
-            createdAt: DateTime.now(),
-            location: 'Hoi An, Viet Nam',
-            name: '2 Hour Bicycle Tour exploring Hoi An',
-            likes: 1234,
-            isFavorite: false,
-            multi: const [
-              PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
-              PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
-              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-            ],
-          ),
-          MyExperienceJson(
-            id: 5,
-            createdAt: DateTime.now(),
-            location: 'Hoi An, Viet Nam',
-            name: '2 Hour Bicycle Tour exploring Hoi An',
-            likes: 1234,
-            isFavorite: false,
-            multi: const [
-              PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
-              PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
-              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-            ],
-          )
-        ],
-        reviews: const [
-          ReviewJson(
-              id: 0,
-              content:
-                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-              createdAt: '09-3-2023',
-              ratersImage: AppImages.emmy,
-              ratersName: 'Pena John',
-              rating: 2),
-          ReviewJson(
-              id: 1,
-              content:
-                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-              createdAt: '09-3-2023',
-              ratersImage: AppImages.emmy,
-              ratersName: 'Pena John',
-              rating: 3),
-          ReviewJson(
-              id: 2,
-              content:
-                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-              createdAt: '09-3-2023',
-              ratersImage: AppImages.emmy,
-              ratersName: 'Pena John',
-              rating: 5)
-        ]),
-    TourGuideDetailJson(
-        id: 3,
-        name: 'Emmy',
-        rating: 2,
-        languages: ['Vietnamese', 'Korean'],
-        videoIntroductionUrl:
-            'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
-        address: 'Ho Chi Minh, Viet Nam',
-        profileImageUrl: AppImages.emmy,
-        prices: {
-          '1 - 3 Travelers': '\$10/ hour',
-          '4 - 6 Travelers': '\$14/ hour',
-          '7 - 9 Travelers': '\$17/ hour'
-        },
-        coverImageUrl: AppImages.emmy,
-        description:
-            'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-        experiences: [
-          MyExperienceJson(
-            id: 5,
-            createdAt: DateTime.now(),
-            location: 'Hoi An, Viet Nam',
-            name: '2 Hour Bicycle Tour exploring Hoi An',
-            likes: 1234,
-            isFavorite: false,
-            multi: const [
-              PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
-              PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
-              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-            ],
-          ),
-          MyExperienceJson(
-            id: 5,
-            createdAt: DateTime.now(),
-            location: 'Hoi An, Viet Nam',
-            name: '2 Hour Bicycle Tour exploring Hoi An',
-            likes: 1234,
-            isFavorite: false,
-            multi: const [
-              PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
-              PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
-              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-              PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-            ],
-          )
-        ],
-        reviews: const [
-          ReviewJson(
-              id: 0,
-              content:
-                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-              createdAt: '09-3-2023',
-              ratersImage: AppImages.tuanTran,
-              ratersName: 'Pena John',
-              rating: 2),
-          ReviewJson(
-              id: 1,
-              content:
-                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-              createdAt: '09-3-2023',
-              ratersImage: AppImages.tuanTran,
-              ratersName: 'Pena John',
-              rating: 3),
-          ReviewJson(
-              id: 2,
-              content:
-                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-              createdAt: '09-3-2023',
-              ratersImage: AppImages.tuanTran,
-              ratersName: 'Pena John',
-              rating: 5)
-        ])
-  ];
+  // List<TourGuideDetailJson> tourGuides = [
+  //   TourGuideDetailJson(
+  //       id: 0,
+  //       name: 'Tuan Tran',
+  //       address: 'Da Nang, Viet Nam',
+  //       coverImageUrl: AppImages.tuanTran,
+  //       profileImageUrl: AppImages.tuanTran,
+  //       rating: 2,
+  //       languages: ['Vietnamese', 'Chinese', 'Korean'],
+  //       prices: {
+  //         '1 - 3 Travelers': '\$10/ hour',
+  //         '4 - 6 Travelers': '\$14/ hour',
+  //         '7 - 9 Travelers': '\$17/ hour'
+  //       },
+  //       videoIntroductionUrl:
+  //           'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+  //       description:
+  //           'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+  //       experiences: [
+  //         MyExperienceJson(
+  //           id: 5,
+  //           createdAt: DateTime.now(),
+  //           location: 'Hoi An, Viet Nam',
+  //           name: '2 Hour Bicycle Tour exploring Hoi An',
+  //           likes: 1234,
+  //           isFavorite: false,
+  //           multi: const [
+  //             PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+  //           ],
+  //         ),
+  //         MyExperienceJson(
+  //           id: 5,
+  //           createdAt: DateTime.now(),
+  //           location: 'Hoi An, Viet Nam',
+  //           name: '2 Hour Bicycle Tour exploring Hoi An',
+  //           likes: 1234,
+  //           isFavorite: false,
+  //           multi: const [
+  //             PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+  //           ],
+  //         )
+  //       ],
+  //       reviews: const [
+  //         ReviewJson(
+  //             id: 0,
+  //             content:
+  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+  //             createdAt: '09-3-2023',
+  //             ratersImage: AppImages.emmy,
+  //             ratersName: 'Pena John',
+  //             rating: 2),
+  //         ReviewJson(
+  //             id: 1,
+  //             content:
+  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+  //             createdAt: '09-3-2023',
+  //             ratersImage: AppImages.emmy,
+  //             ratersName: 'Pena John',
+  //             rating: 3),
+  //         ReviewJson(
+  //             id: 2,
+  //             content:
+  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+  //             createdAt: '09-3-2023',
+  //             ratersImage: AppImages.emmy,
+  //             ratersName: 'Pena John',
+  //             rating: 5)
+  //       ]),
+  //   TourGuideDetailJson(
+  //       id: 1,
+  //       name: 'Emmy',
+  //       rating: 2,
+  //       address: 'Ho Chi Minh, Viet Nam',
+  //       languages: ['Vietnamese', 'Korean'],
+  //       videoIntroductionUrl:
+  //           'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+  //       coverImageUrl: AppImages.emmy,
+  //       profileImageUrl: AppImages.emmy,
+  //       prices: {
+  //         '1 - 3 Travelers': '\$10/ hour',
+  //         '4 - 6 Travelers': '\$14/ hour',
+  //         '7 - 9 Travelers': '\$17/ hour'
+  //       },
+  //       description:
+  //           'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+  //       experiences: [
+  //         MyExperienceJson(
+  //           id: 5,
+  //           createdAt: DateTime.now(),
+  //           location: 'Hoi An, Viet Nam',
+  //           name: '2 Hour Bicycle Tour exploring Hoi An',
+  //           likes: 1234,
+  //           isFavorite: false,
+  //           multi: const [
+  //             PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+  //           ],
+  //         ),
+  //         MyExperienceJson(
+  //           id: 5,
+  //           createdAt: DateTime.now(),
+  //           location: 'Hoi An, Viet Nam',
+  //           name: '2 Hour Bicycle Tour exploring Hoi An',
+  //           likes: 1234,
+  //           isFavorite: false,
+  //           multi: const [
+  //             PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+  //           ],
+  //         )
+  //       ],
+  //       reviews: const [
+  //         ReviewJson(
+  //             id: 0,
+  //             content:
+  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+  //             createdAt: '09-3-2023',
+  //             ratersImage: AppImages.tuanTran,
+  //             ratersName: 'Pena John',
+  //             rating: 2),
+  //         ReviewJson(
+  //             id: 1,
+  //             content:
+  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+  //             createdAt: '09-3-2023',
+  //             ratersImage: AppImages.tuanTran,
+  //             ratersName: 'Pena John',
+  //             rating: 3),
+  //         ReviewJson(
+  //             id: 2,
+  //             content:
+  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+  //             createdAt: '09-3-2023',
+  //             ratersImage: AppImages.tuanTran,
+  //             ratersName: 'Pena John',
+  //             rating: 5)
+  //       ]),
+  //   TourGuideDetailJson(
+  //       id: 2,
+  //       name: 'Tuan Tran',
+  //       rating: 2,
+  //       videoIntroductionUrl:
+  //           'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+  //       address: 'Da Nang, Viet Nam',
+  //       coverImageUrl: AppImages.tuanTran,
+  //       profileImageUrl: AppImages.tuanTran,
+  //       languages: ['Vietnamese', 'Spanish', 'Korean'],
+  //       prices: {
+  //         '1 - 3 Travelers': '\$10/ hour',
+  //         '4 - 6 Travelers': '\$14/ hour',
+  //         '7 - 9 Travelers': '\$17/ hour'
+  //       },
+  //       description:
+  //           'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+  //       experiences: [
+  //         MyExperienceJson(
+  //           id: 5,
+  //           createdAt: DateTime.now(),
+  //           location: 'Hoi An, Viet Nam',
+  //           name: '2 Hour Bicycle Tour exploring Hoi An',
+  //           likes: 1234,
+  //           isFavorite: false,
+  //           multi: const [
+  //             PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+  //           ],
+  //         ),
+  //         MyExperienceJson(
+  //           id: 5,
+  //           createdAt: DateTime.now(),
+  //           location: 'Hoi An, Viet Nam',
+  //           name: '2 Hour Bicycle Tour exploring Hoi An',
+  //           likes: 1234,
+  //           isFavorite: false,
+  //           multi: const [
+  //             PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+  //           ],
+  //         )
+  //       ],
+  //       reviews: const [
+  //         ReviewJson(
+  //             id: 0,
+  //             content:
+  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+  //             createdAt: '09-3-2023',
+  //             ratersImage: AppImages.emmy,
+  //             ratersName: 'Pena John',
+  //             rating: 2),
+  //         ReviewJson(
+  //             id: 1,
+  //             content:
+  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+  //             createdAt: '09-3-2023',
+  //             ratersImage: AppImages.emmy,
+  //             ratersName: 'Pena John',
+  //             rating: 3),
+  //         ReviewJson(
+  //             id: 2,
+  //             content:
+  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+  //             createdAt: '09-3-2023',
+  //             ratersImage: AppImages.emmy,
+  //             ratersName: 'Pena John',
+  //             rating: 5)
+  //       ]),
+  //   TourGuideDetailJson(
+  //       id: 3,
+  //       name: 'Emmy',
+  //       rating: 2,
+  //       languages: ['Vietnamese', 'Korean'],
+  //       videoIntroductionUrl:
+  //           'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+  //       address: 'Ho Chi Minh, Viet Nam',
+  //       profileImageUrl: AppImages.emmy,
+  //       prices: {
+  //         '1 - 3 Travelers': '\$10/ hour',
+  //         '4 - 6 Travelers': '\$14/ hour',
+  //         '7 - 9 Travelers': '\$17/ hour'
+  //       },
+  //       coverImageUrl: AppImages.emmy,
+  //       description:
+  //           'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+  //       experiences: [
+  //         MyExperienceJson(
+  //           id: 5,
+  //           createdAt: DateTime.now(),
+  //           location: 'Hoi An, Viet Nam',
+  //           name: '2 Hour Bicycle Tour exploring Hoi An',
+  //           likes: 1234,
+  //           isFavorite: false,
+  //           multi: const [
+  //             PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+  //           ],
+  //         ),
+  //         MyExperienceJson(
+  //           id: 5,
+  //           createdAt: DateTime.now(),
+  //           location: 'Hoi An, Viet Nam',
+  //           name: '2 Hour Bicycle Tour exploring Hoi An',
+  //           likes: 1234,
+  //           isFavorite: false,
+  //           multi: const [
+  //             PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
+  //           ],
+  //         )
+  //       ],
+  //       reviews: const [
+  //         ReviewJson(
+  //             id: 0,
+  //             content:
+  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+  //             createdAt: '09-3-2023',
+  //             ratersImage: AppImages.tuanTran,
+  //             ratersName: 'Pena John',
+  //             rating: 2),
+  //         ReviewJson(
+  //             id: 1,
+  //             content:
+  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+  //             createdAt: '09-3-2023',
+  //             ratersImage: AppImages.tuanTran,
+  //             ratersName: 'Pena John',
+  //             rating: 3),
+  //         ReviewJson(
+  //             id: 2,
+  //             content:
+  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
+  //             createdAt: '09-3-2023',
+  //             ratersImage: AppImages.tuanTran,
+  //             ratersName: 'Pena John',
+  //             rating: 5)
+  //       ])
+  // ];
 
   Future<List<TourDetailJson>> getListTopJourney() async {
     return <TourDetailJson>[

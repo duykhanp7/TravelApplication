@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
@@ -6,6 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:travel_booking_tour/common/app_logger.dart';
 import 'package:travel_booking_tour/data/model/result.dart';
 import 'package:travel_booking_tour/data/model/user.dart';
 import 'package:travel_booking_tour/data/network/network_exception.dart';
@@ -13,10 +15,13 @@ import 'package:travel_booking_tour/features/auth/repository/auth_repository.dar
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_tour_guide_information_event.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_tour_guide_information_state.dart';
 import "package:path/path.dart" as p;
+import 'package:travel_booking_tour/router/path.dart';
 import 'package:travel_booking_tour/router/routes.dart';
 import 'package:video_viewer/video_viewer.dart';
 
+import '../../../../common/app_constant.dart';
 import '../../../../common/enum/enums.dart';
+import '../../../../data/local/app_storage.dart';
 import '../../../../data/model/time_from_to.dart';
 import '../../../profile/repository/profile_repository.dart';
 
@@ -35,6 +40,7 @@ class BlocSignUpTourGuideInformationScreen extends Bloc<
   String fee46 = '0';
   String fee79 = '0';
   String fee1014 = '0';
+  Map<String, String> fees = {};
 
   XFile? imageProfile;
   XFile? imageGuideLicense;
@@ -70,6 +76,7 @@ class BlocSignUpTourGuideInformationScreen extends Bloc<
 
   final AuthRepository _authRepository = AuthRepository();
   final ProfileRepository _profileRepository = ProfileRepository();
+  final AppStorage _appStorage = AppStorage();
 
   Map<String, dynamic>? dataAccount;
 
@@ -88,34 +95,8 @@ class BlocSignUpTourGuideInformationScreen extends Bloc<
           if (signUpTourGuideInformationGlobalKey.currentState?.validate() ??
               false) {
             currentIndexStep = event.step;
-            dataAccount?['country'] = country;
-            UserJson? guideUser =
-                await _authRepository.signUp(dataAccount ?? {});
-            if (guideUser != null) {
-              Map<String, dynamic> info = {
-                "user": guideUser.id,
-                "file":
-                    await MultipartFile.fromFile(videoIntroduction?.path ?? ''),
-                "languages": languages,
-                "city": city,
-                "address": address,
-                "phone": phoneNumber,
-                "introduction": introduction,
-                "card":
-                    await MultipartFile.fromFile(imageIdentityCard?.path ?? ''),
-                "license":
-                    await MultipartFile.fromFile(imageGuideLicense?.path ?? '')
-              };
-              dynamic addAvatar = _profileRepository.updateAvatar(
-                  File(imageProfile?.path ?? ''),
-                  UserType.guide,
-                  guideUser.id ?? 0);
-              debugPrint('Update Avatar : $addAvatar');
-              dynamic data = await _authRepository.addInformationGuide(info);
-              debugPrint('addInformationGuideaddInformationGuide : $data');
-            }
-            // emit(BlocSignUpTourGuideInformationStateChangeStep(
-            //     step: currentIndexStep));
+            emit(BlocSignUpTourGuideInformationStateChangeStep(
+                step: currentIndexStep));
           } else {
             if (imageProfile == null) {
               emit(BlocSignUpTourGuideInformationStatePickProfileImage(
@@ -137,6 +118,92 @@ class BlocSignUpTourGuideInformationScreen extends Bloc<
         }
       } on NetworkException catch (ex) {
         debugPrint('Sign Up Guide Information Excepytion : $ex');
+      }
+    } else if (event is BlocSignUpTourGuideInformationEventFinishAddInfo) {
+      if (signUpTourGuideInformationGlobalKey.currentState?.validate() ??
+          false) {
+        emit(BlocSignUpTourGuideInformationStateRegisterResult(
+            appResult: AppResult(state: ResultState.loading)));
+
+        try {
+          dataAccount?['country'] = country;
+          debugPrint(
+              'license paht : ${imageGuideLicense?.path ?? 'Empty Path'}');
+          UserJson? guideUser = await _authRepository.signUp(dataAccount ?? {});
+          if (guideUser != null) {
+            Map<String, dynamic> availableTimeList = {};
+            await Future.delayed(Duration.zero, () {
+              mapTimes.forEach((key, value) {
+                availableTimeList[key.name] = value.toJson();
+              });
+            });
+
+            String availableTime = jsonEncode(availableTimeList);
+
+            Map<String, dynamic> fees = {
+              'fee13': fee13,
+              'fee46': fee46,
+              'fee79': fee79,
+              'fee1014': fee1014,
+            };
+
+            String feeJson = jsonEncode(fees);
+
+            debugPrint('Feee Json : $feeJson');
+
+            Map<String, dynamic> info = {
+              "user": guideUser.id,
+              "file":
+                  await MultipartFile.fromFile(videoIntroduction?.path ?? ''),
+              "language": languages,
+              "city": city,
+              "address": address,
+              "phone": phoneNumber,
+              "Introduction": introduction,
+              "traveler": fees,
+              "availabletime": availableTime,
+              "fee": feeJson,
+              "license":
+                  await MultipartFile.fromFile(imageGuideLicense?.path ?? ''),
+              "card":
+                  await MultipartFile.fromFile(imageIdentityCard?.path ?? '')
+            };
+
+            await _profileRepository.updateAvatar(
+                File(imageProfile?.path ?? ''),
+                UserType.guide,
+                guideUser.id ?? 0);
+
+            await _authRepository.addInformationGuide(info);
+            emit(BlocSignUpTourGuideInformationStateRegisterResult(
+                appResult: AppResult(state: ResultState.success)));
+
+            Routes.backToUntilPage(AppPath.signInScreen);
+
+            Map<String, dynamic> dataSignIn = {
+              "identifier": dataAccount?['email'],
+              "password": dataAccount?['password']
+            };
+
+            debugPrint(
+                'Email Password : ${dataAccount?['email']} ${dataAccount?['password']}');
+
+            UserJson? userJson = await _authRepository.signIn(dataSignIn);
+            if (userJson != null) {
+              String json = jsonEncode(userJson);
+              _appStorage.saveData(AppConstant.user, json);
+              _appStorage.saveData(
+                  AppConstant.password, dataAccount?['password']);
+
+              Routes.navigateToAndRemoveUntil(AppPath.mainScreen, {});
+            }
+          }
+        } on NetworkException catch (e) {
+          emit(BlocSignUpTourGuideInformationStateRegisterResult(
+              appResult: AppResult(state: ResultState.fail)));
+
+          AppLogger.loggerOnNetworkException(e);
+        }
       }
     } else if (event
         is BlocSignUpTourGuideInformationEventChangeIndexDateClick) {
@@ -191,15 +258,19 @@ class BlocSignUpTourGuideInformationScreen extends Bloc<
     } else if (event is BlocSignUpTourGuideInformationEventChangeFee) {
       if (event.quantityTraveler == QuantityTraveler.oneToThreeTravelers) {
         fee13 = event.fee;
+        fees['fee13'] = fee13;
       } else if (event.quantityTraveler ==
           QuantityTraveler.fourToSixTravelers) {
         fee46 = event.fee;
+        fees['fee46'] = fee46;
       } else if (event.quantityTraveler ==
           QuantityTraveler.sevenToNineTravelers) {
         fee79 = event.fee;
+        fees['fee79'] = fee79;
       } else if (event.quantityTraveler ==
           QuantityTraveler.tenToFourteenTravelers) {
         fee1014 = event.fee;
+        fees['fee1014'] = fee1014;
       }
     } else if (event
         is BlocSignUpTourGuideInformationEventPickGuideLicenseImage) {

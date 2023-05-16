@@ -1,28 +1,19 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:travel_booking_tour/common/app_constant.dart';
 import 'package:travel_booking_tour/data/dio/api_interface.dart';
 import 'package:travel_booking_tour/data/dio/dio_interceptor.dart';
 import 'package:travel_booking_tour/data/local/app_storage.dart';
 import 'package:travel_booking_tour/data/network/network_exception.dart';
-// import 'package:http_parser/http_parser.dart';
 
 class ApiService implements ApiInterface {
-  //final String _baseURL = 'https://be-travel.onrender.com';
-  final String _baseURL = 'http://10.0.2.2:1337';
-  // final BaseOptions _baseOptions = BaseOptions();
   final Dio dio = Dio();
   final AppStorage _appStorage = AppStorage();
+  final String _baseURL = dotenv.env['BASE_URL'] ?? '';
 
   ApiService() {
-    //_baseOptions.baseUrl = _baseURL;
-    // _baseOptions.connectTimeout = const Duration(seconds: 10);
-    // _baseOptions.sendTimeout = const Duration(seconds: 10);
-    // _baseOptions.receiveTimeout = const Duration(seconds: 10);
-    // _baseOptions.contentType = 'application/json';
-    // _baseOptions.headers = {'Content-Type': 'application/json'};
-    // dio.options = _baseOptions;
     dio.interceptors.add(DioInterceptor());
   }
 
@@ -52,6 +43,18 @@ class ApiService implements ApiInterface {
     try {
       final response =
           await dio.get(_baseURL + endPoint, queryParameters: queryParams);
+      return NetworkException.convertResponse(response, converter);
+    } catch (ex) {
+      throw NetworkException.getDioException(ex);
+    }
+  }
+
+  Future<T> getData<T>(
+      {required String endPoint,
+      Json? queryParams,
+      Converter<T>? converter}) async {
+    try {
+      final response = await dio.get(endPoint, queryParameters: queryParams);
       return NetworkException.convertResponse(response, converter);
     } catch (ex) {
       throw NetworkException.getDioException(ex);
@@ -109,18 +112,17 @@ class ApiService implements ApiInterface {
   }
 
   @override
-  Future<T> postFormData<T>(
+  Future<dynamic> postFormData(
       {required FormData data,
       required String endPoint,
-      Json? queryParams,
-      Converter<T>? converter}) async {
+      Json? queryParams}) async {
     try {
       final response = await dio.post(
         _baseURL + endPoint,
         data: data,
         queryParameters: queryParams,
       );
-      return NetworkException.convertResponse(response, converter);
+      return response.data;
     } catch (ex) {
       throw NetworkException.getDioException(ex);
     }

@@ -58,7 +58,6 @@ class BlocSignInScreen extends Bloc<BlocSignInEvent, BlocSignInState> {
             passwordEditingController.text = '';
           }
         } on NetworkException catch (ex) {
-          debugPrint('Expcetion Sign In ${ex.toString()}');
           errorText = ex.getTextError;
           if (ex.statusCode == 0 ||
               ex.statusCode == 500 ||
@@ -97,8 +96,6 @@ class BlocSignInScreen extends Bloc<BlocSignInEvent, BlocSignInState> {
         if (FirebaseAuth.instance.currentUser == null) {
           User? user = await signInWithGoogle();
           if (user != null) {
-            debugPrint(
-                'User Google Account Info : ${user.email} ${user.displayName} ${user.phoneNumber}');
             emit(BlocSignInStateLoginWithGoogle(
                 appResult:
                     AppResult(state: ResultState.success, result: user)));
@@ -110,7 +107,6 @@ class BlocSignInScreen extends Bloc<BlocSignInEvent, BlocSignInState> {
       } on NetworkException catch (e) {
         emit(BlocSignInStateLoginWithGoogle(
             appResult: AppResult(state: ResultState.fail)));
-
         AppLogger.loggerOnNetworkException(e);
       }
     } else if (event is BlocSignInEventLoginWithFacebook) {}

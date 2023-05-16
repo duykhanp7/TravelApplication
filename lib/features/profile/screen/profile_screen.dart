@@ -11,7 +11,6 @@ import 'package:travel_booking_tour/features/profile/widget/photo_item.dart';
 import 'package:travel_booking_tour/res/res.dart';
 import '../../guide/detail/widget/my_experience_item.dart';
 import '../bloc/my_journeys/bloc_my_journeys_screen.dart';
-import '../bloc/my_journeys/bloc_my_journeys_state.dart';
 import '../bloc/my_photos/bloc_my_photos_screen.dart';
 import '../bloc/profile/bloc_profile_event.dart';
 import '../bloc/profile/bloc_profile_screen.dart';
@@ -38,7 +37,6 @@ class _ProfileScreen extends State<ProfileScreen> {
     _blocMyPhotosScreen = BlocProvider.of<BlocMyPhotosScreen>(context);
     _blocMyJourneysScreen = BlocProvider.of<BlocMyJourneysScreen>(context);
     _blocMyPhotosScreen.add(BlocMyPhotosEventInitial());
-    _blocMyJourneysScreen.add(BlocMyJourneysEventInitial());
     super.initState();
   }
 
@@ -172,12 +170,11 @@ class _ProfileScreen extends State<ProfileScreen> {
                       ],
                     ),
                   ),
-                  BlocBuilder<BlocMyJourneysScreen, BlocMyJourneysState>(
+                  BlocBuilder<BlocProfileScreen, BlocProfileState>(
                       buildWhen: (previous, current) =>
-                          current is BlocMyJourneysStateAddJourney ||
-                          current is BlocMyJourneysStateLoadJourneys,
+                          current is BlocProfileStateLoadUserInforResult,
                       builder: (context, state) {
-                        if (state is BlocMyJourneysStateLoadJourneys) {
+                        if (state is BlocProfileStateLoadUserInforResult) {
                           if (state.appResult.state == ResultState.loading) {
                             return SizedBox(
                               height: 300,
@@ -188,21 +185,19 @@ class _ProfileScreen extends State<ProfileScreen> {
                             );
                           }
                         }
-                        return ListView.builder(
+                        return ListView.separated(
+                          separatorBuilder: (context, index) => const Divider(
+                            height: 20,
+                          ),
                           scrollDirection: Axis.vertical,
                           padding: const EdgeInsets.only(
                               left: 16, right: 16, top: 17, bottom: 20),
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: _blocMyJourneysScreen
-                                      .listMyExperienceJson.length >=
-                                  2
-                              ? 2
-                              : _blocMyJourneysScreen
-                                  .listMyExperienceJson.length,
+                          itemCount: getItemCount(),
                           itemBuilder: (context, index) => MyExperienceItem(
-                              myExperienceJson: _blocMyJourneysScreen
-                                  .listMyExperienceJson[index],
+                              myExperienceJson: _blocProfileScreen
+                                  .userInfoJson?.journeys?[index],
                               edited: true),
                         );
                       })
@@ -213,5 +208,16 @@ class _ProfileScreen extends State<ProfileScreen> {
         ),
       ),
     );
+  }
+
+  int getItemCount() {
+    if (_blocProfileScreen.userInfoJson != null) {
+      if (_blocProfileScreen.userInfoJson?.journeys != null) {
+        return _blocProfileScreen.userInfoJson!.journeys!.length >= 2
+            ? 2
+            : _blocProfileScreen.userInfoJson!.journeys!.length;
+      }
+    }
+    return 0;
   }
 }

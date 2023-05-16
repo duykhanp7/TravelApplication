@@ -88,7 +88,15 @@ class _TopExperienceItem extends State<TopExperienceItem> {
                                               Radius.circular(35)),
                                           child: CachedNetworkImage(
                                             imageUrl: snapshot
-                                                    .data?.profileImageUrl ??
+                                                    .data
+                                                    ?.attributes
+                                                    ?.user
+                                                    ?.data
+                                                    ?.attributes
+                                                    ?.avatar
+                                                    ?.data
+                                                    ?.attributes
+                                                    ?.url ??
                                                 '',
                                             filterQuality: FilterQuality.high,
                                             fit: BoxFit.cover,
@@ -117,7 +125,17 @@ class _TopExperienceItem extends State<TopExperienceItem> {
                                             borderRadius:
                                                 BorderRadius.circular(10)),
                                         child: Text(
-                                          snapshot.data?.name ?? '',
+                                          (snapshot.data?.attributes?.user?.data
+                                                      ?.attributes?.lastName ??
+                                                  '') +
+                                              (snapshot
+                                                      .data
+                                                      ?.attributes
+                                                      ?.user
+                                                      ?.data
+                                                      ?.attributes
+                                                      ?.firstName ??
+                                                  ''),
                                           overflow: TextOverflow.ellipsis,
                                           softWrap: true,
                                           textAlign: TextAlign.center,

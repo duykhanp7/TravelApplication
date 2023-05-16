@@ -40,7 +40,6 @@ class _MainApp extends State<MainApp> {
             GlobalCupertinoLocalizations.delegate,
           ],
           onUnknownRoute: (settings) {
-            debugPrint('onUnknownRouteonUnknownRoute ${settings.name}');
             return MaterialPageRoute(
               builder: (context) => const EmptyPage(),
             );

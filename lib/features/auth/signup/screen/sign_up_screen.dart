@@ -65,19 +65,16 @@ class _SignUpScreen extends State<SignUpScreen> {
               if (state.appResult.state == ResultState.success) {
                 showDialog(
                   context: context,
-                  builder: (context) => AppDialog(
-                    typeDialog: TypeDialog.success,
-                    content: 'Congratulation!\nSign up successfully.',
-                    positiveAction: () => Navigator.of(context).pop(),
+                  builder: (context) => const DefaultDialog.success(
+                    content: Text('Congratulation!\nSign up successfully.'),
                   ),
                 );
               } else if (state.appResult.state == ResultState.error) {
                 showDialog(
                   context: context,
-                  builder: (context) => AppDialog(
-                    typeDialog: TypeDialog.error,
-                    content: 'Opp Sorry!\nSomething went wrong, try later!',
-                    positiveAction: () => Navigator.of(context).pop(),
+                  builder: (context) => const DefaultDialog.warning(
+                    content:
+                        Text('Opp Sorry!\nSomething went wrong, try later!'),
                   ),
                 );
               }

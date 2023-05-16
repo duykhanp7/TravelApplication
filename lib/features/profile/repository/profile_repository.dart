@@ -69,25 +69,27 @@ class ProfileRepository extends BaseRepository {
               endPoint: updateGuideAvatarEndPoint,
               converter: (data) => data);
 
-  Future<Map<dynamic, dynamic>?> updateCover(File file, UserType? type) async =>
+  Future<Map<dynamic, dynamic>?> updateCover(
+          File file, UserType? type, int? id) async =>
       type == UserType.traverler
           ? _apiService.postFile(
               file: file,
+              datas: {"id": id},
               endPoint: updateTraverlerCoverEndPoint,
               converter: (data) => data)
           : _apiService.postFile(
               file: file,
+              datas: {"id": id},
               endPoint: updateGuideCoverEndPoint,
               converter: (data) => data);
 
   Future<UserJson?> get user async => UserJson.fromJson(
       jsonDecode(await _appStorage.getData(AppConstant.user) ?? ''));
 
-  Future<MyExperienceJson?> postMyJourney(FormData data) async =>
+  Future<dynamic> postMyJourney(FormData data) async =>
       _apiService.postFormData(
         data: data,
         endPoint: journeyEndPoint,
-        converter: (data) => MyExperienceJson.fromJson(data),
       );
 
   @override

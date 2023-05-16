@@ -13,11 +13,10 @@ abstract class ApiInterface {
     Converter<T>? converter,
   });
 
-  Future<T> postFormData<T>({
+  Future postFormData({
     required FormData data,
     required String endPoint,
     Json? queryParams,
-    Converter<T>? converter,
   });
 
   Future<T> postFile<T>({

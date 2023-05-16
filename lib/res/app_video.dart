@@ -11,6 +11,7 @@ class AppVideo extends StatefulWidget {
       {super.key, required this.source, required this.videoViewerController});
   final Map<String, VideoSource> source;
   final VideoViewerController videoViewerController;
+
   @override
   State<StatefulWidget> createState() {
     return _AppVideo();
@@ -68,7 +69,6 @@ class _AppVideo extends State<AppVideo> {
               ),
               enableFullscreenScale: false,
               onFullscreenFixLandscape: false,
-              defaultAspectRatio: 3 / 2,
               rewindAmount: 5,
               forwardAmount: 5,
               language: VideoViewerLanguage.en,
