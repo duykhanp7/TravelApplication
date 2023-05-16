@@ -8,14 +8,12 @@ import 'package:travel_booking_tour/features/auth/change_password/bloc/bloc_chan
 import 'package:travel_booking_tour/features/auth/change_password/bloc/bloc_change_password_state.dart';
 import 'package:travel_booking_tour/res/app_appbar.dart';
 import 'package:travel_booking_tour/res/button.dart';
-import 'package:travel_booking_tour/router/path.dart';
 
 import '../../../res/app_dialog.dart';
 import '../../../res/colors.dart';
 import '../../../res/input_field.dart';
 import '../../../res/styles.dart';
 import '../../../res/system.dart';
-import '../../../router/routes.dart';
 import 'bloc/bloc_change_password_screen.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
@@ -60,16 +58,9 @@ class _ChangePasswordScreen extends State<ChangePasswordScreen> {
         listener: (context, state) {
           showDialog(
             context: context,
-            builder: (context) => AppDialog(
-              typeDialog: TypeDialog.info,
-              content:
-                  'The reset password token is expired, try to resend email',
-              negativeTitle: 'Dismiss',
-              positiveTitle: 'OK',
-              positiveAction: () {
-                Routes.backTo();
-                Routes.navigateToAndRemoveUntil(AppPath.forgotPassword, {});
-              },
+            builder: (context) => const DefaultDialog.warning(
+              content: Text(
+                  'The reset password token is expired, try to resend email'),
             ),
           );
         },

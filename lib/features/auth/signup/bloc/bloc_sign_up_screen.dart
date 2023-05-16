@@ -1,12 +1,16 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:travel_booking_tour/data/local/app_storage.dart';
 import 'package:travel_booking_tour/data/model/result.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_event.dart';
 import 'package:travel_booking_tour/features/auth/signup/bloc/bloc_sign_up_state.dart';
 import 'package:travel_booking_tour/router/path.dart';
 import 'package:travel_booking_tour/router/routes.dart';
 
+import '../../../../common/app_constant.dart';
 import '../../../../common/enum/enums.dart';
 import '../../../../data/model/user.dart';
 import '../../../../data/network/network_exception.dart';
@@ -24,6 +28,7 @@ class BlocSignupScreen extends Bloc<BlocSignUpEvent, BlocSignUpState> {
 
   final AuthRepository _authRepository = AuthRepository();
   final GlobalKey<FormState> signUpGlobalKey = GlobalKey<FormState>();
+  final AppStorage _appStorage = AppStorage();
 
   BlocSignupScreen() : super(BlocSignUpStateInitial()) {
     on<BlocSignUpEvent>(mapEventToState, transformer: restartable());
@@ -53,6 +58,19 @@ class BlocSignupScreen extends Bloc<BlocSignUpEvent, BlocSignUpState> {
             if (user != null) {
               emit(BlocSignUpStateValidate(
                   appResult: AppResult(state: ResultState.success)));
+
+              Map<String, dynamic> data = {
+                "identifier": email,
+                "password": password
+              };
+
+              UserJson? userJson = await _authRepository.signIn(data);
+              if (userJson != null) {
+                String json = jsonEncode(userJson);
+                _appStorage.saveData(AppConstant.user, json);
+                _appStorage.saveData(AppConstant.password, password ?? '');
+                Routes.navigateToAndRemoveUntil(AppPath.mainScreen, {});
+              }
             }
           } on NetworkException catch (ex) {
             debugPrint('Expcetion Sign Up ${ex.toString()}');

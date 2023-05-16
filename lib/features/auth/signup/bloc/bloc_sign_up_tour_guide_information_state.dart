@@ -75,3 +75,13 @@ class BlocSignUpTourGuideInformationStateClose
   @override
   List<Object?> get props => [];
 }
+
+class BlocSignUpTourGuideInformationStateRegisterResult
+    extends BlocSignUpTourGuideInformationState {
+  BlocSignUpTourGuideInformationStateRegisterResult({required this.appResult});
+
+  final AppResult appResult;
+
+  @override
+  List<Object?> get props => [appResult];
+}

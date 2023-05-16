@@ -18,7 +18,6 @@ _$_MyExperienceJson _$$_MyExperienceJsonFromJson(Map<String, dynamic> json) =>
       publishedAt: _$JsonConverterFromJson<String, DateTime>(
           json['publishedAt'], const ConvertStringToDateTime().fromJson),
       isFavorite: json['isFavorite'] as bool?,
-      likes: json['likes'] as int?,
       multi: (json['multi'] as List<dynamic>?)
           ?.map((e) => PhotoJson.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -36,7 +35,6 @@ Map<String, dynamic> _$$_MyExperienceJsonToJson(_$_MyExperienceJson instance) =>
       'publishedAt': _$JsonConverterToJson<String, DateTime>(
           instance.publishedAt, const ConvertStringToDateTime().toJson),
       'isFavorite': instance.isFavorite,
-      'likes': instance.likes,
       'multi': instance.multi,
     };
 

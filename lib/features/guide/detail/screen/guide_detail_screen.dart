@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,13 +8,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_booking_tour/common/enum/enums.dart';
 import 'package:travel_booking_tour/features/guide/detail/bloc/bloc_detail_guide_event.dart';
 import 'package:travel_booking_tour/features/guide/detail/bloc/bloc_detail_guide_screen.dart';
-import 'package:travel_booking_tour/features/guide/detail/widget/my_experience_item.dart';
-import 'package:travel_booking_tour/features/guide/detail/widget/review_guide_item.dart';
 import 'package:travel_booking_tour/res/app_inkwell.dart';
 import 'package:travel_booking_tour/res/button.dart';
 import 'package:travel_booking_tour/res/res.dart';
 import 'package:travel_booking_tour/res/vertical_star_widget.dart';
-import 'package:video_viewer/video_viewer.dart';
+import 'package:video_viewer/domain/entities/video_source.dart';
 
 import '../../../../common/app_constant.dart';
 import '../../../../data/model/tour_guide_detail_json.dart';
@@ -103,7 +103,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                   alignment: Alignment.topCenter,
                   color: AppColors.transparent,
                   child: CachedNetworkImage(
-                    imageUrl: tourGuideDetailJson.coverImageUrl ?? '',
+                    imageUrl: 'https://i.imgur.com/mL5BwvK.png',
                     filterQuality: FilterQuality.high,
                     fit: BoxFit.cover,
                     width: double.infinity,
@@ -151,10 +151,20 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(40),
                           child: CachedNetworkImage(
-                            imageUrl: tourGuideDetailJson.profileImageUrl ?? '',
+                            imageUrl: tourGuideDetailJson
+                                    .attributes
+                                    ?.user
+                                    ?.data
+                                    ?.attributes
+                                    ?.avatar
+                                    ?.data
+                                    ?.attributes
+                                    ?.url ??
+                                '',
                             filterQuality: FilterQuality.high,
                             fit: BoxFit.cover,
-                            height: 170,
+                            height: 80,
+                            width: 80,
                             fadeInCurve: Curves.linearToEaseOut,
                             fadeOutCurve: Curves.bounceInOut,
                             errorWidget: (context, url, error) =>
@@ -197,14 +207,23 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
   Widget _buildVideoWidget(BlocDetailGuideState state) {
     if (state is BlocDetailGuideStateLoadDataResult) {
       if (state.appResult.state == ResultState.success) {
-        return AppVideo(
-          source: VideoSource.fromNetworkVideoSources({
-            'video': _blocDetailGuideScreen
-                    .tourGuideDetailJson?.videoIntroductionUrl ??
-                ''
-          }),
-          videoViewerController: _blocDetailGuideScreen.videoViewerController,
-        );
+        final data = _blocDetailGuideScreen
+            .tourGuideDetailJson?.attributes?.videoIntroduction['data'];
+        if (data is Iterable) {
+          final List<String> urls =
+              data.map((e) => e['attributes']['url'].toString()).toList();
+          if (data.isNotEmpty) {
+            return AppVideo(
+              source: VideoSource.fromNetworkVideoSources({'video': urls[0]}),
+              videoViewerController:
+                  _blocDetailGuideScreen.videoViewerController,
+            );
+          } else {
+            return Container();
+          }
+        } else {
+          return Container();
+        }
       }
     }
     return Container(
@@ -232,6 +251,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
     return Container(
       padding: const EdgeInsets.only(left: 16, right: 16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(
             height: 5,
@@ -258,7 +278,12 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                               Container(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  tourGuideDetailJson.name ?? '',
+                                  (tourGuideDetailJson.attributes?.user?.data
+                                              ?.attributes?.lastName ??
+                                          '') +
+                                      (tourGuideDetailJson.attributes?.user
+                                              ?.data?.attributes?.firstName ??
+                                          ''),
                                   style: AppStyles.titleLarge.copyWith(
                                       fontSize: 24,
                                       fontWeight: FontWeight.w100,
@@ -277,7 +302,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                                     width: 8,
                                   ),
                                   Text(
-                                    '${tourGuideDetailJson.reviews?.length ?? 0} reviews',
+                                    '${0} reviews',
                                     style: AppStyles.titleSmall.copyWith(
                                         fontWeight: FontWeight.w400,
                                         color:
@@ -314,7 +339,9 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                   children: [
                     const SizedBox(height: 5),
                     AppListChipWidget(
-                        chips: tourGuideDetailJson.languages ?? []),
+                        chips: tourGuideDetailJson.attributes?.language
+                                ?.split(',') ??
+                            []),
                     const SizedBox(height: 8),
                     Container(
                       alignment: Alignment.centerLeft,
@@ -329,7 +356,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                             width: 6,
                           ),
                           Text(
-                            tourGuideDetailJson.address ?? '',
+                            '${tourGuideDetailJson.attributes?.city ?? ''}, ${tourGuideDetailJson.attributes?.user?.data?.attributes?.country ?? ''}',
                             style: AppStyles.titleSmall.copyWith(
                                 fontWeight: FontWeight.w400,
                                 color: AppColors.primary),
@@ -349,15 +376,16 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                     visibilityLoading: false,
                     background: AppColors.brown,
                   ))
-              : Column(
-                  children: [
-                    Text(tourGuideDetailJson.description ?? '',
-                        style: AppStyles.titleMedium.copyWith(
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.textRadioItalicColor,
-                            height: 1.5)),
-                    const SizedBox(height: 30)
-                  ],
+              : Padding(
+                  padding: const EdgeInsets.only(bottom: 30),
+                  child: Text(
+                    tourGuideDetailJson.attributes?.introduction ?? '',
+                    style: AppStyles.titleMedium.copyWith(
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.textRadioItalicColor,
+                        height: 1.5),
+                    textAlign: TextAlign.start,
+                  ),
                 ),
           _buildVideoWidget(state),
           const SizedBox(height: 35),
@@ -370,11 +398,17 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                     background: AppColors.brown,
                   ))
               : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AppTable(datas: tourGuideDetailJson.prices ?? {}),
+                    AppTable(datas: {
+                      '1 - 3 Travelers': _blocDetailGuideScreen.fee13,
+                      '4 - 6 Travelers': _blocDetailGuideScreen.fee46,
+                      '7 - 9 Travelers': _blocDetailGuideScreen.fee79,
+                      '10 - 14 Travelers': _blocDetailGuideScreen.fee1014
+                    }),
                     const SizedBox(height: 35),
-                    _buildWidgetTourExperiences(),
-                    _buildWidgetReviews()
+                    //_buildWidgetTourExperiences(),
+                    //_buildWidgetReviews()
                   ],
                 )
         ],
@@ -391,7 +425,7 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
         children: [
           Text(
             'My Experiences',
-            textAlign: TextAlign.left,
+            textAlign: TextAlign.start,
             style: AppStyles.titleLarge.copyWith(
                 fontSize: 24,
                 fontWeight: FontWeight.w100,
@@ -399,12 +433,12 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
                 fontStyle: FontStyle.italic),
           ),
           const SizedBox(height: 16),
-          ...List.generate(
-              tourGuideDetailJson.experiences?.length ?? 0,
-              (index) => MyExperienceItem(
-                    myExperienceJson: tourGuideDetailJson.experiences?[index],
-                    edited: false,
-                  ))
+          // ...List.generate(
+          //     tourGuideDetailJson.experiences?.length ?? 0,
+          //     (index) => MyExperienceItem(
+          //           myExperienceJson: tourGuideDetailJson.experiences?[index],
+          //           edited: false,
+          //         ))
         ],
       ),
     );
@@ -451,11 +485,11 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
           const SizedBox(
             height: 17,
           ),
-          ...List.generate(
-            tourGuideDetailJson.reviews?.length ?? 0,
-            (index) => ReviewGuideItem(
-                reviewJson: tourGuideDetailJson.reviews?[index]),
-          )
+          // ...List.generate(
+          //   tourGuideDetailJson.reviews?.length ?? 0,
+          //   (index) => ReviewGuideItem(
+          //       reviewJson: tourGuideDetailJson.reviews?[index]),
+          // )
         ],
       ),
     );

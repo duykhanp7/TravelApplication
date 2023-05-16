@@ -1,196 +1,125 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:travel_booking_tour/common/extension/list_extension.dart';
+import 'package:travel_booking_tour/common/extension/num_extension.dart';
 import 'package:travel_booking_tour/res/colors.dart';
 import 'package:travel_booking_tour/res/icons.dart';
 import 'package:travel_booking_tour/res/styles.dart';
+import 'package:travel_booking_tour/res/svg_icon.dart';
 
-enum TypeDialog { error, success, warning, info, link }
+class DefaultDialog extends StatelessWidget {
+  const DefaultDialog({
+    super.key,
+    this.image,
+    this.title,
+    this.content,
+    this.actions = const <Widget>[],
+    this.crossAxisAlignment = CrossAxisAlignment.center,
+    this.mainAxisAlignment = MainAxisAlignment.start,
+    this.radius,
+    this.dialogWidth = 345.0,
+    this.horizontalPadding,
+    this.hideIconClose = false,
+  }) : assert(title != null || content != null);
 
-class AppDialog extends StatefulWidget {
-  const AppDialog(
+  const DefaultDialog.success(
       {super.key,
-      required this.content,
-      required this.positiveAction,
-      this.negativeAction,
-      this.typeDialog,
-      this.negativeTitle,
-      this.positiveTitle});
+      this.title,
+      this.content,
+      this.actions = const <Widget>[],
+      this.crossAxisAlignment = CrossAxisAlignment.center,
+      this.mainAxisAlignment = MainAxisAlignment.start,
+      this.radius,
+      this.dialogWidth = 345.0,
+      this.horizontalPadding,
+      this.hideIconClose = false})
+      : assert(title != null || content != null),
+        image = const SvgIcon(AppIcons.icSuccess, size: 48);
 
-  final String content;
-  final String? negativeTitle;
-  final String? positiveTitle;
-  final VoidCallback positiveAction;
-  final VoidCallback? negativeAction;
-  final TypeDialog? typeDialog;
+  const DefaultDialog.warning({
+    super.key,
+    this.title,
+    this.content,
+    this.actions = const <Widget>[],
+    this.crossAxisAlignment = CrossAxisAlignment.center,
+    this.mainAxisAlignment = MainAxisAlignment.start,
+    this.radius,
+    this.dialogWidth = 345.0,
+    this.horizontalPadding,
+    this.hideIconClose = false,
+  })  : assert(title != null || content != null),
+        image = const SvgIcon(AppIcons.icWarning, size: 48);
 
-  @override
-  State<StatefulWidget> createState() {
-    return _AppDialog();
-  }
-}
+  final Widget? image;
+  final Widget? title;
+  final Widget? content;
+  final List<Widget> actions;
+  final CrossAxisAlignment crossAxisAlignment;
+  final MainAxisAlignment mainAxisAlignment;
+  final BorderRadiusGeometry? radius;
+  final double dialogWidth;
+  final double? horizontalPadding;
+  final bool hideIconClose;
 
-class _AppDialog extends State<AppDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: AppColors.transparent,
-      insetPadding: EdgeInsets.zero,
-      elevation: 0,
-      alignment: Alignment.center,
-      child: Container(
-        decoration: BoxDecoration(
-          color: widget.typeDialog == null
-              ? AppColors.success
-              : widget.typeDialog! == TypeDialog.error
-                  ? AppColors.error
-                  : widget.typeDialog! == TypeDialog.success
-                      ? AppColors.success
-                      : widget.typeDialog! == TypeDialog.warning
-                          ? AppColors.warning
-                          : widget.typeDialog! == TypeDialog.info
-                              ? AppColors.info
-                              : AppColors.link,
-          borderRadius: BorderRadius.circular(15),
-        ),
-        height: 200,
-        margin: const EdgeInsets.only(left: 20, right: 20),
-        padding: const EdgeInsets.all(10),
-        child: Stack(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // SvgPicture.asset(
-                //   AppIcons.notificationNone,
-                //   color: AppColors.primary,
-                //   width: 20,
-                //   height: 20,
-                // ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  widget.content,
-                  textAlign: TextAlign.center,
-                  style: AppStyles.titleMedium.copyWith(
-                      color: AppColors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Stack(
-                        children: [
-                          Container(
-                            height: 40,
-                            margin: const EdgeInsets.only(left: 10, right: 20),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: AppColors.black.withOpacity(0.3)),
-                            child: Text(widget.negativeTitle ?? 'Cancel',
-                                style: AppStyles.titleMedium.copyWith(
-                                    color: AppColors.white,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 18)),
-                          ),
-                          Container(
-                            height: 40,
-                            margin: const EdgeInsets.only(left: 10, right: 20),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: AppColors.transparent),
-                            child: Material(
-                              color: AppColors.transparent,
-                              borderRadius: BorderRadius.circular(10),
-                              child: InkWell(
-                                borderRadius: BorderRadius.circular(10),
-                                splashColor: AppColors.white.withOpacity(0.1),
-                                highlightColor:
-                                    AppColors.white.withOpacity(0.1),
-                                onTap: () => Navigator.of(context).pop(),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Stack(
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            height: 40,
-                            margin: const EdgeInsets.only(left: 20, right: 10),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: AppColors.primary.withOpacity(0.8)),
-                            child: Text(
-                              widget.positiveTitle ?? 'OK',
-                              style: AppStyles.titleMedium.copyWith(
-                                  color: AppColors.white,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 18),
-                            ),
-                          ),
-                          Container(
-                            height: 40,
-                            margin: const EdgeInsets.only(left: 20, right: 10),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: AppColors.transparent),
-                            child: Material(
-                              color: AppColors.transparent,
-                              borderRadius: BorderRadius.circular(10),
-                              child: InkWell(
-                                borderRadius: BorderRadius.circular(10),
-                                splashColor: AppColors.black.withOpacity(0.1),
-                                highlightColor:
-                                    AppColors.black.withOpacity(0.1),
-                                onTap: widget.positiveAction,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                )
+      insetPadding: 0.insetAll,
+      shape: RoundedRectangleBorder(borderRadius: radius ?? 24.borderRadius),
+      backgroundColor: AppColors.white,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            width: dialogWidth,
+            padding: 24.insetVertical.add(horizontalPadding != null
+                ? EdgeInsets.only(
+                    left: horizontalPadding!, right: horizontalPadding!)
+                : 16.insetHorizontal),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: crossAxisAlignment,
+              mainAxisAlignment: mainAxisAlignment,
+              children: <Widget>[
+                if (image != null) ...<Widget>[
+                  Center(child: image),
+                  16.gapHeight,
+                ],
+                if (title != null)
+                  DefaultTextStyle(
+                    style:
+                        AppStyles.titleMedium.copyWith(color: AppColors.black),
+                    textAlign: TextAlign.center,
+                    child: title!,
+                  ),
+                if (title != null && content != null) 16.gapHeight,
+                if (content != null)
+                  DefaultTextStyle(
+                    style: AppStyles.titleSmall.copyWith(
+                        fontWeight: FontWeight.w400, color: AppColors.black),
+                    textAlign: TextAlign.center,
+                    child: content!,
+                  ),
+                if (actions.isNotEmpty) ...[
+                  16.gapHeight,
+                  ...actions.applySeparator(8.gapHeight),
+                ]
               ],
             ),
-            Positioned(
-                top: 0,
-                right: 0,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    SvgPicture.asset(
-                      AppIcons.icClose,
-                    ),
-                    Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: AppColors.transparent),
-                      child: Material(
-                        borderRadius: BorderRadius.circular(15),
-                        color: AppColors.transparent,
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(15),
-                          onTap: () => Navigator.of(context).pop(),
-                        ),
-                      ),
-                    )
-                  ],
-                ))
-          ],
-        ),
+          ),
+          Visibility(
+            visible: !hideIconClose,
+            child: Positioned(
+              top: 15,
+              right: 18,
+              child: InkWell(
+                  onTap: Navigator.of(context, rootNavigator: true).pop,
+                  child: const SvgIcon(AppIcons.icClose, size: 20)),
+            ),
+          ),
+        ],
       ),
     );
   }
+
+  void closeDialog() {}
 }

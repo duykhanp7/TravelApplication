@@ -29,6 +29,9 @@ _$_UserInfoJson _$$_UserInfoJsonFromJson(Map<String, dynamic> json) =>
       images: (json['images'] as List<dynamic>?)
           ?.map((e) => PhotoJson.fromJson(e as Map<String, dynamic>))
           .toList(),
+      journeys: (json['journeys'] as List<dynamic>?)
+          ?.map((e) => MyExperienceJson.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_UserInfoJsonToJson(_$_UserInfoJson instance) =>
@@ -48,6 +51,7 @@ Map<String, dynamic> _$$_UserInfoJsonToJson(_$_UserInfoJson instance) =>
       'type': _$JsonConverterToJson<String, UserType>(
           instance.type, const ConvertStringToUserType().toJson),
       'images': instance.images,
+      'journeys': instance.journeys,
     };
 
 Value? _$JsonConverterFromJson<Json, Value>(

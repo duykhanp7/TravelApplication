@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:travel_booking_tour/data/model/my_experience_json.dart';
 import 'package:travel_booking_tour/data/model/result.dart';
 import 'package:travel_booking_tour/common/app_constant.dart';
 import 'package:travel_booking_tour/common/enum/enums.dart';
@@ -53,6 +54,15 @@ class BlocProfileScreen extends Bloc<BlocProfileEvent, BlocProfileState> {
                   photo2.createdAt!.compareTo(photo1.createdAt!));
             });
 
+            await Future.delayed(Duration.zero, () {
+              final List<MyExperienceJson> list = [
+                ...userInfoJson?.journeys ?? []
+              ];
+              list.sort((item1, item2) =>
+                  item2.createdAt!.compareTo(item1.createdAt!));
+              userInfoJson = userInfoJson?.copyWith(journeys: list);
+            });
+
             userInfoJson = userInfoJson?.copyWith(images: items);
           }
           emit(BlocProfileStateLoadUserInforResult(
@@ -94,7 +104,7 @@ class BlocProfileScreen extends Bloc<BlocProfileEvent, BlocProfileState> {
         emit(BlocProfileStateUpdateCover(
             appResult: AppResult(state: ResultState.loading)));
         Map<dynamic, dynamic>? url = await _profileRepository.updateCover(
-            File(event.cover.path), userInfoJson?.type);
+            File(event.cover.path), userInfoJson?.type, userInfoJson?.id ?? 0);
         if (url != null) {
           final String? data = url['url'];
           if (data != null) {

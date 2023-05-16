@@ -22,6 +22,8 @@ class TourGuideItem extends StatefulWidget {
 class _TourGuideItem extends State<TourGuideItem> {
   @override
   Widget build(BuildContext context) {
+    debugPrint(
+        '_TourGuideItem : ${widget.tourGuideDetailJson.attributes?.user?.data?.attributes?.avatar?.data?.attributes?.url}');
     return Container(
         width: 170,
         height: 220,
@@ -39,12 +41,21 @@ class _TourGuideItem extends State<TourGuideItem> {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(12)),
                           child: CachedNetworkImage(
-                            imageUrl:
-                                widget.tourGuideDetailJson.profileImageUrl ??
-                                    '',
+                            imageUrl: widget
+                                    .tourGuideDetailJson
+                                    .attributes
+                                    ?.user
+                                    ?.data
+                                    ?.attributes
+                                    ?.avatar
+                                    ?.data
+                                    ?.attributes
+                                    ?.url ??
+                                '',
                             filterQuality: FilterQuality.high,
                             fit: BoxFit.cover,
                             width: 220,
+                            height: 170,
                             fadeInCurve: Curves.linearToEaseOut,
                             fadeOutCurve: Curves.bounceInOut,
                             errorWidget: (context, url, error) =>
@@ -60,16 +71,14 @@ class _TourGuideItem extends State<TourGuideItem> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                HorizontalStarWidget(
-                                    rating:
-                                        widget.tourGuideDetailJson.rating ?? 0),
+                                const HorizontalStarWidget(rating: 5),
                                 const SizedBox(
                                   height: 4,
                                 ),
                                 Container(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
-                                    '${widget.tourGuideDetailJson.reviews?.length ?? 0} reviews',
+                                    '${0} reviews',
                                     textAlign: TextAlign.start,
                                     style: AppStyles.titleSmall.copyWith(
                                         fontSize: 10,
@@ -97,7 +106,12 @@ class _TourGuideItem extends State<TourGuideItem> {
                           ),
                           Text(
                             overflow: TextOverflow.ellipsis,
-                            widget.tourGuideDetailJson.name ?? '',
+                            (widget.tourGuideDetailJson.attributes?.user?.data
+                                        ?.attributes?.lastName ??
+                                    '') +
+                                (widget.tourGuideDetailJson.attributes?.user
+                                        ?.data?.attributes?.firstName ??
+                                    ''),
                             style: AppStyles.titleMedium
                                 .copyWith(fontWeight: FontWeight.w500),
                           ),
@@ -113,7 +127,7 @@ class _TourGuideItem extends State<TourGuideItem> {
                                   width: 6,
                                 ),
                                 Text(
-                                  widget.tourGuideDetailJson.address ?? '',
+                                  '${widget.tourGuideDetailJson.attributes?.city ?? ''}, ${widget.tourGuideDetailJson.attributes?.user?.data?.attributes?.country ?? ''}',
                                   overflow: TextOverflow.ellipsis,
                                   style: AppStyles.titleSmall.copyWith(
                                       fontWeight: FontWeight.w400,

@@ -76,11 +76,19 @@ class BlocMyJourneysScreen
               (element) async => data.files.add(MapEntry(
                   'files.multi', await MultipartFile.fromFile(element))));
 
-          MyExperienceJson? myExperienceJson =
-              await _profileRepository.postMyJourney(data);
+          MyExperienceJson? myExperienceJson = MyExperienceJson.fromJson(
+              await _profileRepository.postMyJourney(data));
 
           if (myExperienceJson != null) {
             listMyExperienceJson.add(myExperienceJson);
+
+            await Future.delayed(Duration.zero, () {
+              listMyExperienceJson.sort((item1, item2) =>
+                  item2.createdAt!.compareTo(item1.createdAt!));
+            });
+
+            journeyNameEditingController.text = '';
+            locationOfJourneyEditingController.text = '';
             Routes.backTo();
             files = null;
             emit(BlocMyJourneysStateAddJourney(

@@ -207,6 +207,9 @@ mixin _$AttributesJson {
   String? get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'Image')
   ImageJson? get images => throw _privateConstructorUsedError;
+  LikeDataJson? get likes => throw _privateConstructorUsedError;
+  AuthorJson? get author => throw _privateConstructorUsedError;
+  CommentResponeJson? get comments => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -226,9 +229,15 @@ abstract class $AttributesJsonCopyWith<$Res> {
       @ConvertStringToDateTime() DateTime? updatedAt,
       @ConvertStringToDateTime() DateTime? publishedAt,
       String? description,
-      @JsonKey(name: 'Image') ImageJson? images});
+      @JsonKey(name: 'Image') ImageJson? images,
+      LikeDataJson? likes,
+      AuthorJson? author,
+      CommentResponeJson? comments});
 
   $ImageJsonCopyWith<$Res>? get images;
+  $LikeDataJsonCopyWith<$Res>? get likes;
+  $AuthorJsonCopyWith<$Res>? get author;
+  $CommentResponeJsonCopyWith<$Res>? get comments;
 }
 
 /// @nodoc
@@ -250,6 +259,9 @@ class _$AttributesJsonCopyWithImpl<$Res, $Val extends AttributesJson>
     Object? publishedAt = freezed,
     Object? description = freezed,
     Object? images = freezed,
+    Object? likes = freezed,
+    Object? author = freezed,
+    Object? comments = freezed,
   }) {
     return _then(_value.copyWith(
       title: freezed == title
@@ -276,6 +288,18 @@ class _$AttributesJsonCopyWithImpl<$Res, $Val extends AttributesJson>
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as ImageJson?,
+      likes: freezed == likes
+          ? _value.likes
+          : likes // ignore: cast_nullable_to_non_nullable
+              as LikeDataJson?,
+      author: freezed == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as AuthorJson?,
+      comments: freezed == comments
+          ? _value.comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as CommentResponeJson?,
     ) as $Val);
   }
 
@@ -288,6 +312,42 @@ class _$AttributesJsonCopyWithImpl<$Res, $Val extends AttributesJson>
 
     return $ImageJsonCopyWith<$Res>(_value.images!, (value) {
       return _then(_value.copyWith(images: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LikeDataJsonCopyWith<$Res>? get likes {
+    if (_value.likes == null) {
+      return null;
+    }
+
+    return $LikeDataJsonCopyWith<$Res>(_value.likes!, (value) {
+      return _then(_value.copyWith(likes: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AuthorJsonCopyWith<$Res>? get author {
+    if (_value.author == null) {
+      return null;
+    }
+
+    return $AuthorJsonCopyWith<$Res>(_value.author!, (value) {
+      return _then(_value.copyWith(author: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CommentResponeJsonCopyWith<$Res>? get comments {
+    if (_value.comments == null) {
+      return null;
+    }
+
+    return $CommentResponeJsonCopyWith<$Res>(_value.comments!, (value) {
+      return _then(_value.copyWith(comments: value) as $Val);
     });
   }
 }
@@ -306,10 +366,19 @@ abstract class _$$_AttributesJsonCopyWith<$Res>
       @ConvertStringToDateTime() DateTime? updatedAt,
       @ConvertStringToDateTime() DateTime? publishedAt,
       String? description,
-      @JsonKey(name: 'Image') ImageJson? images});
+      @JsonKey(name: 'Image') ImageJson? images,
+      LikeDataJson? likes,
+      AuthorJson? author,
+      CommentResponeJson? comments});
 
   @override
   $ImageJsonCopyWith<$Res>? get images;
+  @override
+  $LikeDataJsonCopyWith<$Res>? get likes;
+  @override
+  $AuthorJsonCopyWith<$Res>? get author;
+  @override
+  $CommentResponeJsonCopyWith<$Res>? get comments;
 }
 
 /// @nodoc
@@ -329,6 +398,9 @@ class __$$_AttributesJsonCopyWithImpl<$Res>
     Object? publishedAt = freezed,
     Object? description = freezed,
     Object? images = freezed,
+    Object? likes = freezed,
+    Object? author = freezed,
+    Object? comments = freezed,
   }) {
     return _then(_$_AttributesJson(
       title: freezed == title
@@ -355,6 +427,18 @@ class __$$_AttributesJsonCopyWithImpl<$Res>
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as ImageJson?,
+      likes: freezed == likes
+          ? _value.likes
+          : likes // ignore: cast_nullable_to_non_nullable
+              as LikeDataJson?,
+      author: freezed == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as AuthorJson?,
+      comments: freezed == comments
+          ? _value.comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as CommentResponeJson?,
     ));
   }
 }
@@ -370,7 +454,10 @@ class _$_AttributesJson
       @ConvertStringToDateTime() this.updatedAt,
       @ConvertStringToDateTime() this.publishedAt,
       this.description,
-      @JsonKey(name: 'Image') this.images});
+      @JsonKey(name: 'Image') this.images,
+      this.likes,
+      this.author,
+      this.comments});
 
   factory _$_AttributesJson.fromJson(Map<String, dynamic> json) =>
       _$$_AttributesJsonFromJson(json);
@@ -391,10 +478,16 @@ class _$_AttributesJson
   @override
   @JsonKey(name: 'Image')
   final ImageJson? images;
+  @override
+  final LikeDataJson? likes;
+  @override
+  final AuthorJson? author;
+  @override
+  final CommentResponeJson? comments;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AttributesJson(title: $title, createdAt: $createdAt, updatedAt: $updatedAt, publishedAt: $publishedAt, description: $description, images: $images)';
+    return 'AttributesJson(title: $title, createdAt: $createdAt, updatedAt: $updatedAt, publishedAt: $publishedAt, description: $description, images: $images, likes: $likes, author: $author, comments: $comments)';
   }
 
   @override
@@ -407,7 +500,10 @@ class _$_AttributesJson
       ..add(DiagnosticsProperty('updatedAt', updatedAt))
       ..add(DiagnosticsProperty('publishedAt', publishedAt))
       ..add(DiagnosticsProperty('description', description))
-      ..add(DiagnosticsProperty('images', images));
+      ..add(DiagnosticsProperty('images', images))
+      ..add(DiagnosticsProperty('likes', likes))
+      ..add(DiagnosticsProperty('author', author))
+      ..add(DiagnosticsProperty('comments', comments));
   }
 
   @override
@@ -424,13 +520,17 @@ class _$_AttributesJson
                 other.publishedAt == publishedAt) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.images, images) || other.images == images));
+            (identical(other.images, images) || other.images == images) &&
+            (identical(other.likes, likes) || other.likes == likes) &&
+            (identical(other.author, author) || other.author == author) &&
+            (identical(other.comments, comments) ||
+                other.comments == comments));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, title, createdAt, updatedAt,
-      publishedAt, description, images);
+      publishedAt, description, images, likes, author, comments);
 
   @JsonKey(ignore: true)
   @override
@@ -453,7 +553,10 @@ abstract class _AttributesJson implements AttributesJson {
       @ConvertStringToDateTime() final DateTime? updatedAt,
       @ConvertStringToDateTime() final DateTime? publishedAt,
       final String? description,
-      @JsonKey(name: 'Image') final ImageJson? images}) = _$_AttributesJson;
+      @JsonKey(name: 'Image') final ImageJson? images,
+      final LikeDataJson? likes,
+      final AuthorJson? author,
+      final CommentResponeJson? comments}) = _$_AttributesJson;
 
   factory _AttributesJson.fromJson(Map<String, dynamic> json) =
       _$_AttributesJson.fromJson;
@@ -474,6 +577,12 @@ abstract class _AttributesJson implements AttributesJson {
   @override
   @JsonKey(name: 'Image')
   ImageJson? get images;
+  @override
+  LikeDataJson? get likes;
+  @override
+  AuthorJson? get author;
+  @override
+  CommentResponeJson? get comments;
   @override
   @JsonKey(ignore: true)
   _$$_AttributesJsonCopyWith<_$_AttributesJson> get copyWith =>
@@ -981,4 +1090,802 @@ abstract class _ImageChildAttributesJson implements ImageChildAttributesJson {
   @JsonKey(ignore: true)
   _$$_ImageChildAttributesJsonCopyWith<_$_ImageChildAttributesJson>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+LikeDataJson _$LikeDataJsonFromJson(Map<String, dynamic> json) {
+  return _LikeDataJson.fromJson(json);
+}
+
+/// @nodoc
+mixin _$LikeDataJson {
+  List<LikeDataJsonData>? get data => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $LikeDataJsonCopyWith<LikeDataJson> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $LikeDataJsonCopyWith<$Res> {
+  factory $LikeDataJsonCopyWith(
+          LikeDataJson value, $Res Function(LikeDataJson) then) =
+      _$LikeDataJsonCopyWithImpl<$Res, LikeDataJson>;
+  @useResult
+  $Res call({List<LikeDataJsonData>? data});
+}
+
+/// @nodoc
+class _$LikeDataJsonCopyWithImpl<$Res, $Val extends LikeDataJson>
+    implements $LikeDataJsonCopyWith<$Res> {
+  _$LikeDataJsonCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_value.copyWith(
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<LikeDataJsonData>?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_LikeDataJsonCopyWith<$Res>
+    implements $LikeDataJsonCopyWith<$Res> {
+  factory _$$_LikeDataJsonCopyWith(
+          _$_LikeDataJson value, $Res Function(_$_LikeDataJson) then) =
+      __$$_LikeDataJsonCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<LikeDataJsonData>? data});
+}
+
+/// @nodoc
+class __$$_LikeDataJsonCopyWithImpl<$Res>
+    extends _$LikeDataJsonCopyWithImpl<$Res, _$_LikeDataJson>
+    implements _$$_LikeDataJsonCopyWith<$Res> {
+  __$$_LikeDataJsonCopyWithImpl(
+      _$_LikeDataJson _value, $Res Function(_$_LikeDataJson) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_$_LikeDataJson(
+      data: freezed == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<LikeDataJsonData>?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_LikeDataJson with DiagnosticableTreeMixin implements _LikeDataJson {
+  const _$_LikeDataJson({final List<LikeDataJsonData>? data}) : _data = data;
+
+  factory _$_LikeDataJson.fromJson(Map<String, dynamic> json) =>
+      _$$_LikeDataJsonFromJson(json);
+
+  final List<LikeDataJsonData>? _data;
+  @override
+  List<LikeDataJsonData>? get data {
+    final value = _data;
+    if (value == null) return null;
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'LikeDataJson(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'LikeDataJson'))
+      ..add(DiagnosticsProperty('data', data));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_LikeDataJson &&
+            const DeepCollectionEquality().equals(other._data, _data));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_LikeDataJsonCopyWith<_$_LikeDataJson> get copyWith =>
+      __$$_LikeDataJsonCopyWithImpl<_$_LikeDataJson>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_LikeDataJsonToJson(
+      this,
+    );
+  }
+}
+
+abstract class _LikeDataJson implements LikeDataJson {
+  const factory _LikeDataJson({final List<LikeDataJsonData>? data}) =
+      _$_LikeDataJson;
+
+  factory _LikeDataJson.fromJson(Map<String, dynamic> json) =
+      _$_LikeDataJson.fromJson;
+
+  @override
+  List<LikeDataJsonData>? get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$_LikeDataJsonCopyWith<_$_LikeDataJson> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+LikeDataJsonData _$LikeDataJsonDataFromJson(Map<String, dynamic> json) {
+  return _LikeDataJsonData.fromJson(json);
+}
+
+/// @nodoc
+mixin _$LikeDataJsonData {
+  int? get id => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $LikeDataJsonDataCopyWith<LikeDataJsonData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $LikeDataJsonDataCopyWith<$Res> {
+  factory $LikeDataJsonDataCopyWith(
+          LikeDataJsonData value, $Res Function(LikeDataJsonData) then) =
+      _$LikeDataJsonDataCopyWithImpl<$Res, LikeDataJsonData>;
+  @useResult
+  $Res call({int? id});
+}
+
+/// @nodoc
+class _$LikeDataJsonDataCopyWithImpl<$Res, $Val extends LikeDataJsonData>
+    implements $LikeDataJsonDataCopyWith<$Res> {
+  _$LikeDataJsonDataCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_LikeDataJsonDataCopyWith<$Res>
+    implements $LikeDataJsonDataCopyWith<$Res> {
+  factory _$$_LikeDataJsonDataCopyWith(
+          _$_LikeDataJsonData value, $Res Function(_$_LikeDataJsonData) then) =
+      __$$_LikeDataJsonDataCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? id});
+}
+
+/// @nodoc
+class __$$_LikeDataJsonDataCopyWithImpl<$Res>
+    extends _$LikeDataJsonDataCopyWithImpl<$Res, _$_LikeDataJsonData>
+    implements _$$_LikeDataJsonDataCopyWith<$Res> {
+  __$$_LikeDataJsonDataCopyWithImpl(
+      _$_LikeDataJsonData _value, $Res Function(_$_LikeDataJsonData) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+  }) {
+    return _then(_$_LikeDataJsonData(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_LikeDataJsonData
+    with DiagnosticableTreeMixin
+    implements _LikeDataJsonData {
+  const _$_LikeDataJsonData({this.id});
+
+  factory _$_LikeDataJsonData.fromJson(Map<String, dynamic> json) =>
+      _$$_LikeDataJsonDataFromJson(json);
+
+  @override
+  final int? id;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'LikeDataJsonData(id: $id)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'LikeDataJsonData'))
+      ..add(DiagnosticsProperty('id', id));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_LikeDataJsonData &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_LikeDataJsonDataCopyWith<_$_LikeDataJsonData> get copyWith =>
+      __$$_LikeDataJsonDataCopyWithImpl<_$_LikeDataJsonData>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_LikeDataJsonDataToJson(
+      this,
+    );
+  }
+}
+
+abstract class _LikeDataJsonData implements LikeDataJsonData {
+  const factory _LikeDataJsonData({final int? id}) = _$_LikeDataJsonData;
+
+  factory _LikeDataJsonData.fromJson(Map<String, dynamic> json) =
+      _$_LikeDataJsonData.fromJson;
+
+  @override
+  int? get id;
+  @override
+  @JsonKey(ignore: true)
+  _$$_LikeDataJsonDataCopyWith<_$_LikeDataJsonData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+AuthorJson _$AuthorJsonFromJson(Map<String, dynamic> json) {
+  return _AuthorJson.fromJson(json);
+}
+
+/// @nodoc
+mixin _$AuthorJson {
+  AuthorJsonData? get data => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AuthorJsonCopyWith<AuthorJson> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AuthorJsonCopyWith<$Res> {
+  factory $AuthorJsonCopyWith(
+          AuthorJson value, $Res Function(AuthorJson) then) =
+      _$AuthorJsonCopyWithImpl<$Res, AuthorJson>;
+  @useResult
+  $Res call({AuthorJsonData? data});
+
+  $AuthorJsonDataCopyWith<$Res>? get data;
+}
+
+/// @nodoc
+class _$AuthorJsonCopyWithImpl<$Res, $Val extends AuthorJson>
+    implements $AuthorJsonCopyWith<$Res> {
+  _$AuthorJsonCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_value.copyWith(
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as AuthorJsonData?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AuthorJsonDataCopyWith<$Res>? get data {
+    if (_value.data == null) {
+      return null;
+    }
+
+    return $AuthorJsonDataCopyWith<$Res>(_value.data!, (value) {
+      return _then(_value.copyWith(data: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_AuthorJsonCopyWith<$Res>
+    implements $AuthorJsonCopyWith<$Res> {
+  factory _$$_AuthorJsonCopyWith(
+          _$_AuthorJson value, $Res Function(_$_AuthorJson) then) =
+      __$$_AuthorJsonCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({AuthorJsonData? data});
+
+  @override
+  $AuthorJsonDataCopyWith<$Res>? get data;
+}
+
+/// @nodoc
+class __$$_AuthorJsonCopyWithImpl<$Res>
+    extends _$AuthorJsonCopyWithImpl<$Res, _$_AuthorJson>
+    implements _$$_AuthorJsonCopyWith<$Res> {
+  __$$_AuthorJsonCopyWithImpl(
+      _$_AuthorJson _value, $Res Function(_$_AuthorJson) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_$_AuthorJson(
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as AuthorJsonData?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_AuthorJson with DiagnosticableTreeMixin implements _AuthorJson {
+  const _$_AuthorJson({this.data});
+
+  factory _$_AuthorJson.fromJson(Map<String, dynamic> json) =>
+      _$$_AuthorJsonFromJson(json);
+
+  @override
+  final AuthorJsonData? data;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'AuthorJson(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'AuthorJson'))
+      ..add(DiagnosticsProperty('data', data));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AuthorJson &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AuthorJsonCopyWith<_$_AuthorJson> get copyWith =>
+      __$$_AuthorJsonCopyWithImpl<_$_AuthorJson>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_AuthorJsonToJson(
+      this,
+    );
+  }
+}
+
+abstract class _AuthorJson implements AuthorJson {
+  const factory _AuthorJson({final AuthorJsonData? data}) = _$_AuthorJson;
+
+  factory _AuthorJson.fromJson(Map<String, dynamic> json) =
+      _$_AuthorJson.fromJson;
+
+  @override
+  AuthorJsonData? get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$_AuthorJsonCopyWith<_$_AuthorJson> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+AuthorJsonData _$AuthorJsonDataFromJson(Map<String, dynamic> json) {
+  return _AuthorJsonData.fromJson(json);
+}
+
+/// @nodoc
+mixin _$AuthorJsonData {
+  int? get id => throw _privateConstructorUsedError;
+  UserJson? get attributes => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AuthorJsonDataCopyWith<AuthorJsonData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AuthorJsonDataCopyWith<$Res> {
+  factory $AuthorJsonDataCopyWith(
+          AuthorJsonData value, $Res Function(AuthorJsonData) then) =
+      _$AuthorJsonDataCopyWithImpl<$Res, AuthorJsonData>;
+  @useResult
+  $Res call({int? id, UserJson? attributes});
+
+  $UserJsonCopyWith<$Res>? get attributes;
+}
+
+/// @nodoc
+class _$AuthorJsonDataCopyWithImpl<$Res, $Val extends AuthorJsonData>
+    implements $AuthorJsonDataCopyWith<$Res> {
+  _$AuthorJsonDataCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? attributes = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      attributes: freezed == attributes
+          ? _value.attributes
+          : attributes // ignore: cast_nullable_to_non_nullable
+              as UserJson?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserJsonCopyWith<$Res>? get attributes {
+    if (_value.attributes == null) {
+      return null;
+    }
+
+    return $UserJsonCopyWith<$Res>(_value.attributes!, (value) {
+      return _then(_value.copyWith(attributes: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_AuthorJsonDataCopyWith<$Res>
+    implements $AuthorJsonDataCopyWith<$Res> {
+  factory _$$_AuthorJsonDataCopyWith(
+          _$_AuthorJsonData value, $Res Function(_$_AuthorJsonData) then) =
+      __$$_AuthorJsonDataCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? id, UserJson? attributes});
+
+  @override
+  $UserJsonCopyWith<$Res>? get attributes;
+}
+
+/// @nodoc
+class __$$_AuthorJsonDataCopyWithImpl<$Res>
+    extends _$AuthorJsonDataCopyWithImpl<$Res, _$_AuthorJsonData>
+    implements _$$_AuthorJsonDataCopyWith<$Res> {
+  __$$_AuthorJsonDataCopyWithImpl(
+      _$_AuthorJsonData _value, $Res Function(_$_AuthorJsonData) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? attributes = freezed,
+  }) {
+    return _then(_$_AuthorJsonData(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      attributes: freezed == attributes
+          ? _value.attributes
+          : attributes // ignore: cast_nullable_to_non_nullable
+              as UserJson?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_AuthorJsonData
+    with DiagnosticableTreeMixin
+    implements _AuthorJsonData {
+  const _$_AuthorJsonData({this.id, this.attributes});
+
+  factory _$_AuthorJsonData.fromJson(Map<String, dynamic> json) =>
+      _$$_AuthorJsonDataFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final UserJson? attributes;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'AuthorJsonData(id: $id, attributes: $attributes)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'AuthorJsonData'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('attributes', attributes));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AuthorJsonData &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.attributes, attributes) ||
+                other.attributes == attributes));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, attributes);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AuthorJsonDataCopyWith<_$_AuthorJsonData> get copyWith =>
+      __$$_AuthorJsonDataCopyWithImpl<_$_AuthorJsonData>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_AuthorJsonDataToJson(
+      this,
+    );
+  }
+}
+
+abstract class _AuthorJsonData implements AuthorJsonData {
+  const factory _AuthorJsonData({final int? id, final UserJson? attributes}) =
+      _$_AuthorJsonData;
+
+  factory _AuthorJsonData.fromJson(Map<String, dynamic> json) =
+      _$_AuthorJsonData.fromJson;
+
+  @override
+  int? get id;
+  @override
+  UserJson? get attributes;
+  @override
+  @JsonKey(ignore: true)
+  _$$_AuthorJsonDataCopyWith<_$_AuthorJsonData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+CommentResponeJson _$CommentResponeJsonFromJson(Map<String, dynamic> json) {
+  return _CommentResponeJson.fromJson(json);
+}
+
+/// @nodoc
+mixin _$CommentResponeJson {
+  List<CommentJson>? get data => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CommentResponeJsonCopyWith<CommentResponeJson> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CommentResponeJsonCopyWith<$Res> {
+  factory $CommentResponeJsonCopyWith(
+          CommentResponeJson value, $Res Function(CommentResponeJson) then) =
+      _$CommentResponeJsonCopyWithImpl<$Res, CommentResponeJson>;
+  @useResult
+  $Res call({List<CommentJson>? data});
+}
+
+/// @nodoc
+class _$CommentResponeJsonCopyWithImpl<$Res, $Val extends CommentResponeJson>
+    implements $CommentResponeJsonCopyWith<$Res> {
+  _$CommentResponeJsonCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_value.copyWith(
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<CommentJson>?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_CommentResponeJsonCopyWith<$Res>
+    implements $CommentResponeJsonCopyWith<$Res> {
+  factory _$$_CommentResponeJsonCopyWith(_$_CommentResponeJson value,
+          $Res Function(_$_CommentResponeJson) then) =
+      __$$_CommentResponeJsonCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<CommentJson>? data});
+}
+
+/// @nodoc
+class __$$_CommentResponeJsonCopyWithImpl<$Res>
+    extends _$CommentResponeJsonCopyWithImpl<$Res, _$_CommentResponeJson>
+    implements _$$_CommentResponeJsonCopyWith<$Res> {
+  __$$_CommentResponeJsonCopyWithImpl(
+      _$_CommentResponeJson _value, $Res Function(_$_CommentResponeJson) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_$_CommentResponeJson(
+      data: freezed == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<CommentJson>?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_CommentResponeJson
+    with DiagnosticableTreeMixin
+    implements _CommentResponeJson {
+  const _$_CommentResponeJson({final List<CommentJson>? data}) : _data = data;
+
+  factory _$_CommentResponeJson.fromJson(Map<String, dynamic> json) =>
+      _$$_CommentResponeJsonFromJson(json);
+
+  final List<CommentJson>? _data;
+  @override
+  List<CommentJson>? get data {
+    final value = _data;
+    if (value == null) return null;
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'CommentResponeJson(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CommentResponeJson'))
+      ..add(DiagnosticsProperty('data', data));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_CommentResponeJson &&
+            const DeepCollectionEquality().equals(other._data, _data));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CommentResponeJsonCopyWith<_$_CommentResponeJson> get copyWith =>
+      __$$_CommentResponeJsonCopyWithImpl<_$_CommentResponeJson>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_CommentResponeJsonToJson(
+      this,
+    );
+  }
+}
+
+abstract class _CommentResponeJson implements CommentResponeJson {
+  const factory _CommentResponeJson({final List<CommentJson>? data}) =
+      _$_CommentResponeJson;
+
+  factory _CommentResponeJson.fromJson(Map<String, dynamic> json) =
+      _$_CommentResponeJson.fromJson;
+
+  @override
+  List<CommentJson>? get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$_CommentResponeJsonCopyWith<_$_CommentResponeJson> get copyWith =>
+      throw _privateConstructorUsedError;
 }

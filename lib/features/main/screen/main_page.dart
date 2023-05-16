@@ -319,8 +319,9 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                               }
                               return SvgPicture.asset(
                                 AppIcons.icUser,
-                                height: 80,
-                                width: 80,
+                                height: 40,
+                                width: 40,
+                                fit: BoxFit.contain,
                               );
                             }),
                       ),
@@ -780,10 +781,12 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
           Container(
             alignment: Alignment.topCenter,
             child: CachedNetworkImage(
-              imageUrl: 'https://i.imgur.com/UQyGT1Q.png',
+              imageUrl: _blocMainScreen.unSplashURL?.raw ??
+                  'https://i.imgur.com/UQyGT1Q.png',
               filterQuality: FilterQuality.high,
               fit: BoxFit.cover,
               height: 170,
+              width: double.infinity,
               fadeInCurve: Curves.linearToEaseOut,
               fadeOutCurve: Curves.bounceInOut,
               placeholder: (context, url) => const AppLayoutShimmer(),
@@ -823,7 +826,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                             width: 12,
                           ),
                           Text(
-                            'Da Nang',
+                            _blocMainScreen.currentLocationName?.trim() ?? '',
                             style: AppStyles.titleSmall.copyWith(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w100,
@@ -838,7 +841,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
                       Container(
                         alignment: Alignment.centerRight,
                         child: Text(
-                          '26\u00B0',
+                          '${_blocMainScreen.currentLocationTemperature}\u00B0',
                           textAlign: TextAlign.right,
                           style: AppStyles.titleLarge.copyWith(
                               fontSize: 28,

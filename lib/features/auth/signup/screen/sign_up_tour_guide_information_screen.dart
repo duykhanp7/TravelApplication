@@ -65,101 +65,118 @@ class _SignUpTourGuideInformationScreen
         }
         return false;
       },
-      child: Scaffold(
-        backgroundColor: AppColors.primary,
-        body: SafeArea(
-            child: AppDeepBackground(
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            scrollDirection: Axis.vertical,
-            child: GestureDetector(
-              onTap: () {},
-              child: BlocListener<BlocSignUpTourGuideInformationScreen,
-                  BlocSignUpTourGuideInformationState>(
-                listenWhen: (previous, current) => current
-                    is BlocSignUpTourGuideInformationStatePickWrongFormat,
-                listener: (context, state) {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AppDialog(
-                      content: 'Only support these file formats: .jpg, .png',
-                      typeDialog: TypeDialog.warning,
-                      positiveAction: () => Navigator.of(context).pop(),
-                    ),
-                  );
-                },
-                child: Form(
-                  key: _blocSignUpTourGuideInformationScreen
-                      .signUpTourGuideInformationGlobalKey,
-                  child: AppBackground(
-                      header:
-                          'Please finish your profile so that\nTravelers can find you easily!',
-                      headerStyle: AppStyles.titleMedium.copyWith(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.normal),
-                      headerPadding: const EdgeInsets.only(top: 0, bottom: 30),
-                      top: Container(
-                        margin: const EdgeInsets.only(top: 32, left: 8),
-                        child: Text(
-                          'Welcome, Tuan',
-                          style: AppStyles.titleMedium.copyWith(
-                              fontSize: 34,
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.w100,
-                              color: AppColors.white),
-                        ),
+      child: BlocListener<BlocSignUpTourGuideInformationScreen,
+          BlocSignUpTourGuideInformationState>(
+        listenWhen: (previous, current) =>
+            current is BlocSignUpTourGuideInformationStateRegisterResult,
+        listener: (context, state) {
+          if (state is BlocSignUpTourGuideInformationStateRegisterResult) {
+            if (state.appResult.state == ResultState.success) {
+              showDialog(
+                context: context,
+                builder: (context) => const DefaultDialog.success(
+                  content: Text('Congratulation!\nSign up successfully.'),
+                ),
+              );
+            }
+          }
+        },
+        child: Scaffold(
+          backgroundColor: AppColors.primary,
+          body: SafeArea(
+              child: AppDeepBackground(
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              scrollDirection: Axis.vertical,
+              child: GestureDetector(
+                onTap: () {},
+                child: BlocListener<BlocSignUpTourGuideInformationScreen,
+                    BlocSignUpTourGuideInformationState>(
+                  listenWhen: (previous, current) => current
+                      is BlocSignUpTourGuideInformationStatePickWrongFormat,
+                  listener: (context, state) {
+                    showDialog(
+                      context: context,
+                      builder: (context) => const DefaultDialog.warning(
+                        content:
+                            Text('Only support these file formats: .jpg, .png'),
                       ),
-                      children: Container(
-                        color: AppColors.white,
-                        child: Column(
-                          children: [
-                            BlocBuilder<BlocSignUpTourGuideInformationScreen,
-                                BlocSignUpTourGuideInformationState>(
-                              buildWhen: (previous, current) => current
-                                  is BlocSignUpTourGuideInformationStateChangeStep,
-                              builder: (context, state) => Container(
-                                height: 50,
-                                alignment: Alignment.center,
-                                margin: const EdgeInsets.only(top: 20),
-                                child: TimelineWidget(
-                                    padding: const EdgeInsets.only(
-                                        left: 15, right: 30),
-                                    currentStep:
-                                        _blocSignUpTourGuideInformationScreen
-                                            .currentIndexStep,
-                                    titles: const [
-                                      'Background Info',
-                                      'Fee & Time'
-                                    ]),
-                              ),
-                            ),
-                            const SizedBox(height: 30),
-                            BlocBuilder<BlocSignUpTourGuideInformationScreen,
-                                BlocSignUpTourGuideInformationState>(
-                              buildWhen: (previous, current) => current
-                                  is BlocSignUpTourGuideInformationStateChangeStep,
-                              builder: (context, state) {
-                                if (state
-                                    is BlocSignUpTourGuideInformationStateChangeStep) {
-                                  if (state.step == 0) {
-                                    return _buildStep1();
-                                  } else if (state.step == 1) {
-                                    return _buildStep2(context);
-                                  }
-                                }
-                                return _buildStep1();
-                              },
-                            )
-                          ],
+                    );
+                  },
+                  child: Form(
+                    key: _blocSignUpTourGuideInformationScreen
+                        .signUpTourGuideInformationGlobalKey,
+                    child: AppBackground(
+                        header:
+                            'Please finish your profile so that\nTravelers can find you easily!',
+                        headerStyle: AppStyles.titleMedium.copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            fontStyle: FontStyle.normal),
+                        headerPadding:
+                            const EdgeInsets.only(top: 0, bottom: 30),
+                        top: Container(
+                          margin: const EdgeInsets.only(top: 32, left: 8),
+                          child: Text(
+                            'Welcome, Tuan',
+                            style: AppStyles.titleMedium.copyWith(
+                                fontSize: 34,
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.w100,
+                                color: AppColors.white),
+                          ),
                         ),
-                      )),
+                        children: Container(
+                          color: AppColors.white,
+                          child: Column(
+                            children: [
+                              BlocBuilder<BlocSignUpTourGuideInformationScreen,
+                                  BlocSignUpTourGuideInformationState>(
+                                buildWhen: (previous, current) => current
+                                    is BlocSignUpTourGuideInformationStateChangeStep,
+                                builder: (context, state) => Container(
+                                  height: 50,
+                                  alignment: Alignment.center,
+                                  margin: const EdgeInsets.only(top: 20),
+                                  child: TimelineWidget(
+                                      padding: const EdgeInsets.only(
+                                          left: 15, right: 30),
+                                      currentStep:
+                                          _blocSignUpTourGuideInformationScreen
+                                              .currentIndexStep,
+                                      titles: const [
+                                        'Background Info',
+                                        'Fee & Time'
+                                      ]),
+                                ),
+                              ),
+                              const SizedBox(height: 30),
+                              BlocBuilder<BlocSignUpTourGuideInformationScreen,
+                                  BlocSignUpTourGuideInformationState>(
+                                buildWhen: (previous, current) => current
+                                    is BlocSignUpTourGuideInformationStateChangeStep,
+                                builder: (context, state) {
+                                  if (state
+                                      is BlocSignUpTourGuideInformationStateChangeStep) {
+                                    if (state.step == 0) {
+                                      return _buildStep1();
+                                    } else if (state.step == 1) {
+                                      return _buildStep2(context);
+                                    }
+                                  }
+                                  return _buildStep1();
+                                },
+                              )
+                            ],
+                          ),
+                        )),
+                  ),
                 ),
               ),
             ),
-          ),
-        )),
+          )),
+        ),
       ),
     );
   }
@@ -454,12 +471,32 @@ class _SignUpTourGuideInformationScreen
             ),
           ),
           const SizedBox(height: 56),
-          PrimaryActiveButton(
-            margin: EdgeInsets.zero,
-            text: 'Finish',
-            onTap: () {},
-            allCaps: true,
-          )
+          BlocBuilder<BlocSignUpTourGuideInformationScreen,
+                  BlocSignUpTourGuideInformationState>(
+              buildWhen: (previous, current) =>
+                  current is BlocSignUpTourGuideInformationStateRegisterResult,
+              builder: (context, state) {
+                bool isLoading = false;
+
+                if (state
+                    is BlocSignUpTourGuideInformationStateRegisterResult) {
+                  if (state.appResult.state == ResultState.loading) {
+                    isLoading = true;
+                  } else if (state.appResult.state == ResultState.success ||
+                      state.appResult.state == ResultState.fail) {
+                    isLoading = false;
+                  }
+                }
+
+                return PrimaryActiveButton(
+                  margin: EdgeInsets.zero,
+                  isLoading: isLoading,
+                  text: 'Finish',
+                  onTap: () => _blocSignUpTourGuideInformationScreen
+                      .add(BlocSignUpTourGuideInformationEventFinishAddInfo()),
+                  allCaps: true,
+                );
+              })
         ],
       ),
     );

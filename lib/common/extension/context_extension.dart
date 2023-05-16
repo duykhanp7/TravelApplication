@@ -1,6 +1,8 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:travel_booking_tour/data/model/news_json.dart';
+import 'package:travel_booking_tour/features/explore/widget/bottom_sheet_news.dart';
 import 'package:travel_booking_tour/features/profile/model/photo_json.dart';
 import 'package:travel_booking_tour/res/app_photo_view.dart';
 
@@ -186,5 +188,17 @@ extension ContextExtension on BuildContext {
                   fontWeight: FontWeight.w400, color: AppColors.white),
             ),
             background: AppColors.black.withOpacity(0.3)));
+  }
+
+  Future<void> showBottomSheetNews(NewsJson newsJson) async {
+    await showModalBottomSheet(
+        context: this,
+        isDismissible: false,
+        enableDrag: false,
+        isScrollControlled: true,
+        backgroundColor: AppColors.transparent,
+        builder: (context) => BottomSheetNews(
+              newsJson: newsJson,
+            ));
   }
 }

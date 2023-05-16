@@ -12,7 +12,6 @@ import 'package:travel_booking_tour/res/res.dart';
 import '../../../../res/button.dart';
 import '../../../../res/input_field.dart';
 import '../../../res/app_dialog.dart';
-import '../../../router/routes.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -45,14 +44,8 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
             if (state.appResult.state == ResultState.fail) {
               showDialog(
                 context: context,
-                builder: (context) => AppDialog(
-                  typeDialog: TypeDialog.error,
-                  content: state.appResult.result,
-                  negativeTitle: 'Dismiss',
-                  positiveTitle: 'OK',
-                  positiveAction: () {
-                    Routes.backTo();
-                  },
+                builder: (context) => DefaultDialog.warning(
+                  content: Text(state.appResult.result),
                 ),
               );
             }

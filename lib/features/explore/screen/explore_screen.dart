@@ -214,7 +214,7 @@ class _ExploreScreen extends State<ExploreScreen> {
             crossAxisSpacing: 15,
             mainAxisSpacing: 10,
             children: List.generate(
-                4,
+                items.length >= 4 ? 4 : items.length,
                 (index) => TourGuideItem(
                     callback: () {
                       _blocExploreScreen.add(BlocExploreEventOnBestGuideClick(
@@ -252,6 +252,7 @@ class _ExploreScreen extends State<ExploreScreen> {
             alignment: Alignment.centerLeft,
             height: 350,
             child: ListView.separated(
+                padding: EdgeInsets.zero,
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) => TopExperienceItem(
@@ -381,12 +382,12 @@ class _ExploreScreen extends State<ExploreScreen> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(
-                items.length,
+                items.length >= 4 ? 4 : items.length,
                 (index) => TravelNewItem(
                     newsJson: items[index],
                     callback: () {
-                      // _blocExploreScreen.add(BlocExploreEventOnTourClick(
-                      //     tourDetailJson: items[index]));
+                      _blocExploreScreen.add(BlocExploreEventOnNewsClick(
+                          newsJson: items[index], context, false));
                     })),
           ),
           const SizedBox(height: 20)

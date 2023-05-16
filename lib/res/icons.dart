@@ -198,4 +198,9 @@ class AppIcons {
   static const String icLogOut = '$parentPathIcons/ic_logout.svg';
   static const String icBookmarked = '$parentPathIcons/icBookmarked.svg';
   static const String icUnBookmarked = '$parentPathIcons/icUnBookmarked.svg';
+
+  static const String icSuccess = '$parentPathIcons/ic_success.svg';
+  static const String icWarning = '$parentPathIcons/ic_warning.svg';
+  static const String icTalkBrown = '$parentPathIcons/ic_talk_brown.svg';
+  static const String icDropUp = '$parentPathIcons/ic_drop_up.svg';
 }

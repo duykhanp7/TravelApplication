@@ -61,10 +61,10 @@ class _SignInScreen extends State<SignInScreen> {
                 } else if (state.appResult.state == ResultState.error) {
                   showDialog(
                     context: context,
-                    builder: (context) => AppDialog(
-                      typeDialog: TypeDialog.error,
-                      content: 'Opp Sorry!\nSomething went wrong, try later!',
-                      positiveAction: () => Navigator.of(context).pop(),
+                    builder: (context) => const DefaultDialog.warning(
+                      title: Text('Error Server'),
+                      content:
+                          Text('Opp Sorry!\nSomething went wrong, try later!'),
                     ),
                   );
                 }
@@ -195,15 +195,6 @@ class _SignInScreen extends State<SignInScreen> {
             voidCallback: () async =>
                 _blocSignInScreen.add(BlocSignInEventLoginWithFacebook()),
           ),
-          // const SizedBox(
-          //   width: 20,
-          // ),
-          // SocialButton(
-          //   icon: AppIcons.line,
-          //   background: AppColors.lineBgColor,
-          //   splash: const Color.fromARGB(255, 50, 173, 2),
-          //   voidCallback: () {},
-          // ),
         ],
       ),
     );

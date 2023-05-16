@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:travel_booking_tour/common/extension/extenstion.dart';
 import 'package:travel_booking_tour/data/model/news_json.dart';
 
 import '../../../res/app_layout_shimmer.dart';
@@ -37,7 +38,10 @@ class _TravelNewItem extends State<TravelNewItem> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.newsJson.attributes?.title ?? '',
+                  widget.newsJson.attributes?.title
+                          ?.replaceAll('"', '')
+                          .toTitleCase() ??
+                      '',
                   overflow: TextOverflow.ellipsis,
                   style: AppStyles.titleMedium
                       .copyWith(fontWeight: FontWeight.w500),

@@ -30,7 +30,6 @@ mixin _$MyExperienceJson {
   @ConvertStringToDateTime()
   DateTime? get publishedAt => throw _privateConstructorUsedError;
   bool? get isFavorite => throw _privateConstructorUsedError;
-  int? get likes => throw _privateConstructorUsedError;
   List<PhotoJson>? get multi => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -53,7 +52,6 @@ abstract class $MyExperienceJsonCopyWith<$Res> {
       @ConvertStringToDateTime() DateTime? updatedAt,
       @ConvertStringToDateTime() DateTime? publishedAt,
       bool? isFavorite,
-      int? likes,
       List<PhotoJson>? multi});
 }
 
@@ -77,7 +75,6 @@ class _$MyExperienceJsonCopyWithImpl<$Res, $Val extends MyExperienceJson>
     Object? updatedAt = freezed,
     Object? publishedAt = freezed,
     Object? isFavorite = freezed,
-    Object? likes = freezed,
     Object? multi = freezed,
   }) {
     return _then(_value.copyWith(
@@ -109,10 +106,6 @@ class _$MyExperienceJsonCopyWithImpl<$Res, $Val extends MyExperienceJson>
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
               as bool?,
-      likes: freezed == likes
-          ? _value.likes
-          : likes // ignore: cast_nullable_to_non_nullable
-              as int?,
       multi: freezed == multi
           ? _value.multi
           : multi // ignore: cast_nullable_to_non_nullable
@@ -137,7 +130,6 @@ abstract class _$$_MyExperienceJsonCopyWith<$Res>
       @ConvertStringToDateTime() DateTime? updatedAt,
       @ConvertStringToDateTime() DateTime? publishedAt,
       bool? isFavorite,
-      int? likes,
       List<PhotoJson>? multi});
 }
 
@@ -159,7 +151,6 @@ class __$$_MyExperienceJsonCopyWithImpl<$Res>
     Object? updatedAt = freezed,
     Object? publishedAt = freezed,
     Object? isFavorite = freezed,
-    Object? likes = freezed,
     Object? multi = freezed,
   }) {
     return _then(_$_MyExperienceJson(
@@ -191,10 +182,6 @@ class __$$_MyExperienceJsonCopyWithImpl<$Res>
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
               as bool?,
-      likes: freezed == likes
-          ? _value.likes
-          : likes // ignore: cast_nullable_to_non_nullable
-              as int?,
       multi: freezed == multi
           ? _value._multi
           : multi // ignore: cast_nullable_to_non_nullable
@@ -216,7 +203,6 @@ class _$_MyExperienceJson
       @ConvertStringToDateTime() this.updatedAt,
       @ConvertStringToDateTime() this.publishedAt,
       this.isFavorite,
-      this.likes,
       final List<PhotoJson>? multi})
       : _multi = multi;
 
@@ -240,8 +226,6 @@ class _$_MyExperienceJson
   final DateTime? publishedAt;
   @override
   final bool? isFavorite;
-  @override
-  final int? likes;
   final List<PhotoJson>? _multi;
   @override
   List<PhotoJson>? get multi {
@@ -254,7 +238,7 @@ class _$_MyExperienceJson
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MyExperienceJson(id: $id, name: $name, location: $location, createdAt: $createdAt, updatedAt: $updatedAt, publishedAt: $publishedAt, isFavorite: $isFavorite, likes: $likes, multi: $multi)';
+    return 'MyExperienceJson(id: $id, name: $name, location: $location, createdAt: $createdAt, updatedAt: $updatedAt, publishedAt: $publishedAt, isFavorite: $isFavorite, multi: $multi)';
   }
 
   @override
@@ -269,7 +253,6 @@ class _$_MyExperienceJson
       ..add(DiagnosticsProperty('updatedAt', updatedAt))
       ..add(DiagnosticsProperty('publishedAt', publishedAt))
       ..add(DiagnosticsProperty('isFavorite', isFavorite))
-      ..add(DiagnosticsProperty('likes', likes))
       ..add(DiagnosticsProperty('multi', multi));
   }
 
@@ -290,7 +273,6 @@ class _$_MyExperienceJson
                 other.publishedAt == publishedAt) &&
             (identical(other.isFavorite, isFavorite) ||
                 other.isFavorite == isFavorite) &&
-            (identical(other.likes, likes) || other.likes == likes) &&
             const DeepCollectionEquality().equals(other._multi, _multi));
   }
 
@@ -305,7 +287,6 @@ class _$_MyExperienceJson
       updatedAt,
       publishedAt,
       isFavorite,
-      likes,
       const DeepCollectionEquality().hash(_multi));
 
   @JsonKey(ignore: true)
@@ -331,7 +312,6 @@ abstract class _MyExperienceJson implements MyExperienceJson {
       @ConvertStringToDateTime() final DateTime? updatedAt,
       @ConvertStringToDateTime() final DateTime? publishedAt,
       final bool? isFavorite,
-      final int? likes,
       final List<PhotoJson>? multi}) = _$_MyExperienceJson;
 
   factory _MyExperienceJson.fromJson(Map<String, dynamic> json) =
@@ -354,8 +334,6 @@ abstract class _MyExperienceJson implements MyExperienceJson {
   DateTime? get publishedAt;
   @override
   bool? get isFavorite;
-  @override
-  int? get likes;
   @override
   List<PhotoJson>? get multi;
   @override
