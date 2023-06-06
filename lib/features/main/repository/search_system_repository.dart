@@ -7,7 +7,6 @@ import '../../../data/model/tour_detail_json.dart';
 import '../../../data/model/tour_guide_detail_json.dart';
 
 import '../../../data/model/tour_provider_json.dart';
-import '../../../res/images.dart';
 
 class SearchSystemRepository {
   Future<List<TypeFilterJson>> getListTypeFilter() async {
@@ -31,310 +30,15 @@ class SearchSystemRepository {
     return [];
   }
 
-  // List<TourGuideDetailJson> tourGuides = [
-  //   TourGuideDetailJson(
-  //       id: 0,
-  //       name: 'Tuan Tran',
-  //       address: 'Da Nang, Viet Nam',
-  //       coverImageUrl: AppImages.tuanTran,
-  //       profileImageUrl: AppImages.tuanTran,
-  //       rating: 2,
-  //       languages: ['Vietnamese', 'Chinese', 'Korean'],
-  //       prices: {
-  //         '1 - 3 Travelers': '\$10/ hour',
-  //         '4 - 6 Travelers': '\$14/ hour',
-  //         '7 - 9 Travelers': '\$17/ hour'
-  //       },
-  //       videoIntroductionUrl:
-  //           'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
-  //       description:
-  //           'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-  //       experiences: [
-  //         MyExperienceJson(
-  //           id: 5,
-  //           createdAt: DateTime.now(),
-  //           location: 'Hoi An, Viet Nam',
-  //           name: '2 Hour Bicycle Tour exploring Hoi An',
-  //           likes: 1234,
-  //           isFavorite: false,
-  //           multi: const [
-  //             PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-  //           ],
-  //         ),
-  //         MyExperienceJson(
-  //           id: 5,
-  //           createdAt: DateTime.now(),
-  //           location: 'Hoi An, Viet Nam',
-  //           name: '2 Hour Bicycle Tour exploring Hoi An',
-  //           likes: 1234,
-  //           isFavorite: false,
-  //           multi: const [
-  //             PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-  //           ],
-  //         )
-  //       ],
-  //       reviews: const [
-  //         ReviewJson(
-  //             id: 0,
-  //             content:
-  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-  //             createdAt: '09-3-2023',
-  //             ratersImage: AppImages.emmy,
-  //             ratersName: 'Pena John',
-  //             rating: 2),
-  //         ReviewJson(
-  //             id: 1,
-  //             content:
-  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-  //             createdAt: '09-3-2023',
-  //             ratersImage: AppImages.emmy,
-  //             ratersName: 'Pena John',
-  //             rating: 3),
-  //         ReviewJson(
-  //             id: 2,
-  //             content:
-  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-  //             createdAt: '09-3-2023',
-  //             ratersImage: AppImages.emmy,
-  //             ratersName: 'Pena John',
-  //             rating: 5)
-  //       ]),
-  //   TourGuideDetailJson(
-  //       id: 1,
-  //       name: 'Emmy',
-  //       rating: 2,
-  //       address: 'Ho Chi Minh, Viet Nam',
-  //       languages: ['Vietnamese', 'Korean'],
-  //       videoIntroductionUrl:
-  //           'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
-  //       coverImageUrl: AppImages.emmy,
-  //       profileImageUrl: AppImages.emmy,
-  //       prices: {
-  //         '1 - 3 Travelers': '\$10/ hour',
-  //         '4 - 6 Travelers': '\$14/ hour',
-  //         '7 - 9 Travelers': '\$17/ hour'
-  //       },
-  //       description:
-  //           'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-  //       experiences: [
-  //         MyExperienceJson(
-  //           id: 5,
-  //           createdAt: DateTime.now(),
-  //           location: 'Hoi An, Viet Nam',
-  //           name: '2 Hour Bicycle Tour exploring Hoi An',
-  //           likes: 1234,
-  //           isFavorite: false,
-  //           multi: const [
-  //             PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-  //           ],
-  //         ),
-  //         MyExperienceJson(
-  //           id: 5,
-  //           createdAt: DateTime.now(),
-  //           location: 'Hoi An, Viet Nam',
-  //           name: '2 Hour Bicycle Tour exploring Hoi An',
-  //           likes: 1234,
-  //           isFavorite: false,
-  //           multi: const [
-  //             PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-  //           ],
-  //         )
-  //       ],
-  //       reviews: const [
-  //         ReviewJson(
-  //             id: 0,
-  //             content:
-  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-  //             createdAt: '09-3-2023',
-  //             ratersImage: AppImages.tuanTran,
-  //             ratersName: 'Pena John',
-  //             rating: 2),
-  //         ReviewJson(
-  //             id: 1,
-  //             content:
-  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-  //             createdAt: '09-3-2023',
-  //             ratersImage: AppImages.tuanTran,
-  //             ratersName: 'Pena John',
-  //             rating: 3),
-  //         ReviewJson(
-  //             id: 2,
-  //             content:
-  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-  //             createdAt: '09-3-2023',
-  //             ratersImage: AppImages.tuanTran,
-  //             ratersName: 'Pena John',
-  //             rating: 5)
-  //       ]),
-  //   TourGuideDetailJson(
-  //       id: 2,
-  //       name: 'Tuan Tran',
-  //       rating: 2,
-  //       videoIntroductionUrl:
-  //           'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
-  //       address: 'Da Nang, Viet Nam',
-  //       coverImageUrl: AppImages.tuanTran,
-  //       profileImageUrl: AppImages.tuanTran,
-  //       languages: ['Vietnamese', 'Spanish', 'Korean'],
-  //       prices: {
-  //         '1 - 3 Travelers': '\$10/ hour',
-  //         '4 - 6 Travelers': '\$14/ hour',
-  //         '7 - 9 Travelers': '\$17/ hour'
-  //       },
-  //       description:
-  //           'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-  //       experiences: [
-  //         MyExperienceJson(
-  //           id: 5,
-  //           createdAt: DateTime.now(),
-  //           location: 'Hoi An, Viet Nam',
-  //           name: '2 Hour Bicycle Tour exploring Hoi An',
-  //           likes: 1234,
-  //           isFavorite: false,
-  //           multi: const [
-  //             PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-  //           ],
-  //         ),
-  //         MyExperienceJson(
-  //           id: 5,
-  //           createdAt: DateTime.now(),
-  //           location: 'Hoi An, Viet Nam',
-  //           name: '2 Hour Bicycle Tour exploring Hoi An',
-  //           likes: 1234,
-  //           isFavorite: false,
-  //           multi: const [
-  //             PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-  //           ],
-  //         )
-  //       ],
-  //       reviews: const [
-  //         ReviewJson(
-  //             id: 0,
-  //             content:
-  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-  //             createdAt: '09-3-2023',
-  //             ratersImage: AppImages.emmy,
-  //             ratersName: 'Pena John',
-  //             rating: 2),
-  //         ReviewJson(
-  //             id: 1,
-  //             content:
-  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-  //             createdAt: '09-3-2023',
-  //             ratersImage: AppImages.emmy,
-  //             ratersName: 'Pena John',
-  //             rating: 3),
-  //         ReviewJson(
-  //             id: 2,
-  //             content:
-  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-  //             createdAt: '09-3-2023',
-  //             ratersImage: AppImages.emmy,
-  //             ratersName: 'Pena John',
-  //             rating: 5)
-  //       ]),
-  //   TourGuideDetailJson(
-  //       id: 3,
-  //       name: 'Emmy',
-  //       rating: 2,
-  //       languages: ['Vietnamese', 'Korean'],
-  //       videoIntroductionUrl:
-  //           'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
-  //       address: 'Ho Chi Minh, Viet Nam',
-  //       profileImageUrl: AppImages.emmy,
-  //       prices: {
-  //         '1 - 3 Travelers': '\$10/ hour',
-  //         '4 - 6 Travelers': '\$14/ hour',
-  //         '7 - 9 Travelers': '\$17/ hour'
-  //       },
-  //       coverImageUrl: AppImages.emmy,
-  //       description:
-  //           'Short introduction: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-  //       experiences: [
-  //         MyExperienceJson(
-  //           id: 5,
-  //           createdAt: DateTime.now(),
-  //           location: 'Hoi An, Viet Nam',
-  //           name: '2 Hour Bicycle Tour exploring Hoi An',
-  //           likes: 1234,
-  //           isFavorite: false,
-  //           multi: const [
-  //             PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-  //           ],
-  //         ),
-  //         MyExperienceJson(
-  //           id: 5,
-  //           createdAt: DateTime.now(),
-  //           location: 'Hoi An, Viet Nam',
-  //           name: '2 Hour Bicycle Tour exploring Hoi An',
-  //           likes: 1234,
-  //           isFavorite: false,
-  //           multi: const [
-  //             PhotoJson(url: 'https://i.imgur.com/zuSApjx.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/gi30u3G.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-  //             PhotoJson(url: 'https://i.imgur.com/jvSDzia.png'),
-  //           ],
-  //         )
-  //       ],
-  //       reviews: const [
-  //         ReviewJson(
-  //             id: 0,
-  //             content:
-  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-  //             createdAt: '09-3-2023',
-  //             ratersImage: AppImages.tuanTran,
-  //             ratersName: 'Pena John',
-  //             rating: 2),
-  //         ReviewJson(
-  //             id: 1,
-  //             content:
-  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-  //             createdAt: '09-3-2023',
-  //             ratersImage: AppImages.tuanTran,
-  //             ratersName: 'Pena John',
-  //             rating: 3),
-  //         ReviewJson(
-  //             id: 2,
-  //             content:
-  //                 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-  //             createdAt: '09-3-2023',
-  //             ratersImage: AppImages.tuanTran,
-  //             ratersName: 'Pena John',
-  //             rating: 5)
-  //       ])
-  // ];
-
   Future<List<TourDetailJson>> getListTopJourney() async {
     return <TourDetailJson>[
       const TourDetailJson(
           destination: 'Da Nang - Ba Na - Hoi An',
           departureDate: 'Thurday 30, 2022',
           images: [
-            AppImages.cungVanHoaThieuNhi,
-            AppImages.daNangBanaHoiAn,
-            AppImages.cungVanHoaThieuNhi
+            'https://i.imgur.com/BbjZ4mB.jpeg',
+            'https://i.imgur.com/eHBtlB6.jpeg',
+            'https://i.imgur.com/bpt94dv.jpeg'
           ],
           likes: 1333,
           price: 450.00,
@@ -410,12 +114,12 @@ class SearchSystemRepository {
           tourGuideId: 0,
           rating: 1),
       const TourDetailJson(
-          destination: 'Da Nang - Ba Na - Hoi An',
+          destination: 'Nha Trang - Khanh Hoa - Cam Ranh',
           departureDate: 'Jan 30, 2022',
           images: [
-            AppImages.cungVanHoaThieuNhi,
-            AppImages.daNangBanaHoiAn,
-            AppImages.cungVanHoaThieuNhi
+            'https://i.imgur.com/d4cKuVa.jpeg',
+            'https://i.imgur.com/XqBVxWg.jpeg',
+            'https://i.imgur.com/la3gRc2.jpeg'
           ],
           likes: 1247,
           price: 450.00,
@@ -433,7 +137,7 @@ class SearchSystemRepository {
           },
           saleOff: 400.00,
           schedule: [
-            ScheduleJson(id: 0, name: 'Ho Chi Minh - Da Nang', schedules: [
+            ScheduleJson(id: 0, name: 'Ho Chi Minh - Nha Trang', schedules: [
               SchedulePointJson(
                   id: 0,
                   time: '6:00 AM',
@@ -491,12 +195,12 @@ class SearchSystemRepository {
           tourGuideId: 1,
           rating: 1),
       const TourDetailJson(
-          destination: 'Da Nang - Ba Na - Hoi An',
+          destination: 'Phu Yen - Binh Dinh',
           departureDate: 'Jan 30, 2022',
           images: [
-            AppImages.cungVanHoaThieuNhi,
-            AppImages.daNangBanaHoiAn,
-            AppImages.cungVanHoaThieuNhi
+            'https://i.imgur.com/43DQSsX.jpeg',
+            'https://i.imgur.com/nkkAUoL.jpeg',
+            'https://i.imgur.com/XPFSMJg.jpeg'
           ],
           likes: 1247,
           price: 450.00,
@@ -572,12 +276,12 @@ class SearchSystemRepository {
           tourGuideId: 2,
           rating: 1),
       const TourDetailJson(
-          destination: 'Da Nang - Ba Na - Hoi An',
+          destination: 'Long An - Ca Mau - Dong Thap',
           departureDate: 'Jan 30, 2022',
           images: [
-            AppImages.cungVanHoaThieuNhi,
-            AppImages.daNangBanaHoiAn,
-            AppImages.cungVanHoaThieuNhi
+            'https://media-cdn.tripadvisor.com/media/photo-s/06/48/1b/e1/the-monument-at-the-dat.jpg',
+            'https://fileapi.surego.vn/Upload/NewsImage/R636625818411077570.jpg',
+            'https://dongthap.gov.vn/documents/34223/0/dt1+%281%29.jpg/7124a7ec-50ca-3067-fed9-c7e79cb41198?t=1613097740118'
           ],
           likes: 1247,
           price: 450.00,
@@ -653,12 +357,12 @@ class SearchSystemRepository {
           tourGuideId: 3,
           rating: 1),
       const TourDetailJson(
-          destination: 'Da Nang - Ba Na - Hoi An',
+          destination: 'Ha Giang - Lạng Sơn',
           departureDate: 'Jan 30, 2022',
           images: [
-            AppImages.cungVanHoaThieuNhi,
-            AppImages.daNangBanaHoiAn,
-            AppImages.cungVanHoaThieuNhi
+            'https://media.istockphoto.com/id/1191185918/photo/paddy-rice-terraces-with-ripe-yellow-rice.jpg?b=1&s=170667a&w=0&k=20&c=CGnVFcmhhC2Gt6kfRtaa44DVh_9kJH2_6y2VoiKsfZk=',
+            'https://cdn.vntrip.vn/cam-nang/wp-content/uploads/2017/03/kinh-nghiem-du-lich-lang-son-1-e1527846702337.jpg',
+            'https://ik.imagekit.io/tvlk/blog/2021/09/kinh-nghiem-du-lich-lang-son-1.jpg'
           ],
           likes: 1247,
           price: 450.00,

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_booking_tour/data/model/news_json.dart';
 import 'package:travel_booking_tour/data/model/result.dart';
+import 'package:travel_booking_tour/data/model/user_experiences_json.dart';
 import 'package:travel_booking_tour/data/network/network_exception.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_event.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_state.dart';
@@ -26,7 +27,7 @@ class BlocExploreScreen extends Bloc<BlocExploreEvent, BlocExploreState> {
 
   List<TourDetailJson> topJourneyJsons = [];
   List<TourGuideDetailJson> bestGuideJsons = [];
-  List<TourDetailJson> topExperienceJsons = [];
+  List<UserExperienceJson> topExperienceJsons = [];
   List<TourDetailJson> featuresTourJsons = [];
   List<NewsJson> travelNewJsons = [];
 
@@ -45,13 +46,15 @@ class BlocExploreScreen extends Bloc<BlocExploreEvent, BlocExploreState> {
 
         await Future.forEach(event.objects!, (element) async {
           if (element == TypeDestination.featureTourJson) {
-            featuresTourJsons = await _exploreRepository.getListTopJourney();
+            featuresTourJsons =
+                await _exploreRepository.getListTopJourneyLocal();
           } else if (element == TypeDestination.bestGuideJson) {
             bestGuideJsons = await _exploreRepository.getListTourGuide(1);
           } else if (element == TypeDestination.topExperienceJson) {
-            topExperienceJsons = await _exploreRepository.getListTopJourney();
+            topExperienceJsons =
+                await _exploreRepository.getListUserExperiences();
           } else if (element == TypeDestination.topJourneyJson) {
-            topJourneyJsons = await _exploreRepository.getListTopJourney();
+            topJourneyJsons = await _exploreRepository.getListTopJourneyLocal();
           } else if (element == TypeDestination.travelNewJson) {
             travelNewJsons = await _exploreRepository.getListNews(1);
           } else {}
@@ -99,7 +102,6 @@ class BlocExploreScreen extends Bloc<BlocExploreEvent, BlocExploreState> {
     }
   }
 
-  Future<TourGuideDetailJson?> getTourGuideDetail(int id) async {
-    return null;
-  }
+  Future<String?> getTourGuideDetail(int id) async =>
+      _exploreRepository.getDetailUserExperiences(id);
 }

@@ -73,7 +73,9 @@ class _SeeMoreScreen extends State<SeeMoreScreen> {
 
   Widget _buildBody() {
     return BlocBuilder<BlocSeeMoreScreen, BlocSeeMoreState>(
-      buildWhen: (previous, current) => current is BlocSeeMoreStateLoadData,
+      buildWhen: (previous, current) =>
+          current is BlocSeeMoreStateLoadData ||
+          current is BlocSeeMoreStateSearchResult,
       builder: (context, state) {
         if (state is BlocSeeMoreStateLoadData) {
           if (state.appResult.state == ResultState.success) {
@@ -116,74 +118,10 @@ class _SeeMoreScreen extends State<SeeMoreScreen> {
                   child: Stack(
                     children: [
                       _blocSeeMoreScreen.seeMoreType == SeeMoreType.guide
-                          ? GridView.count(
-                              crossAxisCount: 2,
-                              padding:
-                                  const EdgeInsets.fromLTRB(16, 30, 16, 80),
-                              scrollDirection: Axis.vertical,
-                              physics: const BouncingScrollPhysics(),
-                              shrinkWrap: true,
-                              childAspectRatio: 1 / 1.35,
-                              crossAxisSpacing: 15,
-                              mainAxisSpacing: 10,
-                              children: List.generate(
-                                  _blocSeeMoreScreen.mainData.length,
-                                  (index) => TourGuideItem(
-                                      callback: () => _blocSeeMoreScreen.add(
-                                          BlocSeeMoreEventOnItemClick(
-                                              seeMoreType: _blocSeeMoreScreen
-                                                  .seeMoreType!,
-                                              data: _blocSeeMoreScreen
-                                                      .mainData[index]
-                                                  as TourGuideDetailJson)),
-                                      tourGuideDetailJson:
-                                          _blocSeeMoreScreen.mainData[index]
-                                              as TourGuideDetailJson)),
-                            )
+                          ? _buildChildrenGuides(_blocSeeMoreScreen.mainData)
                           : _blocSeeMoreScreen.seeMoreType == SeeMoreType.tour
-                              ? ListView.builder(
-                                  itemCount: _blocSeeMoreScreen.mainData.length,
-                                  padding:
-                                      const EdgeInsets.fromLTRB(16, 30, 16, 80),
-                                  physics: const BouncingScrollPhysics(),
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-                                  itemBuilder: (context, index) =>
-                                      FeaturedTourItem(
-                                          callback: () => _blocSeeMoreScreen
-                                              .add(
-                                                  BlocSeeMoreEventOnItemClick(
-                                                      seeMoreType:
-                                                          _blocSeeMoreScreen
-                                                              .seeMoreType!,
-                                                      data: _blocSeeMoreScreen
-                                                                  .mainData[
-                                                              index]
-                                                          as TourDetailJson)),
-                                          tourDetailJson:
-                                              _blocSeeMoreScreen.mainData[index]
-                                                  as TourDetailJson),
-                                )
-                              : ListView.builder(
-                                  itemCount: _blocSeeMoreScreen.mainData.length,
-                                  padding:
-                                      const EdgeInsets.fromLTRB(16, 30, 16, 80),
-                                  shrinkWrap: true,
-                                  physics: const BouncingScrollPhysics(),
-                                  scrollDirection: Axis.vertical,
-                                  itemBuilder: (context, index) =>
-                                      TravelNewItem(
-                                          callback: () => BlocProvider.of<
-                                                  BlocExploreScreen>(context)
-                                              .add(BlocExploreEventOnNewsClick(
-                                                  newsJson: _blocSeeMoreScreen
-                                                          .mainData[index]
-                                                      as NewsJson,
-                                                  context,
-                                                  false)),
-                                          newsJson: _blocSeeMoreScreen
-                                              .mainData[index] as NewsJson),
-                                ),
+                              ? _buildChildrenTours(_blocSeeMoreScreen.mainData)
+                              : _builChildrenNews(_blocSeeMoreScreen.mainData),
                       Positioned(
                           left: 0,
                           right: 0,
@@ -202,10 +140,81 @@ class _SeeMoreScreen extends State<SeeMoreScreen> {
               ),
             );
           }
+        } else if (state is BlocSeeMoreStateSearchResult) {
+          if (state.appResult.state == ResultState.loading) {
+            return const AppLayoutShimmer();
+          } else if (state.appResult.state == ResultState.success) {}
+          if (_blocSeeMoreScreen.seeMoreType == SeeMoreType.guide) {
+            return SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: _buildChildrenGuides(state.appResult.result),
+            );
+          } else if (_blocSeeMoreScreen.seeMoreType == SeeMoreType.tour) {
+            return SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: _buildChildrenTours(state.appResult.result),
+            );
+          } else if (_blocSeeMoreScreen.seeMoreType == SeeMoreType.news) {
+            return SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: _builChildrenNews(state.appResult.result),
+            );
+          }
         }
 
         return const AppLayoutShimmer();
       },
+    );
+  }
+
+  Widget _buildChildrenGuides(List<dynamic> data) {
+    return GridView.count(
+      crossAxisCount: 2,
+      padding: const EdgeInsets.fromLTRB(16, 30, 16, 80),
+      scrollDirection: Axis.vertical,
+      physics: const BouncingScrollPhysics(),
+      shrinkWrap: true,
+      childAspectRatio: 1 / 1.35,
+      crossAxisSpacing: 15,
+      mainAxisSpacing: 10,
+      children: List.generate(
+          data.length,
+          (index) => TourGuideItem(
+              callback: () => _blocSeeMoreScreen.add(
+                  BlocSeeMoreEventOnItemClick(
+                      seeMoreType: _blocSeeMoreScreen.seeMoreType!,
+                      data: data[index] as TourGuideDetailJson)),
+              tourGuideDetailJson: data[index] as TourGuideDetailJson)),
+    );
+  }
+
+  Widget _buildChildrenTours(List<dynamic> data) {
+    return ListView.builder(
+      itemCount: data.length,
+      padding: const EdgeInsets.fromLTRB(16, 30, 16, 80),
+      physics: const BouncingScrollPhysics(),
+      shrinkWrap: true,
+      scrollDirection: Axis.vertical,
+      itemBuilder: (context, index) => FeaturedTourItem(
+          callback: () => _blocSeeMoreScreen.add(BlocSeeMoreEventOnItemClick(
+              seeMoreType: _blocSeeMoreScreen.seeMoreType!,
+              data: data[index] as TourDetailJson)),
+          tourDetailJson: data[index] as TourDetailJson),
+    );
+  }
+
+  Widget _builChildrenNews(List<dynamic> data) {
+    return ListView.builder(
+      itemCount: data.length,
+      padding: const EdgeInsets.fromLTRB(16, 30, 16, 80),
+      shrinkWrap: true,
+      physics: const BouncingScrollPhysics(),
+      scrollDirection: Axis.vertical,
+      itemBuilder: (context, index) => TravelNewItem(
+          callback: () => BlocProvider.of<BlocExploreScreen>(context).add(
+              BlocExploreEventOnNewsClick(
+                  newsJson: data[index] as NewsJson, context, false)),
+          newsJson: data[index] as NewsJson),
     );
   }
 
@@ -246,9 +255,15 @@ class _SeeMoreScreen extends State<SeeMoreScreen> {
           child: Container(
             alignment: Alignment.center,
             child: AppSearch(
-                margin: const EdgeInsets.only(left: 16, right: 16, bottom: 7),
-                hintText:
-                    'Hi, ${_blocSeeMoreScreen.seeMoreType == SeeMoreType.tour ? 'where do you want to explore?' : _blocSeeMoreScreen.seeMoreType == SeeMoreType.guide ? 'who do you want to choose?' : 'which news do you want to read?'}'),
+              margin: const EdgeInsets.only(left: 16, right: 16, bottom: 7),
+              onClearText: () =>
+                  _blocSeeMoreScreen.add(BlocSeeMoreEventOnSearch('')),
+              hintText:
+                  'Hi, ${_blocSeeMoreScreen.seeMoreType == SeeMoreType.tour ? 'where do you want to explore?' : _blocSeeMoreScreen.seeMoreType == SeeMoreType.guide ? 'who do you want to choose?' : 'which news do you want to read?'}',
+              onFieldSubmitted: (keySearch) {
+                _blocSeeMoreScreen.add(BlocSeeMoreEventOnSearch(keySearch));
+              },
+            ),
           )),
     );
   }

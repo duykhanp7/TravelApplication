@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:travel_booking_tour/data/model/tour_detail_json.dart';
 
 abstract class BlocTourDetailEvent extends Equatable {}
 
@@ -31,7 +32,8 @@ class BlocTourDetailEventShowBottomSheetShare extends BlocTourDetailEvent {
 }
 
 class BlocTourDetailEventClickButtonBookThisTour extends BlocTourDetailEvent {
-  BlocTourDetailEventClickButtonBookThisTour();
+  BlocTourDetailEventClickButtonBookThisTour({required this.tourDetailJson});
+  final TourDetailJson tourDetailJson;
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [tourDetailJson];
 }

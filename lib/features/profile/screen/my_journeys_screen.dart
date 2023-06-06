@@ -35,13 +35,17 @@ class _MyJourneysScreen extends State<MyJourneysScreen> {
   Widget build(BuildContext context) {
     return BlocListener<BlocMyJourneysScreen, BlocMyJourneysState>(
         listenWhen: (previous, current) =>
-            current is BlocMyJourneysStateAddJourney,
+            current is BlocMyJourneysStateAddJourney ||
+            current is BlocMyJourneysStateDeleteJourneys,
         listener: (context, state) async {
           if (state is BlocMyJourneysStateAddJourney) {
             if (state.appResult.state == ResultState.loading) {
               await context.showLoadingBottomSheet();
-            } else if (state.appResult.state == ResultState.success ||
-                state.appResult.state == ResultState.fail) {
+            } else if (state.appResult.state == ResultState.success) {}
+          } else if (state is BlocMyJourneysStateDeleteJourneys) {
+            if (state.appResult.state == ResultState.loading) {
+              await context.showLoadingBottomSheet();
+            } else if (state.appResult.state == ResultState.success) {
               Routes.backTo();
             }
           }
@@ -87,9 +91,7 @@ class _MyJourneysScreen extends State<MyJourneysScreen> {
                     physics: const BouncingScrollPhysics(),
                     child: BlocBuilder<BlocMyJourneysScreen,
                             BlocMyJourneysState>(
-                        buildWhen: (previous, current) =>
-                            current is BlocMyJourneysStateLoadJourneys ||
-                            current is BlocMyJourneysStateAddJourney,
+                        buildWhen: (previous, current) => checkState(current),
                         builder: (context, state) {
                           if (state is BlocMyJourneysStateLoadJourneys) {
                             if (state.appResult.state == ResultState.loading) {
@@ -109,17 +111,30 @@ class _MyJourneysScreen extends State<MyJourneysScreen> {
                             }
                           }
 
-                          return ListView.builder(
+                          return ListView.separated(
+                            separatorBuilder: (context, index) => const Divider(
+                              height: 20,
+                            ),
                             scrollDirection: Axis.vertical,
-                            padding: EdgeInsets.zero,
                             physics: const BouncingScrollPhysics(),
                             shrinkWrap: true,
                             itemCount: _blocMyJourneysScreen
-                                .listMyExperienceJson.length,
-                            itemBuilder: (context, index) => MyExperienceItem(
-                                myExperienceJson: _blocMyJourneysScreen
-                                    .listMyExperienceJson[index],
-                                edited: true),
+                                    .userInfoJson?.journeys?.length ??
+                                0,
+                            itemBuilder: (context, index) => Dismissible(
+                                key: UniqueKey(),
+                                direction: DismissDirection.endToStart,
+                                onDismissed: (direction) {
+                                  _blocMyJourneysScreen.add(
+                                      BlocMyJourneysEventDeleteJourney(
+                                          myExperienceJson:
+                                              _blocMyJourneysScreen.userInfoJson
+                                                  ?.journeys?[index]));
+                                },
+                                child: MyExperienceItem(
+                                    myExperienceJson: _blocMyJourneysScreen
+                                        .userInfoJson?.journeys?[index],
+                                    edited: true)),
                           );
                         }),
                   ),
@@ -128,5 +143,16 @@ class _MyJourneysScreen extends State<MyJourneysScreen> {
             ),
           )),
         ));
+  }
+
+  bool checkState(BlocMyJourneysState state) {
+    if (state is BlocMyJourneysStateLoadJourneys) {
+      return true;
+    } else if (state is BlocMyJourneysStateDeleteJourneys) {
+      if (state.appResult.state == ResultState.success) {
+        return true;
+      }
+    }
+    return false;
   }
 }

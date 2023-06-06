@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:travel_booking_tour/common/enum/enums.dart';
 import 'package:travel_booking_tour/common/extension/context_extension.dart';
 import 'package:travel_booking_tour/features/auth/signup/widget/choose_date_widget.dart';
@@ -33,12 +34,14 @@ class TourDetailScreen extends StatefulWidget {
 class _TourDetailScreen extends State<TourDetailScreen> {
   late BlocTourDetailScreen _blocTourDetailScreen;
   late TourDetailJson _tourDetailJson;
+  late FToast fToast;
 
   @override
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(AppSystem.systemLightStatusBar);
     _blocTourDetailScreen = BlocProvider.of<BlocTourDetailScreen>(context);
-
+    fToast = FToast();
+    fToast.init(context);
     super.initState();
   }
 
@@ -91,10 +94,32 @@ class _TourDetailScreen extends State<TourDetailScreen> {
         },
         child: BlocListener<BlocTourDetailScreen, BlocTourDetailState>(
           listenWhen: (previous, current) =>
-              current is BlocTourDetailStateShowBottomSheetShare,
+              current is BlocTourDetailStateShowBottomSheetShare ||
+              current is BlocTourDetailStateBookThisTourResult,
           listener: (context, state) async {
             if (state is BlocTourDetailStateShowBottomSheetShare) {
               await context.showBottomSheetShare();
+            } else if (state is BlocTourDetailStateBookThisTourResult) {
+              if (state.appResult.state == ResultState.success) {
+                Routes.backTo();
+                fToast.showToast(
+                    child: Container(
+                      height: 50,
+                      margin: const EdgeInsets.only(bottom: 20),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: AppColors.success),
+                      padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
+                      child: Text(
+                        'Thanks! Booking successfully. Please checkout for start!',
+                        style: AppStyles.titleSmall.copyWith(
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.white),
+                      ),
+                    ),
+                    gravity: ToastGravity.BOTTOM,
+                    toastDuration: const Duration(seconds: 3));
+              }
             }
           },
           child: BlocBuilder<BlocTourDetailScreen, BlocTourDetailState>(
@@ -149,8 +174,9 @@ class _TourDetailScreen extends State<TourDetailScreen> {
             return PrimaryActiveButton(
               margin: EdgeInsets.zero,
               text: 'Book this tour',
-              onTap: () => _blocTourDetailScreen
-                  .add(BlocTourDetailEventClickButtonBookThisTour()),
+              onTap: () => _blocTourDetailScreen.add(
+                  BlocTourDetailEventClickButtonBookThisTour(
+                      tourDetailJson: _tourDetailJson)),
               isLoading: isLoading,
               allCaps: true,
             );

@@ -11,6 +11,9 @@ import 'package:travel_booking_tour/router/path.dart';
 import 'package:travel_booking_tour/router/routes.dart';
 
 import '../../../common/enum/enums.dart';
+import '../../../data/model/news_json.dart';
+import '../../../data/model/tour_detail_json.dart';
+import '../../../data/model/tour_guide_detail_json.dart';
 
 class BlocSeeMoreScreen extends Bloc<BlocSeeMoreEvent, BlocSeeMoreState> {
   BlocSeeMoreScreen() : super(BlocSeeMoreStateInitial()) {
@@ -43,7 +46,65 @@ class BlocSeeMoreScreen extends Bloc<BlocSeeMoreEvent, BlocSeeMoreState> {
       } else if (event.seeMoreType == SeeMoreType.tour) {
         Routes.navigateTo(AppPath.tourDetail, {'data': event.data});
       } else if (event.seeMoreType == SeeMoreType.news) {}
+    } else if (event is BlocSeeMoreEventOnSearch) {
+      emit(BlocSeeMoreStateSearchResult(
+          appResult: AppResult(state: ResultState.loading)));
+      await Future.delayed(const Duration(seconds: 2), () async {
+        final List<dynamic>? filter = await filterData(event.keySearch);
+        emit(BlocSeeMoreStateSearchResult(
+            appResult: AppResult(state: ResultState.success, result: filter)));
+      });
+      emit(BlocSeeMoreStateClose());
     }
+  }
+
+  Future<List<dynamic>?> filterData(String key) async {
+    key = key.toLowerCase();
+    if (seeMoreType == SeeMoreType.guide) {
+      //Filter by name, address of guide
+      List<TourGuideDetailJson>? guides =
+          mainData.map((e) => e as TourGuideDetailJson).toList();
+      return guides
+          .where((element) =>
+              (element.attributes?.user?.data?.attributes?.firstName
+                          ?.toLowerCase() ??
+                      '')
+                  .contains(key) ||
+              (element.attributes?.user?.data?.attributes?.lastName
+                          ?.toLowerCase() ??
+                      '')
+                  .contains(key) ||
+              (element.attributes?.user?.data?.attributes?.country
+                          ?.toLowerCase() ??
+                      '')
+                  .contains(key) ||
+              element.attributes?.city?.toLowerCase() == key)
+          .toList();
+    } else if (seeMoreType == SeeMoreType.tour) {
+      List<TourDetailJson>? tours =
+          mainData.map((e) => e as TourDetailJson).toList();
+      return tours
+          .where((element) =>
+              (element.destination?.toLowerCase() ?? '').contains(key) ||
+              element.price.toString().contains(key))
+          .toList();
+    } else if (seeMoreType == SeeMoreType.news) {
+      List<NewsJson>? news = mainData.map((e) => e as NewsJson).toList();
+      return news
+          .where((element) =>
+              (element.attributes?.title?.toLowerCase() ?? '').contains(key) ||
+              (element.attributes?.author?.data?.attributes?.firstName
+                          ?.toLowerCase() ??
+                      '')
+                  .contains(key) ||
+              (element.attributes?.author?.data?.attributes?.lastName
+                          ?.toLowerCase() ??
+                      '')
+                  .contains(key) ||
+              (element.attributes?.description ?? '').contains(key))
+          .toList();
+    }
+    return null;
   }
 
   Future<void> loadData(SeeMoreType seeMoreType, Emitter<BlocSeeMoreState> emit,
@@ -64,7 +125,7 @@ class BlocSeeMoreScreen extends Bloc<BlocSeeMoreEvent, BlocSeeMoreState> {
                     isLoadMore ? ResultState.loadingMore : ResultState.success,
                 result: data)));
       } else if (seeMoreType == SeeMoreType.tour) {
-        final data = await _exploreRepository.getListTopJourney();
+        final data = await _exploreRepository.getListTopJourneyLocal();
         emit(BlocSeeMoreStateLoadData(
             appResult: AppResult(
                 state:

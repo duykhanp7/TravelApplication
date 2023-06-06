@@ -22,8 +22,6 @@ class TourGuideItem extends StatefulWidget {
 class _TourGuideItem extends State<TourGuideItem> {
   @override
   Widget build(BuildContext context) {
-    debugPrint(
-        '_TourGuideItem : ${widget.tourGuideDetailJson.attributes?.user?.data?.attributes?.avatar?.data?.attributes?.url}');
     return Container(
         width: 170,
         height: 220,

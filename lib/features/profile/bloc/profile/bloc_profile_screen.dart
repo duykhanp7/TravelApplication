@@ -65,6 +65,16 @@ class BlocProfileScreen extends Bloc<BlocProfileEvent, BlocProfileState> {
 
             userInfoJson = userInfoJson?.copyWith(images: items);
           }
+
+          final List<MyExperienceJson> list = [...userInfoJson?.journeys ?? []];
+          if (list.isNotEmpty) {
+            await Future.delayed(Duration.zero, () {
+              list.sort(
+                  (exp1, exp2) => exp2.createdAt!.compareTo(exp1.createdAt!));
+              userInfoJson = userInfoJson?.copyWith(journeys: list);
+            });
+          }
+
           emit(BlocProfileStateLoadUserInforResult(
               appResult:
                   AppResult(state: ResultState.success, result: userInfoJson)));

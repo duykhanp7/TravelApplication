@@ -15,8 +15,11 @@ import 'package:travel_booking_tour/features/profile/bloc/my_journeys/bloc_my_jo
 import 'package:travel_booking_tour/features/profile/bloc/my_journeys/bloc_my_journeys_state.dart';
 import 'package:travel_booking_tour/features/profile/repository/profile_repository.dart';
 
+import '../../../../common/app_constant.dart';
+import '../../../../data/local/app_storage.dart';
 import '../../../../router/path.dart';
 import '../../../../router/routes.dart';
+import '../../model/user_info.dart';
 
 class BlocMyJourneysScreen
     extends Bloc<BlocMyJourneysEvent, BlocMyJourneysState> {
@@ -24,14 +27,16 @@ class BlocMyJourneysScreen
     on<BlocMyJourneysEvent>(mapStateToEvent, transformer: restartable());
   }
 
-  List<MyExperienceJson> listMyExperienceJson = [];
-
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController journeyNameEditingController =
       TextEditingController();
   final TextEditingController locationOfJourneyEditingController =
       TextEditingController();
   final ProfileRepository _profileRepository = ProfileRepository();
+
+  UserInfoJson? userInfoJson;
+  UserInfoJson? userInfo;
+  final AppStorage _appStorage = AppStorage();
 
   bool isPhotoLoaded = true;
   List<String>? files;
@@ -42,11 +47,16 @@ class BlocMyJourneysScreen
       try {
         emit(BlocMyJourneysStateLoadJourneys(
             appResult: AppResult(state: ResultState.loading)));
-        // listMyExperienceJson = await _profileRepository.getMyJourneys();
-        await Future.delayed(const Duration(seconds: 2), () {
+
+        userInfo = UserInfoJson.fromJson(
+            jsonDecode(await _appStorage.getData(AppConstant.user) ?? ''));
+
+        final UserInfoJson? data = await loadData();
+
+        if (data != null) {
           emit(BlocMyJourneysStateLoadJourneys(
-              appResult: AppResult(state: ResultState.success)));
-        });
+              appResult: AppResult(state: ResultState.success, result: data)));
+        }
       } on NetworkException catch (e) {
         emit(BlocMyJourneysStateLoadJourneys(
             appResult: AppResult(state: ResultState.fail)));
@@ -60,6 +70,7 @@ class BlocMyJourneysScreen
         try {
           emit(BlocMyJourneysStateAddJourney(
               appResult: AppResult(state: ResultState.loading)));
+
           UserJson? userJson = await _profileRepository.user;
           FormData data = FormData();
 
@@ -80,20 +91,18 @@ class BlocMyJourneysScreen
               await _profileRepository.postMyJourney(data));
 
           if (myExperienceJson != null) {
-            listMyExperienceJson.add(myExperienceJson);
-
-            await Future.delayed(Duration.zero, () {
-              listMyExperienceJson.sort((item1, item2) =>
-                  item2.createdAt!.compareTo(item1.createdAt!));
-            });
-
-            journeyNameEditingController.text = '';
-            locationOfJourneyEditingController.text = '';
-            Routes.backTo();
-            files = null;
-            emit(BlocMyJourneysStateAddJourney(
-                appResult: AppResult(
-                    state: ResultState.success, result: myExperienceJson)));
+            emit(BlocMyJourneysStateLoadJourneys(
+                appResult: AppResult(state: ResultState.loading)));
+            final UserInfoJson? data = await loadData();
+            if (data != null) {
+              emit(BlocMyJourneysStateLoadJourneys(
+                  appResult:
+                      AppResult(state: ResultState.success, result: data)));
+              journeyNameEditingController.text = '';
+              locationOfJourneyEditingController.text = '';
+              files = null;
+              Routes.backToUntilPage(AppPath.myJourneys);
+            }
           } else {
             emit(BlocMyJourneysStateAddJourney(
                 appResult: AppResult(state: ResultState.fail)));
@@ -117,7 +126,35 @@ class BlocMyJourneysScreen
         files = photos.map((e) => e.path).toList();
         emit(BlocMyJourneysStateUploadFileOrNot(files: files));
       }
+    } else if (event is BlocMyJourneysEventDeleteJourney) {
+      emit(BlocMyJourneysStateDeleteJourneys(
+          appResult: AppResult(state: ResultState.loading)));
+      dynamic data =
+          await _profileRepository.deleteJourney(event.myExperienceJson?.id);
+      if (data != null) {
+        await loadData();
+        emit(BlocMyJourneysStateDeleteJourneys(
+            appResult: AppResult(state: ResultState.success)));
+      } else {
+        emit(BlocMyJourneysStateDeleteJourneys(
+            appResult: AppResult(state: ResultState.fail)));
+      }
     }
+  }
+
+  Future<UserInfoJson?> loadData() async {
+    userInfoJson =
+        await _profileRepository.getUserInfo(userInfo?.id.toString());
+
+    final List<MyExperienceJson> list = [...userInfoJson?.journeys ?? []];
+    debugPrint('List Lenght  Sort : ${list.length}');
+    if (list.isNotEmpty) {
+      await Future.delayed(Duration.zero, () {
+        list.sort((exp1, exp2) => exp2.createdAt!.compareTo(exp1.createdAt!));
+        userInfoJson = userInfoJson?.copyWith(journeys: list);
+      });
+    }
+    return userInfoJson;
   }
 
   String? validateJourneyName(String? value) {

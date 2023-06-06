@@ -2,16 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:travel_booking_tour/data/model/user_experiences_json.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_screen.dart';
 import 'package:travel_booking_tour/res/res.dart';
 
-import '../../../data/model/tour_detail_json.dart';
-
 class TopExperienceItem extends StatefulWidget {
   const TopExperienceItem(
-      {super.key, required this.callback, required this.tourDetailJson});
+      {super.key, required this.callback, required this.userExperienceJson});
   final VoidCallback callback;
-  final TourDetailJson tourDetailJson;
+  final UserExperienceJson userExperienceJson;
   @override
   State<StatefulWidget> createState() {
     return _TopExperienceItem();
@@ -46,7 +45,7 @@ class _TopExperienceItem extends State<TopExperienceItem> {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(12)),
                           child: CachedNetworkImage(
-                            imageUrl: widget.tourDetailJson.images?[0] ?? '',
+                            imageUrl: widget.userExperienceJson.multi?[0] ?? '',
                             filterQuality: FilterQuality.high,
                             fit: BoxFit.cover,
                             width: 206,
@@ -61,96 +60,61 @@ class _TopExperienceItem extends State<TopExperienceItem> {
                         ),
                         FutureBuilder(
                           future: _blocExploreScreen.getTourGuideDetail(
-                              widget.tourDetailJson.tourGuideId ?? 0),
+                              widget.userExperienceJson.id ?? 0),
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.done) {
                               return Positioned(
-                                  bottom: 15,
-                                  left: 16,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Container(
+                                  bottom: 45,
+                                  left: 23,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(3),
+                                    alignment: Alignment.center,
+                                    child: ClipRRect(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(35)),
+                                      child: CachedNetworkImage(
+                                        imageUrl: snapshot.data ?? '',
+                                        filterQuality: FilterQuality.high,
                                         width: 70,
                                         height: 70,
-                                        padding: const EdgeInsets.all(3),
-                                        alignment: Alignment.center,
-                                        decoration: const BoxDecoration(
-                                          color: AppColors.primary,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(35)),
-                                        ),
-                                        child: ClipRRect(
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(35)),
-                                          child: CachedNetworkImage(
-                                            imageUrl: snapshot
-                                                    .data
-                                                    ?.attributes
-                                                    ?.user
-                                                    ?.data
-                                                    ?.attributes
-                                                    ?.avatar
-                                                    ?.data
-                                                    ?.attributes
-                                                    ?.url ??
-                                                '',
-                                            filterQuality: FilterQuality.high,
-                                            fit: BoxFit.cover,
-                                            fadeInCurve: Curves.linearToEaseOut,
-                                            fadeOutCurve: Curves.bounceInOut,
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                    SvgPicture.asset(
-                                                        AppIcons.icErrorImage),
-                                            placeholder: (context, url) =>
-                                                const AppLayoutShimmer(),
-                                          ),
-                                        ),
+                                        fit: BoxFit.cover,
+                                        fadeInCurve: Curves.linearToEaseOut,
+                                        fadeOutCurve: Curves.bounceInOut,
+                                        errorWidget: (context, url, error) =>
+                                            SvgPicture.asset(
+                                                AppIcons.icErrorImage),
+                                        placeholder: (context, url) =>
+                                            const AppLayoutShimmer(),
                                       ),
-                                      const SizedBox(
-                                        height: 2,
-                                      ),
-                                      Container(
-                                        alignment: Alignment.center,
-                                        width: 88,
-                                        height: 23,
-                                        padding: const EdgeInsets.only(
-                                            left: 5, right: 5),
-                                        decoration: BoxDecoration(
-                                            color: AppColors.primary,
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: Text(
-                                          (snapshot.data?.attributes?.user?.data
-                                                      ?.attributes?.lastName ??
-                                                  '') +
-                                              (snapshot
-                                                      .data
-                                                      ?.attributes
-                                                      ?.user
-                                                      ?.data
-                                                      ?.attributes
-                                                      ?.firstName ??
-                                                  ''),
-                                          overflow: TextOverflow.ellipsis,
-                                          softWrap: true,
-                                          textAlign: TextAlign.center,
-                                          style: AppStyles.titleSmall.copyWith(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                              color: AppColors.white),
-                                        ),
-                                      )
-                                    ],
+                                    ),
                                   ));
                             }
                             return Container();
                           },
-                        )
+                        ),
+                        Positioned(
+                            left: 16,
+                            bottom: 15,
+                            child: Container(
+                              alignment: Alignment.center,
+                              width: 88,
+                              height: 23,
+                              padding: const EdgeInsets.only(left: 5, right: 5),
+                              decoration: BoxDecoration(
+                                  color: AppColors.primary,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Text(
+                                widget.userExperienceJson.guideName ?? '',
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                                textAlign: TextAlign.center,
+                                style: AppStyles.titleSmall.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColors.white),
+                              ),
+                            ))
                       ],
                     )),
                 Flexible(
@@ -168,7 +132,7 @@ class _TopExperienceItem extends State<TopExperienceItem> {
                             height: 8,
                           ),
                           Text(
-                            widget.tourDetailJson.description ?? '',
+                            widget.userExperienceJson.name ?? '',
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                             style: AppStyles.titleMedium
@@ -185,14 +149,15 @@ class _TopExperienceItem extends State<TopExperienceItem> {
                                 const SizedBox(
                                   width: 6,
                                 ),
-                                Text(
-                                  widget.tourDetailJson.destination ?? '',
+                                Expanded(
+                                    child: Text(
+                                  widget.userExperienceJson.location ?? '',
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: AppStyles.titleSmall.copyWith(
                                       fontWeight: FontWeight.w400,
                                       color: AppColors.primary),
-                                )
+                                ))
                               ],
                             ),
                           )

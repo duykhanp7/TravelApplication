@@ -28,3 +28,10 @@ class BlocMyJourneysStateUploadFileOrNot extends BlocMyJourneysState {
   @override
   List<Object?> get props => [files];
 }
+
+class BlocMyJourneysStateDeleteJourneys extends BlocMyJourneysState {
+  BlocMyJourneysStateDeleteJourneys({required this.appResult});
+  final AppResult appResult;
+  @override
+  List<Object?> get props => [appResult];
+}
