@@ -25,3 +25,10 @@ class BlocSeeMoreEventOnItemClick extends BlocSeeMoreEvent {
   @override
   List<Object?> get props => [];
 }
+
+class BlocSeeMoreEventOnSearch extends BlocSeeMoreEvent {
+  BlocSeeMoreEventOnSearch(this.keySearch);
+  final String keySearch;
+  @override
+  List<Object?> get props => [keySearch];
+}

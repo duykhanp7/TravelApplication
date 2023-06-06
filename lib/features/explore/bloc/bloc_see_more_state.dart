@@ -19,3 +19,10 @@ class BlocSeeMoreStateClose extends BlocSeeMoreState {
   @override
   List<Object?> get props => [];
 }
+
+class BlocSeeMoreStateSearchResult extends BlocSeeMoreState {
+  BlocSeeMoreStateSearchResult({required this.appResult});
+  final AppResult appResult;
+  @override
+  List<Object?> get props => [appResult];
+}

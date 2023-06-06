@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
 import 'package:travel_booking_tour/common/enum/enums.dart';
 import 'package:travel_booking_tour/data/model/result.dart';
+import 'package:travel_booking_tour/data/model/tour_detail_json.dart';
 import 'package:travel_booking_tour/data/network/network_exception.dart';
 import 'package:travel_booking_tour/features/tour/detail/bloc/bloc_tour_detail_event.dart';
 import 'package:travel_booking_tour/features/tour/detail/bloc/bloc_tour_detail_state.dart';
@@ -57,13 +58,19 @@ class BlocTourDetailScreen
       emit(BlocTourDetailStateBookThisTourResult(
           appResult: AppResult(state: ResultState.loading)));
 
-      await Future.delayed(
-        const Duration(seconds: 4),
-        () {
+      TourDetailJson tourDetailJson = event.tourDetailJson;
+
+      await Future.delayed(const Duration(seconds: 2), () async {
+        final dynamic data = await _tourDetailRepository.bookingTour(
+            tourDetailJson.id, tourDetailJson.price.toString(), 15);
+        if (data != null) {
           emit(BlocTourDetailStateBookThisTourResult(
-              appResult: AppResult(state: ResultState.success)));
-        },
-      );
+              appResult: AppResult(state: ResultState.success, result: data)));
+        } else {
+          emit(BlocTourDetailStateBookThisTourResult(
+              appResult: AppResult(state: ResultState.fail)));
+        }
+      });
     }
   }
 }

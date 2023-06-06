@@ -20,6 +20,7 @@ class ProfileRepository extends BaseRepository {
   final String photoEndPoint = '/api/images';
   final String updateInfoEndPoint = '/api/users';
   final String deletePhotoEndPoint = '/api/users-permissions/deletePhoto';
+  final String deleteJourneyEndPoint = '/api/journeys';
 
   final String updateTraverlerAvatarEndPoint = '/api/traveler/avatar';
   final String updateTraverlerCoverEndPoint = '/api/traveler/cover';
@@ -44,6 +45,11 @@ class ProfileRepository extends BaseRepository {
 
   Future<void> deletePhoto(String id) async => _apiService.deleteJson(
         endPoint: '$deletePhotoEndPoint/$id',
+      );
+
+  Future<dynamic> deleteJourney(int? id) async => _apiService.deleteJson(
+        endPoint: '$deleteJourneyEndPoint/$id',
+        converter: (data) => data,
       );
 
   Future<UserInfoJson?> updateUserInfo(UserInfoJson? userInfoJson) async =>

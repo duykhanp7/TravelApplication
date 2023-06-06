@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -416,82 +414,82 @@ class _GuideDescriptionScreen extends State<GuideDescriptionScreen> {
     );
   }
 
-  Widget _buildWidgetTourExperiences() {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 50),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'My Experiences',
-            textAlign: TextAlign.start,
-            style: AppStyles.titleLarge.copyWith(
-                fontSize: 24,
-                fontWeight: FontWeight.w100,
-                color: AppColors.textOnboardingBlack,
-                fontStyle: FontStyle.italic),
-          ),
-          const SizedBox(height: 16),
-          // ...List.generate(
-          //     tourGuideDetailJson.experiences?.length ?? 0,
-          //     (index) => MyExperienceItem(
-          //           myExperienceJson: tourGuideDetailJson.experiences?[index],
-          //           edited: false,
-          //         ))
-        ],
-      ),
-    );
-  }
+  // Widget _buildWidgetTourExperiences() {
+  //   return Container(
+  //     margin: const EdgeInsets.only(bottom: 50),
+  //     child: Column(
+  //       mainAxisAlignment: MainAxisAlignment.start,
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Text(
+  //           'My Experiences',
+  //           textAlign: TextAlign.start,
+  //           style: AppStyles.titleLarge.copyWith(
+  //               fontSize: 24,
+  //               fontWeight: FontWeight.w100,
+  //               color: AppColors.textOnboardingBlack,
+  //               fontStyle: FontStyle.italic),
+  //         ),
+  //         const SizedBox(height: 16),
+  //         // ...List.generate(
+  //         //     tourGuideDetailJson.experiences?.length ?? 0,
+  //         //     (index) => MyExperienceItem(
+  //         //           myExperienceJson: tourGuideDetailJson.experiences?[index],
+  //         //           edited: false,
+  //         //         ))
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  Widget _buildWidgetReviews() {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 50),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Reviews',
-                  style: AppStyles.titleLarge.copyWith(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w100,
-                      color: AppColors.textOnboardingBlack,
-                      fontStyle: FontStyle.italic),
-                ),
-              ),
-              const Spacer(),
-              Container(
-                height: 20,
-                alignment: Alignment.center,
-                child: Material(
-                  color: AppColors.transparent,
-                  child: InkWell(
-                    splashColor: AppColors.primary.withOpacity(0.1),
-                    child: Text(
-                      'SEE MORE',
-                      style: AppStyles.titleSmall
-                          .copyWith(color: AppColors.primary),
-                    ),
-                    onTap: () {},
-                  ),
-                ),
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 17,
-          ),
-          // ...List.generate(
-          //   tourGuideDetailJson.reviews?.length ?? 0,
-          //   (index) => ReviewGuideItem(
-          //       reviewJson: tourGuideDetailJson.reviews?[index]),
-          // )
-        ],
-      ),
-    );
-  }
+  // Widget _buildWidgetReviews() {
+  //   return Container(
+  //     margin: const EdgeInsets.only(bottom: 50),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Row(
+  //           children: [
+  //             Container(
+  //               alignment: Alignment.centerLeft,
+  //               child: Text(
+  //                 'Reviews',
+  //                 style: AppStyles.titleLarge.copyWith(
+  //                     fontSize: 24,
+  //                     fontWeight: FontWeight.w100,
+  //                     color: AppColors.textOnboardingBlack,
+  //                     fontStyle: FontStyle.italic),
+  //               ),
+  //             ),
+  //             const Spacer(),
+  //             Container(
+  //               height: 20,
+  //               alignment: Alignment.center,
+  //               child: Material(
+  //                 color: AppColors.transparent,
+  //                 child: InkWell(
+  //                   splashColor: AppColors.primary.withOpacity(0.1),
+  //                   child: Text(
+  //                     'SEE MORE',
+  //                     style: AppStyles.titleSmall
+  //                         .copyWith(color: AppColors.primary),
+  //                   ),
+  //                   onTap: () {},
+  //                 ),
+  //               ),
+  //             )
+  //           ],
+  //         ),
+  //         const SizedBox(
+  //           height: 17,
+  //         ),
+  //         // ...List.generate(
+  //         //   tourGuideDetailJson.reviews?.length ?? 0,
+  //         //   (index) => ReviewGuideItem(
+  //         //       reviewJson: tourGuideDetailJson.reviews?[index]),
+  //         // )
+  //       ],
+  //     ),
+  //   );
+  // }
 }

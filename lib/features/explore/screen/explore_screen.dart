@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_booking_tour/data/model/news_json.dart';
+import 'package:travel_booking_tour/data/model/user_experiences_json.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_event.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_screen.dart';
 import 'package:travel_booking_tour/features/explore/bloc/bloc_explore_state.dart';
@@ -227,7 +228,7 @@ class _ExploreScreen extends State<ExploreScreen> {
     );
   }
 
-  Widget _buildTopExperiences(List<TourDetailJson> items) {
+  Widget _buildTopExperiences(List<UserExperienceJson> items) {
     return Container(
       alignment: Alignment.center,
       child: Column(
@@ -257,10 +258,11 @@ class _ExploreScreen extends State<ExploreScreen> {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) => TopExperienceItem(
                       callback: () {
-                        _blocExploreScreen.add(BlocExploreEventOnTourClick(
-                            tourDetailJson: items[index]));
+                        _blocExploreScreen.add(
+                            BlocExploreEventOnTourExperienceClick(
+                                userExperienceJson: items[index]));
                       },
-                      tourDetailJson: items[index],
+                      userExperienceJson: items[index],
                     ),
                 separatorBuilder: (context, index) => const SizedBox(
                       width: 15,

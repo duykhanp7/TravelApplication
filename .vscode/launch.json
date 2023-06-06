@@ -5,21 +5,49 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "travel_booking_tour",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "travel_booking_tour (profile mode)",
+            "name": "Travel Dev",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "program": "lib/main.dart",
+            "args": [
+                "--target",
+                "lib/main.dart",
+                "--flavor",
+                "dev"
+            ],
+            "flutterMode": "debug",
+            "internalConsoleOptions": "openOnSessionStart",
+            "console": "debugConsole",
         },
         {
-            "name": "travel_booking_tour (release mode)",
+            "name": "Travel Stagging",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
-        }
+            "program": "lib/main_stagging.dart",
+            "args": [
+                "--target",
+                "lib/main_stagging.dart",
+                "--flavor",
+                "stagging"
+            ],
+            "flutterMode": "debug",
+            "internalConsoleOptions": "openOnSessionStart",
+            "console": "debugConsole",
+        },
+        {
+            "name": "Travel Production",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_production.dart",
+            "args": [
+                "--target",
+                "lib/main_production.dart",
+                "--flavor",
+                "production"
+            ],
+            "flutterMode": "debug",
+            "internalConsoleOptions": "openOnSessionStart",
+            "console": "debugConsole",
+        },
     ]
 }

@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:travel_booking_tour/data/model/news_json.dart';
+import 'package:travel_booking_tour/data/model/user_experiences_json.dart';
 
 import '../../../common/enum/enums.dart';
 import '../../../data/model/tour_detail_json.dart';
@@ -25,6 +26,13 @@ class BlocExploreEventOnTourClick extends BlocExploreEvent {
   final TourDetailJson tourDetailJson;
   @override
   List<Object?> get props => [tourDetailJson];
+}
+
+class BlocExploreEventOnTourExperienceClick extends BlocExploreEvent {
+  BlocExploreEventOnTourExperienceClick({required this.userExperienceJson});
+  final UserExperienceJson userExperienceJson;
+  @override
+  List<Object?> get props => [userExperienceJson];
 }
 
 class BlocExploreEventOnBestGuideClick extends BlocExploreEvent {

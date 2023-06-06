@@ -57,6 +57,7 @@ abstract class NetworkException with _$NetworkException implements Exception {
         AppStorage appStorage = AppStorage();
         appStorage.saveData(AppConstant.token, token);
       }
+      debugPrint('convertResponse : $response');
       if (result != null) {
         return converter(result);
       }
